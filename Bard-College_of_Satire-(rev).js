@@ -15,21 +15,17 @@
 	
 */
 
-
-
 var iFileName = "Bard-College_of_Satire-(rev)";
 
 RequiredSheetVersion("13.2.0");
 
-
-SourceList.["HB:Satire"] = {
+SourceList["HB:Satire"] = {
     name : "Bardic College: College of Satire (Revised by Frootbat)",
     abbreviation : "HB:S",
     group : "homebrew",
 	url: "https://www.gmbinder.com/share/-MAaXAKfkKrxlh1x7EB7",
     date : ""
 };
-
 
 AddSubClass("bard", "college of satire", {
 	regExpSearch: /^(?=.*(satire)).*$/i,
