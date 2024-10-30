@@ -11,7 +11,7 @@
 	Source:		https://www.gmbinder.com/share/-MAaXAKfkKrxlh1x7EB7
 	Request by:	Lunch Parade
 	Code by:	xika
-	Date:		2024-10-29
+	Date:		2024-10-30
 */
 
 var iFileName = "Bard-College_of_Satire-(rev)";
@@ -31,7 +31,7 @@ AddSubClass("bard", "college of satire", {
 	subname: "College of Satire",
 	source: [ "HB", 1],
 	features: {
-		"tricks of the trade": {
+		"subclassfeature3": {
 			name: "Tricks of the Trade",
 			source: ["HB", 1],
 			minlevel: 3,
@@ -103,16 +103,22 @@ AddSubClass("bard", "college of satire", {
 				"gain +2 AC and the target has disadv. on anyone but me until the end of my nxt trn."
 			]),
 			action : [["reaction", "Irritating Gnave"]],
-			calcChanges: {
+			calcChanges : {
 				atkCalc : [
 					function (fields, v, output) {
-						if (v.WeaponName == "vicious mockery") {
-							output.modToDmg = true;
+						if (classes.known.bard && classes.known.bard.level > 5 && v.isSpell && (/psychich/i).test(fields.Damage_Type)) {
+							output.extraDmg += What('Cha Mod');
 						};
 					},
 					"All my bard spells that deal psychic damage add my charisma mod to the damage roll."
 				],
-			}
+				spellAdd : [
+					function (spellKey, spellObj, spName) {
+						if (!spellObj.psionic) return genericSpellDmgEdit(spellKey, spellObj, "Psychic", "Cha", true);
+					},
+					"All my bard spells that deal psychic damage add my charisma mod to the damage roll."
+				]
+			}			
 		},			
 		"last laugh": {
 			name: "Last Laugh",
