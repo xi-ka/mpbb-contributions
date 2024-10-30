@@ -7,18 +7,22 @@
 
 /*	-INFORMATION-
 	Subject:	Spells
-	Effect:		This script adds spells from Old Gus's spell list https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link
+	Effect:		This script adds 187 spells from Old Gus's Errata https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link
 	LLM Import:	Rocky
 	Code by:	xika
-	Date:		2024-10-22 (sheet v13)
+	Date:		2024-10-30 (sheet v13)
 	
 	Changelog:
-	2024-10-23 added the dulling chains cantrip and the soul whip spell to weapons
+	2024-10-30 	- removed faerie class since a standalone version is now available
+				- removed faerie from spell-classes since the class comes with a full spell list
+				- added Toxic Tongue and Sacred Strike to weapons list
+				- moved Spell-Weapons and Cantrip-Weapons right under their respective Spells instead of top of the list
+	2024-10-23	- added dulling chains and soul whip to weapons
+				
 */
 
 /*
 	TODOs
-	- defaultExcluded: true may need to be added for some spells
 	- "puff of smoke og" adjust after sheet update
 */
 
@@ -27,185 +31,12 @@ var iFileName = "Old_Gus_Errata-Spells.js";
 RequiredSheetVersion("13.2.0");
 
 SourceList.OG = {
-    name : "Old Gus' Errata - Wanderer of Infinite Skies",
-    abbreviation : "OG",
-    abbreviationSpellsheet : "OG",
-    group : "Old Gus Errata",
+	name : "Old Gus' Errata - Wanderer of Infinite Skies",
+	abbreviation : "OG",
+	abbreviationSpellsheet : "OG",
+	group : "Old Gus Errata",
 	url: "https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link",
-    date : "2024/10/22"
-};
-
-/* barebones version of the faerie class so spell sheets can be generated */
-ClassList["faerie og"] = {
-	name: "Faerie",
-	regExpSearch : /^(?=.*faerie).*$/i,
-	source: ["OG", 188],
-	defaultExcluded: true,
-	primaryAbility: "Charisma",
-	prereqs: "Charisma 13",
-	die: 6,
-	improvements : [0, 0, 0, 1, 1, 1, 1,2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5],
-	saves: ["Dex", "Cha"],
-	skills : ["\n\n" + toUni("MyClass") + ": Choose two from Athletics, Acrobatics, Animal Handling, Deception, Intimidation, Persuasion, Performance and Stealth.", "\n\n" + toUni("MyClass") + ": none"], 
-	armorProfs: [false, false, false, false],
-	weaponProfs: [true, false, false],
-	equipment : "MyClass starting equipment:\n \u2022 any simple weapon;\n \u2022 a spellcasting focus;\n \u2022 an entertainer’s pack;\n \u2022 a trinket.\n\nAlternatively, choose 5d4 \xD7 10 gp worth of starting equipment instead of both the class' and the background's starting equipment.",
-	subclasses: ["Faerie Affinities", []],
-	attacks: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-	abilitySave: 6,
-	spellcastingFactor: 1,
-	features: {
-		"spellcasting" : {
-			name : "Spellcasting",
-			source : ["OG", 188],
-			minlevel : 1,
-			description : "\n   " + "I can cast prepared faerie cantrips/spells, using Charisma as my spellcasting ability" + "\n   " + "I can use an arcane focus as a spellcasting focus" + "\n   " + "I can cast all faerie spells in my spellbook as rituals if they have the ritual tag",
-			additional : ["3 cantrips known", "3 cantrips known", "3 cantrips known", "4 cantrips known", "4 cantrips known", "4 cantrips known", "4 cantrips known", "4 cantrips known", "4 cantrips known", "5 cantrips known", "5 cantrips known", "5 cantrips known", "5 cantrips known", "5 cantrips known", "5 cantrips known", "5 cantrips known", "5 cantrips known", "5 cantrips known", "5 cantrips known", "5 cantrips known"], 
-		},		
-	}
-};
-
-WeaponsList["dulling chains og"] = {
-	name: "Dulling Chains",
-	source: ["OG", 239],
-	regExpSearch: /^(?=.*dulling)(?=.*chains).*$/i,
-	type: "Cantrip",
-	ability: 4,
-	damage: ["C",4,"Force"],
-	range: "60ft",
-	dc: true,
-	abilitytodamage: false,
-	description: "Each d4 is a separate chain and may hit a different target. Str save per chain or -15ft speed until my next turn.",
-	list: "spell",
-	tooltip: "You summon a magical restraint to ensnare an enemy.\The target makes a Strength saving throw. On a failure, it takes 1d4 force damage, and its speed is reduced by 15 feet until the start of your next turn.\nThe spell creates more than one restraint when you reach higher levels: two restraints at 5th level, three restraints at 11th level, and four restraints at 17th level. You can direct the restraints at the same target or at different ones. Make a separate attack roll for each restraint."
-};
-WeaponsList["fenton's flickering fists og"] = {
-	name: "Fenton's Flickering Fists",
-	source: ["OG", 242],
-	regExpSearch: /^(?=.*fenton)(?=.*fist).*$/i,
-	type: "Cantrip",
-	ability: 4,
-	abilitytodamage: false,
-	damage: ["C",6,"Force"],
-	range: "Melee",
-	description: "Target looses reaction",
-	list: "spell",
-	tooltip: "Your hands blur, becoming able to strike a creature with devastating vibrations. Make a melee spell attack against the target. On a hit, the target takes 1d6 force damage, and they lose their reaction.\nThis spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
-};
-WeaponsList["ice blade og"] = {
-	name: "Ice Blade",
-	source: ["OG", 251],
-	regExpSearch: /^(?=.*ice)(?=.*blade).*$/i,
-	type: "Spell",
-	ability: 5,
-	abilitytodamage: false,
-	damage: ["3",6,"Cold"],
-	range: "Melee",
-	description: "+1D6/2SL cold dmg; Target -10ft speed until end of their next turn; bns a to re-summon",
-	list: "spell",
-	tooltip: "You evoke an icy blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke the blade again as a bonus action.\nYou can use your action to make a melee spell attack with the icy blade. On a hit, the target takes 3d6 cold damage, and its movement speed is reduced by 10 feet until the end of its next turn.\nAt Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for every two slot levels above 2nd."
-};
-WeaponsList["leeock's lucky coin og"] = {
-	name: "Leeock’s Lucky Coin",
-	source: ["OG", 242],
-	regExpSearch: /^(?=.*leeock)(?=.*lucky)(?=.*coin).*$/i,
-	type: "Cantrip",
-	ability: 4,
-	abilitytodamage: true,
-	damage: ["C",6,"Bludgeoning"],
-	range: "30ft",
-	description: "Ignore 1/2 cover; Treat 3/4 cover as 1/2 cover",
-	list: "spell",
-	tooltip: "You fling a coin toward a creature you can see within range. Make a ranged spell attack, ignoring half cover, and treating three-quarters cover as half cover. On a hit, the target takes 1d6 + your spellcasting ability modifier bludgeoning damage. At the end of your turn, the coin bounces back into your hand or pocket.\nThis spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
-};
-WeaponsList["nature bolt og"] = {
-	name: "Nature Bolt",
-	source: ["OG", 263],
-	regExpSearch: /^(?=.*nature)(?=.*bolt).*$/i,
-	type: "Cantrip",
-	ability: 4,
-	damage: ["C",8,"Special"],
-	range: "60ft",
-	description: "stone, dirt: bludg; metal, wood: pierc; gravel, sand: slash; swamp, marsh: pois; water, snow, ice: cold",
-	list: "spell",
-	tooltip: "A handful of solid terrain you can reach crumbles at your touch, and you hurl the mass at a creature or object within range. Make a ranged spell attack against the target. If you hit, the target takes 1d8 of damage of a type based on the terrain. This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8)."
-};
-WeaponsList["peal of nine bells og"] = {
-	name: "Peal of Nine Bells",
-	source: ["OG", 265],
-	regExpSearch: /^(?=.*peal)(?=.*bell).*$/i,
-	type: "Cantrip",
-	ability: 4,
-	damage: ["C",6,"Thunder"],
-	range: "20ft",
-	dc : true,
-	description: "Target is pushed 10ft away from me in a straight line, Str save, success - no damage/push",
-	list: "spell",
-	tooltip: "You create a beam of ringing sound that strikes at one creature of your choice that you can see within range. The target must succeed on a Strength saving throw or be pushed up to 10 feet in a straight line away from you, taking 1d6 thunder damage.\nThe spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
-};
-WeaponsList["puncture og"] = {
-	name: "Puncture",
-	source: ["OG", 266],
-	regExpSearch: /^(?=.*puncture).*$/i,
-	type: "Cantrip",
-	ability: 4,
-	damage: ["C",10,"Piercing"],
-	range: "120ft",
-	description: "Each d10 is a separate needle requiring separate rolls",
-	list: "spell",
-	tooltip: "A psionic needle streaks toward a creature within range. Make a ranged spell attack against the target. On a hit,the target takes 1d10 piercing damage.\nThe spell creates more needles when you reach higher levels: two needles at 5th level, three needles at 11th level, and four needles at 17th level. You can direct the needles at the same target or at different ones. Make a separate attack roll for each needle."
-};
-WeaponsList["soul whip og"] = {
-	name: "Soul Whip",
-	source: ["OG", 251],
-	regExpSearch: /^(?=.*soul)(?=.*whip).*$/i,
-	type: "Spell",
-	ability: 4,
-	abilitytodamage: true,
-	baseWeapon: "whip",
-	damage: ["2",4,"Psychic"],
-	range: "Melee",
-	description: "finesse, reach, light; +1D4 at SL 3,5&7; adv if target charmed/frightened by me; bns a to re-summon",
-	list: "spell",
-	tooltip: "You weave together threads of wrathful thought to create a whip of solidified enmity in your hand. This magic whip lasts until the spell ends. It counts as a martial melee weapon with which you are proficient. It deals 2d4 + your spellcasting ability modifier psychic damage on a hit and has the finesse, light, and reach properties. In addition, when you use the whip to attack a target that charmed or frightened by you, you make the attack roll with advantage.\nIf you drop the weapon or throw it, it dissipates as it leaves your hand. Thereafter, while the spell persists, you can use a bonus action to cause the whip to reappear in your hand.\n\nWhen you cast this spell using a spell slot of 3rd or 4th level, the damage increases to 3d4 + your spellcasting ability modifier. When you cast it using a spell slot of 5th or 6th level, the damage increases to 4d4 + your spellcasting ability modifier. When you cast it using a spell slot of 7th level or higher, the damage increases to 5d4 + your spellcasting ability modifier."
-};
-WeaponsList["time knife og"] = {
-	name: "Time Knife",
-	source: ["OG", 275],
-	regExpSearch: /^(?=.*time)(?=.*knife).*$/i,
-	type: "Cantrip",
-	ability: 4,
-	abilitytodamage: true,	
-	damage: ["C",6,"slashing"],
-	range: "120ft",
-	description: "Each d6 is a separate knife requiring separate rolls. Add spell mod each time.",
-	list: "spell",
-	tooltip: "A magical blade of disruptive energy sails toward a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d6 slashing damage plus force damage equal to your spellcasting ability modifier. \nThe spell creates additional blades when you reach higher levels: two blades at 5th level, three blades at 11th level, and four blades at 17th level. You can direct the blades at the same target or at different ones. Make a separate attack roll for each blade."
-};
-WeaponsList["whelm og"] = {
-	name: "Whelm",
-	source: ["OG", 280],
-	regExpSearch: /^(?=.*whelm).*$/i,
-	type: "Cantrip",
-	ability: 4,
-	cd: true,	
-	damage: ["C",6,"psychic"],
-	range: "120ft",
-	description: "if taken to 0: unconscious for 1 min + stable; undead, construct & <int4 immune",
-	list: "spell",
-	tooltip: "You thrust your arm forward with your palm open and fingers splayed, targeting a creature you can see within range, and attempt to overwhelm its mind. The target makes a Wisdom saving throw, taking 1d6 points of psychic damage on a failure, or half as much on a success. Constructs, Undead, and creatures with an Intelligence score of 4 or lower are immune to the spell.\If the spell reduces a creature to 0 hit points, they are unconscious, but stable. They remain unconscious for 1 minute, or until someone uses an action to shake or slap them awake, at which time they gain 1 hit point.\nIf the creature takes damage while they are unconscious, they lose their stability and die, or begin to make death saving throws.\nThis spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
-};
-WeaponsList["zap og"] = {
-	name: "Zap",
-	source: ["OG", 284],
-	regExpSearch: /^(?=.*zap).*$/i,
-	type: "Cantrip",
-	ability: 4,
-	damage: ["C",8,"Special"],
-	range: "60ft",
-	description: "1: fire, 2: cold, 3: acid, 4: lightning, 5: thunder, 6: radiant, 7: force, 8: psychic; see B",
-	list: "spell",
-	tooltip: "A thrum of chaotic magic streaks out of you toward one creature of your choice that you can see within range. Make a ranged spell attack. If it hits, roll a d8 to determine the type of damage, then deal 1d8 of that type to the creature. The spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8). Each time the damage dice increase, you can modify the results of your damage type’s roll by an additional ±1.\n\nZap Damage Type:\n1 fire\n2 cold\n3 acid\n4 lightning\n5 thunder\n6 radiant\n7 force\n8 psychic\n"
+	date : "2024/10/22"
 };
 
 SpellsList["acidic exudation og"] = {
@@ -226,7 +57,7 @@ SpellsList["acidic exudation og"] = {
 };
 SpellsList["age plant og"] = {
 	name: "Age Plant",
-	classes: ["druid", "faerie og"],
+	classes: ["druid"],
 	source: ["OG", 225],
 	level: 4,
 	school: "Trans",
@@ -241,7 +72,7 @@ SpellsList["age plant og"] = {
 };
 SpellsList["allergen cloud og"] = {
 	name: "Allergen Cloud",
-	classes: ["druid", "faerie og", "ranger", "wizard"],
+	classes: ["druid", "ranger", "wizard"],
 	source: ["OG", 226],
 	level: 1,
 	school: "Conj",
@@ -257,7 +88,7 @@ SpellsList["allergen cloud og"] = {
 };
 SpellsList["alter fortune og"] = {
 	name: "Alter Fortune",
-	classes: ["bard", "faerie og", "sorcerer", "warlock"],
+	classes: ["bard", "sorcerer", "warlock"],
 	source: ["OG", 226],
 	level: 3,
 	school: "Div",
@@ -287,7 +118,7 @@ SpellsList["amanuensis og"] = {
 };
 SpellsList["anterograde amnesia og"] = {
 	name: "Anterograde Amnesia",
-	classes: ["bard", "faerie og", "sorcerer", "warlock", "wizard"],
+	classes: ["bard", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 226],
 	level: 6,
 	school: "Ench",
@@ -301,7 +132,7 @@ SpellsList["anterograde amnesia og"] = {
 };
 SpellsList["antipathetic field og"] = {
 	name: "Antipathetic Field",
-	classes: ["bard", "faerie og", "warlock"],
+	classes: ["bard", "warlock"],
 	source: ["OG", 227],
 	level: 3,
 	school: "Ench",
@@ -316,7 +147,7 @@ SpellsList["antipathetic field og"] = {
 };
 SpellsList["arcane razor og"] = {
 	name: "Arcane Razor",
-	classes: ["artificer", "faerie og", "ranger", "sorcerer", "wizard"],
+	classes: ["artificer", "ranger", "sorcerer", "wizard"],
 	source: ["OG", 227],
 	level: 3,
 	school: "Evoc",
@@ -331,7 +162,7 @@ SpellsList["arcane razor og"] = {
 };
 SpellsList["arcane strike og"] = {
 	name: "Arcane Strike",
-	classes: ["artificer", "faerie og", "ranger", "sorcerer", "wizard"],
+	classes: ["artificer", "ranger", "sorcerer", "wizard"],
 	source: ["OG", 227],
 	level: 1,
 	school: "Evoc",
@@ -361,9 +192,9 @@ SpellsList["avalanche og"] = {
 	descriptionFull: "Choose a point you can see on the ground within range. A torrent of ice, rock and snow fall in a 30-foot-radius, 40-foot-high cylinder centered on that point. Each creature in that area must make a Dexterity saving throw. On a failure, a creature takes 4d10 cold and 4d10 bludgeoning damage on a failed save and is knocked prone. Creatures that fail their saving throw by 5 or more are restrained by the rubble. A creature can use an action to pull itself or another buried creature free by making a Strength check with a DC equal to your spell save DC.\nAdditionally, objects in the area take 4d10 bludgeoning damage, and the area becomes difficult terrain until cleared. Each 5-foot-square portion of the area requires at least 1 minute to clear by hand. The ice and rocks melt away over the course of the next 24 hours.",
 	atHigherLevels: "When you cast this spell using a spell slot of 8th level or higher, the damage increases by 1d10 for each of its effects."
 };
-SpellsList["avyie's temporal trickery og"] = {
+SpellsList["avyies temporal trickery og"] = {
 	name: "Avyie's Temporal Trickery",
-	classes: ["artificer", "bard", "faerie og", "wizard"],
+	classes: ["artificer", "bard", "wizard"],
 	source: ["OG", 228],
 	level: 3,
 	school: "Trans",
@@ -377,7 +208,7 @@ SpellsList["avyie's temporal trickery og"] = {
 };
 SpellsList["awaken object og"] = {
 	name: "Awaken Object",
-	classes: ["artificer", "faerie og", "wizard"],
+	classes: ["artificer", "wizard"],
 	source: ["OG", 228],
 	level: 5,
 	school: "Trans",
@@ -407,7 +238,7 @@ SpellsList["babau slime og"] = {
 };
 SpellsList["blade of resonance og"] = {
 	name: "Blade of Resonance",
-	classes: ["artificer", "bard", "faerie og", "sorcerer", "wizard"],
+	classes: ["artificer", "bard", "sorcerer", "wizard"],
 	source: ["OG", 229],
 	level: 2,
 	school: "Evoc",
@@ -422,7 +253,7 @@ SpellsList["blade of resonance og"] = {
 };
 SpellsList["blinding glitter og"] = {
 	name: "Blinding Glitter",
-	classes: ["artificer", "bard", "faerie og", "sorcerer"],
+	classes: ["artificer", "bard", "sorcerer"],
 	source: ["OG", 229],
 	level: 4,
 	school: "Evoc",
@@ -437,7 +268,7 @@ SpellsList["blinding glitter og"] = {
 };
 SpellsList["body swap og"] = {
 	name: "Body Swap",
-	classes: ["faerie og", "warlock"],
+	classes: ["warlock"],
 	source: ["OG", 229],
 	level: 7,
 	school: "Ench",
@@ -468,7 +299,7 @@ SpellsList["branch to branch og"] = {
 };
 SpellsList["budding romance og"] = {
 	name: "Budding Romance",
-	classes: ["bard", "faerie og", "warlock"],
+	classes: ["bard", "warlock"],
 	source: ["OG",230 ],
 	level: 6,
 	school: "Ench",
@@ -484,7 +315,7 @@ SpellsList["budding romance og"] = {
 };
 SpellsList["celerity og"] = {
 	name: "Celerity",
-	classes: ["artificer", "bard", "faerie og", "sorcerer", "wizard"],
+	classes: ["artificer", "bard", "sorcerer", "wizard"],
 	source: ["OG", 230],
 	level: 2,
 	school: "Trans",
@@ -497,7 +328,7 @@ SpellsList["celerity og"] = {
 };
 SpellsList["cheetah sprint og"] = {
 	name: "Cheetah Sprint",
-	classes: ["druid", "faerie og", "ranger"],
+	classes: ["druid", "ranger"],
 	source: ["OG", 230],
 	level: 1,
 	school: "Trans",
@@ -541,7 +372,7 @@ SpellsList["cloudburst og"] = {
 };
 SpellsList["conduit og"] = {
 	name: "Conduit",
-	classes: ["artificer", "faerie og", "cleric", "wizard"],
+	classes: ["artificer", "cleric", "wizard"],
 	source: ["OG", 231],
 	level: 5,
 	school: "Ench",
@@ -614,7 +445,7 @@ SpellsList["corrosive touch og"] = {
 };
 SpellsList["create campsite og"] = {
 	name: "Create Campsite",
-	classes: ["bard", "druid", "faerie og"],
+	classes: ["bard", "druid"],
 	source: ["OG", 233],
 	level: 3,
 	school: "Conj",
@@ -644,21 +475,21 @@ SpellsList["cuppy snacks og"] = {
 };
 SpellsList["cursory ward og"] = {
 	name: "Cursory Ward",
-	classes: ["cleric", "faerie og", "sorcerer", "warlock", "wizard"],
+	classes: ["cleric", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 233],
 	level: 0,
 	school: "Abjur",
 	time: "1 a",
 	range: "Self",
 	components:"V,S",
-	descriptionCantripDie: "gain `CD`d4 + my spell mod temp hp until end of next turn",
 	duration:"Instantaneous",
+	descriptionCantripDie: "gain `CD`d4 + my spell mod temp hp until end of next turn",
 	description:"gain 1d4 + my spell mod temp hp until end of next turn; extra D4 at CL 5, 11 and 17",
 	descriptionFull:"You ward yourself from injury, granting yourself temporary hit points equal to 1d4 + your spellcasting ability modifier (minimum of 1). The temporary hit points last until the end of your next turn.\nThe number temporary hit points increase by 1d4 when you reach 5th level (2d4), 11th level (3d4), and 17th level (4d4).",
 };
 SpellsList["dazzling strobe og"] = {
 	name: "Dazzling Strobe",
-	classes: ["bard", "cleric", "faerie og", "paladin", "sorcerer"],
+	classes: ["bard", "cleric", "paladin", "sorcerer"],
 	source: ["OG", 233],
 	level: 3,
 	school: "Evoc",
@@ -765,7 +596,7 @@ SpellsList["dirge of the exorcist og"] = {
 };
 SpellsList["discordant thrum og"] = {
 	name: "Discordant Thrum",
-	classes: ["bard", "faerie og"],
+	classes: ["bard"],
 	source: ["OG", 236],
 	level: 2,
 	school: "Ench",
@@ -793,9 +624,9 @@ SpellsList["disguise undead og"] = {
 	descriptionFull:"You make one undead—including its clothing, armor, weapons, and equipment—look different until the spell ends or until you use your action to dismiss it. The spell also masks the scent of any decaying flesh that might emanate from the target creature. You can make the target seem 1 foot shorter or taller and it can appear thin, fat, or in between. You can’t change its body type, so you must cause it to adopt a form that has the same basic arrangement of limbs. Otherwise, the extent of the illusion is up to you.\nThe changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to a zombie, objects pass through the hat, and anyone who touches it would feel nothing or would feel the zombie’s rotting scalp beneath. If you use this spell to add flesh to a skeleton, someone who shakes the skeleton’s hand might notice their own hand sink into the illusory flesh as they grasp its cold, boney fingers.\nTo discern that the target creature is disguised, a creature can use its action to inspect the target creature’s appearance and must succeed on an Intelligence (Investigation) check against your spell save DC.",
 	atHigherLevels:"When you cast this spell using a spell slot of 3rd level or higher, you can disguise one additional undead creature (creating a unique appearance for each) for each slot level above 3rd."
 };
-SpellsList["diterlizzi's dymaxion og"] = {
+SpellsList["diterlizzis dymaxion og"] = {
 	name: "DiTerlizzi's Dymaxion",
-	classes: ["artificer", "faerie og"],
+	classes: ["artificer"],
 	source: ["OG", 236],
 	level: 2,
 	school: "Div",
@@ -809,7 +640,7 @@ SpellsList["diterlizzi's dymaxion og"] = {
 };
 SpellsList["dodge-weave og"] = {
 	name: "Dodge-Weave",
-	classes: ["bard", "faerie og", "sorcerer", "warlock", "wizard"],
+	classes: ["bard", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 236],
 	level: 3,
 	school: "Conj",
@@ -839,7 +670,7 @@ SpellsList["double jeopardy og"] = {
 };
 SpellsList["doublespeak og"] = {
 	name: "Doublespeak",
-	classes: ["bard", "faerie og", "wizard"],
+	classes: ["bard", "wizard"],
 	source: ["OG", 237],
 	level: 2,
 	school: "Illus",
@@ -879,9 +710,9 @@ SpellsList["drumble dead og"] = {
 	description:"one of: spoil food/drink; drop temp & flicker/dim/change flame; corpse speaks, moves or grapples",
 	descriptionFull:"You disturb the veil between life and death, creating one of the following magical effects within range: \n- You cause nonmagical food or drink that fits within a 5-foot cube to instantaneously spoil and become inedible, and any nonmagical foliage in the area wilts.\n- You cause the temperature in a 5-foot radius to drop 5 degrees Fahrenheit for 1 minute. Within the same area, you can cause flames to flicker, dim, or change color.\n- A corpse (or partial remains) you can see withing range speaks a message up to three words in length of your choosing in a language you know, and creates brief gestures in a manner of your choosing for up to an hour.\n- A Medium or smaller corpse (or partial remains) you can see withing range instantaneously moves up to 10 feet along the ground in a direction of your choice.\n- One Medium creature of your choice that you can see within range and also within 5 feet of a corpse (or partial remains) must succeed on a Strength saving throw or become grappled by the corpse (or partial remains). A grappled creature can use its action to repeat the saving throw on its turn to end the grapple. At the start of your next turn the target is released from the grapple.\nIf you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.\nThe spell can target corpses of larger size categories when you reach higher levels: Large at 5th level, Huge at 11th level, and Gargantuan at 17th level."
 };
-SpellsList["drunkard's breath og"] = {
+SpellsList["drunkards breath og"] = {
 	name: "Drunkard's Breath",
-	classes: ["artificer", "bard", "faerie og"],
+	classes: ["artificer", "bard"],
 	source: ["OG", 238],
 	level: 1,
 	school: "Conj",
@@ -895,7 +726,7 @@ SpellsList["drunkard's breath og"] = {
 };
 SpellsList["drunken revelry og"] = {
 	name: "Drunken Revelry",
-	classes: ["bard", "faerie og"],
+	classes: ["bard"],
 	source: ["OG", 238],
 	level: 4,
 	school: "Ench",
@@ -925,7 +756,7 @@ SpellsList["duelist's ward og"] = {
 };
 SpellsList["dulling chains og"] = {
 	name: "Dulling Chains",
-	classes: ["artificer", "cleric", "faerie og", "warlock", "wizard"],
+	classes: ["artificer", "cleric", "warlock", "wizard"],
 	source: ["OG", 239],
 	level: 0,
 	school: "Conj",
@@ -938,6 +769,20 @@ SpellsList["dulling chains og"] = {
 	descriptionShorter:"fail save: 1d4 force dmg and speed -15ft until my nxt trn; CL >5 more chains; see B",
 	descriptionCantripDie: "`CD` chains vs. same or multiple targets; fail save: 1d4 force dmg and speed -15ft until my nxt trn",
 	descriptionFull:"You summon a magical restraint to ensnare an enemy.\The target makes a Strength saving throw. On a failure, it takes 1d4 force damage, and its speed is reduced by 15 feet until the start of your next turn.\nThe spell creates more than one restraint when you reach higher levels: two restraints at 5th level, three restraints at 11th level, and four restraints at 17th level. You can direct the restraints at the same target or at different ones. Make a separate attack roll for each restraint."
+};
+WeaponsList["dulling chains og"] = {
+	name: "Dulling Chains",
+	source: ["OG", 239],
+	regExpSearch: /^(?=.*dulling)(?=.*chains).*$/i,
+	type: "Cantrip",
+	ability: 4,
+	damage: ["C",4,"Force"],
+	range: "60ft",
+	dc: true,
+	abilitytodamage: false,
+	description: "Each d4 is a separate chain and may hit a different target. Str save per chain or -15ft speed until my next turn.",
+	list: "spell",
+	tooltip: "You summon a magical restraint to ensnare an enemy.\The target makes a Strength saving throw. On a failure, it takes 1d4 force damage, and its speed is reduced by 15 feet until the start of your next turn.\nThe spell creates more than one restraint when you reach higher levels: two restraints at 5th level, three restraints at 11th level, and four restraints at 17th level. You can direct the restraints at the same target or at different ones. Make a separate attack roll for each restraint."
 };
 SpellsList["duodimension og"] = {
 	name: "Duodimension",
@@ -955,7 +800,7 @@ SpellsList["duodimension og"] = {
 };
 SpellsList["dust dash og"] = {
 	name: "Dust Dash",
-	classes: ["artificer", "faerie og", "sorcerer", "wizard"],
+	classes: ["artificer", "sorcerer", "wizard"],
 	source: ["OG", 240],
 	level: 1,
 	school: "Evoc",
@@ -988,7 +833,7 @@ SpellsList["entropic field og"] = {
 };
 SpellsList["euphoric cloud og"] = {
 	name: "Euphoric Cloud",
-	classes: ["artificer", "bard", "faerie og", "sorcerer", "wizard"],
+	classes: ["artificer", "bard", "sorcerer", "wizard"],
 	source: ["OG", 241],
 	level: 3,
 	school: "Conj",
@@ -1019,7 +864,7 @@ SpellsList["exstasis og"] = {
 };
 SpellsList["fallow og"] = {
 	name: "Fallow",
-	classes: ["druid", "faerie og"],
+	classes: ["druid"],
 	source: ["OG", 242],
 	level: 2,
 	school: "Trans",
@@ -1046,9 +891,22 @@ SpellsList["fenton's flickering fists og"] = {
 	description: "melee spell atk; target takes 1D6 force dmg on hit and looses reaction; +1D6 on CL 5, 1 and 17",
 	descriptionFull: "Your hands blur, becoming able to strike a creature with devastating vibrations. Make a melee spell attack against the target. On a hit, the target takes 1d6 force damage, and they lose their reaction.\nThis spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)"
 };
+WeaponsList["fenton's flickering fists og"] = {
+	name: "Fenton's Flickering Fists",
+	source: ["OG", 242],
+	regExpSearch: /^(?=.*fenton)(?=.*fist).*$/i,
+	type: "Cantrip",
+	ability: 4,
+	abilitytodamage: false,
+	damage: ["C",6,"Force"],
+	range: "Melee",
+	description: "Target looses reaction",
+	list: "spell",
+	tooltip: "Your hands blur, becoming able to strike a creature with devastating vibrations. Make a melee spell attack against the target. On a hit, the target takes 1d6 force damage, and they lose their reaction.\nThis spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
+};
 SpellsList["flourishing beanstalk og"] = {
 	name: "Flourishing Beanstalk",
-	classes: ["artificer", "druid", "faerie og", "wizard"],
+	classes: ["artificer", "druid", "wizard"],
 	source: ["OG", 243],
 	level: 2,
 	school: "Trans",
@@ -1062,9 +920,9 @@ SpellsList["flourishing beanstalk og"] = {
 	descriptionFull: "You place the beans on the ground and cause them to sprout. At the start of your next turn, they suddenly shoot upward, growing a network of vines that twist around one another, forming a mighty stalk that reaches into the sky. You must be outdoors to cast this spell. The vines rapidly grow into a 5-foot-radius, 500-foot-high cylinder, which lasts for the duration. You and creatures of your choice can climb the stalk as if you had a climbing speed equal to your movement speed.\nEach 10-foot-high section is a plant with 40 hit points and an AC of 15. It is immune to psychic damage, and vulnerable to slashing damage. If a section of the stalk is destroyed, all sections above it wither and disappear, causing any creatures above the destroyed section to fall.",
 	atHigherLevels: "When you cast this spell using a spell slot of 3rd level or higher, the radius of the cylinder increases by 5 feet, the height increases by 500 feet, and the number of hit points for each section increases by 20 for each slot level above 2nd. If you cast this spell using a spell slot of 3rd level, the duration is 1 hour. At 4th level the duration is 8 hours. At 5th level, the duration is 24 hours. If you cast this spell using a spell slot of 6th level or higher, the spell lasts until it is dispelled, or the stalk is destroyed."
 };
-SpellsList["fool's speech og"] = {
+SpellsList["fools speech og"] = {
 	name: "Fool's Speech",
-	classes: ["bard", "faerie og", "sorcerer", "wizard"],
+	classes: ["bard", "sorcerer", "wizard"],
 	source: ["OG", 243],
 	level: 4,
 	school: "Illus",
@@ -1108,7 +966,7 @@ SpellsList["frigid wind og"] = {
 };
 SpellsList["frigidigitation og"] = {
 	name: "Frigidigitation",
-	classes: ["artificer", "druid", "faerie og", "sorcerer", "wizard"],
+	classes: ["artificer", "druid", "sorcerer", "wizard"],
 	source: ["OG", 244],
 	level: 0,
 	school: "Trans",
@@ -1178,7 +1036,7 @@ SpellsList["ghostly disguise og"] = {
 };
 SpellsList["gift of the soothsayer og"] = {
 	name: "Gift of the Soothsayer",
-	classes: ["cleric", "bard", "druid", "faerie og", "sorcerer", "wizard"],
+	classes: ["cleric", "bard", "druid", "sorcerer", "wizard"],
 	source: ["OG", 246],
 	level: 0,
 	school: "Div",
@@ -1192,7 +1050,7 @@ SpellsList["gift of the soothsayer og"] = {
 };
 SpellsList["glamoured majesty og"] = {
 	name: "Glamoured Majesty",
-	classes: ["cleric", "faerie og", "paladin", "warlock"],
+	classes: ["cleric", "paladin", "warlock"],
 	source: ["OG", 246],
 	level: 2,
 	school: "Illus",
@@ -1208,7 +1066,7 @@ SpellsList["glamoured majesty og"] = {
 };
 SpellsList["glamourous craft og"] = {
 	name: "Glamourous Craft",
-	classes: ["artificer", "bard", "faerie og", "sorcerer", "wizard"],
+	classes: ["artificer", "bard", "sorcerer", "wizard"],
 	source: ["OG", 246],
 	level: 5,
 	school: "Ench",
@@ -1251,7 +1109,7 @@ SpellsList["glassteel og"] = {
 	descriptionFull:"You touch an object or area of metal, stone, or wood, causing up to a 5-foot cube of material to become transparent as glass for the duration. Lead, gold, and platinum cannot be altered by the spell.\nYou decide how transparent or clear, opaque, or diffuse the material becomes, and if creatures other than you can see through it at all. If only you can see through the material, no actual light passes through it. If you allow others to see through it, light passes through the material normally. Although the material can have the appearance of glass, it has the strength and other material properties of the original material.\nIf you concentrate on the spell for its entire duration, the transformation becomes permanent, and the spell consumes the material component.",
 	atHigherLevels: "When you cast this spell using a spell slot of 7th level, the duration increases to 8 hours. If you cast the spell using a spell slot of 9th level, the spell doesn’t require concentration, and its effects are instantaneous and permanent."
 };
-SpellsList["glogala's paradox og"] = {
+SpellsList["glogalas paradox og"] = {
 	name: "Glogala's Paradox",
 	classes: ["sorcerer", "warlock", "wizard"],
 	source: ["OG", 248],
@@ -1268,7 +1126,7 @@ SpellsList["glogala's paradox og"] = {
 };
 SpellsList["grounding og"] = {
 	name: "Grounding",
-	classes: ["druid", "faerie og", "sorcerer", "wizard"],
+	classes: ["druid", "sorcerer", "wizard"],
 	source: ["OG", 248],
 	level: 4,
 	school: "Abjur",
@@ -1295,7 +1153,7 @@ SpellsList["hawkeye og"] = {
 };
 SpellsList["healing wave og"] = {
 	name: "Healing Wave",
-	classes: ["bard", "cleric", "druid", "faerie og"],
+	classes: ["bard", "cleric", "druid"],
 	source: ["OG", 249],
 	level: 3,
 	school: "Evoc",
@@ -1309,7 +1167,7 @@ SpellsList["healing wave og"] = {
 };
 SpellsList["hirsutism og"] = {
 	name: "Hirsutism",
-	classes: ["artificer", "bard", "faerie og", "druid", "wizard"],
+	classes: ["artificer", "bard", "druid", "wizard"],
 	source: ["OG", 249],
 	level: 3,
 	school: "Trans",
@@ -1339,7 +1197,7 @@ SpellsList["hold portal og"] = {
 };
 SpellsList["humanoid possession og"] = {
 	name: "Humanoid Possession",
-	classes: ["faerie og", "warlock"],
+	classes: ["warlock"],
 	source: ["OG", 250],
 	level: 7,
 	school: "Ench",
@@ -1395,6 +1253,19 @@ SpellsList["ice blade og"] = {
 	descriptionFull:"You evoke an icy blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke the blade again as a bonus action. You can use your action to make a melee spell attack with the icy blade. On a hit, the target takes 3d6 cold damage, and its movement speed is reduced by 10 feet until the end of its next turn.",
 	atHigherLevels:"When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for every two slot levels above 2nd."
 };
+WeaponsList["ice blade og"] = {
+	name: "Ice Blade",
+	source: ["OG", 251],
+	regExpSearch: /^(?=.*ice)(?=.*blade).*$/i,
+	type: "Spell",
+	ability: 5,
+	abilitytodamage: false,
+	damage: ["3",6,"Cold"],
+	range: "Melee",
+	description: "+1D6/2SL cold dmg; Target -10ft speed until end of their next turn; bns a to re-summon",
+	list: "spell",
+	tooltip: "You evoke an icy blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke the blade again as a bonus action.\nYou can use your action to make a melee spell attack with the icy blade. On a hit, the target takes 3d6 cold damage, and its movement speed is reduced by 10 feet until the end of its next turn.\nAt Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for every two slot levels above 2nd."
+};
 SpellsList["icicle og"] = {
 	name: "Icicle",
 	classes: ["artificer", "druid", "sorcerer", "wizard"],
@@ -1426,7 +1297,7 @@ SpellsList["icy sheet og"] = {
 SpellsList["immaculate conception og"] = {
 	name: "Immaculate Conception",
 	nameShort: "Immacul. Conception",
-	classes: ["cleric", "faerie og", "sorcerer", "wizard"],
+	classes: ["cleric", "sorcerer", "wizard"],
 	source: ["OG", 253],
 	level: 6,
 	school: "Trans",
@@ -1475,7 +1346,7 @@ SpellsList["infestation of maggots og"] = {
 };
 SpellsList["investiture of starlight og"] = {
 	name: "Investiture of Starlight",
-	classes: ["druid", "faerie og"],
+	classes: ["druid"],
 	source: ["OG", 254],
 	level: 6,
 	school: "Trans",
@@ -1489,7 +1360,7 @@ SpellsList["investiture of starlight og"] = {
 };
 SpellsList["invisible trickery og"] = {
 	name: "Invisible Trickery",
-	classes: ["bard", "faerie og", "sorcerer", "wizard"],
+	classes: ["bard", "sorcerer", "wizard"],
 	source: ["OG", 254],
 	level: 3,
 	school: "Illus",
@@ -1502,7 +1373,7 @@ SpellsList["invisible trickery og"] = {
 	};
 SpellsList["jinx og"] = {
 	name: "Jinx",
-	classes: ["bard", "faerie og", "sorcerer", "warlock"],
+	classes: ["bard", "sorcerer", "warlock"],
 	source: ["OG", 254],
 	level: 2,
 	school: "Ench",
@@ -1515,24 +1386,37 @@ SpellsList["jinx og"] = {
 	descriptionFull: "You curse one creature you can see, jinxing them. Until the spell ends, each time the target takes the Attack action or casts a spell, they must succeed a Dexterity saving throw or take 2d8 thunder damage. A creature can only suffer this damage once on their turn, but can be jinxed again if they cast a spell or make an attack of opportunity using their reaction.\nAlso, choose one ability when you cast the spell. The target has disadvantage on ability checks made with the chosen ability. A remove curse spell or similar magic ends the spell.",
 	atHigherLevels: "When you cast this spell using a spell slot of 3rd or 4th level, you can maintain your concentration on the spell for up to 8 hours. When you use a spell slot of 5th level or higher, you can maintain your concentration on the spell for up to 24 hours."
 };
-SpellsList["leeock's lucky coin og"] = {
+SpellsList["leeocks lucky coin og"] = {
 	name: "Leeock's Lucky Coin",
-	classes: ["artificer", "bard", "faerie og", "sorcerer", "warlock"],
+	classes: ["artificer", "bard", "sorcerer", "warlock"],
 	source: ["OG", 254],
 	level: 0,
-	descriptionCantripDie: "rng spell attack for `CD`D6 + spell mod bludg dmg; ignore 1/2 cover; 3/4 cover = 1/2 cover",
 	school: "Trans",
 	time: "1 a",
 	range: "30 ft",
 	components: "S, M",
 	compMaterial: "a metal coin",
 	duration: "Instantaneous",
+	descriptionCantripDie: "rng spell attack for `CD`D6 + spell mod bludg dmg; ignore 1/2 cover; 3/4 cover = 1/2 cover",
 	description:"rng spell atk for 1D6 + spell mod bludg dmg; ign. 1/2 cover; 3/4 cover = 1/2 cover; +1D6 at CL 5,11,17",
 	descriptionFull:"You fling a coin toward a creature you can see within range. Make a ranged spell attack, ignoring half cover, and treating three-quarters cover as half cover. On a hit, the target takes 1d6 + your spellcasting ability modifier bludgeoning damage. At the end of your turn, the coin bounces back into your hand or pocket.\nThis spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
 };
+WeaponsList["leeocks lucky coin og"] = {
+	name: "Leeock's Lucky Coin",
+	source: ["OG", 242],
+	regExpSearch: /^(?=.*leeock)(?=.*lucky)(?=.*coin).*$/i,
+	type: "Cantrip",
+	ability: 4,
+	abilitytodamage: true,
+	damage: ["C",6,"Bludgeoning"],
+	range: "30ft",
+	description: "Ignore 1/2 cover; Treat 3/4 cover as 1/2 cover",
+	list: "spell",
+	tooltip: "You fling a coin toward a creature you can see within range. Make a ranged spell attack, ignoring half cover, and treating three-quarters cover as half cover. On a hit, the target takes 1d6 + your spellcasting ability modifier bludgeoning damage. At the end of your turn, the coin bounces back into your hand or pocket.\nThis spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
+};
 SpellsList["lifebloom og"] = {
 	name: "Lifebloom",
-	classes: ["faerie og", "druid", "ranger"],
+	classes: ["druid", "ranger"],
 	source: ["OG", 255],
 	level: 4,
 	school: "Evoc",
@@ -1547,7 +1431,7 @@ SpellsList["lifebloom og"] = {
 };
 SpellsList["lipstitch og"] = {
 	name: "Lipstitch",
-	classes: ["faerie og", "sorcerer", "wizard", "warlock"],
+	classes: ["sorcerer", "wizard", "warlock"],
 	source: ["OG", 255],
 	level: 3,
 	school: "Trans",
@@ -1560,7 +1444,7 @@ SpellsList["lipstitch og"] = {
 	descriptionFull: "You speak a rebuking word and make a matching gesture. Choose a creature you can within range. The target must make Constitution saving throw. On a failure, the target becomes cursed, taking 2d4 piercing damage, and its mouth is sewn shut by a sinuous thread.\nIf the creature has multiple mouths, you choose which one to close. A cursed mouth can produce only muffled sounds, it cannot produce speech or the verbal components of spellcasting, and it is unable to make biting attacks. Constructs and creatures without a mouth are immune to the spell.\nThe threads have an AC equal to your spell save DC, and a number of hit points equal to 1d4 + your spellcasting ability modifier. If you can see the target, you can use a bonus action to restore a number of hit points to the threads equal to 1d4 + your spellcasting ability modifier. \nAn affected creature can use its action on its turn to make a Strength saving throw. On a success, they to burst through the stitches. Alternatively, a creature can use its action and an appropriate implement to cut the threading away. Damaging or destroying destroy the threads causes the target to take 1d4 slashing damage. Additionally, a creature can spend 1 minute and make a medicine check whose DC equals your spell save DC to remove the thread harmlessly.\nIf the threads are burst, reduced to 0 hit points, removed, or dispelled, the spell ends. A lesser restoration or remove curse spell also ends it.",
 	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the damage for each of its effects and the number of hit points of the threads increases by 1d4 for each slot level above 3rd. If you cast this spell using a spell slot of 4th level, the duration is concentration, up to 1 hour. If you use a spell slot of 5th level, the duration is 8 hours. If you use a spell slot of 6th level, the duration is 24 hours. If you use a spell slot of 7th level, the duration is 10 days. If you use a 9th level spell slot, the spell lasts until it is dispelled. Using a spell slot of 5th level or higher grants a duration that doesn’t require concentration."
 };
-SpellsList["lloyd's beacon og"] = {
+SpellsList["lloyds beacon og"] = {
 	name: "Lloyd's Beacon",
 	classes: ["artificer", "bard", "cleric", "wizard"],
 	source: ["OG", 256],
@@ -1574,9 +1458,9 @@ SpellsList["lloyd's beacon og"] = {
 	description: "create beacon for teleport which lasts 1 year or teleport myself + 5 creatures to a beacon; see B",
 	descriptionFull: "When casting the spell, choose from the following two options:\nLight. You light a non-magical object, such as a candle, a lantern, lamp, brazier, or torch with a magical flame, which gives off a bright light for 10 feet and dim light for an additional 10 feet. The flame provides no heat and does not consume the object’s substance, burning silently for up to 1 year. If you light a second beacon, the first extinguishes itself. A creature can use its action to extinguish the flame.\nRecall. The spell transports you and up to five willing creatures of your choice within range. You instantaneously appear within 30 feet of the beacon’s location. You must be on the same plane as the beacon you have lit to use this option."
 };
-SpellsList["londyn's duet og"] = {
+SpellsList["londyns duet og"] = {
 	name: "Londyn's Duet",
-	classes: ["bard", "faerie og"],
+	classes: ["bard"],
 	source: ["OG", 256],
 	level: 2,
 	school: "Conj",
@@ -1591,7 +1475,7 @@ SpellsList["londyn's duet og"] = {
 };
 SpellsList["longlimb og"] = {
 	name: "Longlimb",
-	classes: ["faerie og", "sorcerer", "wizard"],
+	classes: ["sorcerer", "wizard"],
 	source: ["OG", 257],
 	level: 1,
 	school: "Trans",
@@ -1606,7 +1490,7 @@ SpellsList["longlimb og"] = {
 };
 SpellsList["luck og"] = {
 	name: "Luck",
-	classes: ["bard", "faerie og", "sorcerer", "warlock"],
+	classes: ["bard", "sorcerer", "warlock"],
 	source: ["OG", 257],
 	level: 3,
 	school: "Div",
@@ -1621,7 +1505,7 @@ SpellsList["luck og"] = {
 };
 SpellsList["lunar occult og"] = {
 	name: "Lunar Occult",
-	classes: ["druid", "faerie og", "sorcerer", "warlock", "wizard"],
+	classes: ["druid", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 257],
 	level: 7,
 	school: "Conj",
@@ -1636,7 +1520,7 @@ SpellsList["lunar occult og"] = {
 };
 SpellsList["magic miasma og"] = {
 	name: "Magic Miasma",
-	classes: ["faerie og", "sorcerer", "wizard"],
+	classes: ["sorcerer", "wizard"],
 	source: ["OG", 257],
 	level: 7,
 	school: "Abjur",
@@ -1679,7 +1563,7 @@ SpellsList["magnetokinesis og"] = {
 };
 SpellsList["major glamour og"] = {
 	name: "Major Glamour",
-	classes: ["faerie og", "sorcerer", "wizard"],
+	classes: ["sorcerer", "wizard"],
 	source: ["OG", 259],
 	level: 4,
 	school: "Trans",
@@ -1695,7 +1579,7 @@ SpellsList["major glamour og"] = {
 };
 SpellsList["mass distortion og"] = {
 	name: "Mass Distortion",
-	classes: ["artificer", "faerie og", "wizard"],
+	classes: ["artificer", "wizard"],
 	source: ["OG", 259],
 	level: 1,
 	school: "Trans",
@@ -1709,7 +1593,7 @@ SpellsList["mass distortion og"] = {
 };
 SpellsList["melfs unicorn arrow og"] = {
 	name: "Melf's Unicorn Arrow",
-	classes: ["faerie og", "sorcerer", "wizard"],
+	classes: ["sorcerer", "wizard"],
 	source: ["OG", 259],
 	level: 3,
 	school: "Conj",
@@ -1739,7 +1623,7 @@ SpellsList["metamorphose liquid og"] = {
 };
 SpellsList["minor glamour og"] = {
 	name: "Minor Glamour",
-	classes: ["faerie og", "sorcerer", "wizard"],
+	classes: ["sorcerer", "wizard"],
 	source: ["OG", 260],
 	level: 3,
 	school: "Trans",
@@ -1755,7 +1639,7 @@ SpellsList["minor glamour og"] = {
 };
 SpellsList["mirror stride og"] = {
 	name: "Mirror Stride",
-	classes: ["artificer", "faerie og", "sorcerer", "wizard", "warlock"],
+	classes: ["artificer", "sorcerer", "wizard", "warlock"],
 	source: ["OG", 261],
 	level: 5,
 	school: "Trans",
@@ -1785,7 +1669,7 @@ SpellsList["missile magnet og"] = {
 };
 SpellsList["misty slash og"] = {
 	name: "Misty Slash",
-	classes: ["faerie og", "sorcerer", "wizard", "warlock"],
+	classes: ["sorcerer", "wizard", "warlock"],
 	source: ["OG", 261],
 	level: 3,
 	school: "Conj",
@@ -1800,7 +1684,7 @@ SpellsList["misty slash og"] = {
 };
 SpellsList["moon blade og"] = {
 	name: "Moon Blade",
-	classes: ["druid", "faerie og", "ranger"],
+	classes: ["druid", "ranger"],
 	source: ["OG", 262],
 	level: 2,
 	school: "Evoc",
@@ -1815,7 +1699,7 @@ SpellsList["moon blade og"] = {
 };
 SpellsList["mushroom ring og"] = {
 	name: "Mushroom Ring",
-	classes: ["druid", "faerie og", "ranger"],
+	classes: ["druid", "ranger"],
 	source: ["OG", 262],
 	level: 3,
 	school: "Conj",
@@ -1831,17 +1715,30 @@ SpellsList["mushroom ring og"] = {
 };
 SpellsList["nature bolt og"] = {
 	name: "Nature Bolt",
-	classes: ["druid", "faerie og", "wizard"],
+	classes: ["druid", "wizard"],
 	source: ["OG", 263],
 	level: 0,
 	school: "Trans",
-	descriptionCantripDie: "ranged spell attack for `CD`d8; see B for dmg type (depends on terrain)",
+	
 	time: "1 a",
 	range: "60 ft",
 	components: "V,S",
 	duration: "Instantaneous",
 	description: "ranged spell attack for 1d8; +1d8 CL 5, 11, 17; see B for dmg type (depends on terrain)",
+	descriptionCantripDie: "ranged spell attack for `CD`d8; see B for dmg type (depends on terrain)",
 	descriptionFull: "A handful of solid terrain you can reach crumbles at your touch, and you hurl the mass at a creature or object within range. Make a ranged spell attack against the target. If you hit, the target takes 1d8 of damage of a type based on the terrain.\n\nstone, dirt: Bludgeoning\nmetal, wood: Piercing\ngravel, sand: Slashing\nswamp, marsh: Poison\nwater, snow, ice: Cold\n\nThis spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8)."
+};
+WeaponsList["nature bolt og"] = {
+	name: "Nature Bolt",
+	source: ["OG", 263],
+	regExpSearch: /^(?=.*nature)(?=.*bolt).*$/i,
+	type: "Cantrip",
+	ability: 4,
+	damage: ["C",8,"Special"],
+	range: "60ft",
+	description: "stone, dirt: bludg; metal, wood: pierc; gravel, sand: slash; swamp, marsh: pois; water, snow, ice: cold",
+	list: "spell",
+	tooltip: "A handful of solid terrain you can reach crumbles at your touch, and you hurl the mass at a creature or object within range. Make a ranged spell attack against the target. If you hit, the target takes 1d8 of damage of a type based on the terrain. This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8)."
 };
 SpellsList["negromantic regombination og"] = {
 	name: "Negromantic Regombination",
@@ -1859,7 +1756,7 @@ SpellsList["negromantic regombination og"] = {
 };
 SpellsList["othertime og"] = {
 	name: "Othertime",
-	classes: ["artificer", "bard", "cleric", "faerie og"],
+	classes: ["artificer", "bard", "cleric"],
 	source: ["OG", 264],
 	level: 5,
 	school: "Conj",
@@ -1874,7 +1771,7 @@ SpellsList["othertime og"] = {
 };
 SpellsList["pall of twilight og"] = {
 	name: "Pall of Twilight",
-	classes: ["bard", "faerie og", "sorcerer", "warlock", "wizard"],
+	classes: ["bard", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 264],
 	level: 3,
 	school: "Illus",
@@ -1905,11 +1802,10 @@ SpellsList["papercut og"] = {
 };
 SpellsList["peal of nine bells og"] = {
 	name: "Peal of Nine Bells",
-	classes: ["artificer", "bard", "cleric", "faerie og", "wizard"],
+	classes: ["artificer", "bard", "cleric", "wizard"],
 	source: ["OG", 265],
 	level: 0,
 	school: "Conj",
-	descriptionCantripDie: "on save fail: `CD`D6 thunder dmg and 10ft pushed away",
 	time: "1 a",
 	range: "20 ft",
 	components: "S,M",
@@ -1917,11 +1813,25 @@ SpellsList["peal of nine bells og"] = {
 	duration: "Instantaneous",
 	save: "Str",
 	description: "on save fail: 1D6 thunder dmg and 10ft pushed away; +D6 at CL 5, 7 and 11",
+	descriptionCantripDie: "on save fail: `CD`D6 thunder dmg and 10ft pushed away",
 	descriptionFull: "You create a beam of ringing sound that strikes at one creature of your choice that you can see within range. The target must succeed on a Strength saving throw or be pushed up to 10 feet in a straight line away from you, taking 1d6 thunder damage.\nThe spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)"
+};
+WeaponsList["peal of nine bells og"] = {
+	name: "Peal of Nine Bells",
+	source: ["OG", 265],
+	regExpSearch: /^(?=.*peal)(?=.*bell).*$/i,
+	type: "Cantrip",
+	ability: 4,
+	damage: ["C",6,"Thunder"],
+	range: "20ft",
+	dc : true,
+	description: "Target is pushed 10ft away from me in a straight line, Str save, success - no damage/push",
+	list: "spell",
+	tooltip: "You create a beam of ringing sound that strikes at one creature of your choice that you can see within range. The target must succeed on a Strength saving throw or be pushed up to 10 feet in a straight line away from you, taking 1d6 thunder damage.\nThe spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
 };
 SpellsList["perplex og"] = {
 	name: "Perplex",
-	classes: ["bard", "faerie og", "wizard"],
+	classes: ["bard", "wizard"],
 	source: ["OG", 265],
 	level: 3,
 	school: "Ench",
@@ -1936,7 +1846,7 @@ SpellsList["perplex og"] = {
 };
 SpellsList["plaguemask og"] = {
 	name: "Plaguemask",
-	classes: ["artificer", "faerie og", "wizard"],
+	classes: ["artificer", "wizard"],
 	source: ["OG", 265],
 	level: 2,
 	school: "Illus",
@@ -1965,7 +1875,7 @@ SpellsList["polandaras petticoat pocket og"] = {
 };
 SpellsList["power word silence og"] = {
 	name: "Power Word Silence",
-	classes: ["bard", "faerie og", "sorcerer", "warlock", "wizard"],
+	classes: ["bard", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 266],
 	level: 6,
 	school: "Ench",
@@ -1979,7 +1889,7 @@ SpellsList["power word silence og"] = {
 };
 SpellsList["probability warp og"] = {
 	name: "Probability Warp",
-	classes: ["bard", "faerie og", "sorcerer", "warlock"],
+	classes: ["bard", "sorcerer", "warlock"],
 	source: ["OG", 266],
 	level: 5,
 	school: "Ench",
@@ -1993,7 +1903,7 @@ SpellsList["probability warp og"] = {
 };
 SpellsList["puff of smoke og"] = {
 	name: "Puff of Smoke",
-	classes: ["artificer", "bard", "faerie og", "sorcerer", "wizard"],
+	classes: ["artificer", "bard", "sorcerer", "wizard"],
 	source: ["OG", 266],
 	level: 0,
 	school: "Conj",
@@ -2020,6 +1930,18 @@ SpellsList["puncture og"] = {
 	description: "1 (+1 at CL 5, 11, 17) ranged spell attacks for 1d10 pierc dmg",
 	descriptionFull: "A psionic needle streaks toward a creature within range. Make a ranged spell attack against the target. On a hit,the target takes 1d10 piercing damage.\nThe spell creates more needles when you reach higher levels: two needles at 5th level, three needles at 11th level, and four needles at 17th level. You can direct the needles at the same target or at different ones. Make a separate attack roll for each needle."
 };
+WeaponsList["puncture og"] = {
+	name: "Puncture",
+	source: ["OG", 266],
+	regExpSearch: /^(?=.*puncture).*$/i,
+	type: "Cantrip",
+	ability: 4,
+	damage: ["C",10,"Piercing"],
+	range: "120ft",
+	description: "Each d10 is a separate needle requiring separate rolls",
+	list: "spell",
+	tooltip: "A psionic needle streaks toward a creature within range. Make a ranged spell attack against the target. On a hit,the target takes 1d10 piercing damage.\nThe spell creates more needles when you reach higher levels: two needles at 5th level, three needles at 11th level, and four needles at 17th level. You can direct the needles at the same target or at different ones. Make a separate attack roll for each needle."
+};
 SpellsList["pyroclasm og"] = {
 	name: "Pyroclasm",
 	classes: ["druid", "sorcerer", "wizard"],
@@ -2039,7 +1961,7 @@ SpellsList["pyroclasm og"] = {
 SpellsList["quentins quickling senses og"] = {
 	name: "Quentin's Quickling Senses",
 	nameShort: "Quentin's Quickl. Senses",
-	classes: ["artificer", "bard", "faerie og", "sorcerer", "wizard"],
+	classes: ["artificer", "bard", "sorcerer", "wizard"],
 	source: ["OG", 267],
 	level: 4,
 	school: "Trans",
@@ -2053,7 +1975,7 @@ SpellsList["quentins quickling senses og"] = {
 };
 SpellsList["radiant glamour og"] = {
 	name: "Radiant Glamour",
-	classes: ["cleric", "faerie og", "paladin"],
+	classes: ["cleric", "paladin"],
 	source: ["OG", 267],
 	level: 3,
 	school: "Evoc",
@@ -2069,7 +1991,7 @@ SpellsList["radiant glamour og"] = {
 };
 SpellsList["read blood og"] = {
 	name: "Read Blood",
-	classes: ["artificer", "faerie og", "sorcerer", "warlock", "wizard"],
+	classes: ["artificer", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 267],
 	level: 1,
 	school: "Div",
@@ -2101,7 +2023,7 @@ SpellsList["regall agony og"] = {
 };
 SpellsList["rejuvenate og"] = {
 	name: "Rejuvenate",
-	classes: ["druid", "faerie og", "sorcerer", "wizard"],
+	classes: ["druid", "sorcerer", "wizard"],
 	source: ["OG", 268],
 	level: 7,
 	school: "Necro",
@@ -2147,7 +2069,7 @@ SpellsList["rending distortion og"] = {
 };
 SpellsList["reorient og"] = {
 	name: "Reorient",
-	classes: ["artificer", "faerie og", "wizard"],
+	classes: ["artificer", "wizard"],
 	source: ["OG", 268],
 	level: 1,
 	school: "Trans",
@@ -2161,7 +2083,7 @@ SpellsList["reorient og"] = {
 };
 SpellsList["reverse projectiles og"] = {
 	name: "Reverse Projectiles",
-	classes: ["artificer", "cleric", "faerie og", "paladin", "wizard"],
+	classes: ["artificer", "cleric", "paladin", "wizard"],
 	source: ["OG", ],
 	level: 3,
 	school: "Abjur",
@@ -2191,7 +2113,7 @@ SpellsList["roar of waves og"] = {
 };
 SpellsList["sacred strike og"] = {
 	name: "Sacred Strike",
-	classes: ["cleric", "faerie og"],
+	classes: ["cleric"],
 	source: ["OG", 269],
 	level: 0,
 	school: "Evoc",
@@ -2201,12 +2123,25 @@ SpellsList["sacred strike og"] = {
 	compMaterial: "a weapon",
 	duration: "1 rnd",
 	descriptionCantripDie: "melee spell atk; next hit by not me deals +`CD-1`D6 + my spell mod rad dmg",
-	description: "melee spell atk; next hit by not me deals my spell mod extra rad dmg; +1D6 at CL 5, 11, 17",
+	description: "spell cast with successful melee atk; next hit by not me +my spell mod rad dmg; +1D6 at CL 5, 11, 17",
 	descriptionFull: "As part of the action used to cast this spell, you must make a melee attack with a weapon against one creature within the spell’s range, otherwise the spell fails. On a hit, the target suffers the attack’s normal effects, and it is wreathed in light, shedding dim light in a 5-foot-radius until the start of your next turn. For the duration, if the creature is hit with an attack made by a creature other than you, the attack deals additional radiant damage equal to your spellcasting modifier, and the wreath of light dissipates.\nThis spell’s damage increases by 1d6 when you reach 5th level (1d6 + your spellcasting ability modifier), 11th level (2d6 + your spellcasting ability modifier), and 17th level (3d6 + your spellcasting ability modifier)."
+};
+WeaponsList["sacred strike og"] = {
+	name: "Sacred Strike",
+	source: ["OG", 284],
+	regExpSearch: /^(?=.*sacred)(?=.*strike).*$/i,
+	type: "Cantrip",
+	ability: 4,
+	damage: ["B",6,"radiant"],
+	abilitytodamage: true,
+	range: "melee",
+	description: "Cast with melee attack, no extra dmg. On hit: marked & extra dmg if hit by other within 1 turn.",
+	list: "spell",
+	tooltip: "As part of the action used to cast this spell, you must make a melee attack with a weapon against one creature within the spell’s range, otherwise the spell fails. On a hit, the target suffers the attack’s normal effects, and it is wreathed in light, shedding dim light in a 5-foot-radius until the start of your next turn. For the duration, if the creature is hit with an attack made by a creature other than you, the attack deals additional radiant damage equal to your spellcasting modifier, and the wreath of light dissipates.\nThis spell’s damage increases by 1d6 when you reach 5th level (1d6 + your spellcasting ability modifier), 11th level (2d6 + your spellcasting ability modifier), and 17th level (3d6 + your spellcasting ability modifier)."
 };
 SpellsList["sanguine strike og"] = {
 	name: "Sanguine Strike",
-	classes: ["bard", "cleric", "faerie og", "sorcerer"],
+	classes: ["bard", "cleric", "sorcerer"],
 	source: ["OG", 269],
 	level: 0,
 	school: "Div",
@@ -2219,7 +2154,7 @@ SpellsList["sanguine strike og"] = {
 };
 SpellsList["seeking og"] = {
 	name: "Seeking",
-	classes: ["artificer", "cleric", "faerie og", "paladin", "ranger", "wizard"],
+	classes: ["artificer", "cleric", "paladin", "ranger", "wizard"],
 	source: ["OG", 270],
 	level: 2,
 	school: "Div",
@@ -2233,7 +2168,7 @@ SpellsList["seeking og"] = {
 };
 SpellsList["sensory deprivation og"] = {
 	name: "Sensory Deprivation",
-	classes: ["faerie og", "sorcerer", "warlock", "wizard"],
+	classes: ["sorcerer", "warlock", "wizard"],
 	source: ["OG", 270],
 	level: 4,
 	school: "Illus",
@@ -2249,7 +2184,7 @@ SpellsList["sensory deprivation og"] = {
 };
 SpellsList["shape wood og"] = {
 	name: "Shape Wood",
-	classes: ["artificer", "druid", "faerie og"],
+	classes: ["artificer", "druid"],
 	source: ["OG", 270],
 	level: 3,
 	school: "Trans",
@@ -2307,7 +2242,7 @@ SpellsList["slipstream og"] = {
 };
 SpellsList["snakestaff og"] = {
 	name: "Snakestaff",
-	classes: ["druid", "faerie og", "sorcerer", "wizard"],
+	classes: ["druid", "sorcerer", "wizard"],
 	source: ["OG", 271],
 	level: 1,
 	school: "Trans",
@@ -2322,7 +2257,7 @@ SpellsList["snakestaff og"] = {
 };
 SpellsList["sneezing dust og"] = {
 	name: "Sneezing Dust",
-	classes: ["bard", "druid", "faerie og", "ranger", "wizard"],
+	classes: ["bard", "druid", "ranger", "wizard"],
 	source: ["OG", 271],
 	level: 4,
 	school: "Conj",
@@ -2337,7 +2272,7 @@ SpellsList["sneezing dust og"] = {
 };
 SpellsList["solid fog og"] = {
 	name: "Solid Fog",
-	classes: ["faerie og", "sorcerer", "wizard"],
+	classes: ["sorcerer", "wizard"],
 	source: ["OG", 271],
 	level: 2,
 	school: "Conj",
@@ -2352,7 +2287,7 @@ SpellsList["solid fog og"] = {
 };
 SpellsList["solipsism og"] = {
 	name: "Solipsism",
-	classes: ["bard", "faerie og", "sorcerer", "warlock", "wizard"],
+	classes: ["bard", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 272],
 	level: 7,
 	school: "Illus",
@@ -2366,7 +2301,7 @@ SpellsList["solipsism og"] = {
 };
 SpellsList["soul whip og"] = {
 	name: "Soul Whip",
-	classes: ["bard", "faerie og", "sorcerer", "warlock", "wizard"],
+	classes: ["bard", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 272],
 	level: 2,
 	school: "Illus",
@@ -2377,6 +2312,20 @@ SpellsList["soul whip og"] = {
 	description: "create whip(finesse, reach, light) dealing 2d4+spell mod psychic dmg; bns to re-summon; see B",
 	descriptionFull: "You weave together threads of wrathful thought to create a whip of solidified enmity in your hand. This magic whip lasts until the spell ends. It counts as a martial melee weapon with which you are proficient. It deals 2d4 + your spellcasting ability modifier psychic damage on a hit and has the finesse, light, and reach properties. In addition, when you use the whip to attack a target that charmed or frightened by you, you make the attack roll with advantage.\nIf you drop the weapon or throw it, it dissipates as it leaves your hand. Thereafter, while the spell persists, you can use a bonus action to cause the whip to reappear in your hand.",
 	atHigherLevels:"When you cast this spell using a spell slot of 3rd or 4th level, the damage increases to 3d4 + your spellcasting ability modifier. When you cast it using a spell slot of 5th or 6th level, the damage increases to 4d4 + your spellcasting ability modifier. When you cast it using a spell slot of 7th level or higher, the damage increases to 5d4 + your spellcasting ability modifier."
+};
+WeaponsList["soul whip og"] = {
+	name: "Soul Whip",
+	source: ["OG", 251],
+	regExpSearch: /^(?=.*soul)(?=.*whip).*$/i,
+	type: "Spell",
+	ability: 4,
+	abilitytodamage: true,
+	baseWeapon: "whip",
+	damage: ["2",4,"Psychic"],
+	range: "Melee",
+	description: "finesse, reach, light; +1D4 at SL 3,5&7; adv if target charmed/frightened by me; bns a to re-summon",
+	list: "spell",
+	tooltip: "You weave together threads of wrathful thought to create a whip of solidified enmity in your hand. This magic whip lasts until the spell ends. It counts as a martial melee weapon with which you are proficient. It deals 2d4 + your spellcasting ability modifier psychic damage on a hit and has the finesse, light, and reach properties. In addition, when you use the whip to attack a target that charmed or frightened by you, you make the attack roll with advantage.\nIf you drop the weapon or throw it, it dissipates as it leaves your hand. Thereafter, while the spell persists, you can use a bonus action to cause the whip to reappear in your hand.\n\nWhen you cast this spell using a spell slot of 3rd or 4th level, the damage increases to 3d4 + your spellcasting ability modifier. When you cast it using a spell slot of 5th or 6th level, the damage increases to 4d4 + your spellcasting ability modifier. When you cast it using a spell slot of 7th level or higher, the damage increases to 5d4 + your spellcasting ability modifier."
 };
 SpellsList["speak with object og"] = {
 	name: "Speak with Object",
@@ -2408,7 +2357,7 @@ SpellsList["squeaking floor og"] = {
 };
 SpellsList["stumble og"] = {
 	name: "Stumble",
-	classes: ["bard", "faerie og", "sorcerer", "warlock", "wizard"],
+	classes: ["bard", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 272],
 	level: 1,
 	school: "Ench",
@@ -2437,7 +2386,7 @@ SpellsList["suspended silence og"] = {
 };
 SpellsList["switcheroo og"] = {
 	name: "Switcheroo",
-	classes: ["bard", "faerie og", "sorcerer", "warlock", "wizard"],
+	classes: ["bard", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 273],
 	level: 4,
 	school: "Conj",
@@ -2453,7 +2402,7 @@ SpellsList["switcheroo og"] = {
 };
 SpellsList["sylvan vision og"] = {
 	name: "Sylvan Vision",
-	classes: ["druid", "faerie og", "ranger"],
+	classes: ["druid", "ranger"],
 	source: ["OG", 273],
 	level: 1,
 	school: "Div",
@@ -2481,7 +2430,7 @@ SpellsList["synostodweomer og"] = {
 };
 SpellsList["tail sweep og"] = {
 	name: "Tail Sweep",
-	classes: ["artificer", "druid", "faerie og", "sorcerer", "wizard"],
+	classes: ["artificer", "druid", "sorcerer", "wizard"],
 	source: ["OG", 273],
 	level: 4,
 	school: "Evoc",
@@ -2509,7 +2458,7 @@ SpellsList["tattoosion og"] = {
 };
 SpellsList["telepathy tap og"] = {
 	name: "Telepathy Tap",
-	classes: ["cleric", "faerie og", "sorcerer", "wizard"],
+	classes: ["cleric", "sorcerer", "wizard"],
 	source: ["OG", 274],
 	level: 3,
 	school: "Div",
@@ -2522,7 +2471,7 @@ SpellsList["telepathy tap og"] = {
 };
 SpellsList["thorn spray og"] = {
 	name: "Thorn Spray",
-	classes: ["faerie og", "druid"],
+	classes: ["druid"],
 	source: ["OG", 274],
 	level: 4,
 	school: "Trans",
@@ -2565,9 +2514,22 @@ SpellsList["time knife og"] = {
 	description: "ranged spell attack for 1d6+spell mod slashing dmg; more blades at CL 5, 11 and 17",
 	descriptionFull: "A magical blade of disruptive energy sails toward a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d6 slashing damage plus force damage equal to your spellcasting ability modifier. \nThe spell creates additional blades when you reach higher levels: two blades at 5th level, three blades at 11th level, and four blades at 17th level. You can direct the blades at the same target or at different ones. Make a separate attack roll for each blade."
 };
+WeaponsList["time knife og"] = {
+	name: "Time Knife",
+	source: ["OG", 275],
+	regExpSearch: /^(?=.*time)(?=.*knife).*$/i,
+	type: "Cantrip",
+	ability: 4,
+	abilitytodamage: true,	
+	damage: ["C",6,"slashing"],
+	range: "120ft",
+	description: "Each d6 is a separate knife requiring separate rolls. Add spell mod each time.",
+	list: "spell",
+	tooltip: "A magical blade of disruptive energy sails toward a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d6 slashing damage plus force damage equal to your spellcasting ability modifier. \nThe spell creates additional blades when you reach higher levels: two blades at 5th level, three blades at 11th level, and four blades at 17th level. You can direct the blades at the same target or at different ones. Make a separate attack roll for each blade."
+};
 SpellsList["time parasite og"] = {
 	name: "Time Parasite",
-	classes: ["bard", "faerie og", "sorcerer", "warlock"],
+	classes: ["bard", "sorcerer", "warlock"],
 	source: ["OG", 275],
 	level: 2,
 	school: "Abjur",
@@ -2594,7 +2556,7 @@ SpellsList["towering oak og"] = {
 };
 SpellsList["toxic tongue og"] = {
 	name: "Toxic Tongue",
-	classes: ["artificer", "druid", "faerie og", "ranger", "warlock"],
+	classes: ["artificer", "druid", "ranger", "warlock"],
 	source: ["OG", 275],
 	level: 3,
 	school: "Trans",
@@ -2607,9 +2569,22 @@ SpellsList["toxic tongue og"] = {
 	descriptionFull: "Your mouth gains the ability to create a virulent poison for the duration. You can use your poison in two ways:\n- Poison Spit: As a bonus action, you can spray a stream of poison from your mouth, targeting one creature you can see within 30 feet of you. The target makes a Constitution saving throw. On a failure, they take 3d10 poison damage.\n- Poison Weapon: As a bonus action, you can apply your poison to a melee weapon or piece of ammunition on your person or carried by a willing creature within 5 feet of you. The poison’s potency lasts until the start of your next turn. If the poisoned weapon hits a creature, the target must make a Constitution saving throw, taking 3d6 poison damage on a failure, or half as much on a success. The poison has no effect if ingested.",
 	atHigherLevels:"When you cast this spell using a spell slot of 4th level or higher, the damage of the poison increases by 1d8 for each slot level above 3rd."
 };
+WeaponsList["toxic tongue og"] = {
+	name: "Toxic Tongue",
+	source: ["OG", 275],
+	regExpSearch: /^(?=.*toxic)(?=.*tongue).*$/i,
+	type: "Spell",
+	ability: 4,
+	dc: true,
+	damage: ["3",10,"Poison"],
+	range: "30ft",
+	description: "Spit Poison as Bonus Action; Con Save: no damage; +1d8 dmg per SL > 3.",
+	list: "spell",
+	tooltip: "Your mouth gains the ability to create a virulent poison for the duration. You can use your poison in two ways:\n- Poison Spit: As a bonus action, you can spray a stream of poison from your mouth, targeting one creature you can see within 30 feet of you. The target makes a Constitution saving throw. On a failure, they take 3d10 poison damage.\n- Poison Weapon: As a bonus action, you can apply your poison to a melee weapon or piece of ammunition on your person or carried by a willing creature within 5 feet of you. The poison’s potency lasts until the start of your next turn. If the poisoned weapon hits a creature, the target must make a Constitution saving throw, taking 3d6 poison damage on a failure, or half as much on a success. The poison has no effect if ingested.\n\nAt Higher Levels: When you cast this spell using a spell slot of 4th level or higher, the damage of the poison increases by 1d8 for each slot level above 3rd."
+};
 SpellsList["treasure scent og"] = {
 	name: "Treasure Scent",
-	classes: ["artificer", "bard", "cleric", "faerie og", "sorcerer", "wizard"],
+	classes: ["artificer", "bard", "cleric", "sorcerer", "wizard"],
 	source: ["OG", 276],
 	level: 3,
 	school: "Div",
@@ -2622,7 +2597,7 @@ SpellsList["treasure scent og"] = {
 };
 SpellsList["tree steed og"] = {
 	name: "Tree Steed",
-	classes: ["druid", "faerie og", "ranger"],
+	classes: ["druid", "ranger"],
 	source: ["OG", 276],
 	level: 2,
 	school: "Ench",
@@ -2635,7 +2610,7 @@ SpellsList["tree steed og"] = {
 };
 SpellsList["twisting innards og"] = {
 	name: "Twisting Innards",
-	classes: ["artificer", "faerie og", "sorcerer", "wizard"],
+	classes: ["artificer", "sorcerer", "wizard"],
 	source: ["OG", ],
 	level: 5,
 	school: "Trans",
@@ -2649,7 +2624,7 @@ SpellsList["twisting innards og"] = {
 };
 SpellsList["unbinding og"] = {
 	name: "Unbinding",
-	classes: ["cleric", "faerie og", "sorcerer", "wizard"],
+	classes: ["cleric", "sorcerer", "wizard"],
 	source: ["OG", 277],
 	level: 9,
 	school: "Abjur",
@@ -2663,7 +2638,7 @@ SpellsList["unbinding og"] = {
 };
 SpellsList["unconscious command og"] = {
 	name: "Unconscious Command",
-	classes: ["bard", "faerie og", "sorcerer", "warlock", "wizard"],
+	classes: ["bard", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 277],
 	level: 6,
 	school: "Ench",
@@ -2738,7 +2713,7 @@ SpellsList["undead regeneration og"] = {
 };
 SpellsList["vacancy og"] = {
 	name: "Vacancy",
-	classes: ["artificer", "faerie og", "sorcerer", "wizard"],
+	classes: ["artificer", "sorcerer", "wizard"],
 	source: ["OG", 279],
 	level: 4,
 	school: "Illus",
@@ -2768,7 +2743,7 @@ SpellsList["wall of pain og"] = {
 };
 SpellsList["water whip og"] = {
 	name: "Water Whip",
-	classes: ["druid", "faerie og", "sorcerer", "wizard"],
+	classes: ["druid", "sorcerer", "wizard"],
 	source: ["OG", 280],
 	level: 1,
 	school: "Trans",
@@ -2797,22 +2772,36 @@ SpellsList["waypoint og"] = {
 };
 SpellsList["whelm og"] = {
 	name: "Whelm",
-	classes: ["artificer", "bard", "cleric", "druid", "faerie og", "sorcerer", "warlock", "wizard"],
+	classes: ["artificer", "bard", "cleric", "druid", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 280],
 	level: 0,
 	school: "Ench",
-	descriptionCantripDie: "creat. save or `CD`d6 psychic damage; if taken to 0 hp unconscious + stable; see B",
+	
 	time: "1 a",
 	range: "30 ft",
 	components: "S",
 	duration: "Instantaneous",
 	save: "Wis",
+	descriptionCantripDie: "creat. save or `CD`d6 psychic damage; if taken to 0 hp unconscious + stable; see B",
 	description: "creat. save or 1d6 psychic damage; if taken to 0 hp unconscious + stable; +1d6 at CL 5,11,17",
 	descriptionFull: "You thrust your arm forward with your palm open and fingers splayed, targeting a creature you can see within range, and attempt to overwhelm its mind. The target makes a Wisdom saving throw, taking 1d6 points of psychic damage on a failure, or half as much on a success. Constructs, Undead, and creatures with an Intelligence score of 4 or lower are immune to the spell.\If the spell reduces a creature to 0 hit points, they are unconscious, but stable. They remain unconscious for 1 minute, or until someone uses an action to shake or slap them awake, at which time they gain 1 hit point.\nIf the creature takes damage while they are unconscious, they lose their stability and die, or begin to make death saving throws.\nThis spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
 };
+WeaponsList["whelm og"] = {
+	name: "Whelm",
+	source: ["OG", 280],
+	regExpSearch: /^(?=.*whelm).*$/i,
+	type: "Cantrip",
+	ability: 4,
+	cd: true,	
+	damage: ["C",6,"psychic"],
+	range: "120ft",
+	description: "if taken to 0: unconscious for 1 min + stable; undead, construct & <int4 immune",
+	list: "spell",
+	tooltip: "You thrust your arm forward with your palm open and fingers splayed, targeting a creature you can see within range, and attempt to overwhelm its mind. The target makes a Wisdom saving throw, taking 1d6 points of psychic damage on a failure, or half as much on a success. Constructs, Undead, and creatures with an Intelligence score of 4 or lower are immune to the spell.\If the spell reduces a creature to 0 hit points, they are unconscious, but stable. They remain unconscious for 1 minute, or until someone uses an action to shake or slap them awake, at which time they gain 1 hit point.\nIf the creature takes damage while they are unconscious, they lose their stability and die, or begin to make death saving throws.\nThis spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
+};
 SpellsList["wild flight og"] = {
 	name: "Wild Flight",
-	classes: ["cleric", "faerie og", "sorcerer"],
+	classes: ["cleric", "sorcerer"],
 	source: ["OG", 280],
 	level: 3,
 	school: "Evoc",
@@ -2828,7 +2817,7 @@ SpellsList["wild flight og"] = {
 };
 SpellsList["wild runner og"] = {
 	name: "Wild Runner",
-	classes: ["druid", "faerie og", "ranger"],
+	classes: ["druid", "ranger"],
 	source: ["OG", 281],
 	level: 4,
 	school: "Trans",
@@ -2842,7 +2831,7 @@ SpellsList["wild runner og"] = {
 };
 SpellsList["wind at our backs og"] = {
 	name: "Wind at Our Backs",
-	classes: ["cleric", "druid", "faerie og", "paladin", "ranger"],
+	classes: ["cleric", "druid", "paladin", "ranger"],
 	source: ["OG", 281],
 	level: 5,
 	school: "Div",
@@ -2886,7 +2875,7 @@ SpellsList["wizen og"] = {
 };
 SpellsList["wood rot og"] = {
 	name: "Wood Rot",
-	classes: ["artificer", "druid", "faerie og", "wizard"],
+	classes: ["artificer", "druid", "wizard"],
 	source: ["OG", 282],
 	level: 1,
 	school: "Trans",
@@ -2944,21 +2933,33 @@ SpellsList["xorn movement og"] = {
 };
 SpellsList["zap og"] = {
 	name: "Zap",
-	classes: ["bard", "faerie og", "sorcerer", "wizard"],
+	classes: ["bard", "sorcerer", "wizard"],
 	source: ["OG", 284],
 	level: 0,
 	school: "Evoc",
-	descriptionCantripDie: "ranged spell attack; random type of `CD`d8 damage; see B",
 	time: "1 a",
 	range: "60 ft",
 	components: "V,S",
 	duration: "Instantaneous",
+	descriptionCantripDie: "ranged spell attack; random type of `CD`d8 damage; see B",
 	description: "ranged spell attack; random type of 1d8 damage; +1d8 at CL 5,11,17; see B",
 	descriptionFull: "A thrum of chaotic magic streaks out of you toward one creature of your choice that you can see within range. Make a ranged spell attack. If it hits, roll a d8 to determine the type of damage, then deal 1d8 of that type to the creature. The spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8). Each time the damage dice increase, you can modify the results of your damage type’s roll by an additional ±1.\n\nZap Damage Type:\n1 fire\n2 cold\n3 acid\n4 lightning\n5 thunder\n6 radiant\n7 force\n8 psychic\n"
 };
+WeaponsList["zap og"] = {
+	name: "Zap",
+	source: ["OG", 284],
+	regExpSearch: /^(?=.*zap).*$/i,
+	type: "Cantrip",
+	ability: 4,
+	damage: ["C",8,"Special"],
+	range: "60ft",
+	description: "Roll 1d8; 1:fire, 2:cold, 3:acid, 4:light, 5:thdr, 6: rad, 7: force, 8: psy; see B",
+	list: "spell",
+	tooltip: "A thrum of chaotic magic streaks out of you toward one creature of your choice that you can see within range. Make a ranged spell attack. If it hits, roll a d8 to determine the type of damage, then deal 1d8 of that type to the creature. The spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8). Each time the damage dice increase, you can modify the results of your damage type’s roll by an additional ±1.\n\nZap Damage Type:\n1 fire\n2 cold\n3 acid\n4 lightning\n5 thunder\n6 radiant\n7 force\n8 psychic\n"
+};
 SpellsList["zone of self immolation og"] = {
 	name: "Zone of Self-Immolation",
-	classes: ["druid", "faerie og", "sorcerer", "wizard"],
+	classes: ["druid", "sorcerer", "wizard"],
 	source: ["OG", 284],
 	level: 5,
 	school: "Abjur",
