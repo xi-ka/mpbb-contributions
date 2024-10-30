@@ -12,7 +12,6 @@
 	Request by:	Lunch Parade
 	Code by:	xika
 	Date:		2024-10-29
-	
 */
 
 var iFileName = "Bard-College_of_Satire-(rev)";
@@ -32,15 +31,49 @@ AddSubClass("bard", "college of satire", {
 	subname: "College of Satire",
 	source: [ "HB", 1],
 	features: {
+		"tricks of the trade": {
+			name: "Tricks of the Trade",
+			source: ["HB", 1],
+			minlevel: 3,
+			skills: "Sleight of Hand",
+			toolProfs : [
+				["Disguise Kit"]
+			],			
+			description: desc([
+				"I gain Profiency with sleight of hand and the disguise kit. I learn the vicious mockery cantrip,",
+				"it's damage die is 1D10 and it does not count against the number of known cantrips."
+			]),
+			spellcastingBonus: [{
+				name: "Tricks of the Trade",
+				spells: ["vicious mockery"],
+				selection: ["vicious mockery"],
+				firstCol: "atwill"
+			}],
+			spellChanges: {
+				"vicious mockery": {
+					descriptionCantripDie : "1 creature save or `CD`d10 Psychic dmg and dis. on next attack roll",
+					changes: "The Damage Die for Vicious Mockery changes to a D10 for me."
+				}
+			},
+			calcChanges: {
+				atkCalc : [
+					function (fields, v, output) {
+						if (v.WeaponName == "vicious mockery") {
+							output.die = output.die.replace('d4','d10');
+						};
+					},
+					"The Damage Die for Vicious Mockery changes to a D10 for me."
+				],				
+			},
+			weaponsAdd : { select : ["Vicious Mockery"] }			
+		},		
 		"tumbling fool": {
 			name: "Tumbling Fool",
 			source: ["HB", 1],
 			minlevel: 3,
 			description: desc([
-				"As a bns a, I can tumble and gain the following benefits for the rest of my turn:",
-				"- I gain the benefits of the dash or disengage action",
-				"- I gain a climbing speed equal to my current speed",
-				"- I reduce any fall damage by my bard level + my charisma mod"
+				"As a bns a, I can gain these benefits for the rest of my turn: dash or disengage; climbing",
+				"peed equal to my speed; reduce fall dmg by bard level + my cha mod."
 			]),
 			action : [["bonus action", "Tumble"]],
 		},
@@ -70,6 +103,16 @@ AddSubClass("bard", "college of satire", {
 				"gain +2 AC and the target has disadv. on anyone but me until the end of my nxt trn."
 			]),
 			action : [["reaction", "Irritating Gnave"]],
+			calcChanges: {
+				atkCalc : [
+					function (fields, v, output) {
+						if (v.WeaponName == "vicious mockery") {
+							output.modToDmg = true;
+						};
+					},
+					"All my bard spells that deal psychic damage add my charisma mod to the damage roll."
+				],
+			}
 		},			
 		"last laugh": {
 			name: "Last Laugh",
