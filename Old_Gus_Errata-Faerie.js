@@ -6,7 +6,7 @@
 */
 
 /*	-INFORMATION-
-	Subject:	Spells
+	Subject:	Class
 	Effect:		This script adds the Faerie Class from Old Gus's Errata https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link
 	Code by:	xika
 	Date:		2024-10-31 (sheet v13)
