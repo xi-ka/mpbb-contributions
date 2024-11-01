@@ -8,7 +8,9 @@
 /*	-INFORMATION-
 	Subject:	Source Book
 	Effect:		This script aims to add Races, Classes, Subclasses, Spells and more from Old Gus's Errata
-	Source:		https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link
+	Source 1:	https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link
+	Source 2:	https://www.reddit.com/r/UnearthedArcana/comments/z5872u/old_gus_errata_wanderers_of_the_infinite_skies/
+	Author:		https://reddit/u/callmepartario
 	Code by:	xika
 	Date:		2024-11-01 (sheet v13)
 	
