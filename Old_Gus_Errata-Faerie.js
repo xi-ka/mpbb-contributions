@@ -9,14 +9,15 @@
 	Subject:	Class
 	Effect:		This script adds the Faerie Class from Old Gus's Errata https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link
 	Code by:	xika
-	Date:		2024-10-31 (sheet v13)
-	
+	Date:		2024-11-01 (sheet v13)
+
 	Changelog:
 	2024-10-31	Initial Release
-	
-	Todo:
-	- Brownie, Wanton Assault, additional: update on Cha change
-	- Sprig, add Shambling Mound as Wildshape
+	2024-11-01	- added tools and multiclassing tools
+				- added Shambling Mound as manual Wildshape
+				- improved Readability of Spelllist
+				- some minor formatting improvements
+
 */
 
 var iFileName = "Old_Gus_Errata-Faerie.js";
@@ -41,12 +42,16 @@ ClassList["faerie og"] = {
 	die: 6,
 	improvements : [0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5],
 	saves: ["Dex", "Cha"],
-	skills : ["\n\n" + toUni("MyClass") + ": Choose two from Athletics, Acrobatics, Animal Handling, Deception, Intimidation, Persuasion, Performance and Stealth.", "\n\n" + toUni("MyClass") + ": none"], 
+	skills : ["\n\n" + toUni("MyClass") + ": Choose two from Acrobatics, Animal Handling, Athletics, Deception, Intimidation, Performance, Persuasion and Stealth.", "\n\n" + toUni("MyClass") + ": none"],
 	armorProfs: {
 		primary : [false, false, false, false]
 	},
 	weaponProfs : {
 		primary : [true, false, false]
+	},
+	toolProfs : { 
+		primary : [["Musical instrument", 1], ["Artisan Tool", 1]],
+		secondary : [["Musical instrument", 1]]
 	},
 	spellcastingFactor: 1,
 	spellcastingKnown : {
@@ -54,9 +59,29 @@ ClassList["faerie og"] = {
 		spells : [5, 6, 7, 8, 9, 10, 11, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18]
 	},
 	spellcastingList : {
-		class : "any", 
-		spells : ["booming blade", "cursory ward og", "dancing lights", "dulling chains og", "encode thoughts", "frigidigitation og", "gift of the soothsayer og", "green-flame blade", "leeocks lucky coin og", "magic stone", "message", "minor illusion", "nature bolt og", "peal of nine bells og", "prestidigitation", "produce flame", "puff of smoke og", "sacred strike og", "sanguine strike og", "sapping sting", "thaumaturgy", "thunderclap", "whelm og", "word of radiance", "zap og", "alarm", "allergen cloud og", "arcane strike", "catapult", "ceremony", "chaos bolt", "charm person", "cheetah sprint og", "color spray", "cure wounds", "detect magic", "drunkards breath og", "dust dash og", "ensnaring strike", "faerie fire", "find familiar", "frost fingers", "gift of alacrity", "goodberry", "hail of thorns", "healing word", "illusory script", "jump", "lightning lure", "londyns duet og", "mass distortion og", "read blood og", "reorient og", "shield", "silent image", "silvery barbs", "sleep", "snakestaff og", "snare", "speak with animals", "stumble og", "sylvan vision og", "water whip og", "witch bolt", "wood rot og", "zephyr strike", "alter self", "animal messenger", "arcane lock", "beast sense", "blade of resonance og", "borrowed knowledge", "celerity og", "darkness", "discordant thrum og", "diterlizzis dymaxion og", "doublespeak og", "enhance ability", "enlarge/reduce", "enthrall", "fallow og", "flourishing beanstalk og", "glamoured majesty og", "healing spirit", "heat metal", "hold person", "immovable object", "invisibility", "jinx og", "kinetic jaunt", "locate animals or plants", "londyns duet og", "magic mouth", "magic weapon", "mirror image", "misty step", "moon blade og", "moonbeam", "nathair's mischief ", "nystul's magic aura", "pass without trace", "plaguemask og", "polandaras petticoat pocket og", "seeking og", "silence", "solid fog og", "soul whip og", "spiritual weapon", "suggestion", "summon beast", "tasha's mind whip", "time parasite og", "tree steed og", "vortex warp", "web", "wither and bloom", "wristpocket", "alter fortune og", "antipathetic field og", "arcane razor og", "avyies temporal trickery og", "bestow curse", "blink", "catnap", "counterspell", "create campsite og", "dazzling strobe og", "dodge-weave og", "euphoric cloud og", "fly", "healing wave og", "hirsutism og", "invisible trickery og", "lightning arrow", "lipstitch og", "magic circle", "major image", "melfs unicorn arrow og", "minor glamour og", "misty slash og", "mushroom ring og", "nondetection", "pall of twilight og", "perplex og", "protection from energy", "radiant glamour og", "remove curse", "reverse projectiles og", "sending", "shape wood og", "slow", "speak with plants", "spirit guardians", "spirit shroud", "summon fey", "summon shadowspawn", "telepathy tap og", "toxic tongue og", "treasure scent og", "wild flight og", "age plant og", "blinding glitter og", "charm monster", "compulsion", "confusion", "drunken revelry og", "fabricate", "fools speech og", "freedom of movement", "giant insect", "greater invisibility", "grounding og", "insect plague", "lifebloom og", "major glamour og", "polymorph", "quentins quickling senses og", "sensory deprivation og", "sneezing dust og", "switcheroo og", "tail sweep og", "thorn spray og", "vacancy og", "wild runner og", "animate objects", "awaken", "awaken object og", "conduit og", "contact other plane", "contagion", "control winds", "dream", "far step", "geas", "glamourous craft og", "greater restoration", "hold monster", "mirror stride og", "mislead", "modify memory", "othertime og", "passwall", "power word silence og", "probability warp og", "rary's telepathic bond", "seeming", "skill empowerment", "synaptic static", "tree stride", "twisting innards og", "wind at our backs og", "zone of self immolation og", "anterograde amnesia og", "budding romance og", "conjure fey", "contingency", "drawmij's instant summons", "fizban's platinum shield", "forbiddance", "immaculate conception og", "investiture of starlight og", "mass suggestion", "mental prison", "otto's irresistible dance", "programmed illusion", "sunbeam", "tasha's otherworldly guise", "true seeing", "unconscious command og", "body swap og", "crown of stars", "dream of the blue veil", "humanoid possession og", "lunar occult og", "magic miasma og", "mirage arcane", "power word pain", "prismatic spray", "project image", "rejuvenate og", "sequester", "simulacrum", "solipsism og", "tether essence", "animal shapes", "antipathy/sympathy", "feeblemind", "glibness", "maddening darkness", "maze", "mind blank", "power word stun", "mass polymorph", "power word heal", "prismatic wall", "shapechange", "true polymorph", "unbinding og", "weird", "wish"]
-	},	
+		spells : [
+		//Cantrips
+		"booming blade", "cursory ward og", "dancing lights", "dulling chains og", "encode thoughts", "frigidigitation og", "gift of the soothsayer og", "green-flame blade", "leeocks lucky coin og", "magic stone", "message", "minor illusion", "nature bolt og", "peal of nine bells og", "prestidigitation", "produce flame", "puff of smoke og", "sacred strike og", "sanguine strike og", "sapping sting", "thaumaturgy", "thunderclap", "whelm og", "word of radiance", "zap og",
+		//Level 1
+		"alarm", "allergen cloud og", "arcane strike", "catapult", "ceremony", "chaos bolt", "charm person", "cheetah sprint og", "color spray", "cure wounds", "detect magic", "drunkards breath og", "dust dash og", "ensnaring strike", "faerie fire", "find familiar", "frost fingers", "gift of alacrity", "goodberry", "hail of thorns", "healing word", "illusory script", "jump", "lightning lure", "londyns duet og", "mass distortion og", "read blood og", "reorient og", "shield", "silent image", "silvery barbs", "sleep", "snakestaff og", "snare", "speak with animals", "stumble og", "sylvan vision og", "water whip og", "witch bolt", "wood rot og", "zephyr strike",
+		//Level 2
+		"alter self", "animal messenger", "arcane lock", "beast sense", "blade of resonance og", "borrowed knowledge", "celerity og", "darkness", "discordant thrum og", "diterlizzis dymaxion og", "doublespeak og", "enhance ability", "enlarge/reduce", "enthrall", "fallow og", "flourishing beanstalk og", "glamoured majesty og", "healing spirit", "heat metal", "hold person", "immovable object", "invisibility", "jinx og", "kinetic jaunt", "locate animals or plants", "londyns duet og", "magic mouth", "magic weapon", "mirror image", "misty step", "moon blade og", "moonbeam", "nathair's mischief ", "nystul's magic aura", "pass without trace", "plaguemask og", "polandaras petticoat pocket og", "seeking og", "silence", "solid fog og", "soul whip og", "spiritual weapon", "suggestion", "summon beast", "tasha's mind whip", "time parasite og", "tree steed og", "vortex warp", "web", "wither and bloom", "wristpocket",
+		//Level 3
+		"alter fortune og", "antipathetic field og", "arcane razor og", "avyies temporal trickery og", "bestow curse", "blink", "catnap", "counterspell", "create campsite og", "dazzling strobe og", "dodge-weave og", "euphoric cloud og", "fly", "healing wave og", "hirsutism og", "invisible trickery og", "lightning arrow", "lipstitch og", "magic circle", "major image", "melfs unicorn arrow og", "minor glamour og", "misty slash og", "mushroom ring og", "nondetection", "pall of twilight og", "perplex og", "protection from energy", "radiant glamour og", "remove curse", "reverse projectiles og", "sending", "shape wood og", "slow", "speak with plants", "spirit guardians", "spirit shroud", "summon fey", "summon shadowspawn", "telepathy tap og", "toxic tongue og", "treasure scent og", "wild flight og",
+		//Level 4
+		"age plant og", "blinding glitter og", "charm monster", "compulsion", "confusion", "drunken revelry og", "fabricate", "fools speech og", "freedom of movement", "giant insect", "greater invisibility", "grounding og", "insect plague", "lifebloom og", "major glamour og", "polymorph", "quentins quickling senses og", "sensory deprivation og", "sneezing dust og", "switcheroo og", "tail sweep og", "thorn spray og", "vacancy og", "wild runner og",
+		//Level 5
+		"animate objects", "awaken", "awaken object og", "conduit og", "contact other plane", "contagion", "control winds", "dream", "far step", "geas", "glamourous craft og", "greater restoration", "hold monster", "mirror stride og", "mislead", "modify memory", "othertime og", "passwall", "power word silence og", "probability warp og", "rary's telepathic bond", "seeming", "skill empowerment", "synaptic static", "tree stride", "twisting innards og", "wind at our backs og", "zone of self immolation og",
+		//Level 6
+		"anterograde amnesia og", "budding romance og", "conjure fey", "contingency", "drawmij's instant summons", "fizban's platinum shield", "forbiddance", "immaculate conception og", "investiture of starlight og", "mass suggestion", "mental prison", "otto's irresistible dance", "programmed illusion", "sunbeam", "tasha's otherworldly guise", "true seeing", "unconscious command og",
+		//Level 7
+		"body swap og", "crown of stars", "dream of the blue veil", "humanoid possession og", "lunar occult og", "magic miasma og", "mirage arcane", "power word pain", "prismatic spray", "project image", "rejuvenate og", "sequester", "simulacrum", "solipsism og", "tether essence",
+		//Level 8
+		"animal shapes", "antipathy/sympathy", "feeblemind", "glibness", "maddening darkness", "maze", "mind blank", "power word stun",
+		//Level 9
+		"mass polymorph", "power word heal", "prismatic wall", "shapechange", "true polymorph", "unbinding og", "weird", "wish"
+		]
+	},
 	equipment : "MyClass starting equipment:\n \u2022 any simple weapon;\n \u2022 a spellcasting focus;\n \u2022 an entertainer’s pack;\n \u2022 a trinket.\n\nAlternatively, choose 5d4 \xD7 10 gp worth of starting equipment instead of both the class' and the background's starting equipment.",
 	subclasses: ["Faerie Affinities", []],
 	attacks: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -83,9 +108,9 @@ ClassList["faerie og"] = {
 				var cantr = [3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5][idx];
 				var splls = [5, 6, 7, 8, 9, 10, 11, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18][idx];
 				return cantr + " cantrips \u0026 " + splls + " spells known";
-			})			
+			})
 		},
-		"glamorous defense og" : {
+		"glamorous defense" : {
 			name : "Glamorous Defense",
 			source : ["OG", 190],
 			minlevel : 1,
@@ -100,8 +125,8 @@ ClassList["faerie og"] = {
 				affectsWildShape : true,
 				selectNow : true
 			}]
-		},		
-		"faerie dust og" : {
+		},
+		"faerie dust" : {
 			name : "Faerie Dust",
 			source : ["OG", 190],
 			minlevel : 1,
@@ -115,7 +140,7 @@ ClassList["faerie og"] = {
 			recovery : "long rest",
 			action : [["bonus action", "Faerie Dust"]]
 		},
-		"misty escape og" : {
+		"misty escape" : {
 			name : "Misty Escape",
 			source : ["OG", 191],
 			minlevel : 2,
@@ -127,7 +152,7 @@ ClassList["faerie og"] = {
 			recovery : "short rest",
 			action : [["reaction", "Misty Escape"]]
 		},
-		"dreamchaser og" : {
+		"dreamchaser" : {
 			name : "Dreamchaser",
 			source : ["OG", 191],
 			minlevel : 18,
@@ -144,15 +169,15 @@ ClassList["faerie og"] = {
 					description: "Under open sky I enter creatures dream and we can talk; if it has my Dreamstone see 'Dreamchaser'",
 					changes: "Under open sky I can cast dream without a spell slot. If target is bearer of my dreamstone the spell can transcend planes. Dreamstone will record message and transmit once they are asleep."
 				}
-			},	
+			},
 			spellcastingBonus: [{
 				name: "Dreamchaser",
 				spells: ["dream"],
 				selection: ["dream"],
 				firstCol: "oncelr"
-			}],	
+			}],
 		},
-		"extraplanar glamour og" : {
+		"extraplanar glamour" : {
 			name : "Extraplanar Glamour",
 			source : ["OG", 191],
 			minlevel : 20,
@@ -179,13 +204,13 @@ ClassList["faerie og"] = {
 						compMaterial: "",
 						changes: "If I am under the light of a full moon, I can cast the gate spell to access the Feywild or Material Plane without expending a spell slot, and without providing material components for the spell. I regain use of this ability when I finish a long rest."
 					}
-				},	
+				},
 				spellcastingBonus: [{
 					name: "Extraplanar Glamour",
 					spells: ["gate"],
 					selection: ["gate"],
 					firstCol: "oncelr"
-				}],				
+				}],
 			},
 			"astral access": {
 				name: "Extraplanar Glamour: Astral Access",
@@ -203,13 +228,13 @@ ClassList["faerie og"] = {
 						compMaterial: "One quartz crystal.",
 						changes: "I can cast the astral projection spell once without expending a spell slot, using a single quartz crystal as the material component for the spell. When I cast the spell, I can only bring a number of additional creatures equal to my Charisma modifier. I regain use of this ability when I finish a long rest."
 					}
-				},	
+				},
 				spellcastingBonus: [{
 					name: "Extraplanar Glamour",
 					spells: ["astral projection"],
 					selection: ["astral projection"],
 					firstCol: "oncelr"
-				}],	
+				}],
 			},
 			"ethereal access": {
 				name: "Extraplanar Glamour: Ethereal Access",
@@ -224,15 +249,15 @@ ClassList["faerie og"] = {
 						description: "Me and my spell mod willing go to Ethereal Plane; still able to perceive 60 ft into normal plane",
 						changes: "I can cast the etherealness spell once without expending a spell slot, and regain the ability to do so when I finish a long rest. When I cast the spell, I can bring an additional number of willing creatures that I can see within 30 feet of I equal to my Charisma modifier."
 					}
-				},					
+				},
 				spellcastingBonus: [{
 					name: "Extraplanar Glamour",
 					spells: ["etherealness"],
 					selection: ["etherealness"],
 					firstCol: "oncelr"
-				}],	
+				}],
 			},
-		},		
+		},
 	}
 };
 
@@ -251,7 +276,7 @@ AddSubClass("faerie og", "sidhe", {
 				]),
                 skills: "Insight",
 				spellcastingExtra: ["gust", "shape water", "create or destroy water", "fog cloud", "gust of wind", "warding wind", "slow", "wind wall", "storm sphere", "wall of water", "wind walk", "whirlwind", "control weather", "storm of vengeance"],
-				spellcastingExtraApplyNonconform: true,				
+				spellcastingExtraApplyNonconform: true,
             },
 			"heroic glamour": {
 				name: "Heroic Glamour",
@@ -295,7 +320,7 @@ AddSubClass("faerie og", "sidhe", {
 					spells: ["mage hand"],
 					selection: ["mage hand"],
 					firstCol: "atwill"
-				}],					
+				}],
 			},
 			"glamourous incorporation": {
 				name: "Glamourous Incorporation",
@@ -316,7 +341,7 @@ AddSubClass("faerie og", "sidhe", {
 				description: desc([
 						"The recipient of my Heroic Glamour adds half my faerie level to dmg rolls as thunder dmg."
 					])
-			},			
+			},
 		}
 });
 
@@ -337,7 +362,7 @@ AddSubClass("faerie og", "nixie", {
 				]),
                 skills: "Arcana",
 				spellcastingExtra: ["vicious mockery","infestation","command","dissonant whispers","crown of madness","phantasmal force","fear","hypnotic pattern","phantasmal killer","dominate person","eyebite","reverse gravity","dominate monster","psychic scream"],
-				spellcastingExtraApplyNonconform: true,	
+				spellcastingExtraApplyNonconform: true,
             },
 			"nightmarish delirium": {
 				name: "Nightmarish Delirium",
@@ -366,7 +391,7 @@ AddSubClass("faerie og", "nixie", {
 					],
 					popupName: "Nightmarish Delirium",
 					source : ["OG", 194]
-				}],				
+				}],
 			},
 			"supple wards": {
 				name: "Supple Ward",
@@ -531,7 +556,7 @@ AddSubClass("faerie og", "nixie", {
 							tricksyCantripDesc
 						]
 					},
-					weaponsAdd : { select : ["Sapping Sting"] }					
+					weaponsAdd : { select : ["Sapping Sting"] }
 				},
 				"whelm": {
 					name: "Tricksy Cantrip: Whelm",
@@ -588,7 +613,7 @@ AddSubClass("faerie og", "nixie", {
 				usages: 1,
 				recovery: "long rest",
 				action: ["reaction","Magical Mimicry"]
-			},			
+			},
 		}
 });
 
@@ -616,7 +641,7 @@ AddSubClass("faerie og", "sprig", {
 					spells: ["speak with plants"],
 					selection: ["speak with plants"],
 					firstCol: "oncelr"
-				}],					
+				}],
             },
 			"corrosive ichor": {
 				name: "Corrosive Ichor",
@@ -647,14 +672,14 @@ AddSubClass("faerie og", "sprig", {
 					],
 					atkAdd: [
 						function (fields, v) {
-							if (v.WeaponName == "thorn whip") 
+							if (v.WeaponName == "thorn whip")
 							{
 								fields.Range = "Melee, 45 ft";
 								fields.Description = "Melee spell attack, pull target up to 15 ft closer";
 							}
 						},
 						"My Thorn Whip can pull up to 15ft and has 45ft range."
-					]					
+					]
 				},
 				spellChanges: {
 					"thorn whip": {
@@ -674,7 +699,8 @@ AddSubClass("faerie og", "sprig", {
 					"I can assume the form of a shambling mound for half my faerie level in hours with HP = 50 +",
 					"fearie level. In this form I can only cast Thorn Whip and other Sprig spells. I retain my Int, Wis,",
 					"Cha and my skill and save profiencies. If reduced to 0 HP I take the remainder of the dmg.",
-					"I can release the forme anytime, no action."
+					"I can release the forme anytime, no action.",
+					"You can manually add it to the Wild Shapes page: enter \"Shambling Mound\" and adjust HP."
 					]),
 				action: ["action", "Natural Raiment"],
 				usages: 1,
@@ -698,7 +724,7 @@ AddSubClass("faerie og", "sprig", {
 				calcChanges: {
 					atkAdd: [
 						function (fields, v) {
-							if (v.WeaponName == "thorn whip") 
+							if (v.WeaponName == "thorn whip")
 							{
 								fields.Description = "Melee spell atk, +" + What('Cha Mod') + " acid damage, pull target max 15ft closer, can pull friend (no dmg/atk)";
 							}
@@ -706,7 +732,7 @@ AddSubClass("faerie og", "sprig", {
 						"Plants I created or charmed can be origin for my Thorn Whip, it gets + my cha mod acid dmg and I can use it to pull friendly crea 15ft with no dmg or attack roll."
 					]
 				},
-			},			
+			},
 		}
 });
 
@@ -732,7 +758,6 @@ AddSubClass("faerie og", "brownie", {
 			spellcastingExtraApplyNonconform: true,
 			armorProfs: [true, false, false, false]
 		},
-		// Level 1 - 2 Faerie Weapon
 		"faerie weapon": {
 			name: "Faerie Weapon",
 			source: ["OG",195],
@@ -798,7 +823,6 @@ AddSubClass("faerie og", "brownie", {
 				},
 				description: desc(arFaerieWeapon),
 			},
-			
 		},
 		"whimsy": {
 			name: "Whimsy",
@@ -824,12 +848,12 @@ AddSubClass("faerie og", "brownie", {
 			},
 			weaponsAdd : {
 				select : ["Faerie Weapon, Whimsy"]
-			},			
+			},
 			dmgres : [
 				["Bludgeoning", "Bludge. (in whimsy)"],
 				["Slashing", "Slash. (in whimsy)"],
 				["Piercing", "Pierc. (in whimsy)"]
-			],			
+			],
 		},
 		"quickling attack": {
 			name: "Quickling Attack",
@@ -844,7 +868,6 @@ AddSubClass("faerie og", "brownie", {
 			name: "Wanton Assault",
 			source: ["OG", 196],
 			minlevel: 10,
-			//additional : Math.max(3, What('Cha Mod')) + " atks",
 			description: desc([
 					"Use action + bns during whimsy: +15 feet speed, immune atks of opport., make Cha mod",
 					"(min 3) atks w/ faerie weapon & deal +1d6 extra dmg. Whimsy ends at end of turn.",
@@ -895,7 +918,6 @@ AddSubClass("faerie og", "brownie", {
 					]
 				},
 			}
-
 		},
 		"smiting glamour": {
 			name: "Smiting Glamour",
@@ -908,9 +930,7 @@ AddSubClass("faerie og", "brownie", {
 	}
 });
 
-
-/*
-CreatureList."shambling mound" = {
+CreatureList["shambling mound"] = {
         name: "Shambling Mound",
         source: ["MM", 270],
         size: 2,
@@ -918,15 +938,18 @@ CreatureList."shambling mound" = {
         companion: "familiar_not_al",
         alignment: "Unaligned",
         ac: 15,
-        hp: 136,
+        hp: 50,
         hd: [16, 10],
 		speed: "20 ft, swim 20 ft",
         scores: [18, 8, 16, 5, 10, 3],
         skills: {
             stealth: 2
         },
-        senses: "Blindsight 60 ft; blind beyond that",
-        passivePerception: 10,
+        senses: "Blindsight 60 ft, blind beyond that",
+        damage_resistances : "cold, fire",
+		damage_immunities : "poison",
+		condition_immunities : "blind, deaf, exhaustion",
+		passivePerception: 10,
         challengeRating: "5",
         proficiencyBonus: 3,
         attacksAction: 1,
@@ -941,15 +964,17 @@ CreatureList."shambling mound" = {
             ability: 1,
             damage: [2, 8, "bludgeoning"],
             range: "Special",
-            description: ""
+            description: "Target is blind, restr., unable to breath. DC 14 Con/rnd or DMG. See B"
         }
 		],
-        traits: [{
-            name: "Lightning Absorption",
-            description: "When subjected to lightning damage, take no dmg and gain hp equal to the lightning damage."
-        },
-		{
-			name: "Multiattack",
-			description: "Make 2 slam attacks. If both hit a Medium or smaller crea it is grappled (escape DC 14), and I use Engulf on it."
-		}]
-};*/
+        traits: [
+			{
+				name: "Lightning Absorption",
+				description: "When taking lightn. dmg, take no dmg and gain hp equal to the lightn. dmg."
+			},
+			{
+				name: "Multiattack",
+				description: "Make 2 slam atks. If both hit a <=Medium  crea it is grappled (escape DC 14), and I use Engulf on it."
+			}
+		]
+};
