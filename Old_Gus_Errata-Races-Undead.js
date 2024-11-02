@@ -11,7 +11,6 @@
 	Source 1:	https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link
 	Source 2:	https://www.reddit.com/r/UnearthedArcana/comments/z5872u/old_gus_errata_wanderers_of_the_infinite_skies/
 	Author:		https://reddit/u/callmepartario
-	LLM Import:	Rocky
 	Code by:	xika
 
 	Date:		2024-11-02 (sheet v13)
