@@ -12,10 +12,12 @@
 	Source 2:	https://www.reddit.com/r/UnearthedArcana/comments/z5872u/old_gus_errata_wanderers_of_the_infinite_skies/
 	Author:		https://reddit/u/callmepartario
 	Code by:	xika
-	Date:		2024-11-01 (sheet v13)
-	
+
+	Date:		2024-11-09 (sheet v13)
+
 	Repository for single scripts:	https://github.com/xi-ka/mpmb-contributions/tree/main
-	
+
+
 	Content included thus far:
 		- Spells (187)
 		- Faerie Class with four Subclasses
@@ -32,8 +34,10 @@ SourceList.OG = {
 	abbreviationSpellsheet : "OG",
 	group : "Old Gus Errata",
 	url: "https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link",
-	date : "2024/10/22"
+	date : "2022/01/08"
 };
+
+// ### BEGIN SPELLS ### Old_Gus_Errata-Spells.js
 
 SpellsList["acidic exudation og"] = {
 	name: "Acidic Exudation",
@@ -45,7 +49,7 @@ SpellsList["acidic exudation og"] = {
 	range: "Self",
 	components: "V,S,M",
 	compMaterial: "a pinch of saltpeter",
-	save : "dex",
+	save: "dex",
 	duration: "Conc, 1 min",
 	description: "create volatile orb; throw 30m; Dex save or 2d6+1D6/SL acid dmg in 5ft radius; half on success",
 	descriptionFull: "Your palm secretes a volatile gel, which you can use as a weapon. For the duration, you can use a bonus action to throw a globule of the substance up to 30 feet. The globule explodes upon impact, creating a shower of hissing acid in a 5-foot-radius sphere. Creatures in the area must make a Dexterity saving throw, taking 2d6 acid damage on a failed save, or half as much damage on a successful one.",
@@ -64,7 +68,7 @@ SpellsList["age plant og"] = {
 	save: "Wis",
 	description: "age/de-age, control, enlarge/reduce or restrain target plant; see B",
 	descriptionFull: "You target a Plant you can see within range. If the target is a nonmagical and immobile plant, seed, or tree, you increase or decrease its aging of by up to ten years.\nThe process can operate either forward or backward, causing flowers to blossom, seeds to sprout and grow, and trees to bear fruit; or fruit to turn to blossoms, trees to become saplings, and new shoots to turn to seeds. The extent of the changes are entirely up to you.\nYou can guide the plant’s growth so long as it can grow in the manner you direct.\nIf the target is an unwilling Plant, it must succeed on a Wisdom saving throw or be charmed by you for the duration. If you or creatures that are friendly to you are fighting it, it has advantage on the saving throw. While the Plant is charmed, you can use your action to cause additional effects to the target, choosing from the following:\n- Control. You take total and precise control of the target. Until the end of your next turn, the creature takes only the actions you choose, and doesn’t do anything that you don’t allow it to do. During this time, you can also cause the creature to use a reaction, but this requires you to use your own reaction as well.\n- Enlarge. The target’s size doubles in all dimensions, and its weight is multiplied by eight. This growth increases its size by one category—from Medium to Large, for example. If there isn’t enough room for the target to double its size, the creature or object attains the maximum possible size in the space available. While enlarged, the target’s attacks deal an additional 1d6 damage. You can enlarge the target up to twice.\n- Reduce. The target’s size is halved in all dimensions, and its weight is reduced to one-eighth of normal. This reduction decreases its size by one category—from Medium to Small, for example. While reduced, the target’s attacks have a 1d6 damage penalty. You can reduce the target up to twice.\n- Restrain. The succeed on a Strength saving throw or be restrained until the end of its next turn.\nEach time the target takes damage, it makes a new Wisdom saving throw against the spell. If the saving throw succeeds, the spell ends.",
-	atHigherLevels:"When you cast this spell using a spell slot of 5th level, aging effect increases to 25 years. If you use a spell slot of 6th level, the aging effect increases to 100 years. If you use a spell slot of 7th level or higher, the aging effect increases to 1,000 years."
+	atHigherLevels: "When you cast this spell using a spell slot of 5th level, aging effect increases to 25 years. If you use a spell slot of 6th level, the aging effect increases to 100 years. If you use a spell slot of 7th level or higher, the aging effect increases to 1,000 years."
 };
 SpellsList["allergen cloud og"] = {
 	name: "Allergen Cloud",
@@ -75,11 +79,11 @@ SpellsList["allergen cloud og"] = {
 	time: "1 a",
 	range: "60 ft",
 	components: "V,M",
-	compMaterial:"a pinch of ragweed",
+	compMaterial: "a pinch of ragweed",
 	duration: "Conc, 1 min",
 	save: "Con",
-	description:"15ft+15/SL radius and 10ft+5ft/SL height; all enter/start turn save or poisoned; save: immune 24h",
-	descriptionFull:"A cloud of irritating dust and pollen fills a 15-foot-radius, 10-foot-high cylinder centered on a point you can see within range. For the duration, the area is lightly obscured. When creature enters the spell’s area for the first time on a turn or starts its turn there, it must succeed on a Constitution saving throw or be poisoned for 1 minute, experiencing watering of the eyes and fits of coughs and sneezing. Constructs, Undead, and creatures that do not need to breathe succeed their saving throw automatically. An affected creature makes a new saving throw at the end of each of their turns. On a success, the effects end and it becomes immune to this spell for 24 hours. The cloud lasts for the duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.",
+	description: "15ft+15/SL radius and 10ft+5ft/SL height; all enter/start turn save or poisoned; save: immune 24h",
+	descriptionFull: "A cloud of irritating dust and pollen fills a 15-foot-radius, 10-foot-high cylinder centered on a point you can see within range. For the duration, the area is lightly obscured. When creature enters the spell’s area for the first time on a turn or starts its turn there, it must succeed on a Constitution saving throw or be poisoned for 1 minute, experiencing watering of the eyes and fits of coughs and sneezing. Constructs, Undead, and creatures that do not need to breathe succeed their saving throw automatically. An affected creature makes a new saving throw at the end of each of their turns. On a success, the effects end and it becomes immune to this spell for 24 hours. The cloud lasts for the duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.",
 	atHigherLevels: "When you cast this spell using a spell slot of 2nd level or higher, the cylinder’s radius increases by 15 feet, and its height increases by 5 feet for each spell slot above 1st.",
 };
 SpellsList["alter fortune og"] = {
@@ -150,10 +154,10 @@ SpellsList["arcane razor og"] = {
 	time: "1 a",
 	range: "S: 15ft rad",
 	components: "V,S,M\u0192",
-	compMaterial:"a melee weapon made of metal worth at least 10 gp that deals slashing damage",
+	compMaterial: "a melee weapon made of metal worth at least 10 gp that deals slashing damage",
 	duration: "Instantaneous",
-	description:"weapon dmg plus 4d10+1d10/SL slashing dmg to all where AC <= melee atk roll; also damages objects",
-	descriptionFull:"You infuse your weapon with arcane energy and whirl it in a circle, unleashing a wave of razor-thin magic out in all directions. Make a melee weapon attack roll. All creatures withing 15 feet of you whose an AC is less than your attack roll suffer the attack’s normal damage plus an additional 4d10 slashing damage. The spell also damages any objects in the area that aren’t being worn or carried.",
+	description: "weapon dmg plus 4d10+1d10/SL slashing dmg to all where AC <= melee atk roll; also damages objects",
+	descriptionFull: "You infuse your weapon with arcane energy and whirl it in a circle, unleashing a wave of razor-thin magic out in all directions. Make a melee weapon attack roll. All creatures within 15 feet of you whose an AC is equal to or less than your attack roll suffer the attack’s normal damage plus an additional 4d10 slashing damage. The spell also damages any objects in the area that aren’t being worn or carried.",
 	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d10 for each slot level above 3rd."
 };
 SpellsList["arcane strike og"] = {
@@ -185,7 +189,7 @@ SpellsList["avalanche og"] = {
 	compMaterial: "a quartz crystal",
 	duration: "Instantaneous",
 	description: "30ft rad, 40ft cyl; each creature save or 4d10+1d10/SL cold + 4d10+1d10/SL bludg and prone; see B",
-	descriptionFull: "Choose a point you can see on the ground within range. A torrent of ice, rock and snow fall in a 30-foot-radius, 40-foot-high cylinder centered on that point. Each creature in that area must make a Dexterity saving throw. On a failure, a creature takes 4d10 cold and 4d10 bludgeoning damage on a failed save and is knocked prone. Creatures that fail their saving throw by 5 or more are restrained by the rubble. A creature can use an action to pull itself or another buried creature free by making a Strength check with a DC equal to your spell save DC.\nAdditionally, objects in the area take 4d10 bludgeoning damage, and the area becomes difficult terrain until cleared. Each 5-foot-square portion of the area requires at least 1 minute to clear by hand. The ice and rocks melt away over the course of the next 24 hours.",
+	descriptionFull: "Choose a point you can see on the ground within range. A torrent of ice, rock and snow fall in a 30-foot-radius, 40-foot-high cylinder centered on that point. Each creature in that area must make a Dexterity saving throw. On a failure, a creature takes 4d10 cold and 4d10 bludgeoning damage on and is knocked prone. Creatures that fail their saving throw by 5 or more are restrained by the rubble. A creature can use an action to pull itself or another buried creature free by making a Strength check with a DC equal to your spell save DC. On a successful save, the creature takes half as much damage only.\nAdditionally, objects and structures in the area take 4d10 bludgeoning damage, and the area becomes difficult terrain until cleared. Each 5-foot-square portion of the area requires at least 1 minute to clear by hand. The ice and rocks melt away, disappearing over the course of the next 24 hours.",
 	atHigherLevels: "When you cast this spell using a spell slot of 8th level or higher, the damage increases by 1d10 for each of its effects."
 };
 SpellsList["avyies temporal trickery og"] = {
@@ -211,10 +215,10 @@ SpellsList["awaken object og"] = {
 	time: "8 h",
 	range: "Touch",
 	components: "V,S,M\u2020",
-	compMaterial:"platinum shavings worth at least 1,000 gp (consumed)",
+	compMaterial: "platinum shavings worth at least 1,000 gp (consumed)",
 	duration: "Instantaneous",
-	description:"touched object awakens as living construct; DM assigns stats; see B",
-	descriptionFull:"You touch a Huge or smaller object, which becomes a living construct, able to articulate any of its component parts. The DM rolls a d4 in secret.\n- If the result is a 1, the construct gains the Axiomatic Mind trait: Axiomatic Mind. The construct is unaligned, and remains loyal to its creator until it dies. It can’t be compelled to act in a manner contrary to instructions you provide it. It has an intelligence score of 3.\n - If the result is a 2, The construct gains the Axiomatic Mind trait and has an Intelligence score of 1d4 + 3. It gains the ability to speak one language you know.\n- If the result is a 3, the construct gains an Intelligence score of 4d4 + 3, and it also gains a personality and alignment of its own. The resulting construct it is charmed by you for 30 days or until you or your companions do anything harmful to it. When the charmed condition ends, the construct chooses whether to remain friendly to you, based on its personality, desires and how it has been treated.\n- If the result is a 4, the construct gains all the benefits it would as if you had rolled a 3, and one other ability to the awakened construct (DM’s discretion). This may take the form of limited spellcasting, or allowing an object with “wings” (for example, a table with folding sides) to fly, even if it is not aerodynamically sound.\nThe DM assigns any remaining statistics appropriate for the awakened object. The DM assigns these traits randomly, or selects appropriate statistics informed by the object’s nature or original construction. Chapter 8 of the Dungeon Master’s Guide includes guidance for assigning AC and hit points to objects based on their size and construction. If an awakened object dies, it cannot be returned to life by spells.",
+	description: "touched object awakens as living construct; DM assigns stats; see B",
+	descriptionFull: "You touch a Huge or smaller object, which becomes a living construct, able to articulate any of its component parts. The DM rolls a d4 in secret.\n- If the result is a 1, the construct gains the Axiomatic Mind trait: Axiomatic Mind. The construct is unaligned, and remains loyal to its creator until it dies. It can’t be compelled to act in a manner contrary to instructions you provide it. It has an intelligence score of 3.\n - If the result is a 2, The construct gains the Axiomatic Mind trait and has an Intelligence score of 1d4 + 3. It gains the ability to speak one language you know.\n- If the result is a 3, the construct gains an Intelligence score of 4d4 + 3, and it also gains a personality and alignment of its own. The resulting construct it is charmed by you for 30 days or until you or your companions do anything harmful to it. When the charmed condition ends, the construct chooses whether to remain friendly to you, based on its personality, desires and how it has been treated.\n- If the result is a 4, the construct gains all the benefits it would as if you had rolled a 3, and one other ability to the awakened construct (DM’s discretion). This may take the form of limited spellcasting, or allowing an object with “wings” (for example, a table with folding sides) to fly, even if it is not aerodynamically sound.\nThe DM assigns any remaining statistics appropriate for the awakened object. The DM assigns these traits randomly, or selects appropriate statistics informed by the object’s nature or original construction. Chapter 8 of the Dungeon Master’s Guide includes guidance for assigning AC and hit points to objects based on their size and construction. If an awakened object dies, it cannot be returned to life by spells.",
 };
 SpellsList["babau slime og"] = {
 	name: "Babau Slime",
@@ -225,11 +229,11 @@ SpellsList["babau slime og"] = {
 	time: "1 a",
 	range: "Self",
 	components: "V,S,M\u0192",
-	compMaterial:"a vial of babau blood worth at least 100 gp",
-	duration:"1 h",
-	save:"Con",
-	description:"coat yourself in slime; attackers in 5ft take 3d6+1d6/SL; grapple or swallow 2d6+1d6/SL on failed save",
-	descriptionFull:"Your flesh and equipment begin to weep hot red tears that quickly coats your body and equipment in a slimy layer of red jelly. For the duration, a creature that touches you or hits you with a melee attack while within 5 feet of you takes 3d6 points of acid damage. Additionally, a creature that you are grappling, that is grappling you, or a creature that has swallowed you must succeed on a Constitution saving throw or take 2d6 acid damage at the start of their turn.",
+	compMaterial: "a vial of babau blood worth at least 100 gp",
+	duration: "1 h",
+	save: "Con",
+	description: "coat yourself in slime; attackers in 5ft take 3d6+1d6/SL; grapple or swallow 2d6+1d6/SL on failed save",
+	descriptionFull: "Your flesh and equipment begin to weep hot red tears that quickly coats your body and equipment in a slimy layer of red jelly. For the duration, a creature that touches you or hits you with a melee attack while within 5 feet of you takes 3d6 points of acid damage. Additionally, a creature that you are grappling, that is grappling you, or a creature that has swallowed you must succeed on a Constitution saving throw or take 2d6 acid damage at the start of their turn.",
 	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the damage for each of its effects increases by 1d6 for each slot level above 3rd."
 };
 SpellsList["blade of resonance og"] = {
@@ -244,7 +248,7 @@ SpellsList["blade of resonance og"] = {
 	compMaterial: "a melee weapon made of metal worth at least 10 gp",
 	duration: "Instantaneous",
 	description: "melee atk; all 30ft/5ft line with AC<=atk normal dmg + 3d6+1d6/SL thunder; boom audible 300ft",
-	descriptionFull: "You clang your weapon on a nearby surface, causing it to vibrate, and swing it with blinding speed, releasing a thundering shockwave in its wake. As part of the action used to cast this spell, you must make a melee attack with a weapon, otherwise the spell fails. All creatures in a line 30 feet long and 5 feet wide whose AC is less than your attack roll suffer the attack’s normal damage, and take an additional 3d6 thunder damage. Additionally, the spell emits a thunderous boom audible out to 300 feet.",
+	descriptionFull: "You clang your weapon on a nearby surface, causing it to vibrate, and swing it with blinding speed, releasing a thundering shockwave in its wake. As part of the action used to cast this spell, you must make a melee attack with a weapon, otherwise the spell fails. All creatures in a line 30 feet long and 5 feet wide whose AC is equal to or less than your attack roll suffer the attack’s normal damage, and take an additional 3d6 thunder damage. Additionally, the spell emits a thunderous boom audible out to 300 feet.",
 	atHigherLevels: "When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 2nd."
 };
 SpellsList["blinding glitter og"] = {
@@ -277,7 +281,7 @@ SpellsList["body swap og"] = {
 	save: "Cha",
 	description: "swap essences between two creatures not in combat; save if unwilling; see B",
 	descriptionFull: "You target two living creatures in range that you can see who are not in combat. Both targets must share the same creature type.\nAn unwilling target makes a Charisma saving throw. If a creature succeeds their saving throw, the spell is lost, the target(s) immediately awaken (if asleep), and are aware of your attempt and your location. If they fail, their essences are swapped.\nEach body retains its racial modifiers and abilities, its Strength, Constitution and Dexterity scores. Memories, and enchantments upon or within them are transferred to their new body, which takes on the Intelligence, Wisdom and Charisma scores as well as the languages, skills, proficiencies, spells, and abilities of its new inhabitant until the spell ends or is dispelled.",
-	atHigherLevels:"If you cast this spell using a spell slot of 8th level, the duration is 24 hours. At 9th level, the targets do not need to share a creature type, and the spell lasts until dispelled. Using a spell slot of 8th level or higher grants a duration that doesn’t require concentration."
+	atHigherLevels: "If you cast this spell using a spell slot of 8th level, the duration is 24 hours. At 9th level, the targets do not need to share a creature type, and the spell lasts until dispelled. Using a spell slot of 8th level or higher grants a duration that doesn’t require concentration."
 };
 SpellsList["branch to branch og"] = {
 	name: "Branch to Branch",
@@ -289,25 +293,25 @@ SpellsList["branch to branch og"] = {
 	range: "Self",
 	components: "V,S",
 	duration: "Conc, 10 min",
-	description:"climb = move speed; add spell mod to dex(acrobatics) chk; swing with no check; SL 3+ duration = 1h",
-	descriptionFull:"You pound your chest in primal exuberance. For the duration, you gain a climbing speed equal to your movement speed. You gain a bonus to Dexterity (Acrobatics) checks equal to your spellcasting ability modifier. You can brachiate (swing from branches and vines) at your movement speed without needing to make an ability check.",
+	description: "climb = move speed; add spell mod to dex(acrobatics) chk; swing with no check; SL 3+ duration = 1h",
+	descriptionFull: "You pound your chest in primal exuberance. For the duration, you gain a climbing speed equal to your movement speed. You gain a bonus to Dexterity (Acrobatics) checks equal to your spellcasting ability modifier. You can brachiate (swing from branches and vines) at your movement speed without needing to make an ability check.",
 	atHigherLevels: "When you cast this spell using a spell slot of 3rd level or higher, the duration is increased to 1 hour."
 };
 SpellsList["budding romance og"] = {
 	name: "Budding Romance",
 	classes: ["bard", "warlock"],
-	source: ["OG",230 ],
+	source: ["OG", 230],
 	level: 6,
 	school: "Ench",
 	time: "1 min",
 	range: "60 ft",
 	components: "S, M\u2020",
-	compMaterial:"a lock of hair or drop of blood from the target(s), which the spell consumes",
-	duration:"conc, 1 h",
-	save:"Wis",
-	description:"bond of love between two creatures if save fail; see B",
-	descriptionFull:"You forge a bond of love between up to two creatures. Designate up to two living creatures of the same that you can see within range who are not in combat. If the target is aware of your presence, it must not be hostile toward you, or else the spell fails.\nEach target makes a Wisdom saving throw. If a target succeeds, they are unaffected, and become aware of your attempt and location, but not your identity. If they fail their saving throw, they are consumed by feelings of love for the other target of the spell. If you targeted only one creature, designate another living creature of the same type that both you and the target can see as the object of their affection.\nFor the duration, affected creatures are helpful in their actions and will do whatever they can to spend time near the object of their affections.",
-	atHigherLevels:"If you cast this spell using a spell slot of 7th-level, the duration is 8 hours. At 8th level the duration is 24 hours, and at 9th-level, the spell lasts until it is dispelled. Using a spell slot of 7th level or higher grants a duration that doesn’t require concentration."
+	compMaterial: "a lock of hair or drop of blood from the target(s), which the spell consumes",
+	duration: "conc, 1 h",
+	save: "Wis",
+	description: "bond of love between two creatures if save fail; see B",
+	descriptionFull: "You forge a bond of love between up to two creatures. Designate up to two living creatures of the same that you can see within range who are not in combat. If the target is aware of your presence, it must not be hostile toward you, or else the spell fails.\nEach target makes a Wisdom saving throw. If a target succeeds, they are unaffected, and become aware of your attempt and location, but not your identity. If they fail their saving throw, they are consumed by feelings of love for the other target of the spell. If you targeted only one creature, designate another living creature of the same type that both you and the target can see as the object of their affection.\nFor the duration, affected creatures are helpful in their actions and will do whatever they can to spend time near the object of their affections.",
+	atHigherLevels: "If you cast this spell using a spell slot of 7th-level, the duration is 8 hours. At 8th level the duration is 24 hours, and at 9th-level, the spell lasts until it is dispelled. Using a spell slot of 7th level or higher grants a duration that doesn’t require concentration."
 };
 SpellsList["celerity og"] = {
 	name: "Celerity",
@@ -344,11 +348,11 @@ SpellsList["choking hands og"] = {
 	time: "1 a",
 	range: "60 ft",
 	components: "S,M",
-	compMaterial:"a silk handkerchief, tied in a knot",
+	compMaterial: "a silk handkerchief, tied in a knot",
 	duration: "Conc, 1 min",
 	save: "Con",
-	description:"on save fail 1d12+1d12/SL necrotic, grappled and silenced; on success half damage, no effect; see B",
-	descriptionFull:"You create a pair of spectral hands that appear around the throat of Large or smaller creature you can see within range. The target makes a Constitution saving throw. On a failure, the target takes 1d12 necrotic damage, and they are grappled, and they are unable to speak until the end of their next turn. On a success, they take half the amount, and they aren’t grappled and can speak normally. Constructs, Undead, and creatures that do not need to breathe are immune to the spell.\nIf the target moves, the hands stay wrapped around their throat, moving with them. On each of your turns after you cast this spell, you can use an action to tighten the hands again, forcing the target to make another saving throw or suffer the spells’ effects again.\nAlternatively, you can use an action to move the hands up to 60 feet. If the hands enter another creature’s space, you can cause that creature to become the target of the spell instead, forcing them to make a Constitution saving throw against the spell’s effects.\nThe spell ends if a creature succeeds their saving throw against it.\nIf you reduce a creature to 0 hit points with this spell, you can force the creature unconscious for 1 minute instead of killing them.",
+	description: "on save fail 1d12+1d12/SL necrotic, grappled and silenced; on success half damage, no effect; see B",
+	descriptionFull: "You create a pair of spectral hands that appear around the throat of Large or smaller creature you can see within range. The target makes a Constitution saving throw. On a failure, the target takes 1d12 necrotic damage, and they are grappled, and they are unable to speak until the end of their next turn. On a success, they take half the amount, and they aren’t grappled and can speak normally. Constructs, Undead, and creatures that do not need to breathe are immune to the spell.\nIf the target moves, the hands stay wrapped around their throat, moving with them. On each of your turns after you cast this spell, you can use an action to tighten the hands again, forcing the target to make another saving throw or suffer the spells’ effects again.\nAlternatively, you can use an action to move the hands up to 60 feet. If the hands enter another creature’s space, you can cause that creature to become the target of the spell instead, forcing them to make a Constitution saving throw against the spell’s effects.\nThe spell ends if a creature succeeds their saving throw against it.\nIf you reduce a creature to 0 hit points with this spell, you can force the creature unconscious for 1 minute instead of killing them.",
 	atHigherLevels: "When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d12 for each slot level above 2nd."
 };
 SpellsList["cloudburst og"] = {
@@ -361,10 +365,10 @@ SpellsList["cloudburst og"] = {
 	time: "1 a",
 	range: "500 ft",
 	components: "V,S,M",
-	compMaterial:"a finely crushed quartz crystal",
-	duration:"Conc, 10 min",
-	description:"clouds and rainfall 150ft radius; lightly obscured; flames extinguished; after 1 min water vanishes; see B",
-	descriptionFull:"You cause clouds to gather, and a heavy rain begins to fall in a 150-foot-radius centered on a point you can see within range. The spell fails if cast indoors, underground, underwater, or in extremely hot and dry climates.\nFor the duration, the area becomes lightly obscured, and any unprotected flames are extinguished. Soft earth is made into muddy, difficult terrain. The water created by the spell does not quench thirst, nor does it provide any nourishment to plants.\nAfter the spell ends, the fallen rainwater quickly evaporates, leaving no trace of itself after 1 minute."
+	compMaterial: "a finely crushed quartz crystal",
+	duration: "Conc, 10 min",
+	description: "clouds and rainfall 150ft radius; lightly obscured; flames extinguished; after 1 min water vanishes; see B",
+	descriptionFull: "You cause clouds to gather, and a heavy rain begins to fall in a 150-foot-radius centered on a point you can see within range. The spell fails if cast indoors, underground, underwater, or in extremely hot and dry climates.\nFor the duration, the area becomes lightly obscured, and any unprotected flames are extinguished. Soft earth is made into muddy, difficult terrain. The water created by the spell does not quench thirst, nor does it provide any nourishment to plants.\nAfter the spell ends, the fallen rainwater quickly evaporates, leaving no trace of itself after 1 minute."
 };
 SpellsList["conduit og"] = {
 	name: "Conduit",
@@ -374,11 +378,11 @@ SpellsList["conduit og"] = {
 	school: "Ench",
 	time: "1 h",
 	range: "Touch",
-	components:"V,S,M\u2020",
-	compMaterial:"metallic ink worth at least 100 gp per spell slot level instilled and ammunition (consumed)",
-	duration:"1 h",
-	description:"up to 5 pices of ammunition are instilled with spells; release on impact; see B",
-	descriptionFull:"You touch up to five pieces of nonmagical ammunition and instill them with spells of 1st-4th level that you know or have prepared, expending an additional spell slot for each spell you wish to instill into the ammunition. Any additional decisions required by an instilled spell must be made as the time they added to the ammunition (for example, the exact instructions of a suggestion spell). Each piece of ammunition can only be instilled with one spell.\nFor the duration, the ammunition is magical for the purpose of overcoming resistance and immunity to nonmagical damage. If they are fired a from a weapon, and the attack hits a creature or object, the instilled spell is released, targeting (or centering upon) the target of that attack.\nIf the instilled spell requires concentration, the creature that fired the ammunition must maintain concentration on the spell. If the instilled spell requires a saving throw, the DC is 11 + the instilled spell’s level, or your spell save DC, whichever is lower."
+	components: "V,S,M\u2020",
+	compMaterial: "metallic ink worth at least 100 gp per spell slot level instilled and ammunition (consumed)",
+	duration: "1 h",
+	description: "up to 5 pices of ammunition are instilled with spells; release on impact; see B",
+	descriptionFull: "You touch up to five pieces of nonmagical ammunition and instill them with spells of 1st-4th level that you know or have prepared, expending an additional spell slot for each spell you wish to instill into the ammunition. Any additional decisions required by an instilled spell must be made at the time they added to the ammunition (for example, the exact instructions of a suggestion spell). Each piece of ammunition can only be instilled with one spell.\nFor the duration, the ammunition is magical for the purpose of overcoming resistance and immunity to nonmagical damage. If they are fired a from a weapon, and the attack hits a creature or object, the instilled spell is released, targeting (or centering upon) the target of that attack.\nIf the instilled spell requires concentration, the creature that fired the ammunition must maintain concentration on the spell. If the instilled spell requires a saving throw, the DC is 11 + the instilled spell’s level, or your spell save DC, whichever is lower.",
 };
 SpellsList["confess og"] = {
 	name: "Confess",
@@ -418,10 +422,10 @@ SpellsList["corak's metal form og"] = {
 	time: "1 a",
 	range: "Touch",
 	components: "V,S,M\u0192",
-	compMaterial:"a platinum figurine worth at least 500 gp",
-	duration:"Conc, 10 min",
-	description:"target metalcoated; weight * 8; AC at least 20; immunities & resistances; bonus to melee attacks; see B",
-	descriptionFull:"You touch a willing creature. Until the spell ends:\n- The target’s skin, clothing and equipment is covered in a lustrous metallic coating, their weight is multiplied by eight, they don’t need to breath, and they can’t swim or fly without the aid of magic. \n- The target’s AC can’t be less than 20, regardless of what kind of armor it is wearing.\n- The target is immune to acid, fire, lightning, and poison damage, and has resistance to nonmagical bludgeoning, piercing, and slashing damage. The target is also immune to the effects of extreme heat and cold as described in Chapter 5 of the Dungeon Master’s Guide.\n- The target’s melee weapon attacks that deal bludgeoning, piercing, or slashing damage count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage, can’t deal less than 1d10 damage on a hit, and if the target is an object, the hit is a critical hit.",
+	compMaterial: "a platinum figurine worth at least 500 gp",
+	duration: "Conc, 10 min",
+	description: "target metalcoated; weight * 8; AC at least 20; immunities & resistances; bonus to melee attacks; see B",
+	descriptionFull: "You touch a willing creature. Until the spell ends:\n- The target’s skin, clothing and equipment is covered in a lustrous metallic coating, their weight is multiplied by eight, they don’t need to breath, and they can’t swim or fly without the aid of magic. \n- The target’s AC can’t be less than 20, regardless of what kind of armor it is wearing.\n- The target is immune to acid, fire, lightning, and poison damage, and has resistance to nonmagical bludgeoning, piercing, and slashing damage. The target is also immune to the effects of extreme heat and cold as described in Chapter 5 of the Dungeon Master’s Guide.\n- The target’s melee weapon attacks that deal bludgeoning, piercing, or slashing damage count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage, can’t deal less than 1d10 damage on a hit, and if the target is an object, the hit is a critical hit.",
 };
 SpellsList["corrosive touch og"] = {
 	name: "Corrosive Touch",
@@ -432,11 +436,11 @@ SpellsList["corrosive touch og"] = {
 	time: "1 a",
 	range: "Touch",
 	components: "S,M",
-	compMaterial:"a vial of lye",
+	compMaterial: "a vial of lye",
 	save: "Var",
-	duration:"Conc, 1 min",
-	description:"touch dmg metal obj. (weap., shield, armor, ...) ; constr. for 3D6+1D6/SL; touch as reac on miss; see B",
-	descriptionFull:"For the duration, your hands become corrosive to ferrous metal. If a nonmagical metal object isn’t being worn or carried, you can use your action to touch it, destroying a one-inch cube of it, ending the spell. \nIf you target a nonmagical metal equipment being worn or carried by a creature: \n If targeting a shield or armor, make a melee spell attack. On a hit, the item takes a permanent and cumulative -1 penalty to the AC it offers. Armor reduced to an AC of 10 or a shield that drops to a +0 bonus is destroyed. \n- If targeting a weapon (for example, a longsword), the target makes a Dexterity saving throw. On a failure, the weapon takes a permanent and cumulative -1 penalty. If its penalty drops to -5, the weapon is destroyed. \nIf you target a construct made of metal, they make a Constitution saving throw at disadvantage, taking 3d6 acid damage on a failure, and half as much on a success.\nAdditionally, if a creature misses you with a melee weapon attack, you can use your reaction to attempt to touch your attacker, or one object they are wearing or carrying.",
+	duration: "Conc, 1 min",
+	description: "touch dmg metal obj. (weap., shield, armor, ...) ; constr. for 3D6+1D6/SL; touch as reac on miss; see B",
+	descriptionFull: "For the duration, your hands become corrosive to ferrous metal. If a nonmagical metal object isn’t being worn or carried, you can use your action to touch it, destroying a one-inch cube of it, ending the spell. \nIf you target a nonmagical metal equipment being worn or carried by a creature: \n If targeting a shield or armor, make a melee spell attack. On a hit, the item takes a permanent and cumulative -1 penalty to the AC it offers. Armor reduced to an AC of 10 or a shield that drops to a +0 bonus is destroyed. \n- If targeting a weapon (for example, a longsword), the target makes a Dexterity saving throw. On a failure, the weapon takes a permanent and cumulative -1 penalty. If its penalty drops to -5, the weapon is destroyed. \nIf you target a construct made of metal, they make a Constitution saving throw at disadvantage, taking 3d6 acid damage on a failure, and half as much on a success.\nAdditionally, if a creature misses you with a melee weapon attack, you can use your reaction to attempt to touch your attacker, or one object they are wearing or carrying.",
 	atHigherLevels: "When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6, and you can destroy 1 additional cubic inch of metal for each slot level above 1st."
 };
 SpellsList["create campsite og"] = {
@@ -448,10 +452,10 @@ SpellsList["create campsite og"] = {
 	ritual: true,
 	time: "10 min",
 	range: "Special",
-	components:"V,S",
-	duration:"24 h",
-	description:"fey servants build campsite, fetch water and prepare meal; campsite is hard to spot; see B",
-	descriptionFull:"You summon a troupe of tiny Fey servants who create a campsite for up to ten travelers. There must be enough nearby natural terrain to host the campsite, or the spell fails. The fey follow your instructions, clear the area of debris, set up any tents or bedrolls if you have them (or prepare soft earth and plants to sleep upon), start a campfire, fetch fresh water, and prepare a bland meal of local flora.\nFor the duration, the campsite is so skillfully prepared that it blends in with the surrounding terrain, such that Beasts in the area have disadvantage on Wisdom (Perception) checks to notice its presence at all, and Humanoids in the area must make a Wisdom (Survival) check against your spell save DC to notice any alterations to the natural landscape.",
+	components: "V,S",
+	duration: "24 h",
+	description: "fey servants build campsite, fetch water and prepare meal; campsite is hard to spot; see B",
+	descriptionFull: "You summon a troupe of tiny Fey servants who create a campsite for up to ten travelers. There must be enough nearby natural terrain to host the campsite, or the spell fails. The fey follow your instructions, clear the area of debris, set up any tents or bedrolls if you have them (or prepare soft earth and plants to sleep upon), start a campfire, fetch fresh water, and prepare a bland meal of local flora.\nFor the duration, the campsite is so skillfully prepared that it blends in with the surrounding terrain, such that Beasts in the area have disadvantage on Wisdom (Perception) checks to notice its presence at all, and Humanoids in the area must make a Wisdom (Survival) check against your spell save DC to notice any alterations to the natural landscape.",
 };
 SpellsList["cuppy snacks og"] = {
 	name: "Cuppy Snacks",
@@ -462,11 +466,11 @@ SpellsList["cuppy snacks og"] = {
 	school: "Conj",
 	time: "1 min",
 	range: "Self",
-	components:"V,S,M",
-	materials:"100gp + 50gp/SL, which the spell consumes",
-	duration:"24 h",
-	description:"time-travel-buy 2+1/SL snacks; heal 2d4+2; nourishment for 1 day; lose potency after 24h",
-	descriptionFull:"You travel through time and space to an eatery you are familiar with, purchase food, and send it back to yourself in a sealed magical cup with a paraffin paper lid, which preserves, shrinks, and infuses the food with healing potential, becoming cuppy snacks.\nImmediately, two snacks appear in your hand and last for the duration. A creature can use its action to peel back the lid and eat a snack. Eating a snack restores 2d4 + 2 hit points, and the snack provides enough nourishment to sustain a creature for one day.\nThe snacks lose their potency if they have not been consumed within 24 hours.",
+	components: "V,S,M",
+	materials: "100gp + 50gp/SL, which the spell consumes",
+	duration: "24 h",
+	description: "time-travel-buy 2+1/SL snacks; heal 2d4+2; nourishment for 1 day; lose potency after 24h",
+	descriptionFull: "You travel through time and space to an eatery you are familiar with, purchase food, and send it back to yourself in a sealed magical cup with a paraffin paper lid, which preserves, shrinks, and infuses the food with healing potential, becoming cuppy snacks.\nImmediately, two snacks appear in your hand and last for the duration. A creature can use its action to peel back the lid and eat a snack. Eating a snack restores 2d4 + 2 hit points, and the snack provides enough nourishment to sustain a creature for one day.\nThe snacks lose their potency if they have not been consumed within 24 hours.",
 	atHigherLevels: "At Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the material cost increases by 50 gp and the spell produces one additional snack for each slot level above 2nd."
 };
 SpellsList["cursory ward og"] = {
@@ -477,11 +481,11 @@ SpellsList["cursory ward og"] = {
 	school: "Abjur",
 	time: "1 a",
 	range: "Self",
-	components:"V,S",
-	duration:"Instantaneous",
+	components: "V,S",
+	duration: "Instantaneous",
 	descriptionCantripDie: "gain `CD`d4 + my spell mod temp hp until end of next turn",
-	description:"gain 1d4 + my spell mod temp hp until end of next turn; extra D4 at CL 5, 11 and 17",
-	descriptionFull:"You ward yourself from injury, granting yourself temporary hit points equal to 1d4 + your spellcasting ability modifier (minimum of 1). The temporary hit points last until the end of your next turn.\nThe number temporary hit points increase by 1d4 when you reach 5th level (2d4), 11th level (3d4), and 17th level (4d4).",
+	description: "gain 1d4 + my spell mod temp hp until end of next turn; extra D4 at CL 5, 11 and 17",
+	descriptionFull: "You ward yourself from injury, granting yourself temporary hit points equal to 1d4 + your spellcasting ability modifier (minimum of 1). The temporary hit points last until the end of your next turn.\nThe number temporary hit points increase by 1d4 when you reach 5th level (2d4), 11th level (3d4), and 17th level (4d4).",
 };
 SpellsList["dazzling strobe og"] = {
 	name: "Dazzling Strobe",
@@ -537,11 +541,11 @@ SpellsList["delay agony og"] = {
 	timeFull: "You react to incoming damage and warp reality around a creature you can see within range.",
 	range: "30 ft",
 	components: "V,S,M",
-	compMaterial:"a puff of cotton or a few down feathers",
-	duration:"Conc, 1 h",
-	description:"subtract 8d8+1d8/SL from attack/spell; no conc. check if you; subtracted dmg taken when spell ends",
-	descriptionFull:"You react to incoming damage and warp reality around a creature you can see within range. Roll 8d8 and subtract the total from the triggering spell or attack’s damage. Record the amount of prevented damage. Any remaining damage is passed onto the target as normal, and they are also subject to any additional effects described by the spell or attack. If you cast the spell with yourself as the target, you do not need to make a concentration check against the damage from the triggering attack. The target of the spell takes the prevented damage immediately after the spell ends.",
-	atHigherLevels:"When you cast this spell using a spell slot of 5th level or higher, the prevented damage increases by 1d8 for each slot level above 4th."
+	compMaterial: "a puff of cotton or a few down feathers",
+	duration: "Conc, 1 h",
+	description: "subtract 8d8+1d8/SL from attack/spell; no conc. check if you; subtracted dmg taken when spell ends",
+	descriptionFull: "You react to incoming damage and warp reality around a creature you can see within range. Roll 8d8 and subtract the total from the triggering spell or attack’s damage. Record the amount of prevented damage. Any remaining damage is passed onto the target as normal, and they are also subject to any additional effects described by the spell or attack. If you cast the spell with yourself as the target, you do not need to make a concentration check against the damage from the triggering attack. The target of the spell takes the prevented damage immediately after the spell ends.",
+	atHigherLevels: "When you cast this spell using a spell slot of 5th level or higher, the prevented damage increases by 1d8 for each slot level above 4th."
 };
 SpellsList["dimensional anchor og"] = {
 	name: "Dimensional Anchor",
@@ -552,8 +556,8 @@ SpellsList["dimensional anchor og"] = {
 	time: "1 rea",
 	timeFull: "",
 	range: "60 ft",
-	components:"V,S",
-	duration:"Conc, 1 min",
+	components: "V,S",
+	duration: "Conc, 1 min",
 	save: "Cha",
 	description: "anchor target to plane on save fail; on attempt 4d10+1d10/SL force dmg, half on save; read B",
 	descriptionFull: "You grasp at a teleporting creature’s essence, and attempt to anchor it to the location and plane you are upon. The target makes a Charisma saving throw. On a failure, they are wreathed in a shimmering emerald field, shedding dim light in a 5-foot-radius. The field prevents the creature from using or willingly participating in any form of extradimensional travel or teleportation.\nForms of movement blocked by the dimensional anchor include spells like blink, dimension door, etherealness, gate, misty step, plane shift, teleport, teleport circle, as well as class abilities like shadow step and shadow walk.\nFor the duration, if the target attempts to teleport or move themselves through time, they must make Charisma saving throw, taking 4d10 force damage on a failure, or half as much on a success.",
@@ -599,11 +603,11 @@ SpellsList["discordant thrum og"] = {
 	time: "1 a",
 	range: "S: 15ft cone",
 	components: "V,S,M",
-	compMaterial:"faerie dust",
-	duration:"Instantaneous",
+	compMaterial: "faerie dust",
+	duration: "Instantaneous",
 	save: "Int",
-	description:"all fail save can't communicate & dis. on attack until end their turn; int < 7 immune",
-	descriptionFull:"You emit an uncomfortable cacophony. Each creature in a 15-foot cone that can hear you makes an Intelligence saving throw. If they fail, they cannot communicate and have disadvantage on attack rolls until the end of their next turn. Creatures with an Intelligence score of 6 or lower are immune."
+	description: "all fail save can't communicate & dis. on attack until end their turn; int < 7 immune",
+	descriptionFull: "You emit an uncomfortable cacophony. Each creature in a 15-foot cone that can hear you makes an Intelligence saving throw. If they fail, they cannot communicate and have disadvantage on attack rolls until the end of their next turn. Creatures with an Intelligence score of 6 or lower are immune."
 };
 SpellsList["disguise undead og"] = {
 	name: "Disguise Undead",
@@ -613,12 +617,12 @@ SpellsList["disguise undead og"] = {
 	school: "Illus",
 	time: "1 min",
 	range: "Touch",
-	components:"V,S,M",
-	compMaterial:"a moth's cocoon",
-	duration:"1 h",
-	description:"1+1/SL undead appear different & mask scent; Int(Investig.) vs my spell DC to unmask; see B",
-	descriptionFull:"You make one undead—including its clothing, armor, weapons, and equipment—look different until the spell ends or until you use your action to dismiss it. The spell also masks the scent of any decaying flesh that might emanate from the target creature. You can make the target seem 1 foot shorter or taller and it can appear thin, fat, or in between. You can’t change its body type, so you must cause it to adopt a form that has the same basic arrangement of limbs. Otherwise, the extent of the illusion is up to you.\nThe changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to a zombie, objects pass through the hat, and anyone who touches it would feel nothing or would feel the zombie’s rotting scalp beneath. If you use this spell to add flesh to a skeleton, someone who shakes the skeleton’s hand might notice their own hand sink into the illusory flesh as they grasp its cold, boney fingers.\nTo discern that the target creature is disguised, a creature can use its action to inspect the target creature’s appearance and must succeed on an Intelligence (Investigation) check against your spell save DC.",
-	atHigherLevels:"When you cast this spell using a spell slot of 3rd level or higher, you can disguise one additional undead creature (creating a unique appearance for each) for each slot level above 3rd."
+	components: "V,S,M",
+	compMaterial: "a moth's cocoon",
+	duration: "1 h",
+	description: "1+1/SL undead appear different & mask scent; Int(Investig.) vs my spell DC to unmask; see B",
+	descriptionFull: "You make one undead—including its clothing, armor, weapons, and equipment—look different until the spell ends or until you use your action to dismiss it. The spell also masks the scent of any decaying flesh that might emanate from the target creature. You can make the target seem 1 foot shorter or taller and it can appear thin, fat, or in between. You can’t change its body type, so you must cause it to adopt a form that has the same basic arrangement of limbs. Otherwise, the extent of the illusion is up to you.\nThe changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to a zombie, objects pass through the hat, and anyone who touches it would feel nothing or would feel the zombie’s rotting scalp beneath. If you use this spell to add flesh to a skeleton, someone who shakes the skeleton’s hand might notice their own hand sink into the illusory flesh as they grasp its cold, boney fingers.\nTo discern that the target creature is disguised, a creature can use its action to inspect the target creature’s appearance and must succeed on an Intelligence (Investigation) check against your spell save DC.",
+	atHigherLevels: "When you cast this spell using a spell slot of 3rd level or higher, you can disguise one additional undead creature (creating a unique appearance for each) for each slot level above 3rd."
 };
 SpellsList["diterlizzis dymaxion og"] = {
 	name: "DiTerlizzi's Dymaxion",
@@ -628,11 +632,11 @@ SpellsList["diterlizzis dymaxion og"] = {
 	school: "Div",
 	time: "1 bns",
 	range: "Self",
-	components:"V,S,M\u0192",
-	compMaterial:"specialized copper-engraved tools worth at least 250 gp",
-	duration:"Conc, 1 min",
-	description:"when I cast 1st level spell: roll 1D20, 11+ no slot spend; cast 2nd level spend 1st; cast 3rd spend 2nd",
-	descriptionFull:"You amplify your ability to efficiently manage your magical resources. For the duration, whenever you cast a 1st-level spell, roll a d20. On a 11 or higher, you immediately recover the expended spell slot.\nAdditionally, whenever you expend a spell slot of 2nd or 3rd level, you can expend a spell slot one level lower instead.\nWhen the spell ends, you can’t cast spells until after your next turn."
+	components: "V,S,M\u0192",
+	compMaterial: "specialized copper-engraved tools worth at least 250 gp",
+	duration: "Conc, 1 min",
+	description: "when I cast 1st level spell: roll 1D20, 11+ no slot spend; cast 2nd level spend 1st; cast 3rd spend 2nd",
+	descriptionFull: "You amplify your ability to efficiently manage your magical resources. For the duration, whenever you cast a 1st-level spell, roll a d20. On a 11 or higher, you immediately recover the expended spell slot.\nAdditionally, whenever you expend a spell slot of 2nd or 3rd level, you can expend a spell slot one level lower instead.\nWhen the spell ends, you can’t cast spells until after your next turn."
 };
 SpellsList["dodge-weave og"] = {
 	name: "Dodge-Weave",
@@ -703,8 +707,8 @@ SpellsList["drumble dead og"] = {
 	range: "30 ft",
 	components: "V,S",
 	duration: "up to 1h",
-	description:"one of: spoil food/drink; drop temp & flicker/dim/change flame; corpse speaks, moves or grapples",
-	descriptionFull:"You disturb the veil between life and death, creating one of the following magical effects within range: \n- You cause nonmagical food or drink that fits within a 5-foot cube to instantaneously spoil and become inedible, and any nonmagical foliage in the area wilts.\n- You cause the temperature in a 5-foot radius to drop 5 degrees Fahrenheit for 1 minute. Within the same area, you can cause flames to flicker, dim, or change color.\n- A corpse (or partial remains) you can see withing range speaks a message up to three words in length of your choosing in a language you know, and creates brief gestures in a manner of your choosing for up to an hour.\n- A Medium or smaller corpse (or partial remains) you can see withing range instantaneously moves up to 10 feet along the ground in a direction of your choice.\n- One Medium creature of your choice that you can see within range and also within 5 feet of a corpse (or partial remains) must succeed on a Strength saving throw or become grappled by the corpse (or partial remains). A grappled creature can use its action to repeat the saving throw on its turn to end the grapple. At the start of your next turn the target is released from the grapple.\nIf you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.\nThe spell can target corpses of larger size categories when you reach higher levels: Large at 5th level, Huge at 11th level, and Gargantuan at 17th level."
+	description: "one of: spoil food/drink; drop temp & flicker/dim/change flame; corpse speaks, moves or grapples",
+	descriptionFull: "You disturb the veil between life and death, creating one of the following magical effects within range: \n- You cause nonmagical food or drink that fits within a 5-foot cube to instantaneously spoil and become inedible, and any nonmagical foliage in the area wilts.\n- You cause the temperature in a 5-foot radius to drop 5 degrees Fahrenheit for 1 minute. Within the same area, you can cause flames to flicker, dim, or change color.\n- A corpse (or partial remains) you can see withing range speaks a message up to three words in length of your choosing in a language you know, and creates brief gestures in a manner of your choosing for up to an hour.\n- A Medium or smaller corpse (or partial remains) you can see withing range instantaneously moves up to 10 feet along the ground in a direction of your choice.\n- One Medium creature of your choice that you can see within range and also within 5 feet of a corpse (or partial remains) must succeed on a Strength saving throw or become grappled by the corpse (or partial remains). A grappled creature can use its action to repeat the saving throw on its turn to end the grapple. At the start of your next turn the target is released from the grapple.\nIf you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.\nThe spell can target corpses of larger size categories when you reach higher levels: Large at 5th level, Huge at 11th level, and Gargantuan at 17th level."
 };
 SpellsList["drunkards breath og"] = {
 	name: "Drunkard's Breath",
@@ -718,7 +722,7 @@ SpellsList["drunkards breath og"] = {
 	duration: "Instantaneous",
 	save: "Con",
 	description: "all hit save or poisoned for 1 min and no action nxt trn; no breathing = immune; repeat save end turn",
-	descriptionFull: "You let out a tremendous, foul-smelling belch in a 15-foot cone. Creatures in the area must make a Constitution saving throw. On a failed save, a creature becomes is poisoned for 1 minute, and spends its action on its next turn retching and reeling. Creatures that don’t need to breathe or are immune to poison automatically succeed on this saving throw.\nAn affected creature repeats its saving throw at the end of each of its turns, ending the effect on a success."
+	descriptionFull: "You let out a tremendous, foul-smelling belch in a 15-foot cone. Creatures in the area must make a Constitution saving throw. On a failed save, a creature becomes poisoned for 1 minute, and spends its action on its next turn retching and reeling. Creatures that don’t need to breathe or are immune to poison automatically succeed on this saving throw.\nAn affected creature repeats its saving throw at the end of each of its turns, ending the effect on a success."
 };
 SpellsList["drunken revelry og"] = {
 	name: "Drunken Revelry",
@@ -748,7 +752,7 @@ SpellsList["duelist's ward og"] = {
 	duration: "Conc, 1 min",
 	description: "target attacks or forces save use reaction to +1D6 to AC/Save; higher SL more Bonus; see B",
 	descriptionFull: "Choose a creature you can see within 120 feet of you. For the duration, when the target hits you with an attack or forces you to make a saving throw (including to maintain your concentration on this spell), you can use your reaction to gain a 1d6 bonus to your AC against that attack, or a 1d6 bonus to that saving throw.\nYou can use this reaction a number of times equal to 1 + your spellcasting ability modifier (minimum of twice). When you expend the final use of the reaction, the spell ends",
-	atHigherLevels:"When you cast this spell using a spell slot of 4th level or higher, the bonus increases to 1d8. When you cast this spell using a spell slot of 5th level or higher, the bonus increases to 1d10. When you cast this spell using a spell slot of 6th level or higher, the bonus increases to 1d12."
+	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the bonus increases to 1d8. When you cast this spell using a spell slot of 5th level or higher, the bonus increases to 1d10. When you cast this spell using a spell slot of 6th level or higher, the bonus increases to 1d12."
 };
 SpellsList["dulling chains og"] = {
 	name: "Dulling Chains",
@@ -760,11 +764,11 @@ SpellsList["dulling chains og"] = {
 	range: "60 ft",
 	components: "V,S",
 	duration: "Instantaneous",
-	save:"Str",
-	description:"fail save: 1d4 force dmg and speed -15ft until my nxt trn; 2 chains at CL 5, 3 at 11, 4 at 17; see B",
-	descriptionShorter:"fail save: 1d4 force dmg and speed -15ft until my nxt trn; CL >5 more chains; see B",
+	save: "Str",
+	description: "fail save: 1d4 force dmg and speed -15ft until my nxt trn; 2 chains at CL 5, 3 at 11, 4 at 17; see B",
+	descriptionShorter: "fail save: 1d4 force dmg and speed -15ft until my nxt trn; CL >5 more chains; see B",
 	descriptionCantripDie: "`CD` chains vs. same or multiple targets; fail save: 1d4 force dmg and speed -15ft until my nxt trn",
-	descriptionFull:"You summon a magical restraint to ensnare an enemy.\The target makes a Strength saving throw. On a failure, it takes 1d4 force damage, and its speed is reduced by 15 feet until the start of your next turn.\nThe spell creates more than one restraint when you reach higher levels: two restraints at 5th level, three restraints at 11th level, and four restraints at 17th level. You can direct the restraints at the same target or at different ones. Make a separate attack roll for each restraint."
+	descriptionFull: "You summon a magical restraint to ensnare an enemy.\The target makes a Strength saving throw. On a failure, it takes 1d4 force damage, and its speed is reduced by 15 feet until the start of your next turn.\nThe spell creates more than one restraint when you reach higher levels: two restraints at 5th level, three restraints at 11th level, and four restraints at 17th level. You can direct the restraints at the same target or at different ones. Make a separate attack roll for each restraint."
 };
 WeaponsList["dulling chains og"] = {
 	name: "Dulling Chains",
@@ -772,7 +776,7 @@ WeaponsList["dulling chains og"] = {
 	regExpSearch: /^(?=.*dulling)(?=.*chains).*$/i,
 	type: "Cantrip",
 	ability: 4,
-	damage: ["C",4,"Force"],
+	damage: ["C", 4, "Force"],
 	range: "60ft",
 	dc: true,
 	abilitytodamage: false,
@@ -788,11 +792,11 @@ SpellsList["duodimension og"] = {
 	school: "Trans",
 	time: "1 a",
 	range: "Self",
-	components:"S, M\u0192",
-	compMaterial:"a strip of fine paper bound into a mobius strip and a flat ivory likeness of yourself worth at least 500 gp",
-	duration:"Conc, 1 h",
-	description:"I'm reduced to 2 dimensions; attacks vs. me dis.; bonus to hide; vulnerable piercing/slashing; see B",
-	descriptionFull:"You fold your height, width, or depth into the Astral Plane, reducing yourself to a two-dimensional form. For the duration, you gain the following effects: \n- Attacks against you are made at disadvantage.\n- You can Hide as a bonus action without any available cover, and you have advantage on Dexterity (Stealth) checks when you do, and you gain a +5 bonus to your armor class until the start of your next turn.\n- You can move through any available space as long as your remaining two dimensions can squeeze through it.\n- You become vulnerable to piercing and slashing damage.\nWhen the spell ends, you immediately return to your three-dimensional form in the spot you currently occupy. If you occupy the same spot as a solid object or creature when this happens, you are immediately shunted to the nearest unoccupied space and take 2d6 force damage. \nWhile under the effects of this spell, inserting your body inside an extradimensional space created by a bag of holding, Heward’s handy haversack, portable hole, or similar item instantly destroys the item and opens a gate to the Astral Plane. The gate originates where you were placed inside the extradimensional space. You, and any creature within 10 feet of the gate is sucked through it to a random location on the Astral Plane. The gate then closes. The gate is one-way only and can’t be reopened."
+	components: "S, M\u0192",
+	compMaterial: "a strip of fine paper bound into a mobius strip and a flat ivory likeness of yourself worth at least 500 gp",
+	duration: "Conc, 1 h",
+	description: "I'm reduced to 2 dimensions; attacks vs. me dis.; bonus to hide; vulnerable piercing/slashing; see B",
+	descriptionFull: "You fold your height, width, or depth into the Astral Plane, reducing yourself to a two-dimensional form. For the duration, you gain the following effects: \n- Attacks against you are made at disadvantage.\n- You can Hide as a bonus action without any available cover, and you have advantage on Dexterity (Stealth) checks when you do, and you gain a +5 bonus to your armor class until the start of your next turn.\n- You can move through any available space as long as your remaining two dimensions can squeeze through it.\n- You become vulnerable to piercing and slashing damage.\nWhen the spell ends, you immediately return to your three-dimensional form in the spot you currently occupy. If you occupy the same spot as a solid object or creature when this happens, you are immediately shunted to the nearest unoccupied space and take 2d6 force damage. \nWhile under the effects of this spell, inserting your body inside an extradimensional space created by a bag of holding, Heward’s handy haversack, portable hole, or similar item instantly destroys the item and opens a gate to the Astral Plane. The gate originates where you were placed inside the extradimensional space. You, and any creature within 10 feet of the gate is sucked through it to a random location on the Astral Plane. The gate then closes. The gate is one-way only and can’t be reopened."
 };
 SpellsList["dust dash og"] = {
 	name: "Dust Dash",
@@ -809,7 +813,7 @@ SpellsList["dust dash og"] = {
 	description: "dash faerie dust on creature; spell attack if unwilling; cause unpredictable effects; see Table in Book",
 	descriptionFull: "You dash faerie dust wantonly upon a living creature within 5 feet of you, causing unpredictable effects. Make a melee spell attack against the target if it is unwilling. On a hit, roll a d20 to determine the dust’s unpredictable effects from the table in the Book.",
 	atHigherLevels: "When you cast this spell using a spell slot of 2nd-level or higher, you can add or subtract a number to your d20 roll on the table equal to the level of the spell slot you expended minus one. For example, if you cast the spell at 2nd-level, and rolled a 10, you can choose from anywhere between 9 and 11 on the table for the applied dust effect."
-	
+
 };
 SpellsList["entropic field og"] = {
 	name: "Entropic Field",
@@ -853,10 +857,10 @@ SpellsList["exstasis og"] = {
 	range: "1 mile",
 	components: "S",
 	duration: "Conc, 1 min",
-	description:"I project and control duplicate self; higher SL = more range, duration and duplicates; see B",
-	descriptionFull:"You project a duplicate self, which materializes in an unoccupied point within range. The destination must be known to you, and on the same plane of existence as you. Your familiarity determines whether your second self arrives there successfully. The DM rolls a d20 and consults the table. (See Book for Teleportation Safety Book and results.)\nFor the duration, the following rules apply:\n- Your selves share the same statistics, spell slots, hit points, conditions, and equipment. \n- On your turn, you can act using any of your selves’ locations and senses. If you or your second self drops an object or gives it away, it disappears from the other location. \n- Your selves count as a single creature for spells or other abilities that target a specific number of creatures, and they can’t be targeted more than once by them. \n- If both of your selves are standing in an area created by spell or ability, for example, a Dragon’s breath weapon, both selves must make a saving throw to avoid its effects. \n- If one of your selves take damage and you aren’t incapacitated, you can use your reaction to sacrifice that self, avoiding the damage entirely.\nWhen the spell ends, you choose which of your selves you become, unless you are incapacitated. If you are incapacitated, you become the self closest to the source of your incapacitation (for example, an attacking creature or natural hazard).",
+	description: "I project and control duplicate self; higher SL = more range, duration and duplicates; see B",
+	descriptionFull: "You project a duplicate self, which materializes in an unoccupied point within range. The destination must be known to you, and on the same plane of existence as you. Your familiarity determines whether your second self arrives there successfully. The DM rolls a d20 and consults the table. (See Book for Teleportation Safety Book and results.)\nFor the duration, the following rules apply:\n- Your selves share the same statistics, spell slots, hit points, conditions, and equipment. \n- On your turn, you can act using any of your selves’ locations and senses. If you or your second self drops an object or gives it away, it disappears from the other location. \n- Your selves count as a single creature for spells or other abilities that target a specific number of creatures, and they can’t be targeted more than once by them. \n- If both of your selves are standing in an area created by spell or ability, for example, a Dragon’s breath weapon, both selves must make a saving throw to avoid its effects. \n- If one of your selves take damage and you aren’t incapacitated, you can use your reaction to sacrifice that self, avoiding the damage entirely.\nWhen the spell ends, you choose which of your selves you become, unless you are incapacitated. If you are incapacitated, you become the self closest to the source of your incapacitation (for example, an attacking creature or natural hazard).",
 	atHigherLevels: "When you cast this spell using a spell slot of 6th, the duration is increased to 10 minutes, and the range is increased to 10 miles. When you cast this spell using a spell slot of 7th-level, you can create a third self, the duration is increased to 1 hour, and the range is increased to 100 miles. When you cast this spell using a spell slot of 8th level, the duration is increased to 8 hours, and the range is increased to 1000 miles. Using a spell slot of 9th level or higher grants a duration that doesn’t require concentration, and the range extends to any location on the plane you are upon."
-	
+
 };
 SpellsList["fallow og"] = {
 	name: "Fallow",
@@ -867,10 +871,10 @@ SpellsList["fallow og"] = {
 	ritual: true,
 	time: "1 min",
 	range: "Touch",
-	components:"V,S",
-	duration:"max 1000 yrs",
-	description:"Deposit my essence into plant or stone; enter fallow state; harder and harder to leave; see B",
-	descriptionFull:"You deposit your essence within a plant or a stone large enough to contain your body. You can also deposit yourself into a stone. For the duration, you are blinded.\nAs you lie fallow, other effects set over time as noted on the following table.\nYou can rest comfortably in your hiding place, and can complete short or long rests. If you continue to remain undisturbed, you can remain in a fallow state for as long as your body is able to live. You can exit your hiding place using your action.\nIf your host plant or stone is uprooted, damaged or disturbed, you are immediately expelled from your hiding place and fallow state, and take double the damage done to your host plant or stone. You then must then succeed a Wisdom saving throw against your own spell save DC or gain the effects of the confusion spell. You can make a new saving throw on each of your turns to end the effect. See Book!",
+	components: "V,S",
+	duration: "max 1000 yrs",
+	description: "Deposit my essence into plant or stone; enter fallow state; harder and harder to leave; see B",
+	descriptionFull: "You deposit your essence within a plant or a stone large enough to contain your body. You can also deposit yourself into a stone. For the duration, you are blinded.\nAs you lie fallow, other effects set over time as noted on the following table.\nYou can rest comfortably in your hiding place, and can complete short or long rests. If you continue to remain undisturbed, you can remain in a fallow state for as long as your body is able to live. You can exit your hiding place using your action.\nIf your host plant or stone is uprooted, damaged or disturbed, you are immediately expelled from your hiding place and fallow state, and take double the damage done to your host plant or stone. You then must then succeed a Wisdom saving throw against your own spell save DC or gain the effects of the confusion spell. You can make a new saving throw on each of your turns to end the effect. See Book!",
 	atHigherLevels: "You can immediately immerse yourself into a deeper fallow state by casting the spell using a higher-level spell slot as noted in the table."
 };
 SpellsList["fenton's flickering fists og"] = {
@@ -894,7 +898,7 @@ WeaponsList["fenton's flickering fists og"] = {
 	type: "Cantrip",
 	ability: 4,
 	abilitytodamage: false,
-	damage: ["C",6,"Force"],
+	damage: ["C", 6, "Force"],
 	range: "Melee",
 	description: "Target looses reaction",
 	list: "spell",
@@ -940,10 +944,10 @@ SpellsList["fortify familiar og"] = {
 	time: "10 min",
 	range: "10 ft",
 	components: "V,S,M\u2020",
-	compMaterial:"charcoal, incense, and herbs worth at least 20 gp (consumed)",
-	duration:"24 h",
-	description:"empower a familiar with profiency, hit die, AC, damage, ability scores; see B",
-	descriptionFull:"You empower a familiar in your service, keeping its current form, or altering it to new one, choosing from the options in the find familiar spell, or another form the DM has approved. The fortified familiar gains these benefits: \n- Your familiar uses your proficiency bonus rather than its own, and becomes proficient with all saving throws. \n- For each level you have gained after 3rd, your familiar gains an additional hit die and increases its hit points accordingly. \n- Your familiar’s AC and damage rolls receive a bonus equal to your proficiency bonus minus 2.\n- If you have gained the Ability Score Improvement class feature, your familiar’s abilities also improve. For each of these features you have attained, your familiar can increase one ability score of your choice by 2, or it can increase two ability scores of your choice by 1. Your familiar can’t increase an ability score above 20. Using the optional feats rule, you can forgo this feature to take a feat of your choice from the Familiar Feats list instead.\nIn combat, your empowered familiar shares your initiative count, and takes its turn immediately after yours. The only action it takes on its turn is the Dodge action, unless you command it otherwise (no action required). Once on your turn when you take the Attack action or cast a spell, you can command your familiar to use its reaction to make one attack, adding your spellcasting ability modifier to the damage roll on a hit. Your familiar remains empowered for the duration, after which it reverts to its usual state."
+	compMaterial: "charcoal, incense, and herbs worth at least 20 gp (consumed)",
+	duration: "24 h",
+	description: "empower a familiar with profiency, hit die, AC, damage, ability scores; see B",
+	descriptionFull: "You empower a familiar in your service, keeping its current form, or altering it to new one, choosing from the options in the find familiar spell, or another form the DM has approved. The fortified familiar gains these benefits: \n- Your familiar uses your proficiency bonus rather than its own, and becomes proficient with all saving throws. \n- For each level you have gained after 3rd, your familiar gains an additional hit die and increases its hit points accordingly. \n- Your familiar’s AC and damage rolls receive a bonus equal to your proficiency bonus minus 2.\n- If you have gained the Ability Score Improvement class feature, your familiar’s abilities also improve. For each of these features you have attained, your familiar can increase one ability score of your choice by 2, or it can increase two ability scores of your choice by 1. Your familiar can’t increase an ability score above 20. Using the optional feats rule, you can forgo this feature to take a feat of your choice from the Familiar Feats list instead.\nIn combat, your empowered familiar shares your initiative count, and takes its turn immediately after yours. The only action it takes on its turn is the Dodge action, unless you command it otherwise (no action required). Once on your turn when you take the Attack action or cast a spell, you can command your familiar to use its reaction to make one attack, adding your spellcasting ability modifier to the damage roll on a hit. Your familiar remains empowered for the duration, after which it reverts to its usual state."
 };
 SpellsList["frigid wind og"] = {
 	name: "Frigid Wind",
@@ -953,11 +957,11 @@ SpellsList["frigid wind og"] = {
 	school: "Evoc",
 	time: "1 a",
 	range: "S: 60ft line",
-	components:"V,S",
-	duration:"Instantaneous",
+	components: "V,S",
+	duration: "Instantaneous",
 	save: "Con",
-	description:"60ftx10ft line; 8d6+1d6/SL cold dmg; half on save; extinguish flames; freezes water; see B", 
-	descriptionFull:"A line of strong, frigid wind 60 feet long and 10 feet wide blasts from you in a direction you choose. Each creature in the line must make a Constitution saving throw, taking 8d6 cold damage on a failed save, or half as much damage on a successful one.\nThe wind disperses gas or vapor, and it extinguishes candles, torches, and similar unprotected flames in the area. It causes protected flames, such as those of lanterns, to dance wildly and has a 50 percent chance to extinguish them. If the wind passes over open water, the water freezes to a depth of 6 inches for 1 minute.",
+	description: "60ftx10ft line; 8d6+1d6/SL cold dmg; half on save; extinguish flames; freezes water; see B",
+	descriptionFull: "A line of strong, frigid wind 60 feet long and 10 feet wide blasts from you in a direction you choose. Each creature in the line must make a Constitution saving throw, taking 8d6 cold damage on a failed save, or half as much damage on a successful one.\nThe wind disperses gas or vapor, and it extinguishes candles, torches, and similar unprotected flames in the area. It causes protected flames, such as those of lanterns, to dance wildly and has a 50 percent chance to extinguish them. If the wind passes over open water, the water freezes to a depth of 6 inches for 1 minute.",
 	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd."
 };
 SpellsList["frigidigitation og"] = {
@@ -998,10 +1002,10 @@ SpellsList["ghost armor og"] = {
 	time: "1 a",
 	range: "Touch",
 	components: "V,S,M",
-	compMaterial:"a shard of battle-worn metal",
-	duration:"1 h",
-	description:"AC 13 + spell mod; resistance necrotic; creat. touch or melee atks me 1d4+spell mod necrotic dmg",
-	descriptionFull:"You touch a willing creature and cause a haunting, magical force in the shape of a suit of armor to surround it. Until the spell ends, the target gains resistance to necrotic damage, and its AC cannot be less than 13 + your spellcasting ability modifier (minimum of 1). \nA creature that touches the bearer of the armor or hits it with a melee attack while within 5 feet of it takes necrotic damage equal to 1d4 + your spellcasting ability modifier (minimum of 1)."
+	compMaterial: "a shard of battle-worn metal",
+	duration: "1 h",
+	description: "AC 13 + spell mod; resistance necrotic; creat. touch or melee atks me 1d4+spell mod necrotic dmg",
+	descriptionFull: "You touch a willing creature and cause a haunting, magical force in the shape of a suit of armor to surround it. Until the spell ends, the target gains resistance to necrotic damage, and its AC cannot be less than 13 + your spellcasting ability modifier (minimum of 1). \nA creature that touches the bearer of the armor or hits it with a melee attack while within 5 feet of it takes necrotic damage equal to 1d4 + your spellcasting ability modifier (minimum of 1)."
 };
 SpellsList["ghost trap og"] = {
 	name: "Ghost Trap",
@@ -1011,11 +1015,11 @@ SpellsList["ghost trap og"] = {
 	school: "Abjur",
 	time: "1 a",
 	range: "S: 60ft rad",
-	components:"V,S,M",
-	compMaterial:"a scrap of tulle or lace",
-	duration:"Conc, 1 min",
-	description:"aura moves with me; all ethereal creatures move to my plane and can't leave while in aura",
-	descriptionFull:"Supernatural ripples radiate from you in an aura with a 60-foot-radius. Ethereal creatures in the area are transported to your plane and cannot return to the Ethereal Plane until the spell ends or they leave the aura’s area."
+	components: "V,S,M",
+	compMaterial: "a scrap of tulle or lace",
+	duration: "Conc, 1 min",
+	description: "aura moves with me; all ethereal creatures move to my plane and can't leave while in aura",
+	descriptionFull: "Supernatural ripples radiate from you in an aura with 60-foot-radius. Until the spell ends, the aura moves with you, centered on you. Ethereal creatures in the area are transported to the plane you occupy, and are unable to return to the Ethereal Plane until the spell ends or they leave the aura’s area."
 };
 SpellsList["ghostly disguise og"] = {
 	name: "Ghostly Disguise",
@@ -1025,10 +1029,10 @@ SpellsList["ghostly disguise og"] = {
 	school: "Illus",
 	time: "1 a",
 	range: "Self",
-	components:"V,S",
-	duration:"Conc, 1 h",
-	description:"I & my equip & voice appear ghostly; DC 15 Wis(Perc) within 15ft to discern; end on attack; (D)",
-	descriptionFull:"You make yourself—including your clothing, armor, weapons, and other belongings on your person—appear as if you were a ghost until the spell ends or until you use your action to dismiss it. You appear to hover ever so slightly off the surface you are standing upon, and your eyes appear sunken, and the edges of your form take on a wispy, tattered. Your voice takes on a ghostly echo. If you are already under the effects of a spell that alters your form, such as disguise self or alter self, the ghostly appearance adapts to it.\nThe spell doesn’t confer any other benefits of etherealness, and actual ghosts can still detect your life force without any difficulty. You cannot fly, nor can you see or enter the Ethereal Plane. The changes wrought by this spell fail to hold up to physical inspection. For example, if a creature through a vase at you, it would bounce off your physical form.\nTo discern that your spectral appearance is an illusion, a creature within 15 feet of you can use its action to inspect your appearance and must succeed on a Wisdom(Perception) check against your spell save DC.\nThe spell ends if you attack a creature, including spells that require a spell attacks or cause damage of any kind."
+	components: "V,S",
+	duration: "Conc, 1 h",
+	description: "I & my equip & voice appear ghostly; DC 15 Wis(Perc) within 15ft to discern; end on attack; (D)",
+	descriptionFull: "You make yourself—including your clothing, armor, weapons, and other belongings on your person—appear as if you were a ghost until the spell ends or until you use your action to dismiss it. You appear to hover ever so slightly off the surface you are standing upon, and your eyes appear sunken, and the edges of your form take on a wispy, tattered. Your voice takes on a ghostly echo. If you are already under the effects of a spell that alters your form, such as disguise self or alter self, the ghostly appearance adapts to it.\nThe spell doesn’t confer any other benefits of etherealness, and actual ghosts can still detect your life force without any difficulty. You cannot fly, nor can you see or enter the Ethereal Plane. The changes wrought by this spell fail to hold up to physical inspection. For example, if a creature through a vase at you, it would bounce off your physical form.\nTo discern that your spectral appearance is an illusion, a creature within 15 feet of you can use its action to inspect your appearance and must succeed on a Wisdom(Perception) check against your spell save DC.\nThe spell ends if you attack a creature, including spells that require a spell attacks or cause damage of any kind."
 };
 SpellsList["gift of the soothsayer og"] = {
 	name: "Gift of the Soothsayer",
@@ -1071,8 +1075,8 @@ SpellsList["glamourous craft og"] = {
 	components: "V,S,M",
 	compMaterial: "faerie dust",
 	duration: "Conc, 8 h",
-	description:"craft quickly with advantage or enchant one masterwork item and bind one spell slot to it; see B",
-	descriptionFull:"Left uninterrupted to work, you can perform incredible feats of craftsmanship. Choose from the following two options:\nHasty Craft. Designate one artisan’s tool with which you are proficient. You gain an additional action on your turn, which you can use to make an ability check using the tool, and any checks you make with the tool are made with advantage. You might complete an intricate painting, or work a stack of leather into several pairs of high-quality shoes. \nMasterwork. Alternatively, the spell can enchant a mundane item you created. When you do, your spell slot is consumed, and is lost. The item becomes magical, and gains an enchantment of your choice made from the following spells: blur, comprehend languages, enhance, elemental weapon (if a weapon), enlarge/reduce, fly, gaseous form, haste, invisibility, magic weapon (if a weapon), major image, pass without trace, or tongues. Any decisions required by the spell are made by you when you create the item. \nYou cannot use your own masterwork item, and its command word is your name. A creature who becomes attuned to the item learns the command word (even if they do not recognize its significance), and can activate it, gaining the spell’s effect, which are cast with your spell save DC. The item recharges after one day as long as you are still alive and on the same plane as the item. You can retract the item’s boon if you can see or touch it (no action required by you), recovering the spell slot when you complete your next long rest, and any creature under the effects of its magic loses it."
+	description: "craft quickly with advantage or enchant one masterwork item and bind one spell slot to it; see B",
+	descriptionFull: "Left uninterrupted to work, you can perform incredible feats of craftsmanship. Choose from the following two options:\nHasty Craft. Designate one artisan’s tool with which you are proficient. You gain an additional action on your turn, which you can use to make an ability check using the tool, and any checks you make with the tool are made with advantage. You might complete an intricate painting, or work a stack of leather into several pairs of high-quality shoes. \nMasterwork. Alternatively, the spell can enchant a mundane item you created. When you do, your spell slot is consumed, and is lost. The item becomes magical, and gains an enchantment of your choice made from the following spells: blur, comprehend languages, enhance, elemental weapon (if a weapon), enlarge/reduce, fly, gaseous form, haste, invisibility, magic weapon (if a weapon), major image, pass without trace, or tongues. Any decisions required by the spell are made by you when you create the item. \nYou cannot use your own masterwork item, and its command word is your name. A creature who becomes attuned to the item learns the command word (even if they do not recognize its significance), and can activate it, gaining the spell’s effect, which are cast with your spell save DC. The item recharges after one day as long as you are still alive and on the same plane as the item. You can retract the item’s boon if you can see or touch it (no action required by you), recovering the spell slot when you complete your next long rest, and any creature under the effects of its magic loses it."
 };
 SpellsList["glass strike og"] = {
 	name: "Glass Strike",
@@ -1082,12 +1086,12 @@ SpellsList["glass strike og"] = {
 	school: "Trans",
 	time: "1 a",
 	range: "60 ft",
-	components:"V,S,M",
-	compMaterial:"a shard of transparent glass",
-	duration:"Special",
-	save:"Con",
-	description:"small object or 5ft cube becomes glass; or one creature on save fail for 1 min conc; see B",
-	descriptionFull:"You transform a target creature or object you can see into glass. You can cast either of these two versions of the spell: \nGlass Transmute. You transform up to 5 cubic feet of nonliving matter or a nonmagical object of equal or lesser volume into glass. Part of a larger object (such as a door or siege weapon) can be transformed by this spell. The object (or area)’s AC becomes 13, and it is vulnerable to bludgeoning and thunder damage.\nFlesh to Glass. You target a Medium or smaller creature, which must make a Constitution saving throw. On a failed save, its flesh becomes transparent and brittle. Constructs, Undead, and creatures not made of flesh are immune to the spell.\nYou concentrate for up to 1 minute, and for the duration, the target’s movement speed is reduced by half, it has disadvantage on attack rolls, it is vulnerable to bludgeoning and thunder damage, it is immune to poison and necrotic damage, and cannot become diseased.\nAdditionally, any nonmagical equipment the creature is wearing or carrying is transformed. Unless it is wearing magical armor, its AC cannot be higher than 13. If the target rolls a 1 on an attack roll with a glass weapon, it shatters and can no longer be used.\nIf the creature is physically broken while in its glass form, it suffers from similar deformities if it reverts to its original state.\nAn affected creature can repeat its saving throw at the end of each of its turns, ending the effect on a success. If you maintain your concentration on this spell for the entire possible duration, the creature is turned to glass until the effect is removed by a dispel magic spell."
+	components: "V,S,M",
+	compMaterial: "a shard of transparent glass",
+	duration: "Special",
+	save: "Con",
+	description: "small object or 5ft cube becomes glass; or one creature on save fail for 1 min conc; see B",
+	descriptionFull: "You transform a target creature or object you can see into glass. You can cast either of these two versions of the spell: \nGlass Transmute. You transform up to 5 cubic feet of nonliving matter or a nonmagical object of equal or lesser volume into glass. Part of a larger object (such as a door or siege weapon) can be transformed by this spell. The object (or area)’s AC becomes 13, and it is vulnerable to bludgeoning and thunder damage.\nFlesh to Glass. You target a Medium or smaller creature, which must make a Constitution saving throw. On a failed save, its flesh becomes transparent and brittle. Constructs, Undead, and creatures not made of flesh are immune to the spell.\nYou concentrate for up to 1 minute, and for the duration, the target’s movement speed is reduced by half, it has disadvantage on attack rolls, it is vulnerable to bludgeoning and thunder damage, it is immune to poison and necrotic damage, and cannot become diseased.\nAdditionally, any nonmagical equipment the creature is wearing or carrying is transformed. Unless it is wearing magical armor, its AC cannot be higher than 13. If the target rolls a 1 on an attack roll with a glass weapon, it shatters and can no longer be used.\nIf the creature is physically broken while in its glass form, it suffers from similar deformities if it reverts to its original state.\nAn affected creature can repeat its saving throw at the end of each of its turns, ending the effect on a success. If you maintain your concentration on this spell for the entire possible duration, the creature is turned to glass until the effect is removed by a dispel magic spell."
 };
 SpellsList["glassteel og"] = {
 	name: "Glassteel",
@@ -1098,11 +1102,11 @@ SpellsList["glassteel og"] = {
 	school: "Trans",
 	time: "10 min",
 	range: "Touch",
-	components:"V,S,M\u0192",
-	compMaterial:"a piece of fine crystal worth at least 2,500 gp",
-	duration:"1 h",
-	description:"5ft cube metal/wood/stone = steelglass; pick transpar.; perm if conc till end; SL7 8h; SL9 perm, no Conc",
-	descriptionFull:"You touch an object or area of metal, stone, or wood, causing up to a 5-foot cube of material to become transparent as glass for the duration. Lead, gold, and platinum cannot be altered by the spell.\nYou decide how transparent or clear, opaque, or diffuse the material becomes, and if creatures other than you can see through it at all. If only you can see through the material, no actual light passes through it. If you allow others to see through it, light passes through the material normally. Although the material can have the appearance of glass, it has the strength and other material properties of the original material.\nIf you concentrate on the spell for its entire duration, the transformation becomes permanent, and the spell consumes the material component.",
+	components: "V,S,M\u0192",
+	compMaterial: "a piece of fine crystal worth at least 2,500 gp",
+	duration: "1 h",
+	description: "5ft cube metal/wood/stone = steelglass; pick transpar.; perm if conc till end; SL7 8h; SL9 perm, no Conc",
+	descriptionFull: "You touch an object or area of metal, stone, or wood, causing up to a 5-foot cube of material to become transparent as glass for the duration. Lead, gold, and platinum cannot be altered by the spell.\nYou decide how transparent or clear, opaque, or diffuse the material becomes, and if creatures other than you can see through it at all. If only you can see through the material, no actual light passes through it. If you allow others to see through it, light passes through the material normally. Although the material can have the appearance of glass, it has the strength and other material properties of the original material.\nIf you concentrate on the spell for its entire duration, the transformation becomes permanent, and the spell consumes the material component.",
 	atHigherLevels: "When you cast this spell using a spell slot of 7th level, the duration increases to 8 hours. If you cast the spell using a spell slot of 9th level, the spell doesn’t require concentration, and its effects are instantaneous and permanent."
 };
 SpellsList["glogalas paradox og"] = {
@@ -1157,9 +1161,9 @@ SpellsList["healing wave og"] = {
 	range: "30 ft",
 	components: "V,S",
 	duration: "Instantaneous",
-	description:"10d4+3d4/SL heal pool; 1st crea heal 1/2 +spell mod; 2nd 1/2 remain +spell mod; 3rd rest +spell mod",
-	descriptionFull:"You create a pool of 10d4 restorative healing and channel it toward a creature you can see within range. Roll half the pool’s dice, restoring a number of hit points to the creature equal to the result + your spellcasting ability modifier.\nChoose a second creature you can see within range. Roll half the pool’s remaining dice, restoring a number of hit points to the creature equal to the result.\nChoose a third creature within range. Roll the remaining dice in the pool, restoring a number of hit points to the creature equal to the result.\nThis spell has no effect on Constructs or Undead.",
-	atHigherLevels:"When you cast this spell using a spell slot of 4th level or higher, the pool of restorative healing increases by 3d4 for each slot level above 3rd. If you cast the spell at 5th level or higher, you can add your spellcasting ability modifier to the second creature’s healing. If you cast the spell at 7th level or higher, you can add your spellcasting ability modifier to the third creature’s healing."
+	description: "10d4+3d4/SL heal pool; 1st crea heal 1/2 +spell mod; 2nd 1/2 remain +spell mod; 3rd rest +spell mod",
+	descriptionFull: "You create a pool of 10d4 restorative healing and channel it toward a creature you can see within range. Roll half the pool’s dice, restoring a number of hit points to the creature equal to the result + your spellcasting ability modifier.\nChoose a second creature you can see within range. Roll half the pool’s remaining dice, restoring a number of hit points to the creature equal to the result.\nChoose a third creature within range. Roll the remaining dice in the pool, restoring a number of hit points to the creature equal to the result.\nThis spell has no effect on Constructs or Undead.",
+	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the pool of restorative healing increases by 3d4 for each slot level above 3rd. If you cast the spell at 5th level or higher, you can add your spellcasting ability modifier to the second creature’s healing. If you cast the spell at 7th level or higher, you can add your spellcasting ability modifier to the third creature’s healing."
 };
 SpellsList["hirsutism og"] = {
 	name: "Hirsutism",
@@ -1169,12 +1173,12 @@ SpellsList["hirsutism og"] = {
 	school: "Trans",
 	time: "1 a",
 	range: "60 ft",
-	components:"V,S,M",
-	compMaterial:"a drop of castor oil",
-	duration:"Conc, 1 min",
-	save:"Str",
-	description:"willing crea chooses hair,beard,... or unwilling crea cursed with massive hair growth; see B",
-	descriptionFull:"You cause hair to sprout from a target you can see within range. Constructs, Celestials, Plants, and Undead are immune to the spell. Choose from the following two versions of the spell:\nHirsute Blessing. You choose a willing target within range. The target then determines any amount hair growth they desire, including where it sprouts from, it’s density and texture. The spell results in a new hairstyle, beard, moustache, or pouf of chest hair of their own design. The hair created by the spell lasts until shorn.\nHirsute Curse. You choose a target you can see, which makes a Charisma saving throw. On a failure, the target sprouts a copious amount of thick, unruly hair all over their body. On a success, the target is unaffected.\nFor the duration, an affected target is blinded by the hair, and their movement speed is reduced by half as the tangled masses of hair catch on their equipment and anything else near to them. At the start each of an affected creature’s turns, they must succeed on a Strength saving throw or be restrained by the hair until the start of their turn. \nA creature with an Intelligence score of at least 6 that is holding an appropriate implement (for example, shears or a dagger) can use its action to shear enough hair from an affected creature’s eyes, to alleviate their blindness or restraints, but the grows so quickly that the spell’s effects resume at the end of the affected creature’s next turn.\nThe target makes a new Charisma saving throw at the end of each of its turns, ending the effect on a success. A dispel magic or remove curse spell ends the effects early. If you maintain your concentration on this spell for the entire possible duration, the hair growth becomes permanent until it is dispelled, or the creature spends an hour with shears or other bladed weapon to remove the unwanted tangles of hair from their body (or half as much time if they have assistance from another creature)."
+	components: "V,S,M",
+	compMaterial: "a drop of castor oil",
+	duration: "Conc, 1 min",
+	save: "Str",
+	description: "willing crea chooses hair,beard,... or unwilling crea cursed with massive hair growth; see B",
+	descriptionFull: "You cause hair to sprout from a target you can see within range. Constructs, Celestials, Plants, and Undead are immune to the spell. Choose from the following two versions of the spell:\nHirsute Blessing. You choose a willing target within range. The target then determines any amount hair growth they desire, including where it sprouts from, it’s density and texture. The spell results in a new hairstyle, beard, moustache, or pouf of chest hair of their own design. The hair created by the spell lasts until shorn.\nHirsute Curse. You choose a target you can see, which makes a Charisma saving throw. On a failure, the target sprouts a copious amount of thick, unruly hair all over their body. On a success, the target is unaffected.\nFor the duration, an affected target is blinded by the hair, and their movement speed is reduced by half as the tangled masses of hair catch on their equipment and anything else near to them. At the start each of an affected creature’s turns, they must succeed on a Strength saving throw or be restrained by the hair until the start of their turn. \nA creature with an Intelligence score of at least 6 that is holding an appropriate implement (for example, shears or a dagger) can use its action to shear enough hair from an affected creature’s eyes, to alleviate their blindness or restraints, but the grows so quickly that the spell’s effects resume at the end of the affected creature’s next turn.\nThe target makes a new Charisma saving throw at the end of each of its turns, ending the effect on a success. A dispel magic or remove curse spell ends the effects early. If you maintain your concentration on this spell for the entire possible duration, the hair growth becomes permanent until it is dispelled, or the creature spends an hour with shears or other bladed weapon to remove the unwanted tangles of hair from their body (or half as much time if they have assistance from another creature)."
 };
 SpellsList["hold portal og"] = {
 	name: "Hold Portal",
@@ -1189,7 +1193,7 @@ SpellsList["hold portal og"] = {
 	duration: "Conc, 1 h",
 	description: "hold shut nonmag. entrance; max size 15+5/SL cu ft.; temp hp 1d8+1d8/SL; see B",
 	descriptionFull: "You magically close and hold shut a nonmagical entrance you can see within range, holding any locking mechanisms it can have in place for the duration. The entrance must be a door, gate, window, or shutter made of wood, metal, or stone whose total area does not exceed 15 cubic feet. For the duration, the target object gains 1d8 temporary hit points and has resistance to damage from nonmagical attacks.\nA creature can attempt to force the door open by making a Strength ability check equal to your spell save DC, or the same DC the door would usually require to be forced open, adding your spellcasting ability modifier, as a bonus (minimum of 1), whichever is higher.\nA more powerful knock or dispel magic spell opens the entrance and ends the spell.",
-	atHigherLevels:"When you cast this spell using a spell slot of 2nd level or higher, the temporary hit points increase by an additional 1d8 for each slot level above 1st, and the size of the spell door it can hold increases by 5 cubic feet."
+	atHigherLevels: "When you cast this spell using a spell slot of 2nd level or higher, the temporary hit points increase by an additional 1d8 for each slot level above 1st, and the size of the spell door it can hold increases by 5 cubic feet."
 };
 SpellsList["humanoid possession og"] = {
 	name: "Humanoid Possession",
@@ -1205,7 +1209,7 @@ SpellsList["humanoid possession og"] = {
 	save: "Cha",
 	description: "posses humanoid's; hostile has adv. on save; enter body; target aware; repeat save 1 min; see B",
 	descriptionFull: "You touch one Humanoid you can see within range, forcing it to make a Charisma saving throw. If the target is hostile to you, it makes its saving throw with advantage, and it succeeds automatically if it is under the effect of a ring of mind shielding, the glibness or mind blank spells or similar magic. On a success, the spell is lost, and you have disadvantage on any saving throw the target forces you to make until the end of your next turn. On a failure, the target is charmed, and your essence, body, and all your equipment enter the creature’s consciousness.\nFor the duration, you control the target’s body, although target’s consciousness remains aware of what its body is doing. You have total cover, and can’t be targeted by any attack, spell, or other effect, except ones that turn Fey. You retain your alignment and Intelligence, Wisdom, and Charisma scores, and the possessed body retains its Strength, Dexterity and Constitution scores. You do not gain access to the target’s knowledge, proficiencies, spellcasting, or other abilities. You have advantage on Wisdom (Insight) checks you make against the target.\nOnce each minute the target can attempt to wrestle control of itself back by making a new saving throw. If the target’s body is in combat, they can make a new saving throw at the end of each of your turns, ending the spell on a success. If the target’s body takes damage, you take an equal amount as psychic damage.\nThe possession lasts for the duration, until the target is reduced to 0 hit points, until you are otherwise forced out by the dispel evil and good spell or similar magic, or until you end exit the body using a bonus action. When the spell ends, you reappear in an unoccupied space within 5 feet of the target and the target becomes immune to your possession for 24 hours.",
-	atHigherLevels:"If you cast this spell using a spell slot of 9th level, the duration is 1 hour, and an affected target makes their saving throw to break the effect and reassert control over their body only once every ten minutes."
+	atHigherLevels: "If you cast this spell using a spell slot of 9th level, the duration is 1 hour, and an affected target makes their saving throw to break the effect and reassert control over their body only once every ten minutes."
 };
 SpellsList["hunter's mercy og"] = {
 	name: "Hunter’s Mercy",
@@ -1230,9 +1234,9 @@ SpellsList["hypothermia og"] = {
 	range: "60 ft",
 	components: "V,S",
 	duration: "Instantaneous",
-	description:"8d8+1d8/SL cold dmg, half speed, dis. chk, atk, dex save; half dmg on save, no effect; see B",
-	descriptionFull:"You target a creature you can see within range, and an icy rime covers their body and equipment, draining heat away from them. The target makes a Constitution saving throw, taking 8d8 cold damage on a failure, or half as much on a success. Creatures that have resistance to cold damage, or that are adapted to extreme cold as described in Chapter 5 of the Dungeon Master’s Guide have advantage on their saving throw. Constructs and creatures immune to cold damage are immune to the spell. If the target is within 5 feet of an open flame, they make saving throws against the spell with advantage. Creatures that fail their saving throw suffer an ongoing chilling sickness. Their movement speed is halved, and they have disadvantage on ability checks, attack rolls and Dexterity saving throws. An affected target can repeat their saving throw at the end of each of their turns, ending the effects on a success.",
-	atHigherLevels:"When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th."
+	description: "8d8+1d8/SL cold dmg, half speed, dis. chk, atk, dex save; half dmg on save, no effect; see B",
+	descriptionFull: "You target a creature you can see within range, and an icy rime covers their body and equipment, draining heat away from them. The target makes a Constitution saving throw, taking 8d8 cold damage on a failure, or half as much on a success. Creatures that have resistance to cold damage, or that are adapted to extreme cold as described in Chapter 5 of the Dungeon Master’s Guide have advantage on their saving throw. Constructs and creatures immune to cold damage are immune to the spell. If the target is within 5 feet of an open flame, they make saving throws against the spell with advantage. Creatures that fail their saving throw suffer an ongoing chilling sickness. Their movement speed is halved, and they have disadvantage on ability checks, attack rolls and Dexterity saving throws. An affected target can repeat their saving throw at the end of each of their turns, ending the effects on a success.",
+	atHigherLevels: "When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th."
 };
 SpellsList["ice blade og"] = {
 	name: "Ice Blade",
@@ -1242,12 +1246,12 @@ SpellsList["ice blade og"] = {
 	school: "Evoc",
 	time: "1 bns",
 	range: "Self",
-	components:"V,S,M",
+	components: "V,S,M",
 	compMaterial: "leaf of hellebore",
-	duration:"Conc, 10 min",
-	description:"evoke icy scimitar; melee spell atk. for 3d6+1d6/2SL and movement -10ft; re-summon with bns a",
-	descriptionFull:"You evoke an icy blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke the blade again as a bonus action. You can use your action to make a melee spell attack with the icy blade. On a hit, the target takes 3d6 cold damage, and its movement speed is reduced by 10 feet until the end of its next turn.",
-	atHigherLevels:"When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for every two slot levels above 2nd."
+	duration: "Conc, 10 min",
+	description: "evoke icy scimitar; melee spell atk. for 3d6+1d6/2SL and movement -10ft; re-summon with bns a",
+	descriptionFull: "You evoke an icy blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke the blade again as a bonus action. You can use your action to make a melee spell attack with the icy blade. On a hit, the target takes 3d6 cold damage, and its movement speed is reduced by 10 feet until the end of its next turn.",
+	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for every two slot levels above 2nd."
 };
 WeaponsList["ice blade og"] = {
 	name: "Ice Blade",
@@ -1256,7 +1260,7 @@ WeaponsList["ice blade og"] = {
 	type: "Spell",
 	ability: 5,
 	abilitytodamage: false,
-	damage: ["3",6,"Cold"],
+	damage: ["3", 6, "Cold"],
 	range: "Melee",
 	description: "+1D6/2SL cold dmg; Target -10ft speed until end of their next turn; bns a to re-summon",
 	list: "spell",
@@ -1304,7 +1308,7 @@ SpellsList["immaculate conception og"] = {
 	compMaterial: "a meal prepared by the spell’s targets",
 	duration: "Special",
 	description: "2+1/SL willing creatures conceive offspring; secret D20 roll decides number of offspring; see B",
-	descriptionFull: "You bind two willing creatures you can see within range together, comingling their essences, and calling forth a new life into the world, whose parents are the targets of the spell. This spell must be cast under a full moon.\nWhile the spell is being cast, the targets must maintain physical contact with one another, consuming the meal they have prepared by feeding it to one another. During the casting, one of the targets must declare their intent out loud to carry the child to be created by the spell. When the spell is cast, the DM rolls a d20 and adds the half the Charisma modifier of the creature who wishes to carry the child as a bonus to the roll. The DM makes this roll in secret, consulting the following table:\nResults\n-1–5 Conception does not occur, and the targets must wait until the next full moon to make another attempt at conception using this spell.\n-5–18 A single child is conceived.\n-19–20 Twins are conceived.\n-21+ For each value in excess of 20, an additional child is conceived.\n\nThe spell can produce offspring from creatures that cannot normally produce offspring together. For example, a dwarf and a gnome, a dragon and a human, or a devil and an elf. Even an awakened bear and an awakened owl, if they consent to the spell, might produce an owlbear cub.\nThis spell also renders creatures that are not normally able to carry or deliver offspring able to do until such time as the child is born or lost. They grow a womb and any other required anatomy to deliver the child (or lay the egg). The gestation (and/or incubation) period and exact nature of the offspring are entirely up to the DM.",
+	descriptionFull: "You bind two willing creatures you can see within range together, comingling their essences, and calling forth a new life into the world, whose parents are the targets of the spell. This spell must be cast under a full moon.\nWhile the spell is being cast, the targets must maintain physical contact with one another, consuming the meal they have prepared by feeding it to one another. During the casting, one of the targets must declare their intent out loud to carry the child to be created by the spell. When the spell is cast, the DM rolls a d20 and adds half the Charisma modifier of the creature who wishes to carry the child as a bonus to the roll. The DM makes this roll in secret, consulting the following table:\nResults\n-1–5 Conception does not occur, and the targets must wait until the next full moon to make another attempt at conception using this spell.\n-5–18 A single child is conceived.\n-19–20 Twins are conceived.\n-21+ For each value in excess of 20, an additional child is conceived.\n\nThe spell can produce offspring from creatures that cannot normally produce offspring together. For example, a dwarf and a gnome, a dragon and a human, or a devil and an elf. Even an awakened bear and an awakened owl, if they consent to the spell, might produce an owlbear cub.\nThis spell also renders creatures that are not normally able to carry or deliver offspring able to do until such time as the child is born or lost. They grow a womb and any other required anatomy to deliver the child (or lay the egg). The gestation (and/or incubation) period and exact nature of the offspring are entirely up to the DM.",
 	atHigherLevels: "At Higher Levels. When you cast this spell using a spell slot of 7th level or higher, the spell can incorporate one additional parent whose essence contributes to the child’s parentage for each slot level above 6th."
 };
 SpellsList["indefinite suspension og"] = {
@@ -1320,9 +1324,9 @@ SpellsList["indefinite suspension og"] = {
 	compMaterial: "a hunk of amber with an insect preserved inside",
 	duration: "Special",
 	save: "Cha",
-	description:"1 crea on save 4d10 force dmg, on fail stunned 1 trn; save again; fail petrified for 1-10min; see B",
-	descriptionFull:"You touch a Large or smaller creature and attempt to suspend them in time. The target makes a Charisma saving throw, taking 4d10 force damage on a success. On a failure, the creature begins to untether itself from the timeline and is stunned. At the start of its next turn, it is no longer stunned, and makes another Charisma saving throw. On a success, the spell ends. On a failure, the creature is suspended in time.\nTo determine the number of minutes the creature stays suspended, the DM rolls a 1d10 in secret. For the duration, the creature is petrified, and nothing, not physical objects, energy, or other spell effects, can affect it. The creature is immune to all damage, and can’t be damaged by attacks or effects originating from outside. A creature can choose to willingly fail any of these saving throws.",
-	atHigherLevels:"If you cast this spell using a spell slot of 8th level, the duration is measured in hours. If you cast this spell using a spell slot of 9th level, the duration is measured in days."
+	description: "1 crea on save 4d10 force dmg, on fail stunned 1 trn; save again; fail petrified for 1-10min; see B",
+	descriptionFull: "You touch a Large or smaller creature and attempt to suspend them in time. The target makes a Charisma saving throw, taking 4d10 force damage on a success. On a failure, the creature begins to untether itself from the timeline and is stunned. At the start of its next turn, it is no longer stunned, and makes another Charisma saving throw. On a success, the spell ends. On a failure, the creature is suspended in time.\nTo determine the number of minutes the creature stays suspended, the DM rolls a 1d10 in secret. For the duration, the creature is petrified, and nothing, not physical objects, energy, or other spell effects, can affect it. The creature is immune to all damage, and can’t be damaged by attacks or effects originating from outside. A creature can choose to willingly fail any of these saving throws.",
+	atHigherLevels: "If you cast this spell using a spell slot of 8th level, the duration is measured in hours. If you cast this spell using a spell slot of 9th level, the duration is measured in days."
 };
 SpellsList["infestation of maggots og"] = {
 	name: "Infestation of Maggots",
@@ -1332,13 +1336,13 @@ SpellsList["infestation of maggots og"] = {
 	school: "Necro",
 	time: "1 a",
 	range: "30 ft",
-	components:"V,S,M",
+	components: "V,S,M",
 	compMaterial: "several dead flies",
-	duration:"Conc, 1 min",
+	duration: "Conc, 1 min",
 	save: "Con",
-	description:"poison 1 (3SL:2;5:3,7:4) crea on save fail 1d6+1d6/SL+spell mod necro dmg; repeat as bns; see B",
-	descriptionFull:"You exhale a foul-smelling stench of decay, which winds its way onto a creature you can see within range. The target makes a Constitution saving throw. On a failure, the target is poisoned for 1 minute, and hundreds of writhing maggots burst forth from its flesh, dealing necrotic damage equal to 1d6 + your spellcasting modifier. Creatures that lack flesh (for example, a skeleton or iron golem) are immune to the spell.\nCreatures with immunity to poison only are only exempt from the spell’s poisoning effects, and can still find their flesh devoured by the maggots (for example, a flesh golem).\nFor the duration, you can use a bonus action to inspire hunger in the maggots, dealing an additional 2d6 necrotic damage to the target.\nA poisoned creature repeats their saving throw at the end of each of their turns, ending the effect on a success. The spell’s effects end on a creature it if recovers any of its missing hit points.",
-	atHigherLevels:"When you cast this spell using a spell slot of 3rd level or higher, the damage for each of its effects increases by 1d6 for each slot level above 2nd. If you use a spell slot of 3rd level or higher, you can target two creatures with the spell. If you use a spell slot of 5th level or higher, you can target three creatures with the spell. If you use a spell slot of 7th level or higher, you can target four creatures with the spell."
+	description: "poison 1 (3SL:2;5:3,7:4) crea on save fail 1d6+1d6/SL+spell mod necro dmg; repeat as bns; see B",
+	descriptionFull: "You exhale a foul-smelling stench of decay, which winds its way onto a creature you can see within range. The target makes a Constitution saving throw. On a failure, the target is poisoned for 1 minute, and hundreds of writhing maggots burst forth from its flesh, dealing necrotic damage equal to 1d6 + your spellcasting modifier. Creatures that lack flesh (for example, a skeleton or iron golem) are immune to the spell.\nCreatures with immunity to poison only are only exempt from the spell’s poisoning effects, and can still find their flesh devoured by the maggots (for example, a flesh golem).\nFor the duration, you can use a bonus action to inspire hunger in the maggots, dealing an additional 2d6 necrotic damage to the target.\nA poisoned creature repeats their saving throw at the end of each of their turns, ending the effect on a success. The spell’s effects end on a creature it if recovers any of its missing hit points.",
+	atHigherLevels: "When you cast this spell using a spell slot of 3rd level or higher, the damage for each of its effects increases by 1d6 for each slot level above 2nd. If you use a spell slot of 3rd level or higher, you can target two creatures with the spell. If you use a spell slot of 5th level or higher, you can target three creatures with the spell. If you use a spell slot of 7th level or higher, you can target four creatures with the spell."
 };
 SpellsList["investiture of starlight og"] = {
 	name: "Investiture of Starlight",
@@ -1366,7 +1370,7 @@ SpellsList["invisible trickery og"] = {
 	duration: "Conc, 1 min",
 	description: "end turn 1D20: 11+ invis unt. nxt trn; I atk,cast,react ends invs; spell mod (min 2) invis: spell ends; see B",
 	descriptionFull: "For the duration, roll a d20 at the end of each of your turns. On a roll of 11 or higher, you become invisible until the start of your turn. Anything you are wearing or carrying is invisible as long as it is on your person. Your invisibility ends early if you attack a creature, cast a spell, or use your reaction.\n Once the spell causes you to become invisible twice or a number of times equal to your spellcasting ability modifier (whichever is higher), the spell ends at the start of your next turn when your invisibility expires."
-	};
+};
 SpellsList["jinx og"] = {
 	name: "Jinx",
 	classes: ["bard", "sorcerer", "warlock"],
@@ -1394,8 +1398,8 @@ SpellsList["leeocks lucky coin og"] = {
 	compMaterial: "a metal coin",
 	duration: "Instantaneous",
 	descriptionCantripDie: "rng spell attack for `CD`D6 + spell mod bludg dmg; ignore 1/2 cover; 3/4 cover = 1/2 cover",
-	description:"rng spell atk for 1D6 + spell mod bludg dmg; ign. 1/2 cover; 3/4 cover = 1/2 cover; +1D6 at CL 5,11,17",
-	descriptionFull:"You fling a coin toward a creature you can see within range. Make a ranged spell attack, ignoring half cover, and treating three-quarters cover as half cover. On a hit, the target takes 1d6 + your spellcasting ability modifier bludgeoning damage. At the end of your turn, the coin bounces back into your hand or pocket.\nThis spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
+	description: "rng spell atk for 1D6 + spell mod bludg dmg; ign. 1/2 cover; 3/4 cover = 1/2 cover; +1D6 at CL 5,11,17",
+	descriptionFull: "You fling a coin toward a creature you can see within range. Make a ranged spell attack, ignoring half cover, and treating three-quarters cover as half cover. On a hit, the target takes 1d6 + your spellcasting ability modifier bludgeoning damage. At the end of your turn, the coin bounces back into your hand or pocket.\nThis spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
 };
 WeaponsList["leeocks lucky coin og"] = {
 	name: "Leeock's Lucky Coin",
@@ -1404,7 +1408,7 @@ WeaponsList["leeocks lucky coin og"] = {
 	type: "Cantrip",
 	ability: 4,
 	abilitytodamage: true,
-	damage: ["C",6,"Bludgeoning"],
+	damage: ["C", 6, "Bludgeoning"],
 	range: "30ft",
 	description: "Ignore 1/2 cover; Treat 3/4 cover as 1/2 cover",
 	list: "spell",
@@ -1418,11 +1422,11 @@ SpellsList["lifebloom og"] = {
 	school: "Evoc",
 	time: "1 a",
 	range: "30 ft",
-	components:"V,S,M",
+	components: "V,S,M",
 	compMaterial: "a fresh sprig of local flora",
-	duration:"Instantaneous",
-	description:"20ft rad sphere; heal 3d6+1d6/SL; beast,fey,plant +spell mod heal, rest only if DC10 Cha ab. chk; see B",
-	descriptionFull:"You draw pure life force from the Feywild, sharing it with your allies. You create 20-foot-radius sphere filled with pure life force centered on a point you can see within range. Each creature of your choice that you can see in the area regains 3d6 hit points and makes a DC 10 Charisma ability check. If they succeed, they add your spellcasting modifier to the amount healed. Beasts, Fey and Plants automatically succeed this check. This healing has no effect on Constructs or Undead.",
+	duration: "Instantaneous",
+	description: "20ft rad sphere; heal 3d6+1d6/SL; beast,fey,plant +spell mod heal, rest only if DC10 Cha ab. chk; see B",
+	descriptionFull: "You draw pure life force from the Feywild, sharing it with your allies. You create 20-foot-radius sphere filled with pure life force centered on a point you can see within range. Each creature of your choice that you can see in the area regains 3d6 hit points and makes a DC 10 Charisma ability check. If they succeed, they add your spellcasting modifier to the amount healed. Beasts, Fey and Plants automatically succeed this check. This healing has no effect on Constructs or Undead.",
 	atHigherLevels: "When you cast this spell using a spell slot of 5th level or higher, the radius of the sphere increases by 5 feet and the healing increases by 1d6 for each slot level above 4th."
 };
 SpellsList["lipstitch og"] = {
@@ -1465,8 +1469,8 @@ SpellsList["londyns duet og"] = {
 	components: "V,S,M",
 	compMaterial: "a metal coin with two identical sides",
 	duration: "Conc, 10 min",
-	description:"create a duplicate of myself for performance or combat support; see Book",
-	descriptionFull:"You create a translucent duplicate of yourself, which shares your personality, which appears within 5 feet of you, or the nearest unoccupied space. You can use it to perform a duet or a two-person comedy routine together, or to support you and your allies in combat. The duplicate looks exactly like you, and has your equipment.\nYou can determine the appearance of its clothing, but its face must be visible.\nThe duplicate knows all the japes, songs that you do, and shares proficiencies with musical instruments that you possess. While the duplicate is within 30 feet of you, you have advantage on Charisma (Performance) checks you make, and the duplicate accompanies and harmonizes with you.\n- The duplicate has an AC of 11 + your spellcasting ability modifier. It is immune to the charmed, exhaustion, frightened, grappled, paralyzed, petrified, poisoned, prone, and restrained conditions, and it is immune to attacks of opportunity and to psychic damage. If it is forced to make any saving throw, it uses your proficiency bonus and adds your spellcasting ability modifier to the roll.\n- Your duplicate speaks and understands the languages that you do, and while it is within 1 mile of you, you can communicate with each other telepathically. If your duplicate takes damage, you take half the amount as psychic damage.\n- Your duplicate cannot interact with objects other than its possessions that were created by the spell. It cannot make ability checks or cast spells.\nYou can use a bonus action to cause your duplicate to perform one the following:\n- You command the duplicate to move up to 30 feet and make one weapon attack. The duplicate’s weapon must have been upon your when you cast the spell, and it gains no bonuses from being magical. Make a melee or ranged spell attack that matches the melee or ranged properties of the weapon. If it hits, it deals force damage equal to the weapon’s damage die + your spellcasting ability modifier.\n- You expend a use of your bardic inspiration, granting the die to a creature within 60 feet of the duplicate that can hear it.\n- You command the duplicate to take the Dodge action, or to move up to 60 feet.\nIf your duplicate travels more than 1 mile away from you, the spell ends.",
+	description: "create a duplicate of myself for performance or combat support; see Book",
+	descriptionFull: "You create a translucent duplicate of yourself, which shares your personality, which appears within 5 feet of you, or the nearest unoccupied space. You can use it to perform a duet or a two-person comedy routine together, or to support you and your allies in combat. The duplicate looks exactly like you, and has your equipment.\nYou can determine the appearance of its clothing, but its face must be visible.\nThe duplicate knows all the japes, songs that you do, and shares proficiencies with musical instruments that you possess. While the duplicate is within 30 feet of you, you have advantage on Charisma (Performance) checks you make, and the duplicate accompanies and harmonizes with you.\n- The duplicate has an AC of 11 + your spellcasting ability modifier. It is immune to the charmed, exhaustion, frightened, grappled, paralyzed, petrified, poisoned, prone, and restrained conditions, and it is immune to attacks of opportunity and to psychic damage. If it is forced to make any saving throw, it uses your proficiency bonus and adds your spellcasting ability modifier to the roll.\n- Your duplicate speaks and understands the languages that you do, and while it is within 1 mile of you, you can communicate with each other telepathically. If your duplicate takes damage, you take half the amount as psychic damage.\n- Your duplicate cannot interact with objects other than its possessions that were created by the spell. It cannot make ability checks or cast spells.\nYou can use a bonus action to cause your duplicate to perform one the following:\n- You command the duplicate to move up to 30 feet and make one weapon attack. The duplicate’s weapon must have been upon your when you cast the spell, and it gains no bonuses from being magical. Make a melee or ranged spell attack that matches the melee or ranged properties of the weapon. If it hits, it deals force damage equal to the weapon’s damage die + your spellcasting ability modifier.\n- You expend a use of your bardic inspiration, granting the die to a creature within 60 feet of the duplicate that can hear it.\n- You command the duplicate to take the Dodge action, or to move up to 60 feet.\nIf your duplicate travels more than 1 mile away from you, the spell ends.",
 	atHigherLevels: "When you cast this spell using a spell slot of 3rd level or higher, damage of its weapon attacks increases by 1d6 for each slot level above 2nd. If you use a spell slot of 3rd level, the duration increases to 1 hour. If you use a spell slot of 5th level or higher, the duration increases to 8 hours."
 };
 SpellsList["longlimb og"] = {
@@ -1480,9 +1484,9 @@ SpellsList["longlimb og"] = {
 	components: "V,S,M",
 	compMaterial: "a length of rubber",
 	duration: "Conc, 1 min",
-	description:"extend arms for +10+5/SL ft reach or legs for +15+5/SL ft speed and triple jump distance",
-	descriptionFull:"You touch a willing creature, causing one pair of limbs to grow two beyond their normal length and become flexible until the end of your next turn. Choose one of the following: \nArms. The target’s reach is increased by 10 feet.\nLegs. The creature’s walking speed is increased by 15 feet, and their jump distance is tripled.",
-	atHigherLevels:"When you cast this spell using a spell slot of 2nd level or higher, the target’s reach or movement speed is increased by 5 feet for each slot level above 1st."
+	description: "extend arms for +10+5/SL ft reach or legs for +15+5/SL ft speed and triple jump distance",
+	descriptionFull: "You touch a willing creature, causing one pair of limbs to grow two beyond their normal length and become flexible until the end of your next turn. Choose one of the following: \nArms. The target’s reach is increased by 10 feet.\nLegs. The creature’s walking speed is increased by 15 feet, and their jump distance is tripled.",
+	atHigherLevels: "When you cast this spell using a spell slot of 2nd level or higher, the target’s reach or movement speed is increased by 5 feet for each slot level above 1st."
 };
 SpellsList["luck og"] = {
 	name: "Luck",
@@ -1492,11 +1496,11 @@ SpellsList["luck og"] = {
 	school: "Div",
 	time: "1 a",
 	range: "Touch",
-	components:"V,S,M",
-	compMaterial: "a four-leaf clover or rabbit’s foot",	
-	duration:"Conc, 1 min",
-	description:"crea gains 2+1/SL luck points to re-roll chk,atk,save or gain adv. or use react to re-roll dmg die; see B",
-	descriptionFull:"You touch a willing creature and imbue them with good fortune. For the duration, the target gains 2 Luck points, which last for the duration. When the recipient makes an ability check, attack roll, or saving throw, they can spend a Luck point to gain advantage on the roll. They can also use their reaction to expend a Luck point to reroll a number of damage dice for a spell or weapon attack up to your spellcasting ability modifier (minimum of 1), and accept either result.\nOnce the target spends a Luck point, they cannot spend another until the start of their next turn.",
+	components: "V,S,M",
+	compMaterial: "a four-leaf clover or rabbit’s foot",
+	duration: "Conc, 1 min",
+	description: "crea gains 2+1/SL luck points to re-roll chk,atk,save or gain adv. or use react to re-roll dmg die; see B",
+	descriptionFull: "You touch a willing creature and imbue them with good fortune. For the duration, the target gains 2 Luck points, which last for the duration. When the recipient makes an ability check, attack roll, or saving throw, they can spend a Luck point to gain advantage on the roll. They can also use their reaction to expend a Luck point to reroll a number of damage dice for a spell or weapon attack up to your spellcasting ability modifier (minimum of 1), and accept either result.\nOnce the target spends a Luck point, they cannot spend another until the start of their next turn.",
 	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the target gains 1 additional Luck point for each slot level above 3rd."
 };
 SpellsList["lunar occult og"] = {
@@ -1540,8 +1544,8 @@ SpellsList["magnetism og"] = {
 	components: "V,S,M\u0192",
 	compMaterial: "a horseshoe-shaped piece of magnetic iron coated in mithril worth at least 250 gp",
 	duration: "Conc, 1 min",
-	description:"one obj, 10 cu ft of mat., becomes magnetic; pulls unatt. obj and creat w/ metal armor/weapon; see B",
-	descriptionFull:"You cause an object made of nonmagical stone or metal you can see within range to emit a powerful magnetic field. Up to 10 cubic feet of material can be affected (for example, a section of stone wall). For the duration, the object attracts all other nonmagical ferrous metals within 60 feet of itself.\nWhen you cast the spell, and at the start of each of your turns, the object pulses with magnetic force. Any Large or smaller metal objects that aren’t being worn or carried move 30 feet toward the magnet, and Large or smaller creatures in the area that are wearing metal armor or carrying metal weapons must make a Strength saving throw. On a failure, they fall prone, are disarmed of their metal weapons, and are pulled 30 feet toward the magnetized object. If they collide with a creature or object during this movement, they are treated as if they were falling the same distance.\nOn a successful saving throw, the target is unaffected, but their movement speed is reduced by half. A creature can use its action on its turn to prepare for the next pulse, gaining advantage on their next saving throw.\nA creature wearing metal armor who touches the magnet is restrained for the duration of the spell, and such creatures are likewise affected if they are touching another armored creature who is touching the magnet."
+	description: "one obj, 10 cu ft of mat., becomes magnetic; pulls unatt. obj and creat w/ metal armor/weapon; see B",
+	descriptionFull: "You cause an object made of nonmagical stone or metal you can see within range to emit a powerful magnetic field. Up to 10 cubic feet of material can be affected (for example, a section of stone wall). For the duration, the object attracts all other nonmagical ferrous metals within 60 feet of itself.\nWhen you cast the spell, and at the start of each of your turns, the object pulses with magnetic force. Any Large or smaller metal objects that aren’t being worn or carried move 30 feet toward the magnet, and Large or smaller creatures in the area that are wearing metal armor or carrying metal weapons must make a Strength saving throw. On a failure, they fall prone, are disarmed of their metal weapons, and are pulled 30 feet toward the magnetized object. If they collide with a creature or object during this movement, they are treated as if they were falling the same distance.\nOn a successful saving throw, the target is unaffected, but their movement speed is reduced by half. A creature can use its action on its turn to prepare for the next pulse, gaining advantage on their next saving throw.\nA creature wearing metal armor who touches the magnet is restrained for the duration of the spell, and such creatures are likewise affected if they are touching another armored creature who is touching the magnet."
 };
 SpellsList["magnetokinesis og"] = {
 	name: "Magnetokinesis",
@@ -1641,10 +1645,10 @@ SpellsList["mirror stride og"] = {
 	school: "Trans",
 	time: "1 a",
 	range: "Special",
-	components:"V,S",
-	duration:"conc, 10 min",
-	description:"step into, out of or reside in space behind mirror/reflective surface; int(invest.) to spot you; see B",
-	descriptionFull:"You gain the ability to enter reflective surfaces to a space between them. For the duration, you can use 5 feet of movement to step through a reflective surface of glass, metal, crystal or ice for example, a mirror or a highly polished breastplate. The surface must be large enough for you to squeeze into. On the other side of the surface, you enter an extradimensional space, where you can comfortably remain for the duration of the spell. You can make a number of such entrances equal to 1 + your spellcasting ability modifier (minimum of twice).\nThe space is furnished with an exit to the surface you entered from, as well as exits to any other mirrored surfaces within a 120-foot-radius of the surface you entered. You can look out through any of these surfaces, and exit through any of them that can squeeze through, appearing in a spot of your choice within 5 feet of the destination, using another 5 feet of movement. Such a space might include dozens of exits to destinations you cannot see or are unfamiliar with.\nTo discern that you are inhabiting spaces between nearby eligible exits, a creature can use its action to inspect an object with an exit available to you, and must succeed on an Intelligence (Investigation) check against your spell save DC. If the inspected surface is too small for you to exit through, the creature has disadvantage on the check.\nIf the object you first entered through is damaged or destroyed while you are inside the extradimensional space, or the spell ends while you are inside it, you are expelled, falling prone in an unoccupied space closest to where you first entered, taking 4d6 psychic damage.",
+	components: "V,S",
+	duration: "conc, 10 min",
+	description: "step into, out of or reside in space behind mirror/reflective surface; int(invest.) to spot you; see B",
+	descriptionFull: "You gain the ability to enter reflective surfaces to a space between them. For the duration, you can use 5 feet of movement to step through a reflective surface of glass, metal, crystal or ice for example, a mirror or a highly polished breastplate. The surface must be large enough for you to squeeze into. On the other side of the surface, you enter an extradimensional space, where you can comfortably remain for the duration of the spell. You can make a number of such entrances equal to 1 + your spellcasting ability modifier (minimum of twice).\nThe space is furnished with an exit to the surface you entered from, as well as exits to any other mirrored surfaces within a 120-foot-radius of the surface you entered. You can look out through any of these surfaces, and exit through any of them that can squeeze through, appearing in a spot of your choice within 5 feet of the destination, using another 5 feet of movement. Such a space might include dozens of exits to destinations you cannot see or are unfamiliar with.\nTo discern that you are inhabiting spaces between nearby eligible exits, a creature can use its action to inspect an object with an exit available to you, and must succeed on an Intelligence (Investigation) check against your spell save DC. If the inspected surface is too small for you to exit through, the creature has disadvantage on the check.\nIf the object you first entered through is damaged or destroyed while you are inside the extradimensional space, or the spell ends while you are inside it, you are expelled, falling prone in an unoccupied space closest to where you first entered, taking 4d6 psychic damage.",
 	atHigherLevels: "If you cast this spell using a spell slot of 6th level, the radius is increased to 500 feet. If you cast this spell using a spell slot of 7th level, the radius is increased to 1000 feet. If you cast this spell using a spell slot of 8th level, the radius is increased to 1 mile, and the duration is increased to 1 hour. If you cast this spell using a spell slot of 9th level, the radius is increased to 10 miles, and the duration is increased to 8 hours."
 };
 SpellsList["missile magnet og"] = {
@@ -1655,11 +1659,11 @@ SpellsList["missile magnet og"] = {
 	school: "Ench",
 	time: "1 a",
 	range: "120 ft",
-	components:"V, M",
+	components: "V, M",
 	compMaterial: "a sliver of magnetic iron",
-	duration:"Conc, 1 min",
+	duration: "Conc, 1 min",
 	save: "Wis",
-	description:"target no benefit of 1/2, 3/4 cover, 1d4+1d4/SL extra range dmg; repeat save at turnend; see B",
+	description: "target no benefit of 1/2, 3/4 cover, 1d4+1d4/SL extra range dmg; repeat save at turnend; see B",
 	descriptionFull: "You curse a target, drawing projectiles toward it. The target makes a Wisdom saving throw. If it fails, it is wreathed in a nimbus of emerald light that sheds dim light in a 5-foot-radius and attracts projectiles. For the duration, ranged attack rolls against the target have advantage, the target loses any benefits from half and three-quarters cover from ranged attacks, and it takes an additional 1d4 force damage from ranged attacks that hit it.nAdditionally, ranged attack rolls that would hit a creature within 5 feet of the cursed target force it to make a Charisma saving throw. On a failure, the cursed target it hit by the instead, even if the attack roll is lower than their own AC.\nAt the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target. A remove curse spell or similar magic ends the effect early.",
 	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the additional damage from projectiles increases by 1d4 for each slot level above 3rd."
 };
@@ -1671,11 +1675,11 @@ SpellsList["misty slash og"] = {
 	school: "Conj",
 	time: "1 a",
 	range: "S",
-	components:"V,S,M\u0192",
+	components: "V,S,M\u0192",
 	compMaterial: "a melee weapon worth at least 10 gp that deals slashing damage",
-	duration:"1 rnd",
-	description:"teleport 30ft, 1st melee atk +2d6+1d6/SL; if hit or force moved in duration rea to teleport back;",
-	descriptionFull:"You surround yourself in silvery mist, teleporting up to 30 feet to an unoccupied space that you can see. Until the start of your next turn, the weapon is magical, and the first time you hit a creature with it, the attack deals an additional 2d6 damage.\nFor the duration, when you hit a creature with the weapon, or if you are hit by an attack or fail a saving throw that doesn’t result in your being moved, you can use your reaction to teleport to the space you were in when you cast the spell.\nIf the space you were in when you cast the spell is occupied, you teleport to the nearest unoccupied space instead.",
+	duration: "1 rnd",
+	description: "teleport 30ft, 1st melee atk +2d6+1d6/SL; if hit or force moved in duration rea to teleport back;",
+	descriptionFull: "You surround yourself in silvery mist, teleporting up to 30 feet to an unoccupied space that you can see. Until the start of your next turn, the weapon is magical, and the first time you hit a creature with it, the attack deals an additional 2d6 damage.\nFor the duration, when you hit a creature with the weapon, or if you are hit by an attack or fail a saving throw that doesn’t result in your being moved, you can use your reaction to teleport to the space you were in when you cast the spell.\nIf the space you were in when you cast the spell is occupied, you teleport to the nearest unoccupied space instead.",
 	atHigherLevels: "When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 3rd."
 };
 SpellsList["moon blade og"] = {
@@ -1686,12 +1690,12 @@ SpellsList["moon blade og"] = {
 	school: "Evoc",
 	time: "1 bns",
 	range: "S",
-	components:"VSM",
-	compMaterial:"a drop of wintergreen oil",
-	duration:"Conc, 1h",
-	description:"melee weap; 2d8+1d8/2SL rad dmg; finesse,light,throw (20/60); special vs. shapechanger/undead; see B",
-	descriptionFull:"You create a crescent-shaped sword of solidified moonlight in your hand. This magic sword lasts until the spell ends, shedding dim light in a 5-foot-radius. It counts as a simple melee weapon with which you are proficient. It deals 2d8 radiant damage on a hit and has the finesse, light, and thrown properties (range 20/60).\nWhen you use the sword to attack a shapechanger, you have advantage on the attack roll. If you hit a shapechanger with your moon blade, it must succeed on a Charisma saving throw or instantly revert to its original form. An affected shapechanger can’t assume a different form until it the end of their next turn.\nWhen you use the sword to attack an undead creature, you gain a bonus to your attack and damage rolls equal to your spellcasting ability modifier (minimum of 1). If you drop the weapon or throw it, it dissipates at the end of the turn. Thereafter, while the spell persists, you can use a bonus action to cause the sword to reappear in your hand.",
-	atHigherLevels:"When you cast this spell using a spell slot of 3rd or 4th level, the damage increases to 3d8. When you cast it using a spell slot of 5th or 6th level, the damage increases to 4d8. When you cast it using a spell slot of 7th level or higher, the damage increases to 5d8, and when you hit a target, you can use a bonus action to end the effects of a spell on the target if the spell’s level is equal to or less than the level of the spell slot you used. You can end a number of spells in this manner equal to your spellcasting ability modifier (minimum of 1).",
+	components: "VSM",
+	compMaterial: "a drop of wintergreen oil",
+	duration: "Conc, 1h",
+	description: "melee weap; 2d8+1d8/2SL rad dmg; finesse,light,throw (20/60); special vs. shapechanger/undead; see B",
+	descriptionFull: "You create a crescent-shaped sword of solidified moonlight in your hand. This magic sword lasts until the spell ends, shedding dim light in a 5-foot-radius. It counts as a simple melee weapon with which you are proficient. It deals 2d8 radiant damage on a hit and has the finesse, light, and thrown properties (range 20/60).\nWhen you use the sword to attack a shapechanger, you have advantage on the attack roll. If you hit a shapechanger with your moon blade, it must succeed on a Charisma saving throw or instantly revert to its original form. An affected shapechanger can’t assume a different form until it the end of their next turn.\nWhen you use the sword to attack an undead creature, you gain a bonus to your attack and damage rolls equal to your spellcasting ability modifier (minimum of 1). If you drop the weapon or throw it, it dissipates at the end of the turn. Thereafter, while the spell persists, you can use a bonus action to cause the sword to reappear in your hand.",
+	atHigherLevels: "When you cast this spell using a spell slot of 3rd or 4th level, the damage increases to 3d8. When you cast it using a spell slot of 5th or 6th level, the damage increases to 4d8. When you cast it using a spell slot of 7th level or higher, the damage increases to 5d8, and when you hit a target, you can use a bonus action to end the effects of a spell on the target if the spell’s level is equal to or less than the level of the spell slot you used. You can end a number of spells in this manner equal to your spellcasting ability modifier (minimum of 1).",
 };
 SpellsList["mushroom ring og"] = {
 	name: "Mushroom Ring",
@@ -1707,7 +1711,7 @@ SpellsList["mushroom ring og"] = {
 	duration: "1 h",
 	description: "10ft rad ring; protects me+invited against ent., atk, charm, fright from chosen type; can explode; see B",
 	descriptionFull: "You enhance the fecundity of a 10-foot-radius circle of bare rock, earth or soil centered directly underneath you.\nAt the start of your next turn, dimly glowing mushrooms appear at the edges of the circle. The ring’s effects extend in a 15-foot-high cylinder above and below the ring.\nWhen you cast the spell, choose one of the following: Beasts, Humanoids, or Monstrosities. The ring affects a creature of the chosen type in the following ways:\n- The creature attempting to enter the area must first succeed on a Charisma saving throw.\n- The creature has disadvantage on attacks against you while in the area. \n- Invited creatures within the cylinder can’t be charmed or frightened by the creature. While the ring exists, you can use your bonus action to invite a creature of the excluded type into the ring without penalty.\nYou can use your action to consume the ring in an explosion of spores, ending the spell. When you do, creatures other than you and those you have invited within 5 feet of the area must make a Constitution saving throw, taking 4d8 poison damage on a failed save, or half as much damage on a success.",
-	atHigherLevels:"When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd"
+	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd"
 };
 SpellsList["nature bolt og"] = {
 	name: "Nature Bolt",
@@ -1715,7 +1719,7 @@ SpellsList["nature bolt og"] = {
 	source: ["OG", 263],
 	level: 0,
 	school: "Trans",
-	
+
 	time: "1 a",
 	range: "60 ft",
 	components: "V,S",
@@ -1730,7 +1734,7 @@ WeaponsList["nature bolt og"] = {
 	regExpSearch: /^(?=.*nature)(?=.*bolt).*$/i,
 	type: "Cantrip",
 	ability: 4,
-	damage: ["C",8,"Special"],
+	damage: ["C", 8, "Special"],
 	range: "60ft",
 	description: "stone, dirt: bludg; metal, wood: pierc; gravel, sand: slash; swamp, marsh: pois; water, snow, ice: cold",
 	list: "spell",
@@ -1762,7 +1766,7 @@ SpellsList["othertime og"] = {
 	compMaterial: "a fold of brocade fabric worth at least 50 gold, which the spell consumes",
 	duration: "Conc, 1 rnd",
 	description: "step 1+1/SL rnd into future; cannot affect any crea, traps, sensors or unheld item; return to origin; see B",
-	descriptionFull: "You step into the future, to the start of your next turn. To other creatures, you appear to vanish altogether, only to reappear at a later point in time. Time continues to progress for everything except you.\nAt the start of your next turn, you reappear at that exact in the space you were in when you cast the spell, or in the nearest unoccupied space. The world around you remains frozen in time until the end of your turn. For the duration, you are completely unaffected an observed by your surroundings. For the duration, you can move, perceive the world, take actions, and cast spells that target only yourself. You cannot affect any creature or object while time remains frozen, nor do you trigger any traps, magical alarms, or sensors. For example, you read a book at the page it was opened to, but could not turn to the following page.\nWhen the spell ends, time resumes at its normal pace for both you and your surroundings. The spell ends if you move to a place more than 1,000 feet from the location where you cast it.",
+	descriptionFull: "You step into the future, to the start of your next turn. To other creatures, you appear to vanish altogether, only to reappear at a later point in time. Time continues to progress for everything except you.\nAt the start of your next turn, you reappear at that exact in the space you were in when you cast the spell, or in the nearest unoccupied space. The world around you remains frozen in time until the end of your turn. For the duration, you are completely unaffected and unobserved by your surroundings. For the duration, you can move, perceive the world, take actions, and cast spells that target only yourself. You cannot affect any creature or object while time remains frozen, nor do you trigger any traps, magical alarms, or sensors. For example, you read a book at the page it was opened to, but could not turn to the following page.\nWhen the spell ends, time resumes at its normal pace for both you and your surroundings. The spell ends if you move to a place more than 1,000 feet from the location where you cast it.",
 	atHigherLevels: "If you cast this spell using a spell slot of 6th level or higher, you move 1 additional turn into the future for each slot level above 5th."
 };
 SpellsList["pall of twilight og"] = {
@@ -1793,7 +1797,7 @@ SpellsList["papercut og"] = {
 	duration: "Instantaneous",
 	save: "Dex",
 	description: "tear & throw paper for 10d8+2d8/SL slash dmg; half on save; see B for extra dmg if spell scroll used",
-	descriptionFull: "You tear a sheet of into dozens of fragments, and send them flying toward a creature you can see within range. The target makes a Dexterity saving throw, taking 10d8 damage on a failed save, or half as much on a successful one.\nIf you use a spell scroll as the material component for the spell, it deals 1d8 additional damage, plus 1d8 times the spell level of the scroll. The additional damage matches the damage type the spell upon the scroll would deal. If the spell upon the scroll does not deal damage, the damage is force damage.",
+	descriptionFull: "You tear a sheet of into dozens of fragments, and send them flying toward a creature you can see within range. The target makes a Dexterity saving throw, taking 10d8 slashing damage on a failed save, or half as much on a successful one.\nIf you use a spell scroll as the material component for the spell, it deals 1d8 additional damage, plus 1d8 times the spell level of the scroll. The additional damage matches the damage type the spell upon the scroll would deal. If the spell upon the scroll does not deal damage, the damage is slashing damage.",
 	atHigherLevels: "When you cast this spell using a spell slot of 5th level or higher, the damage increases by 2d8 for each slot level above 4th."
 };
 SpellsList["peal of nine bells og"] = {
@@ -1818,9 +1822,9 @@ WeaponsList["peal of nine bells og"] = {
 	regExpSearch: /^(?=.*peal)(?=.*bell).*$/i,
 	type: "Cantrip",
 	ability: 4,
-	damage: ["C",6,"Thunder"],
+	damage: ["C", 6, "Thunder"],
 	range: "20ft",
-	dc : true,
+	dc: true,
 	description: "Target is pushed 10ft away from me in a straight line, Str save, success - no damage/push",
 	list: "spell",
 	tooltip: "You create a beam of ringing sound that strikes at one creature of your choice that you can see within range. The target must succeed on a Strength saving throw or be pushed up to 10 feet in a straight line away from you, taking 1d6 thunder damage.\nThe spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
@@ -1867,7 +1871,7 @@ SpellsList["polandaras petticoat pocket og"] = {
 	compMaterial: "a fold of fine fabric worth at least 10 gold, which is consumed by the spell",
 	duration: "Instantaneous",
 	description: "create miniature bag of holding in my garment weighing 3 lbs; holds 20 cu ft, 50 lbs; slot is consumed",
-	descriptionFull: "The spell creates a pocketed square of fabric, which immediately attaches to a location on a garment the caster is wearing. The spell slot used to create the pocket is consumed, and cannot be recovered until the pocket no longer exists.\nThe pocket has an opening no larger than a six-inch diameter, with an interior space considerably larger than its outside dimensions suggest: the pocket is to 10 feet deep. The pocket can hold up to 50 pounds, not exceeding a volume of 20 cubic feet. The pocket weighs 3 pounds, regardless of its contents. Retrieving an item from the depths of the pocket requires a bonus action. If the pocket is overloaded, pierced, or torn, it ruptures and is destroyed, and its contents scatter within 10 feet of the garment the pocket is attached to.\nIf the pocket is turned inside out, its contents spill forth, unharmed, but the pocket must be put right before it can be used again. Breathing creatures inside the pocket can survive up to a number of minutes equal to their Constitution modifier (minimum of 1), after which they begin to suffocate.\nPlacing another extradimensional space, such as a bag of holding, Heward’s handy haversack, portable hole, or similar item instantly destroys both the pocket and the item and opens a gate to the Astral Plane. Any creature within 10 feet of the gate is sucked through it to a random location on the Astral Plane. The gate then closes. The gate is one-way only and can’t be reopened.\nYou can dismiss the pocket at any time with a bonus action, causing its contents to immediately scatter outside of its present location. You can then recover the spell slot the pocket consumed at your next available opportunity."
+	descriptionFull: "The spell creates a pocketed square of fabric, which immediately attaches to a location on a garment the caster is wearing. The spell slot used to create the pocket is consumed, and cannot be recovered until the pocket no longer exists.\nThe pocket has an opening no larger than a six-inch diameter, with an interior space considerably larger than its outside dimensions suggest: the pocket is 10 feet deep, it can hold up to 50 pounds, and a volume of 20 cubic feet. The pocket weighs 3 pounds, regardless of its contents. Retrieving an item from the depths of the pocket requires a bonus action.\nIf the pocket is overloaded, pierced, or torn, it ruptures and is destroyed, and its contents scatter within 10 feet of the garment the pocket is attached to.\nIf the pocket is turned inside out, its contents spill forth, unharmed, but the pocket must be put right before it can be used again. Breathing creatures inside the pocket can survive up to a number of minutes equal to their Constitution modifier (minimum of 1), after which they begin to suffocate.\nPlacing another extradimensional space, such as a bag of holding, Heward’s handy haversack, portable hole, or similar item instantly destroys both the pocket and the item and opens a gate to the Astral Plane. Any creature within 10 feet of the gate is sucked through it to a random location on the Astral Plane. The gate then closes. The gate is one-way only and can’t be reopened.\nYou can dismiss the pocket at any time with a bonus action, causing its contents to immediately scatter outside of its present location. You can then recover the spell slot the pocket consumed at your next available opportunity."
 };
 SpellsList["power word silence og"] = {
 	name: "Power Word Silence",
@@ -1932,7 +1936,7 @@ WeaponsList["puncture og"] = {
 	regExpSearch: /^(?=.*puncture).*$/i,
 	type: "Cantrip",
 	ability: 4,
-	damage: ["C",10,"Piercing"],
+	damage: ["C", 10, "Piercing"],
 	range: "120ft",
 	description: "Each d10 is a separate needle requiring separate rolls",
 	list: "spell",
@@ -1952,7 +1956,7 @@ SpellsList["pyroclasm og"] = {
 	save: "Dex",
 	description: "20 ft rad 2d8 fire dmg & 2d8 pois dmg; save 1/2; start next trn 4d8 fire; save 1/2; see B for higher SL",
 	descriptionFull: "A cloud of volatile fumes and scorching lava erupts forth at a point you choose in range. Each creature in a 20-foot-radius sphere centered on that point must make a Dexterity saving throw, taking 2d8 fire damage and 2d8 poison damage on a failure, or half as much damage on a successful one.\nAfter damage is dealt, the spell’s area of effect is filled by the cloud of fumes and ash, lightly obscuring the area. At the start of your next turn, the cloud ignites. Each creature in the area must make a Dexterity saving throw. A target takes 4d8 fire damage on a failure, or half as much damage on a successful one. Afterwards, the cloud vanishes.",
-	atHigherLevels:"When you cast this spell using a spell slot of 4th level or higher, the initial fire or poison damage (your choice when you cast the spell) increases by 1d8 for each slot level above 3rd."
+	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the initial fire or poison damage (your choice when you cast the spell) increases by 1d8 for each slot level above 3rd."
 };
 SpellsList["quentins quickling senses og"] = {
 	name: "Quentin's Quickling Senses",
@@ -1967,7 +1971,7 @@ SpellsList["quentins quickling senses og"] = {
 	compMaterial: "a hummingbird feather",
 	duration: "Conc, 1 min",
 	description: "+spell mod (min1) AC; ign. dif.ter.; imm. AoO; adv. Dex,Int,Wis chk/sv; dis. atk, cha chk; a to talk; see B",
-	descriptionFull: "For the duration, you can a bonus to your armor class equal to your spellcasting ability modifier (minimum of 1), you ignore difficult terrain and are immune to attacks of opportunity. You have advantage on Dexterity, Intelligence and Wisdom checks and saving throws, and you cannot be surprised. In addition, attacks against you from sources you can see are made at disadvantage.\nHowever, your quickening makes it difficult to engage with those moving at normal speed: you also have disadvantage on attack rolls, Charisma ability checks you make to influence others, and you must use an action to communicate non-telepathically with any creature with whom you share a language.\nWhen the spell ends, you must succeed on a DC 14 Constitution saving throw or suffer one level of exhaustion."
+	descriptionFull: "For the duration, you gain a bonus to your armor class equal to your spellcasting ability modifier (minimum of 1), you ignore difficult terrain and are immune to attacks of opportunity. You have advantage on Dexterity, Intelligence and Wisdom checks and saving throws, and you cannot be surprised. In addition, attacks against you from sources you can see are made at disadvantage.\nHowever, your quickening makes it difficult to engage with those moving at normal speed: you also have disadvantage on attack rolls, Charisma ability checks you make to influence others, and you must use an action to communicate non-telepathically with any creature with whom you share a language.\nWhen the spell ends, you must succeed on a DC 14 Constitution saving throw or suffer one level of exhaustion."
 };
 SpellsList["radiant glamour og"] = {
 	name: "Radiant Glamour",
@@ -1983,7 +1987,7 @@ SpellsList["radiant glamour og"] = {
 	save: "Con",
 	description: "all choosen 3D12+1D12/SL rad dmg; half on save; fiend/undead dis. save + blind on fail till end nxt trn",
 	descriptionFull: "You emit an intense light, searing nearby enemies. Each creature of your choice within 20 feet of that can see you makes a Constitution saving throw. A creature takes 3d12 radiant damage on a failure, or half as much on a success. Fiends and Undead have disadvantage on their saving throws, and if they fail, they are blinded until the end of their next turn.",
-	atHigherLevels:"When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d12 for each slot level above 3rd"
+	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d12 for each slot level above 3rd"
 };
 SpellsList["read blood og"] = {
 	name: "Read Blood",
@@ -1999,7 +2003,7 @@ SpellsList["read blood og"] = {
 	duration: "Instantaneous",
 	description: "learn 2+1/SL: surface thoughts; crea type & con score; highest SL cast; relation to crea I see; see B",
 	descriptionFull: "You focus your mind on the fluid, gaining mystical insight into the magics connecting it to the creature it came from, revealing certain information about the creature. The DM tells you information in regard to two choices from the following list:\n\n- The creature’s surface thoughts at the time the fluid was spilled.\n- The creature’s type and Constitution score.\n- The highest level of spell (if any) the creature had cast, up to a month before the fluid was spilled.\n- If the creature was diseased or poisoned.\n- How closely another creature you can see within 60 feet of you is related to the creature the fluid came from (for example, they might be the same creature, or a close relative, or the same species)",
-	atHigherLevels:"When you cast this spell using a spell slot of 2nd level or higher, you can request one additional piece of information for each slot level above 1st."
+	atHigherLevels: "When you cast this spell using a spell slot of 2nd level or higher, you can request one additional piece of information for each slot level above 1st."
 };
 SpellsList["regall agony og"] = {
 	name: "Regall Agony",
@@ -2015,7 +2019,7 @@ SpellsList["regall agony og"] = {
 	save: "Cha",
 	description: "4d10+1d10/SL psy; save: 1/2; fail: when crea takes dmg reac for +1/2 psydmg; unde/cons/int<4 imm.",
 	descriptionFull: "You draw upon a painful memory within one creature you can see within range and force them to relive the experience. The target makes a Charisma saving throw, taking 4d10 psychic damage on a failure, and half as much on a success.\nIf they fail their saving throw, they are become cursed. For the duration, whenever the target takes damage, you can use your reaction to force them to relive the experience, dealing half the amount as additional psychic damage to the creature.\nConstructs, Undead, and creatures with an Intelligence score lower than 4 are immune to the spell’s effects.",
-	atHigherLevels:"When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th."
+	atHigherLevels: "When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th."
 };
 SpellsList["rejuvenate og"] = {
 	name: "Rejuvenate",
@@ -2031,7 +2035,7 @@ SpellsList["rejuvenate og"] = {
 	save: "Cha",
 	description: "human./beast willing or save fail: -1d6 age; rea to -spell mod age; re-roll save start turn; see B",
 	descriptionFull: "You touch a Humanoid or Beast, reversing its aging process. An unwilling target can make a Charisma saving throw to resist the effect. If the creature is willing or if it fails the saving throw, roll 1d6 and subtract the results from the creature’s age. You cannot reduce a creature’s age to be less than at the time of their birth.\nFor the duration, you can use your action on your turn to touch and rejuvenate the creature again, up to an additional number of times equal to your spellcasting ability modifier (minimum of 1).\nCreatures repeat their saving throw at the start of each of their turns, ending the effect on a success. When the spell ends, the unnatural aging lingers, and the target gradually returns to their natural age over the course of a year, or until restored by a dispel magic spell or similar magic.",
-	atHigherLevels:"When you cast this spell using a spell slot of 8th level, the die is increased to 1d10, and its effects linger for a century. At 9th level, the die is increased to 1d12, and its effects are permanent."
+	atHigherLevels: "When you cast this spell using a spell slot of 8th level, the die is increased to 1d10, and its effects linger for a century. At 9th level, the die is increased to 1d12, and its effects are permanent."
 };
 SpellsList["reminiscence og"] = {
 	name: "Reminiscence",
@@ -2061,7 +2065,7 @@ SpellsList["rending distortion og"] = {
 	description: "5d10+1d10/SL foce dmg; half on save; on fail till end next turn restr. and 2d10 force dmg if action",
 	save: "Con",
 	descriptionFull: "The spell causes the space and time around and inside a target creature or object to rapidly accelerate and decelerate in random patches, tearing their body as they attempt to move through the fluctuations. The target makes a Constitution save, taking 5d10 force damage on a failure and half as much on a success. If they fail their saving throw, they are restrained until the end of their next turn, and if they take an action on that turn, they are dealt an additional 2d10 force damage.",
-	atHigherLevels:"When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th."
+	atHigherLevels: "When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th."
 };
 SpellsList["reorient og"] = {
 	name: "Reorient",
@@ -2105,7 +2109,7 @@ SpellsList["roar of waves og"] = {
 	save: "Wis",
 	description: "1+1/SL crea imagine drowning; save end ea. trn to end spell, 4d4 psy dmg on fail; see B for immun.",
 	descriptionFull: "You tap into the mind of a creature you can see within range, creating an illusory manifestation of rising ocean waters, visible only to the target, which must make a Wisdom saving throw. On a failed save, the target is overcome by the rising waters, lost in a nightmare of drowning alone at sea. Creatures with a swimming speed succeed their saving throw automatically.\nFor the duration, the creature’s movement speed is halved, and is deafened and incapacitated, hearing only the sound of the waves and winds, as it desperately tries to swim to safety. Creatures within 30 feet of the affected target also hear the dull sound of ocean waves.\nAt the end of each of the target’s turns before the spell ends, the target must succeed on a Wisdom saving throw or take 4d4 psychic damage. On a successful save, the spell ends. The spell also ends if the target becomes the subject of a spell that allows them to escape the illusion, for example, the alter self (aquatic adaptation), water breathing, or water walk spells.",
-	atHigherLevels:"When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd."
+	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd."
 };
 SpellsList["sacred strike og"] = {
 	name: "Sacred Strike",
@@ -2128,7 +2132,7 @@ WeaponsList["sacred strike og"] = {
 	regExpSearch: /^(?=.*sacred)(?=.*strike).*$/i,
 	type: "Cantrip",
 	ability: 4,
-	damage: ["B",6,"radiant"],
+	damage: ["B", 6, "radiant"],
 	abilitytodamage: true,
 	range: "melee",
 	description: "Cast with melee attack, no extra dmg. On hit: marked & extra dmg if hit by other within 1 turn.",
@@ -2176,7 +2180,7 @@ SpellsList["sensory deprivation og"] = {
 	save: "Wis",
 	description: "on save fail 1+1/SL crea looses all senses except touch and telepathy; re-roll save end trn to end spell",
 	descriptionFull: "You attempt to blot out the senses of a creature you can see within range. The target makes a Wisdom saving throw. On a failure, the target’s senses are nullified for the duration, including their auditory, olfactory, taste, and visual senses. In addition to being blinded and deafened, an affected creature cannot benefit from blindsight or tremorsense while under the effects of the spell, and any Wisdom (Perception) checks they make that do not rely on touch automatically fail. The target retains any telepathic links it has with other creatures (for example, a myconid can still communicate through its rapport spores).\nAt the end of each of its turns, the target makes a Wisdom saving throw, ending the effect on a success.",
-	atHigherLevels:"When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th."
+	atHigherLevels: "When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th."
 };
 SpellsList["shape wood og"] = {
 	name: "Shape Wood",
@@ -2249,7 +2253,7 @@ SpellsList["snakestaff og"] = {
 	duration: "Conc, 1 h",
 	description: "wooden spear or statt turns into giant poisonous snake under my control; command as bns a; see B",
 	descriptionFull: "You throw a wooden spear or quarterstaff up to 15 feet away from you, transforming it into a giant poisonous snake. The snake is friendly to you and your companions, and it obeys your commands.\nIn combat, the snake shares your initiative count, but it takes its turn immediately after yours. The only action it takes on its turn is the Dodge action, unless you take a bonus action to command it to take one of the actions in its stat block or to take the Dash, Disengage, or Help action. The snake adds your spellcasting ability modifier as a bonus to its ability checks, attack rolls, and saving throws (minimum of 1).\nThe transformation lasts for the duration, or until the snake drops to 0 hit points or dies. When the spell ends, it becomes the object used to create it.\nIf the weapon used to create the snake has a bonus to attack rolls and damage rolls, those same bonuses are also conferred upon any snake created by the spell.",
-	atHigherLevels:"When you cast this spell using a spell slot of 3rd level or higher, you can transform the staff into a giant constrictor snake or a swarm of poisonous snakes."
+	atHigherLevels: "When you cast this spell using a spell slot of 3rd level or higher, you can transform the staff into a giant constrictor snake or a swarm of poisonous snakes."
 };
 SpellsList["sneezing dust og"] = {
 	name: "Sneezing Dust",
@@ -2307,7 +2311,7 @@ SpellsList["soul whip og"] = {
 	duration: "Conc, 1 min",
 	description: "create whip(finesse, reach, light) dealing 2d4+spell mod psychic dmg; bns to re-summon; see B",
 	descriptionFull: "You weave together threads of wrathful thought to create a whip of solidified enmity in your hand. This magic whip lasts until the spell ends. It counts as a martial melee weapon with which you are proficient. It deals 2d4 + your spellcasting ability modifier psychic damage on a hit and has the finesse, light, and reach properties. In addition, when you use the whip to attack a target that charmed or frightened by you, you make the attack roll with advantage.\nIf you drop the weapon or throw it, it dissipates as it leaves your hand. Thereafter, while the spell persists, you can use a bonus action to cause the whip to reappear in your hand.",
-	atHigherLevels:"When you cast this spell using a spell slot of 3rd or 4th level, the damage increases to 3d4 + your spellcasting ability modifier. When you cast it using a spell slot of 5th or 6th level, the damage increases to 4d4 + your spellcasting ability modifier. When you cast it using a spell slot of 7th level or higher, the damage increases to 5d4 + your spellcasting ability modifier."
+	atHigherLevels: "When you cast this spell using a spell slot of 3rd or 4th level, the damage increases to 3d4 + your spellcasting ability modifier. When you cast it using a spell slot of 5th or 6th level, the damage increases to 4d4 + your spellcasting ability modifier. When you cast it using a spell slot of 7th level or higher, the damage increases to 5d4 + your spellcasting ability modifier."
 };
 WeaponsList["soul whip og"] = {
 	name: "Soul Whip",
@@ -2317,7 +2321,7 @@ WeaponsList["soul whip og"] = {
 	ability: 4,
 	abilitytodamage: true,
 	baseWeapon: "whip",
-	damage: ["2",4,"Psychic"],
+	damage: ["2", 4, "Psychic"],
 	range: "Melee",
 	description: "finesse, reach, light; +1D4 at SL 3,5&7; adv if target charmed/frightened by me; bns a to re-summon",
 	list: "spell",
@@ -2394,7 +2398,7 @@ SpellsList["switcheroo og"] = {
 	save: "Wil",
 	description: "I can swap positions of 2+1/SL crea (no constr./undead) willing or fail save; I can tel back as rea: see B",
 	descriptionFull: "You attempt to exchange the positions of two creatures you can see within range. The targets must be of the same size category. If either target is unwilling, they make a Wisdom saving throw, and if they succeed, they are not eligible to participate in the switch. Constructs and Undead succeed their saving throw automatically. Additionally, until the end of your next turn, you can use your reaction to teleport to the position you were at when you cast this spell.",
-	atHigherLevels:"When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th, exchanging each the positions of targets that fail their saving throws as you desire."
+	atHigherLevels: "When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th, exchanging each the positions of targets that fail their saving throws as you desire."
 };
 SpellsList["sylvan vision og"] = {
 	name: "Sylvan Vision",
@@ -2437,7 +2441,7 @@ SpellsList["tail sweep og"] = {
 	save: "Dex",
 	description: "any crea in range 4d10+1d10/SL force damage and knocked prone; on save half dmg and no prone",
 	descriptionFull: "A translucent, scaled tail uncoils from behind you and sweeps around you in a 10-foot-radius, and then vanishes as quickly as it appeared.\nEach creature of your choice within range must make a Dexterity saving throw. On a failure, a creature takes 4d10 force damage and is knocked prone. On a success, they take half as much damage and aren’t knocked prone.",
-	atHigherLevels:"When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th."
+	atHigherLevels: "When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th."
 };
 SpellsList["tattoosion og"] = {
 	name: "Tattoosion",
@@ -2478,7 +2482,7 @@ SpellsList["thorn spray og"] = {
 	duration: "Instantaneous",
 	description: "split 10d6+2d6/SL pierc dmg between any crea hit with ranged spell atk; hit crea pois end my nxt trn",
 	descriptionFull: "You create a spray of thick, painful thorns which you distribute in a 60-foot cone, dealing up to 10d6 piercing damage.\nMake a ranged spell attack for each creature of your choice within the area. When you do, divide the spell’s damage dice between the targets. For example, you can target two creatures for 5d6 damage each, or three creatures: one for 5d6, one for 3d6 and one for 2d6 damage.\nOn a hit, the target is poisoned until the end of your next turn",
-	atHigherLevels:"When you cast this spell using a spell slot of 5th level or higher, the damage increases by 2d6 for each slot level above 4th."
+	atHigherLevels: "When you cast this spell using a spell slot of 5th level or higher, the damage increases by 2d6 for each slot level above 4th."
 };
 SpellsList["time bomb og"] = {
 	name: "Time Bomb",
@@ -2494,7 +2498,7 @@ SpellsList["time bomb og"] = {
 	Save: "Con",
 	description: "3d6+1d6/SL force dmg; save 1/2 dmg+spell ends; rpt save turnend; a rpt dmg; 0 HP = explode; see B",
 	descriptionFull: "You cause a well of pressure to build from within a creature you can see within range, turning them into a living bomb. The target must make a Constitution saving throw. On a failure, they take 3d6 force damage, and their movement speed is halved. On a success, they take half the amount and are otherwise unaffected. Elementals and creatures immune to the grappled condition succeed their saving throw automatically. An affected creature repeats its saving throw at the end of each of their turns, ending the effect on a success.\nFor the duration, you can use an action on your turn to deal 3d6 force damage to an affected target. If the target is reduced to 0 hit points, they explode, causing each creature within 15 feet of them to make a Dexterity saving throw. Creatures that fail this saving throw take 4d6 bludgeoning damage on a failure, or half as much on a success.",
-	atHigherLevels:"When you cast this spell using a spell slot of 4th level or higher, the damage for each of its effects increases by 1d6 for each slot level above 3rd."
+	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the damage for each of its effects increases by 1d6 for each slot level above 3rd."
 };
 SpellsList["time knife og"] = {
 	name: "Time Knife",
@@ -2516,8 +2520,8 @@ WeaponsList["time knife og"] = {
 	regExpSearch: /^(?=.*time)(?=.*knife).*$/i,
 	type: "Cantrip",
 	ability: 4,
-	abilitytodamage: true,	
-	damage: ["C",6,"slashing"],
+	abilitytodamage: true,
+	damage: ["C", 6, "slashing"],
 	range: "120ft",
 	description: "Each d6 is a separate knife requiring separate rolls. Add spell mod each time.",
 	list: "spell",
@@ -2563,7 +2567,7 @@ SpellsList["toxic tongue og"] = {
 	save: "Con",
 	description: "poison in my mouth; spit for 3d10+1d8/SL; half on save; bns to apply poison to blade/ammo; see B",
 	descriptionFull: "Your mouth gains the ability to create a virulent poison for the duration. You can use your poison in two ways:\n- Poison Spit: As a bonus action, you can spray a stream of poison from your mouth, targeting one creature you can see within 30 feet of you. The target makes a Constitution saving throw. On a failure, they take 3d10 poison damage.\n- Poison Weapon: As a bonus action, you can apply your poison to a melee weapon or piece of ammunition on your person or carried by a willing creature within 5 feet of you. The poison’s potency lasts until the start of your next turn. If the poisoned weapon hits a creature, the target must make a Constitution saving throw, taking 3d6 poison damage on a failure, or half as much on a success. The poison has no effect if ingested.",
-	atHigherLevels:"When you cast this spell using a spell slot of 4th level or higher, the damage of the poison increases by 1d8 for each slot level above 3rd."
+	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the damage of the poison increases by 1d8 for each slot level above 3rd."
 };
 WeaponsList["toxic tongue og"] = {
 	name: "Toxic Tongue",
@@ -2572,7 +2576,7 @@ WeaponsList["toxic tongue og"] = {
 	type: "Spell",
 	ability: 4,
 	dc: true,
-	damage: ["3",10,"Poison"],
+	damage: ["3", 10, "Poison"],
 	range: "30ft",
 	description: "Spit Poison as Bonus Action; Con Save: no damage; +1d8 dmg per SL > 3.",
 	list: "spell",
@@ -2616,7 +2620,7 @@ SpellsList["twisting innards og"] = {
 	duration: "1 h",
 	description: "protect crea (no Const/Unde/Plant); on crit & sneak roll d4 on 3-4 (SL 6: 2-4, SL 7: 1-4) no extra dmg",
 	descriptionFull: "You cause the target’s vital organs to writhe, shift, and move about, making it difficult to strike the target in a vulnerable area. For the duration, if the target is subjected to a critical hit or sneak attack, roll a 1d4. If the result is a 3-4, the target is unaffected by the extra damage caused by the sneak attack or critical it.\nThis spell can’t affect Constructs, Plants, or Undead.",
-	atHigherLevels:"If you cast this spell using a spell slot of 6th level, the additional damage from a critical hit or sneak attack is avoided on a roll of 2-4. If you use a spell slot of 7th level, the target is rendered immune to critical hits and sneak attacks"
+	atHigherLevels: "If you cast this spell using a spell slot of 6th level, the additional damage from a critical hit or sneak attack is avoided on a roll of 2-4. If you use a spell slot of 7th level, the target is rendered immune to critical hits and sneak attacks"
 };
 SpellsList["unbinding og"] = {
 	name: "Unbinding",
@@ -2641,11 +2645,11 @@ SpellsList["unconscious command og"] = {
 	time: "1 min",
 	range: "Touch",
 	components: "V,S",
-	duration: "1 h",
+	duration: "24 h",
 	save: "Wis",
 	description: "put max 2 sentence command in crea mind; fail: crea unconsc. & no memory; new save on dmg; see B",
 	descriptionFull: "You touch a creature’s forehead, implanting a course of activity (limited to a sentence or two) deep into the recesses of their mind. You must share at least one language with the target. You dictate the trigger for the command to take hold of the target, which must be worded in such a manner as to sound reasonable. You can cause the creature to attack another creature, even in the face of overwhelming odds, but not to cause direct harm to themselves (for example, “When you are alone in a room with Old Gus, strangle him to death!”). The target makes a Wisdom saving throw. On a failure, the target has no knowledge of the spell affecting them, and they fall unconscious (or if they are immune to sleep magic, are stunned) until the end of their next turn, at which time they lose all memory of the last 10 minutes. Creatures that can’t be charmed are immune to the spell.\nFor the duration, when the conditions you have set come to pass, the target is forced to single-mindedly attempt to fulfill your command. For the next hour, each time the target takes damage, it makes a new Wisdom saving throw against the spell, ending it on a success. When the spell ends, the target retains any memories of actions it took while under the spell.\nThe spell is detectable by the detect magic and detect thoughts spells, but the course of activity itself is not discernible. A remove curse spell ends the effect, but a dispel magic spell does not.\n\n(Note: Level 6 Duration adjusted by xika.)",
-	atHigherLevels:"When you cast this spell using a spell slot of 7th level, the duration increases to 24 hours. If you use a spell slot of 8th level, the duration is 30 days. If you use a 9th level spell slot, the spell lasts until it is dispelled."
+	atHigherLevels: "When you cast this spell using a spell slot of 7th level, the duration increases to 30 days. If you use a spell slot of 8th level, the duration is 1 year. If you use a 9th level spell slot, the spell lasts until it is dispelled."
 };
 SpellsList["undead alacrity og"] = {
 	name: "Undead Alacrity",
@@ -2659,7 +2663,7 @@ SpellsList["undead alacrity og"] = {
 	duration: "Conc, 1 min",
 	description: "buff 3+1/SL undead: speed +10ft, +1 to AC, Dex Save and Iniative",
 	descriptionFull: "You imbue up to three undead creatures you can see within range with the speed of the living. For the duration, the targets’ base walking speed is increased by 10 feet, and they gain a +1 bonus to their AC, Dexterity saving throws, and initiative rolls.",
-	atHigherLevels:"When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st."
+	atHigherLevels: "When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st."
 };
 SpellsList["undead detonation og"] = {
 	name: "Undead Detonation",
@@ -2674,7 +2678,7 @@ SpellsList["undead detonation og"] = {
 	save: "Dex",
 	description: "zombie I control or corpse mov. max 40ft & explodes 6d6+1d6/SL nec dmg in 10ft; 1/2 on save; see B",
 	descriptionFull: "You cause a zombie under your control (or an available corpse of a Medium-sized creature, which becomes a zombie) that you can see to immediately move up to 40 feet and explode. Creatures in a 10-foot radius of the zombie must make a Dexterity saving throw, taking 6d6 necrotic damage and 6d6 thunder damage on a failed save, or half as much on a successful one. If the zombie is reduced to 0 hit points, it explodes immediately.",
-	atHigherLevels:"When you cast this spell using a spell slot of 5th level or higher, the damage of each of its effects increases by 1d6 for each slot level above 4th."
+	atHigherLevels: "When you cast this spell using a spell slot of 5th level or higher, the damage of each of its effects increases by 1d6 for each slot level above 4th."
 };
 SpellsList["undead emissary og"] = {
 	name: "Undead Emissary",
@@ -2690,7 +2694,7 @@ SpellsList["undead emissary og"] = {
 	duration: "1 h",
 	description: "empower undead as emissary; in 1 mile I can use senses, speak and command other undead; see B",
 	descriptionFull: "You place the iron crown onto a willing undead creature in your service, empowering it as your emissary. For the duration, the target gains 3d8 temporary hit points, and has advantage on saving throws against being frightened and effects that turn undead, and its Intelligence and Wisdom scores increase by an amount equal to your spellcasting ability modifier (minimum of 1), and it can cast the thaumaturgy cantrip, allowing it to speak. Additionally, you can gift your emissary with the ability to speak one language you know that it did not know in life.\nWhile the target is within 1 mile of you, you can communicate with it telepathically. As an action, you can perceive the world through its senses, seeing what it sees, hearing what it hears. Additionally, you can speak with your own voice through your emissary. During this time, you are deaf and blind with regard to your own senses.\nAdditionally, on each of the target’s turns, it can use a bonus action to mentally command any creature within 60 feet of itself that you created with the animate dead spell. While you are in possession of your emissary’s sense, you can issue these commands yourself. Finally, when you cast a spell with a range of touch, the target undead can deliver the spell as if it had cast the spell. The undead must be within 1 mile of you, and it must use its reaction to deliver the spell when you cast it. If the spell requires an attack roll, you use your attack modifier for the roll.\nIf your emissary is turned or reduced to 0 hit points, your connection to it is severed, it loses any remaining temporary hit points it has, and the iron crown upon its head clatters to the floor, and the mithril runes carved into it disappear. You can’t have more than one undead emissary at a time. If you cast this spell while you already have an undead emissary, the first loses its temporary hit points, its crown disintegrates.",
-	atHigherLevels:"When you cast this spell using a spell slot of 5th level or higher, the temporary hit points are increased by 1d8 for each slot level above 4th. If you use a spell slot of 5th level, the duration increases to 8 hours. If you use a spell slot of 6th level, the duration is 24 hours. If you use a spell slot of 7th level or higher, the spell and your control over the undead last until dispelled, even if the original spell used to animate the undead expires."
+	atHigherLevels: "When you cast this spell using a spell slot of 5th level or higher, the temporary hit points are increased by 1d8 for each slot level above 4th. If you use a spell slot of 5th level, the duration increases to 8 hours. If you use a spell slot of 6th level, the duration is 24 hours. If you use a spell slot of 7th level or higher, the spell and your control over the undead last until dispelled, even if the original spell used to animate the undead expires."
 };
 SpellsList["undead regeneration og"] = {
 	name: "Undead Regeneration",
@@ -2705,7 +2709,7 @@ SpellsList["undead regeneration og"] = {
 	duration: "24 h",
 	description: "restore 2d12+1d12/SL + spell mod hitpoints in up to six undead",
 	descriptionFull: "You reinforce the magic that keeps an undead animated. Up to six undead creatures of your choice that you can see within range each regain hit points equal to 2d12 + your spellcasting ability modifier.",
-	atHigherLevels:"When you cast this spell using a spell slot of 4th level or higher, the healing increases by 1d12 for each slot level above 3rd."
+	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the healing increases by 1d12 for each slot level above 3rd."
 };
 SpellsList["vacancy og"] = {
 	name: "Vacancy",
@@ -2735,7 +2739,7 @@ SpellsList["wall of pain og"] = {
 	save: "Con",
 	description: "60ft lng, 1ft thk; cast: all in area 6d8+1d8/SL nec dmg; save 1/2; 1 side repeat dmg ea turn in 5ft; see B",
 	descriptionFull: "You create a wall of twisting energy on a solid surface within range. You can make the wall up to 60 feet long, 20 feet high, and 1 foot thick, or a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall itself is invisible, but the area is filled with dim green light. The wall lasts for the duration.\nWhen the wall appears, each creature within its area must make a Constitution saving throw. On a failed save, a creature takes 6d8 necrotic damage, or half as much damage on a successful save.\nOne side of the wall, selected by you when you cast this spell, deals 6d8 necrotic damage to each creature that ends its turn within 5 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there.\nThe other side of the wall deals no damage.",
-	atHigherLevels:"When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th."
+	atHigherLevels: "When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th."
 };
 SpellsList["water whip og"] = {
 	name: "Water Whip",
@@ -2750,7 +2754,7 @@ SpellsList["water whip og"] = {
 	duration: "Instantaneous",
 	description: "ranged atk for 2D12 + 1D12/SL Bludgeoning; move target 15ft + 5ft/SL.; grapple if within 5ft.",
 	descriptionFull: "You extend a whip of water at a target within range. Make a ranged spell attack; on hit, it takes 2d12 bludgeoning damage and can be pushed or pulled up to 15 feet in any direction but upwards. If pulled within 5 feet of you, use a bonus action to attempt to grapple it. At Higher Levels: When cast using a spell slot of 2nd level or higher, damage increases by 1d12 and movement distance by 5 feet per slot level above 1st.",
-	atHigherLevels:"When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d12, and the distance the target is moved increases by 5 feet for each slot level above 1st (to a maximum of 30 feet)."
+	atHigherLevels: "When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d12, and the distance the target is moved increases by 5 feet for each slot level above 1st (to a maximum of 30 feet)."
 };
 SpellsList["waypoint og"] = {
 	name: "Waypoint",
@@ -2772,7 +2776,7 @@ SpellsList["whelm og"] = {
 	source: ["OG", 280],
 	level: 0,
 	school: "Ench",
-	
+
 	time: "1 a",
 	range: "30 ft",
 	components: "S",
@@ -2788,8 +2792,8 @@ WeaponsList["whelm og"] = {
 	regExpSearch: /^(?=.*whelm).*$/i,
 	type: "Cantrip",
 	ability: 4,
-	cd: true,	
-	damage: ["C",6,"psychic"],
+	cd: true,
+	damage: ["C", 6, "psychic"],
 	range: "120ft",
 	description: "if taken to 0: unconscious for 1 min + stable; undead, construct & <int4 immune",
 	list: "spell",
@@ -2809,7 +2813,7 @@ SpellsList["wild flight og"] = {
 	save: "Dex",
 	description: "double remain. move; move in 10ft increm. through crea & deal 4d6+1d6/SL dmg; 1/2 on save; see B",
 	descriptionFull: "You become a swirling orb of magical energy. You double your remaining movement speed. Until the end of your turn, you can use your movement speed to move freely through creatures. Your velocity so high that you can only change direction every 10 feet you move.\nEach creature you move through must make a Dexterity saving throw, taking 4d6 radiant damage on a failure, or half as much on a success. A creature takes an additional 1d6 damage for every size category larger than Medium they exceed (for example, a Huge creature takes an additional 2d6 damage). A creature can only be damaged by your travel path once.\nIf you end your turn in a space occupied by another creature, you take 2d6 force damage and are shunted to the nearest available space.",
-	atHigherLevels:"When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd."
+	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd."
 };
 SpellsList["wild runner og"] = {
 	name: "Wild Runner",
@@ -2867,7 +2871,7 @@ SpellsList["wizen og"] = {
 	save: "Cha",
 	description: "age human./beast; save fail: 1d6 aged & necrotic dmg; repeat save start turn; repeat aging as a; see B",
 	descriptionFull: "A jet-black beam fires from your hand and ages one Humanoid or Beast you can see within range. The target makes a Charisma saving throw. If they fail, you curse the target, roll a 1d6 and deal the results in necrotic damage to the target, and age them by an equivalent number of years.\nFor the duration, you can use your action to repeat the aging process on your turn, up to an additional number of times equal to your spellcasting ability modifier (minimum of 1). Each additional time you age the target, it must succeed a Constitution saving throw or take one level of exhaustion.\nThe target can repeat its saving throw at the start of its turns, ending the spell on a success. The unnatural aging lingers after the spell ends, and the target gradually returns to their natural age over the course of a year, or until removed by a remove curse spell or similar magic.\nA creature aged past its maximum natural lifespan must begin to make death saving throws.",
-	atHigherLevels:"When you cast this spell using a spell slot of 7th level, the die is increased to 1d8, and its effects linger for a decade. At 8th level, the die is increased to 1d10, and its effects linger for a century. At 9th level, the die is increased to 1d12, and its effects, including any exhaustion applied by the aging process, are permanent."
+	atHigherLevels: "When you cast this spell using a spell slot of 7th level, the die is increased to 1d8, and its effects linger for a decade. At 8th level, the die is increased to 1d10, and its effects linger for a century. At 9th level, the die is increased to 1d12, and its effects, including any exhaustion applied by the aging process, are permanent."
 };
 SpellsList["wood rot og"] = {
 	name: "Wood Rot",
@@ -2882,7 +2886,7 @@ SpellsList["wood rot og"] = {
 	duration: "Instantaneous",
 	description: "plant: 4d6+1d6/SL necr, save 1/2; obj worn/carried: dex sv or brittle; obj: 5+5/SL cu ft destroy.; see B",
 	descriptionFull: "You touch a plant creature or nonmagical wooden object, and an insidious rot immediately taints it.\nIf the target is a plant, they must make a Constitution saving throw, taking 4d6 points of necrotic damage on a failure or half as much on a success.\nIf the target is a nonmagical wooden object that isn’t being worn or carried, you can destroy up to 5 cubic feet of it, ending the spell.\nIf the target is a wooden shield or armor being carried or worn by a creature, the target makes a Dexterity saving throw. On a failure, the shield or armor becomes brittle, and the next time a creature hits the creature with an attack, the shield or armor is destroyed.\nIf the target is a wooden weapon (for example, a club or quarterstaff) being word or carried by a creature, make a melee spell attack. On a hit, the weapon becomes brittle, and the next time the target makes a damage roll with the weapon, the result is reduced by an amount equal to your spellcasting ability modifier, and the weapon is destroyed.",
-	atHigherLevels:"When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6, and you can destroy 5 additional cubic feet of wood for each slot level above 1st."
+	atHigherLevels: "When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6, and you can destroy 5 additional cubic feet of wood for each slot level above 1st."
 };
 SpellsList["wrack og"] = {
 	name: "Wrack",
@@ -2897,7 +2901,7 @@ SpellsList["wrack og"] = {
 	save: "Con",
 	description: "save or cursed; repeat save each rnd; as a deal 3d10+1d10/SL nec damage and Str save or prone; see B",
 	descriptionFull: "You target a creature you can see within range with a painful curse. The target makes a Constitution saving throw. On a failure, the target’s body blisters with weeping sores, and its eyes cloud with blood, rendering it blind for the duration of the spell. Constructs, Undead, and creatures immune to disease succeed their saving throw automatically.\nFor the duration of the spell, you can use an action on your turn to deal 3d10 necrotic damage to the target, which must succeed a Strength saving throw or fall prone.\nThe target can repeat its saving throw at the end of each of its turns, ending the effect early on a success.",
-	atHigherLevels:"When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th."
+	atHigherLevels: "When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th."
 };
 SpellsList["wyrmhole og"] = {
 	name: "Wyrmhole",
@@ -2947,7 +2951,7 @@ WeaponsList["zap og"] = {
 	regExpSearch: /^(?=.*zap).*$/i,
 	type: "Cantrip",
 	ability: 4,
-	damage: ["C",8,"Special"],
+	damage: ["C", 8, "Special"],
 	range: "60ft",
 	description: "Roll 1d8; 1:fire, 2:cold, 3:acid, 4:light, 5:thdr, 6: rad, 7: force, 8: psy; see B",
 	list: "spell",
@@ -2966,141 +2970,155 @@ SpellsList["zone of self immolation og"] = {
 	duration: "Conc, 1 h",
 	description: "30ft+10ft/SL rad; spell level 4+1/SL or lower creating flame backfires only on caster; see B",
 	descriptionFull: "You create a 30-foot-radius sphere centered on a point you can see within range where magical fire twists against its creator. The zone is invisible, but smells of ash and sulfur, which is perceptible with a successful Wisdom (Perception) check against your spell save DC.\For the duration, nonmagical flames are immediately extinguished in the area. If a creature in the area casts a spell of 4th level or lower cast that would create magical flame, the spell backfires and they (and only they) become the target of the spell’s effects instead. If the spell requires an attack roll and the result would hit the caster, it does so. If the spell requires a saving throw, the caster must do so.\nAdditionally, creatures in the area have resistance to fire damage that they did not cause themselves. The breath weapons of Dragons are unaffected by any of the spell’s effects, including this resistance.",
-	atHigherLevels:"When you cast this spell using a spell slot of 5th level or higher, the radius of the sphere increases by 10 feet for each slot level above 5th.\nAdditionally, the zone causes spells of one level higher to backfire for each slot level above 5th"
+	atHigherLevels: "When you cast this spell using a spell slot of 5th level or higher, the radius of the sphere increases by 10 feet for each slot level above 5th.\nAdditionally, the zone causes spells of one level higher to backfire for each slot level above 5th"
 };
 
+// ### END SPELLS ### Old_Gus_Errata-Spells.js
+
+// ### BEGIN FAERIE ### Old_Gus_Errata-Faerie.js
 
 ClassList["faerie og"] = {
 	name: "Faerie",
-	regExpSearch : /^(?=.*faerie).*$/i,
+	regExpSearch: /^(?=.*faerie).*$/i,
 	source: ["OG", 188],
 	primaryAbility: "Charisma",
 	prereqs: "Charisma 13",
 	die: 6,
-	improvements : [0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5],
+	improvements: [0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5],
 	saves: ["Dex", "Cha"],
-	skills : ["\n\n" + toUni("MyClass") + ": Choose two from Acrobatics, Animal Handling, Athletics, Deception, Intimidation, Performance, Persuasion and Stealth.", "\n\n" + toUni("MyClass") + ": none"],
+	skills: ["\n\n" + toUni("MyClass") + ": Choose two from Acrobatics, Animal Handling, Athletics, Deception, Intimidation, Performance, Persuasion and Stealth.", "\n\n" + toUni("MyClass") + ": none"],
 	armorProfs: {
-		primary : [false, false, false, false]
+		primary: [false, false, false, false]
 	},
-	weaponProfs : {
-		primary : [true, false, false]
+	weaponProfs: {
+		primary: [true, false, false]
 	},
-	toolProfs : { 
-		primary : [["Musical instrument", 1], ["Artisan Tool", 1]],
-		secondary : [["Musical instrument", 1]]
-	},
-	spellcastingFactor: 1,
-	spellcastingKnown : {
-		cantrips : [3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
-		spells : [5, 6, 7, 8, 9, 10, 11, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18]
-	},
-	spellcastingList : {
-		spells : [
-		//Cantrips
-		"booming blade", "cursory ward og", "dancing lights", "dulling chains og", "encode thoughts", "frigidigitation og", "gift of the soothsayer og", "green-flame blade", "leeocks lucky coin og", "magic stone", "message", "minor illusion", "nature bolt og", "peal of nine bells og", "prestidigitation", "produce flame", "puff of smoke og", "sacred strike og", "sanguine strike og", "sapping sting", "thaumaturgy", "thunderclap", "whelm og", "word of radiance", "zap og",
-		//Level 1
-		"alarm", "allergen cloud og", "arcane strike", "catapult", "ceremony", "chaos bolt", "charm person", "cheetah sprint og", "color spray", "cure wounds", "detect magic", "drunkards breath og", "dust dash og", "ensnaring strike", "faerie fire", "find familiar", "frost fingers", "gift of alacrity", "goodberry", "hail of thorns", "healing word", "illusory script", "jump", "lightning lure", "londyns duet og", "mass distortion og", "read blood og", "reorient og", "shield", "silent image", "silvery barbs", "sleep", "snakestaff og", "snare", "speak with animals", "stumble og", "sylvan vision og", "water whip og", "witch bolt", "wood rot og", "zephyr strike",
-		//Level 2
-		"alter self", "animal messenger", "arcane lock", "beast sense", "blade of resonance og", "borrowed knowledge", "celerity og", "darkness", "discordant thrum og", "diterlizzis dymaxion og", "doublespeak og", "enhance ability", "enlarge/reduce", "enthrall", "fallow og", "flourishing beanstalk og", "glamoured majesty og", "healing spirit", "heat metal", "hold person", "immovable object", "invisibility", "jinx og", "kinetic jaunt", "locate animals or plants", "londyns duet og", "magic mouth", "magic weapon", "mirror image", "misty step", "moon blade og", "moonbeam", "nathair's mischief ", "nystul's magic aura", "pass without trace", "plaguemask og", "polandaras petticoat pocket og", "seeking og", "silence", "solid fog og", "soul whip og", "spiritual weapon", "suggestion", "summon beast", "tasha's mind whip", "time parasite og", "tree steed og", "vortex warp", "web", "wither and bloom", "wristpocket",
-		//Level 3
-		"alter fortune og", "antipathetic field og", "arcane razor og", "avyies temporal trickery og", "bestow curse", "blink", "catnap", "counterspell", "create campsite og", "dazzling strobe og", "dodge-weave og", "euphoric cloud og", "fly", "healing wave og", "hirsutism og", "invisible trickery og", "lightning arrow", "lipstitch og", "magic circle", "major image", "melfs unicorn arrow og", "minor glamour og", "misty slash og", "mushroom ring og", "nondetection", "pall of twilight og", "perplex og", "protection from energy", "radiant glamour og", "remove curse", "reverse projectiles og", "sending", "shape wood og", "slow", "speak with plants", "spirit guardians", "spirit shroud", "summon fey", "summon shadowspawn", "telepathy tap og", "toxic tongue og", "treasure scent og", "wild flight og",
-		//Level 4
-		"age plant og", "blinding glitter og", "charm monster", "compulsion", "confusion", "drunken revelry og", "fabricate", "fools speech og", "freedom of movement", "giant insect", "greater invisibility", "grounding og", "insect plague", "lifebloom og", "major glamour og", "polymorph", "quentins quickling senses og", "sensory deprivation og", "sneezing dust og", "switcheroo og", "tail sweep og", "thorn spray og", "vacancy og", "wild runner og",
-		//Level 5
-		"animate objects", "awaken", "awaken object og", "conduit og", "contact other plane", "contagion", "control winds", "dream", "far step", "geas", "glamourous craft og", "greater restoration", "hold monster", "mirror stride og", "mislead", "modify memory", "othertime og", "passwall", "power word silence og", "probability warp og", "rary's telepathic bond", "seeming", "skill empowerment", "synaptic static", "tree stride", "twisting innards og", "wind at our backs og", "zone of self immolation og",
-		//Level 6
-		"anterograde amnesia og", "budding romance og", "conjure fey", "contingency", "drawmij's instant summons", "fizban's platinum shield", "forbiddance", "immaculate conception og", "investiture of starlight og", "mass suggestion", "mental prison", "otto's irresistible dance", "programmed illusion", "sunbeam", "tasha's otherworldly guise", "true seeing", "unconscious command og",
-		//Level 7
-		"body swap og", "crown of stars", "dream of the blue veil", "humanoid possession og", "lunar occult og", "magic miasma og", "mirage arcane", "power word pain", "prismatic spray", "project image", "rejuvenate og", "sequester", "simulacrum", "solipsism og", "tether essence",
-		//Level 8
-		"animal shapes", "antipathy/sympathy", "feeblemind", "glibness", "maddening darkness", "maze", "mind blank", "power word stun",
-		//Level 9
-		"mass polymorph", "power word heal", "prismatic wall", "shapechange", "true polymorph", "unbinding og", "weird", "wish"
+	toolProfs: {
+		primary: [
+			["Musical instrument", 1],
+			["Artisan Tool", 1]
+		],
+		secondary: [
+			["Musical instrument", 1]
 		]
 	},
-	equipment : "MyClass starting equipment:\n \u2022 any simple weapon;\n \u2022 a spellcasting focus;\n \u2022 an entertainer’s pack;\n \u2022 a trinket.\n\nAlternatively, choose 5d4 \xD7 10 gp worth of starting equipment instead of both the class' and the background's starting equipment.",
+	spellcastingFactor: 1,
+	spellcastingKnown: {
+		cantrips: [3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+		spells: [5, 6, 7, 8, 9, 10, 11, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18]
+	},
+	spellcastingList: {
+		spells: [
+			//Cantrips
+			"booming blade", "cursory ward og", "dancing lights", "dulling chains og", "encode thoughts", "frigidigitation og", "gift of the soothsayer og", "green-flame blade", "leeocks lucky coin og", "magic stone", "message", "minor illusion", "nature bolt og", "peal of nine bells og", "prestidigitation", "produce flame", "puff of smoke og", "sacred strike og", "sanguine strike og", "sapping sting", "thaumaturgy", "thunderclap", "whelm og", "word of radiance", "zap og",
+			//Level 1
+			"alarm", "allergen cloud og", "arcane strike", "catapult", "ceremony", "chaos bolt", "charm person", "cheetah sprint og", "color spray", "cure wounds", "detect magic", "drunkards breath og", "dust dash og", "ensnaring strike", "faerie fire", "find familiar", "frost fingers", "gift of alacrity", "goodberry", "hail of thorns", "healing word", "illusory script", "jump", "lightning lure", "londyns duet og", "mass distortion og", "read blood og", "reorient og", "shield", "silent image", "silvery barbs", "sleep", "snakestaff og", "snare", "speak with animals", "stumble og", "sylvan vision og", "water whip og", "witch bolt", "wood rot og", "zephyr strike",
+			//Level 2
+			"alter self", "animal messenger", "arcane lock", "beast sense", "blade of resonance og", "borrowed knowledge", "celerity og", "darkness", "discordant thrum og", "diterlizzis dymaxion og", "doublespeak og", "enhance ability", "enlarge/reduce", "enthrall", "fallow og", "flourishing beanstalk og", "glamoured majesty og", "healing spirit", "heat metal", "hold person", "immovable object", "invisibility", "jinx og", "kinetic jaunt", "locate animals or plants", "londyns duet og", "magic mouth", "magic weapon", "mirror image", "misty step", "moon blade og", "moonbeam", "nathair's mischief ", "nystul's magic aura", "pass without trace", "plaguemask og", "polandaras petticoat pocket og", "seeking og", "silence", "solid fog og", "soul whip og", "spiritual weapon", "suggestion", "summon beast", "tasha's mind whip", "time parasite og", "tree steed og", "vortex warp", "web", "wither and bloom", "wristpocket",
+			//Level 3
+			"alter fortune og", "antipathetic field og", "arcane razor og", "avyies temporal trickery og", "bestow curse", "blink", "catnap", "counterspell", "create campsite og", "dazzling strobe og", "dodge-weave og", "euphoric cloud og", "fly", "healing wave og", "hirsutism og", "invisible trickery og", "lightning arrow", "lipstitch og", "magic circle", "major image", "melfs unicorn arrow og", "minor glamour og", "misty slash og", "mushroom ring og", "nondetection", "pall of twilight og", "perplex og", "protection from energy", "radiant glamour og", "remove curse", "reverse projectiles og", "sending", "shape wood og", "slow", "speak with plants", "spirit guardians", "spirit shroud", "summon fey", "summon shadowspawn", "telepathy tap og", "toxic tongue og", "treasure scent og", "wild flight og",
+			//Level 4
+			"age plant og", "blinding glitter og", "charm monster", "compulsion", "confusion", "drunken revelry og", "fabricate", "fools speech og", "freedom of movement", "giant insect", "greater invisibility", "grounding og", "insect plague", "lifebloom og", "major glamour og", "polymorph", "quentins quickling senses og", "sensory deprivation og", "sneezing dust og", "switcheroo og", "tail sweep og", "thorn spray og", "vacancy og", "wild runner og",
+			//Level 5
+			"animate objects", "awaken", "awaken object og", "conduit og", "contact other plane", "contagion", "control winds", "dream", "far step", "geas", "glamourous craft og", "greater restoration", "hold monster", "mirror stride og", "mislead", "modify memory", "othertime og", "passwall", "power word silence og", "probability warp og", "rary's telepathic bond", "seeming", "skill empowerment", "synaptic static", "tree stride", "twisting innards og", "wind at our backs og", "zone of self immolation og",
+			//Level 6
+			"anterograde amnesia og", "budding romance og", "conjure fey", "contingency", "drawmij's instant summons", "fizban's platinum shield", "forbiddance", "immaculate conception og", "investiture of starlight og", "mass suggestion", "mental prison", "otto's irresistible dance", "programmed illusion", "sunbeam", "tasha's otherworldly guise", "true seeing", "unconscious command og",
+			//Level 7
+			"body swap og", "crown of stars", "dream of the blue veil", "humanoid possession og", "lunar occult og", "magic miasma og", "mirage arcane", "power word pain", "prismatic spray", "project image", "rejuvenate og", "sequester", "simulacrum", "solipsism og", "tether essence",
+			//Level 8
+			"animal shapes", "antipathy/sympathy", "feeblemind", "glibness", "maddening darkness", "maze", "mind blank", "power word stun",
+			//Level 9
+			"mass polymorph", "power word heal", "prismatic wall", "shapechange", "true polymorph", "unbinding og", "weird", "wish"
+		]
+	},
+	equipment: "MyClass starting equipment:\n \u2022 any simple weapon;\n \u2022 a spellcasting focus;\n \u2022 an entertainer’s pack;\n \u2022 a trinket.\n\nAlternatively, choose 5d4 \xD7 10 gp worth of starting equipment instead of both the class' and the background's starting equipment.",
 	subclasses: ["Faerie Affinities", []],
 	attacks: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 	abilitySave: 6,
 	features: {
-		"faerie affinity" : {
-			name : "Faerie Affinity",
-			source : ["OG", 190],
-			minlevel : 1,
-			description : desc([
-					'My creature type is Fey in addition to the creature type determined by my race.',
-				])
+		"faerie affinity": {
+			name: "Faerie Affinity",
+			source: ["OG", 190],
+			minlevel: 1,
+			description: desc([
+				'My creature type is Fey in addition to the creature type determined by my race.',
+			])
 		},
-		"spellcasting" : {
-			name : "Spellcasting",
-			source : ["OG", 188],
-			minlevel : 1,
-			description : desc([
+		"spellcasting": {
+			name: "Spellcasting",
+			source: ["OG", 188],
+			minlevel: 1,
+			description: desc([
 				"I can cast prepared faerie cantrips/spells, using Charisma as my spellcasting ability",
 				"I can use an druidic focus or a musical instrument I'm proficient with as focus",
 				"I can cast all faerie spells in my spellbook as rituals if they have the ritual tag"
 			]),
-			additional : levels.map(function (n, idx) {
+			additional: levels.map(function(n, idx) {
 				var cantr = [3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5][idx];
 				var splls = [5, 6, 7, 8, 9, 10, 11, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18][idx];
 				return cantr + " cantrips \u0026 " + splls + " spells known";
 			})
 		},
-		"glamorous defense" : {
-			name : "Glamorous Defense",
-			source : ["OG", 190],
-			minlevel : 1,
-			description : desc([
-					"While not wearing armor or holding a shield, my AC equals 10 + Dex mod + my Cha mod."
-				]),
-			armorOptions : [{
-				regExpSearch : /^(?=.*(glamorous))(?=.*(defense)).*$/i,
-				name : "Glamorous Defense (Cha)",
-				source : ["OG", 190],
-				ac : "10+Cha",
-				affectsWildShape : true,
-				selectNow : true
+		"glamorous defense": {
+			name: "Glamorous Defense",
+			source: ["OG", 190],
+			minlevel: 1,
+			description: desc([
+				"While not wearing armor or holding a shield, my AC equals 10 + Dex mod + my Cha mod."
+			]),
+			armorOptions: [{
+				regExpSearch: /^(?=.*(glamorous))(?=.*(defense)).*$/i,
+				name: "Glamorous Defense (Cha)",
+				source: ["OG", 190],
+				ac: "10+Cha",
+				affectsWildShape: true,
+				selectNow: true
 			}]
 		},
-		"faerie dust" : {
-			name : "Faerie Dust",
-			source : ["OG", 190],
-			minlevel : 1,
-			description : desc([
-					"My body produces glowing dust, visible to detect magic, providing spellcasting components.",
-					"As bonus action, I can splash onto myself or a crea in 5 ft. Target heals for 1d6 + faerie level",
-					"HP, or immed. saves vs poison, disease, enchantm. adding my spell attribute mod as bonus."
-				]),
+		"faerie dust": {
+			name: "Faerie Dust",
+			source: ["OG", 190],
+			minlevel: 1,
+			description: desc([
+				"My body produces glowing dust, visible to detect magic, providing spellcasting components.",
+				"As bonus action, I can splash onto myself or a crea in 5 ft. Target heals for 1d6 + faerie level",
+				"HP, or immed. saves vs poison, disease, enchantm. adding my spell attribute mod as bonus."
+			]),
 			usages: "Profiency bonus per ",
 			usagescalc: "event.value = Number(How('Proficiency Bonus'));",
-			recovery : "long rest",
-			action : [["bonus action", "Faerie Dust"]]
+			recovery: "long rest",
+			action: [
+				["bonus action", "Faerie Dust"]
+			]
 		},
-		"misty escape" : {
-			name : "Misty Escape",
-			source : ["OG", 191],
-			minlevel : 2,
-			description : desc([
-					"When I take dmg, I can become invisible as reaction and teleport up to 30ft. I remain",
-					"invisible until the end of my next turn or until I cast a spell or attack."
-				]),
+		"misty escape": {
+			name: "Misty Escape",
+			source: ["OG", 191],
+			minlevel: 2,
+			description: desc([
+				"When I take dmg, I can become invisible as reaction and teleport up to 30ft. I remain",
+				"invisible until the end of my next turn or until I cast a spell or attack."
+			]),
 			usages: 1,
-			recovery : "short rest",
-			action : [["reaction", "Misty Escape"]]
+			recovery: "short rest",
+			action: [
+				["reaction", "Misty Escape"]
+			]
 		},
-		"dreamchaser" : {
-			name : "Dreamchaser",
-			source : ["OG", 191],
-			minlevel : 18,
-			description : desc([
-					"I can craft a Dreamstone (1 min) & gift to crea. If I craft 2nd the 1st crumbles to dust.",
-					"Under an open sky I can cast dream w/o spell slot. If target has my Dreamstone it can",
-					"transcend planes. The Stone will record a message and transmit it once they are asleep."
-				]),
+		"dreamchaser": {
+			name: "Dreamchaser",
+			source: ["OG", 191],
+			minlevel: 18,
+			description: desc([
+				"I can craft a Dreamstone (1 min) & gift to crea. If I craft 2nd the 1st crumbles to dust.",
+				"Under an open sky I can cast dream w/o spell slot. If target has my Dreamstone it can",
+				"transcend planes. The Stone will record a message and transmit it once they are asleep."
+			]),
 			usages: 1,
-			recovery : "long rest",
-			action : [["action", "Dreamchaser"]],
+			recovery: "long rest",
+			action: [
+				["action", "Dreamchaser"]
+			],
 			spellChanges: {
 				"dream": {
 					description: "Under open sky I enter creatures dream and we can talk; if it has my Dreamstone see 'Dreamchaser'",
@@ -3114,26 +3132,26 @@ ClassList["faerie og"] = {
 				firstCol: "oncelr"
 			}],
 		},
-		"extraplanar glamour" : {
-			name : "Extraplanar Glamour",
-			source : ["OG", 191],
-			minlevel : 20,
-			description : desc([
-					"My Charisma increases by 4, to a max of 24 and become attuned one of the inner planes.",
-					"Use the \"Choose Feature\" button above to pick a Plane."
-				]),
-			scores : [0,0,0,0,0,4],
-			scoresMaximum : [0,0,0,0,0,24],
+		"extraplanar glamour": {
+			name: "Extraplanar Glamour",
+			source: ["OG", 191],
+			minlevel: 20,
+			description: desc([
+				"My Charisma increases by 4, to a max of 24 and become attuned one of the inner planes.",
+				"Use the \"Choose Feature\" button above to pick a Plane."
+			]),
+			scores: [0, 0, 0, 0, 0, 4],
+			scoresMaximum: [0, 0, 0, 0, 0, 24],
 			extraname: "Glamour Plane",
 			choices: ["Feywild Access", "Astral Access", "Ethereal Access"],
 			"feywild access": {
 				name: "Extraplanar Glamour: Feywild Access",
 				source: ["OG", 191],
 				description: desc([
-						"My Charisma increases by 4, to a max of 24 and become attuned one of the inner planes.",
-						"If I am under the light of a full moon, I can cast the gate spell to access the Feywild or",
-						"Material Plane without expending a spell slot, and without providing material components."
-					]),
+					"My Charisma increases by 4, to a max of 24 and become attuned one of the inner planes.",
+					"If I am under the light of a full moon, I can cast the gate spell to access the Feywild or",
+					"Material Plane without expending a spell slot, and without providing material components."
+				]),
 				spellChanges: {
 					"gate": {
 						description: "Under light of full moon create a portal to Material Plane or Feywild; can transport named crea to me.",
@@ -3153,11 +3171,11 @@ ClassList["faerie og"] = {
 				name: "Extraplanar Glamour: Astral Access",
 				source: ["OG", 191],
 				description: desc([
-						"My Charisma increases by 4, to a max of 24 and become attuned one of the inner planes.",
-						"I can cast the astral projection spell once without expending a spell slot, using a single quartz",
-						"crystal as the material component for the spell. When I cast the spell, I can only bring a",
-						"number of additional creatures equal to my Charisma modifier."
-					]),
+					"My Charisma increases by 4, to a max of 24 and become attuned one of the inner planes.",
+					"I can cast the astral projection spell once without expending a spell slot, using a single quartz",
+					"crystal as the material component for the spell. When I cast the spell, I can only bring a",
+					"number of additional creatures equal to my Charisma modifier."
+				]),
 				spellChanges: {
 					"astral projection": {
 						description: "Me + my spell mod willing crea projected to Astral Plane with identical statistics.",
@@ -3177,10 +3195,10 @@ ClassList["faerie og"] = {
 				name: "Extraplanar Glamour: Ethereal Access",
 				source: ["OG", 191],
 				description: desc([
-						"My Charisma increases by 4, to a max of 24 and become attuned one of the inner planes.",
-						"I can cast the etherealness spell once without expending a spell slot. I can bring an additional",
-						"number of willing creatures that I can see within 30 feet of I equal to my Charisma modifier."
-					]),
+					"My Charisma increases by 4, to a max of 24 and become attuned one of the inner planes.",
+					"I can cast the etherealness spell once without expending a spell slot. I can bring an additional",
+					"number of willing creatures that I can see within 30 feet of I equal to my Charisma modifier."
+				]),
 				spellChanges: {
 					"etherealness": {
 						description: "Me and my spell mod willing go to Ethereal Plane; still able to perceive 60 ft into normal plane",
@@ -3199,488 +3217,568 @@ ClassList["faerie og"] = {
 };
 
 AddSubClass("faerie og", "sidhe", {
-        regExpSearch: /^(?=.*(sidhe)).*$/i,
-        subname: "Sidhe",
-        source: [ "OG", 192],
-        features: {
-            "subclassfeature1": {
-                name: "Fluid Magics",
-                source: ["OG", 192],
-                minlevel: 1,
-                description: desc([
-					"I gain proficiency with the Insight skill and know the gust and shape water cantrips.",
-					"I learn additional spells, which do not count towards the number of spells I can know."
-				]),
-                skills: "Insight",
-				spellcastingExtra: ["gust", "shape water", "create or destroy water", "fog cloud", "gust of wind", "warding wind", "slow", "wind wall", "storm sphere", "wall of water", "wind walk", "whirlwind", "control weather", "storm of vengeance"],
-				spellcastingExtraApplyNonconform: true,
-            },
-			"heroic glamour": {
-				name: "Heroic Glamour",
-				source: ["OG", 192],
-				minlevel: 2,
-				description: desc([
-						"As a bonus action, I entwine my essen with an ally in 30ft. Until my next turn their",
-						"AC, all saves, damage rolls +my charisma mod. They have ress to all dmg and I take",
-						"half the amount they take as psychic dmg. Ends if they move over 30ft away."
-					]),
-				usages : levels.map(
-					function(n) {
-						return n < 2 ? 0 : n < 3 ? 2 : n < 6 ? 4 : n < 12 ? 4 : n < 17 ? 5 : 6;
-					}),
-				additional: levels.map(
-					function(n) {
-						return (n < 2 ? 0 : n < 6 ? 30 : n < 12 ? 35 : n < 17 ? 40 : 45) + "ft";
-					}),
-				recovery: "short rest",
-				action: ["bonus action", "Heroic Glamour"]
+	regExpSearch: /^(?=.*(sidhe)).*$/i,
+	subname: "Sidhe",
+	source: ["OG", 192],
+	features: {
+		"subclassfeature1": {
+			name: "Fluid Magics",
+			source: ["OG", 192],
+			minlevel: 1,
+			description: desc([
+				"I gain proficiency with the Insight skill and know the gust and shape water cantrips.",
+				"I learn additional spells, which do not count towards the number of spells I can know."
+			]),
+			skills: "Insight",
+			spellcastingExtra: ["gust", "shape water", "create or destroy water", "fog cloud", "gust of wind", "warding wind", "slow", "wind wall", "storm sphere", "wall of water", "wind walk", "whirlwind", "control weather", "storm of vengeance"],
+			spellcastingExtraApplyNonconform: true,
+		},
+		"heroic glamour": {
+			name: "Heroic Glamour",
+			source: ["OG", 192],
+			minlevel: 2,
+			description: desc([
+				"As a bonus action, I entwine my essen with an ally in 30ft. Until my next turn their",
+				"AC, all saves, damage rolls +my charisma mod. They have ress to all dmg and I take",
+				"half the amount they take as psychic dmg. Ends if they move over 30ft away."
+			]),
+			usages: levels.map(
+				function(n) {
+					return n < 2 ? 0 : n < 3 ? 2 : n < 6 ? 4 : n < 12 ? 4 : n < 17 ? 5 : 6;
+				}),
+			additional: levels.map(
+				function(n) {
+					return (n < 2 ? 0 : n < 6 ? 30 : n < 12 ? 35 : n < 17 ? 40 : 45) + "ft";
+				}),
+			recovery: "short rest",
+			action: ["bonus action", "Heroic Glamour"]
+		},
+		"flowing favors": {
+			name: "Flowing Favors",
+			source: ["OG", 192],
+			minlevel: 6,
+			description: desc([
+				"I learn mage hand cantrip and it's invisible. When a crea I can see makes atk roll, check or",
+				"save I can apply my charisma mod as a bonus or penalty to the roll before results are known."
+			]),
+			usages: 1,
+			recovery: "short rest",
+			action: ["reaction", "Flowing Favors"],
+			spellChanges: {
+				"mage hand": {
+					description: "Create invisible hand for simple tasks or carry up to 10 lb; 1 a to control; can't have multiple instances",
+					changes: "Mage Hand is invisible for me."
+				}
 			},
-			"flowing favors": {
+			spellcastingBonus: [{
 				name: "Flowing Favors",
-				source: ["OG", 192],
-				minlevel: 6,
-				description: desc([
-						"I learn mage hand cantrip and it's invisible. When a crea I can see makes atk roll, check or",
-						"save I can apply my charisma mod as a bonus or penalty to the roll before results are known."
-					]),
-				usages: 1,
-				recovery: "short rest",
-				action: ["reaction","Flowing Favors"],
-				spellChanges: {
-					"mage hand": {
-						description: "Create invisible hand for simple tasks or carry up to 10 lb; 1 a to control; can't have multiple instances",
-						changes: "Mage Hand is invisible for me."
-					}
-				},
-				spellcastingBonus: [{
-					name: "Flowing Favors",
-					spells: ["mage hand"],
-					selection: ["mage hand"],
-					firstCol: "atwill"
-				}],
-			},
-			"glamourous incorporation": {
-				name: "Glamourous Incorporation",
-				source: ["OG", 192],
-				minlevel: 10,
-				description: desc([
-						"If I or the target of my Heroic Glamour are the sole target of a spell <= 5th level I react to",
-						"make a Cha save instead. If I succeed I regain a spell slot up to the spells level."
-					]),
-				usages: 1,
-				recovery: "long rest",
-				action: ["reaction", "Glamourous Incorporation"]
-			},
-			"thundering heroism": {
-				name: "Thundering Heroism",
-				source: ["OG", 192],
-				minlevel: 14,
-				description: desc([
-						"The recipient of my Heroic Glamour adds half my faerie level to dmg rolls as thunder dmg."
-					])
-			},
-		}
+				spells: ["mage hand"],
+				selection: ["mage hand"],
+				firstCol: "atwill"
+			}],
+		},
+		"glamourous incorporation": {
+			name: "Glamourous Incorporation",
+			source: ["OG", 192],
+			minlevel: 10,
+			description: desc([
+				"If I or the target of my Heroic Glamour are the sole target of a spell <= 5th level I react to",
+				"make a Cha save instead. If I succeed I regain a spell slot up to the spells level."
+			]),
+			usages: 1,
+			recovery: "long rest",
+			action: ["reaction", "Glamourous Incorporation"]
+		},
+		"thundering heroism": {
+			name: "Thundering Heroism",
+			source: ["OG", 192],
+			minlevel: 14,
+			description: desc([
+				"The recipient of my Heroic Glamour adds half my faerie level to dmg rolls as thunder dmg."
+			])
+		},
+	}
 });
 
 var tricksyCantripDesc = "\n   I empower 1 faerie cantrip that targets 1 crea. The cantrip can target 1 extra crea within\n   range & also within 30ft of 1st target. If it needs an atk roll I need a separate roll for 2nd.";
 
 AddSubClass("faerie og", "nixie", {
-        regExpSearch: /^(?=.*(nixie)).*$/i,
-        subname: "Nixie",
-        source: [ "OG", 193],
-        features: {
-            "subclassfeature1": {
-                name: "Cunnnig Magics",
-                source: ["OG", 193],
-                minlevel: 1,
-                description: desc([
-					"I gain proficiency with the Arcana skill and know the Vicious Mockery and Infestation cantrips.",
-					"I learn additional spells, which do not count towards the number of spells I can know."
-				]),
-                skills: "Arcana",
-				spellcastingExtra: ["vicious mockery","infestation","command","dissonant whispers","crown of madness","phantasmal force","fear","hypnotic pattern","phantasmal killer","dominate person","eyebite","reverse gravity","dominate monster","psychic scream"],
-				spellcastingExtraApplyNonconform: true,
-            },
-			"nightmarish delirium": {
+	regExpSearch: /^(?=.*(nixie)).*$/i,
+	subname: "Nixie",
+	source: ["OG", 193],
+	features: {
+		"subclassfeature1": {
+			name: "Cunnnig Magics",
+			source: ["OG", 193],
+			minlevel: 1,
+			description: desc([
+				"I gain proficiency with the Arcana skill and know the Vicious Mockery and Infestation cantrips.",
+				"I learn additional spells, which do not count towards the number of spells I can know."
+			]),
+			skills: "Arcana",
+			spellcastingExtra: ["vicious mockery", "infestation", "command", "dissonant whispers", "crown of madness", "phantasmal force", "fear", "hypnotic pattern", "phantasmal killer", "dominate person", "eyebite", "reverse gravity", "dominate monster", "psychic scream"],
+			spellcastingExtraApplyNonconform: true,
+		},
+		"nightmarish delirium": {
+			name: "Nightmarish Delirium",
+			source: ["OG", 194],
+			minlevel: 2,
+			description: desc([
+				"I can plunge a creature charmed, frightened, or put to sleep by me into a delirious nightmare.",
+				"(See explanation on the Notes Page.)"
+			]),
+			usages: 1,
+			recovery: "long rest",
+			action: ["bonus action", "Nightmarish Delirium"],
+			toNotesPage: [{
 				name: "Nightmarish Delirium",
-				source: ["OG", 194],
-				minlevel: 2,
-				description: desc([
-						"I can plunge a creature charmed, frightened, or put to sleep by me into a delirious nightmare.",
-						"(See explanation on the Notes Page.)"
-					]),
-				usages: 1,
-				recovery: "long rest",
-				action: ["bonus action", "Nightmarish Delirium"],
-				toNotesPage : [{
-					name: "Nightmarish Delirium",
-					note: [
-						"I can plunge a creature charmed or frightened of me, or that I have put to sleep into a delirious nightmare.",
-						"As a bonus action, I concentrate (as if concentrating on the spell, if you are not already) and double the remaining duration of the effect upon the creature, which becomes lost in a nightmare of my design. The creature sees and hears only itself and the nightmare, experiencing up to one hour’s passing on each of their turns. At the end each of my turns, I can alter the nightmare, causing the creature to be charmed by me, frightened of me, unconscious or confused.",
-						"If the target takes damage, they immediately make a Wisdom saving throw against my faerie spell save DC, ending the effect on a success. Once the effect ends, the creature becomes immune to my Nightmarish Delirium for 24 hours.\n",
-						"Confusion",
-						"A confused creature can’t take reactions and must roll a d10 at the start of each of its turns to determine its behavior for that turn.",
-						"d10    Behavior",
-						"1-2    The creature uses all its movement to move in a random direction. To determine the direction, roll a d8 and assign a direction to each die face. The creature doesn’t take an action this turn.",
-						"2-6    The creature doesn’t move or take Actions this turn.",
-						"7-8    The creature uses its action to make a melee Attack against a randomly determined creature within its reach. If there is no creature within its reach, the creature does nothing this turn.",
-						"9-10  The creature can act and move normally."
-					],
-					popupName: "Nightmarish Delirium",
-					source : ["OG", 194]
-				}],
-			},
-			"supple wards": {
-				name: "Supple Ward",
-				source: ["OG", 192],
-				minlevel: 6,
-				description: desc([
-					   "When rng spell atk (or mag. missile) <= lvl 5 targtes crea in 30 feet, I can react and expend an",
-					   "equivalent spell slot to make opposed spellcasting check vs. the caster. If I win, the spell hits",
-					   "the caster instead."
-					]),
-				usages: 1,
-				recovery: "short rest",
-				action: ["reaction","Supple Ward"]
-			},
-			"tricksy cantrip": {
-				name: "Tricksy Cantrip",
-				source: ["OG", 192],
-				minlevel: 10,
-				description: desc([
-						"I empower 1 faerie cantrip that targets a 1 crea. The cantrip can target one extra crea within",
-						"range & also within 30ft of 1st target. If it needs an atk roll I need a separate roll for 2nd.",
-						"Use the \"Choose Feature\" button above to select a known cantrip."
-					]),
-				choices: ["Cursory Ward", "Leeocks Lucky Coin", "Message", "Nature Bolt", "Peal Of Nine Bells", "Sanguine Strike", "Sapping Sting", "Whelm", "Zap", "Lightning Lure"],
-				"cursory ward": {
-					name: "Tricksy Cantrip: Cursory Ward",
-					source: ["OG", 233],
-					description: tricksyCantripDesc,
-					prereqeval : function() { return isSpellUsed("cursory ward og", true); },
-					spellChanges: {
-						"cursory ward og": {
-							descriptionCantripDie: "I & 1 crea in 30 ft gain `CD`d4 + my spell mod temp hp until end of next turn",
-							changes: tricksyCantripDesc
-						}
+				note: [
+					"I can plunge a creature charmed or frightened of me, or that I have put to sleep into a delirious nightmare.",
+					"As a bonus action, I concentrate (as if concentrating on the spell, if you are not already) and double the remaining duration of the effect upon the creature, which becomes lost in a nightmare of my design. The creature sees and hears only itself and the nightmare, experiencing up to one hour’s passing on each of their turns. At the end each of my turns, I can alter the nightmare, causing the creature to be charmed by me, frightened of me, unconscious or confused.",
+					"If the target takes damage, they immediately make a Wisdom saving throw against my faerie spell save DC, ending the effect on a success. Once the effect ends, the creature becomes immune to my Nightmarish Delirium for 24 hours.\n",
+					"Confusion",
+					"A confused creature can’t take reactions and must roll a d10 at the start of each of its turns to determine its behavior for that turn.",
+					"d10    Behavior",
+					"1-2    The creature uses all its movement to move in a random direction. To determine the direction, roll a d8 and assign a direction to each die face. The creature doesn’t take an action this turn.",
+					"2-6    The creature doesn’t move or take Actions this turn.",
+					"7-8    The creature uses its action to make a melee Attack against a randomly determined creature within its reach. If there is no creature within its reach, the creature does nothing this turn.",
+					"9-10  The creature can act and move normally."
+				],
+				popupName: "Nightmarish Delirium",
+				source: ["OG", 194]
+			}],
+		},
+		"supple wards": {
+			name: "Supple Ward",
+			source: ["OG", 192],
+			minlevel: 6,
+			description: desc([
+				"When rng spell atk (or mag. missile) <= lvl 5 targtes crea in 30 feet, I can react and expend an",
+				"equivalent spell slot to make opposed spellcasting check vs. the caster. If I win, the spell hits",
+				"the caster instead."
+			]),
+			usages: 1,
+			recovery: "short rest",
+			action: ["reaction", "Supple Ward"]
+		},
+		"tricksy cantrip": {
+			name: "Tricksy Cantrip",
+			source: ["OG", 192],
+			minlevel: 10,
+			description: desc([
+				"I empower 1 faerie cantrip that targets a 1 crea. The cantrip can target one extra crea within",
+				"range & also within 30ft of 1st target. If it needs an atk roll I need a separate roll for 2nd.",
+				"Use the \"Choose Feature\" button above to select a known cantrip."
+			]),
+			choices: ["Cursory Ward", "Infestation", "Leeocks Lucky Coin", "Lightning Lure", "Message", "Nature Bolt", "Peal Of Nine Bells", "Sanguine Strike", "Sapping Sting", "Whelm", "Vicious Mockery", "Zap"],
+			"cursory ward": {
+				name: "Tricksy Cantrip: Cursory Ward",
+				description: tricksyCantripDesc,
+				prereqeval: function() {
+					return isSpellUsed("cursory ward og", true);
+				},
+				spellChanges: {
+					"cursory ward og": {
+						descriptionCantripDie: "I & 1 crea in 30 ft gain `CD`d4 + my spell mod temp hp until end of next turn",
+						changes: tricksyCantripDesc
 					}
-				},
-				"leeocks lucky coin": {
-					source: ["OG", 254],
-					name: "Tricksy Cantrip: Leeock's Lucky Coin",
-					description: tricksyCantripDesc,
-					prereqeval : function() { return isSpellUsed("leeocks lucky coin og", true); },
-					spellChanges: {
-						"leeocks lucky coin og": {
-							descriptionCantripDie: "rng spell attack for `CD`D6+spell mod bludg dmg; 2nd target 30 ft of 1st; ignore 1/2 cover; 3/4 = 1/2 cover",
-							changes: tricksyCantripDesc
-						}
-					},
-					calcChanges: {
-						atkAdd: [
-							function (fields, v) {
-								if (v.WeaponName == "leeocks lucky coin og") fields.Description = "1 crea (+2nd in 30ft of 1st, separate roll); Ignore 1/2 cover; Treat 3/4 cover as 1/2 cover.";
-							},
-							tricksyCantripDesc
-						]
-					},
-					weaponsAdd : { select : ["Leeock's Lucky Coin"] }
-				},
-				"lightning lure": {
-					source: ["T", 107],
-					name: "Tricksy Cantrip: Lightning Lure",
-					description: tricksyCantripDesc,
-					prereqeval : function() { return isSpellUsed("lightning lure", true); },
-					spellChanges: {
-						"lightning lure": {
-							descriptionCantripDie: "1 crea (+2nd in 30ft of 1st) save or pull 10 ft to me; if it ends in 5 ft, ´CD´d8 Lightning dmg",
-							changes: tricksyCantripDesc
-						}
-					},
-					calcChanges: {
-						atkAdd: [
-							function (fields, v) {
-								if (v.WeaponName == "lightning lure") fields.Description = "1 crea (+2nd in 30ft of 1st) str save; fail: pull 10 ft closer to me & take damage if end within 5 ft of me";
-							},
-							tricksyCantripDesc
-						]
-					},
-					weaponsAdd : { select : ["Lightning Lure"] }
-				},
-				"message": {
-					name: "Tricksy Cantrip: Message",
-					source: ["P", 259],
-					description: tricksyCantripDesc,
-					prereqeval : function() { return isSpellUsed("message", true); },
-					spellChanges: {
-						"message": {
-							description:"1 crea (+2nd in 30ft of 1st) hears whispered message & can reply with a whisper; none can overhear",
-							changes: tricksyCantripDesc
-						}
-					}
-				},
-				"nature bolt": {
-					name: "Tricksy Cantrip: Nature Bolt",
-					source: ["OG", 263],
-					description: tricksyCantripDesc,
-					prereqeval : function() { return isSpellUsed("nature bolt og", true); },
-					spellChanges: {
-						"nature bolt og": {
-							descriptionCantripDie: "rng spell atk crea (+2nd in 30ft of 1st) `CD`d8; see B for dmg type (depends on terrain)",
-							changes: tricksyCantripDesc
-						}
-					},
-					calcChanges: {
-						atkAdd: [
-							function (fields, v) {
-								if (v.WeaponName == "nature bolt og") fields.Description = "Separate roll for 2nd target in 30ft of 1st; damage type depends on terrain; see Book.";
-							},
-							tricksyCantripDesc
-						]
-					},
-					weaponsAdd : { select : ["Nature Bolt"] }
-				},
-				"peal of nine bells": {
-					name: "Tricksy Cantrip: Peal of Nine Bells",
-					source: ["OG", 265],
-					description: tricksyCantripDesc,
-					prereqeval : function() { return isSpellUsed("peal of nine bells og", true); },
-					spellChanges: {
-						"peal of nine bells og": {
-							descriptionCantripDie: "1 crea (+2nd in 30ft of 1st) on save fail: `CD`D6 thunder dmg and 10ft pushed away",
-							changes: tricksyCantripDesc
-						}
-					},
-					calcChanges: {
-						atkAdd: [
-							function (fields, v) {
-								if (v.WeaponName == "peal of nine bells og") fields.Description = "One crea (+2nd in 30ft of 1st) Str Save, Fail: damage & pushed 10ft away in straight line";
-							},
-							tricksyCantripDesc
-						]
-					},
-					weaponsAdd : { select : ["Peal of Nine Bells"] }
-				},
-				"sanguine strike": {
-					name: "Tricksy Cantrip: Sanguine Strike",
-					source: ["OG", 269],
-					description: tricksyCantripDesc,
-					prereqeval : function() { return isSpellUsed("sanguine strike og", true); },
-					spellChanges: {
-						"sanguine strike og": {
-							description: "touched creature (+2nd in 30ft of 1st) gains advantage for next attack roll",
-							changes: tricksyCantripDesc
-						}
-					},
-				},
-				"sapping sting": {
-					name: "Tricksy Cantrip: Sapping Sting",
-					source: ["W", 189],
-					description: tricksyCantripDesc,
-					prereqeval : function() { return isSpellUsed("sapping sting", true); },
-					spellChanges: {
-						"sapping sting": {
-							description: "1 crea (+2nd in 30ft) save or 1d4 Necrotic dmg and fall prone; +1d4 at CL 5, 11, and 17",
-							descriptionCantripDie: "1 crea (+2nd in 30ft) save or `CD`d4 Necrotic dmg and fall prone",
-							changes: tricksyCantripDesc
-						}
-					},
-					calcChanges: {
-						atkAdd: [
-							function (fields, v) {
-								if (v.WeaponName == "sapping sting") fields.Description = "1 crea (+2nd in 30ft) , Con save, success - no damage, fail - also fall prone";
-							},
-							tricksyCantripDesc
-						]
-					},
-					weaponsAdd : { select : ["Sapping Sting"] }
-				},
-				"whelm": {
-					name: "Tricksy Cantrip: Whelm",
-					source: ["OG", 280],
-					description: tricksyCantripDesc,
-					prereqeval : function() { return isSpellUsed("whelm og", true); },
-					spellChanges: {
-						"whelm og": {
-							descriptionCantripDie: "creat. (+2nd in 30ft of 1st) save or `CD`d6 psychic damage; if taken to 0 hp unconscious + stable; see B",
-							changes: tricksyCantripDesc
-						}
-					},
-					calcChanges: {
-						atkAdd: [
-							function (fields, v) {
-								if (v.WeaponName == "whelm og") fields.Description = "1 crea (+2nd in 30ft of 1st) wis save; fail: dmg; taken to 0: unconscious for 1 min + stable.";
-							},
-							tricksyCantripDesc
-						]
-					},
-					weaponsAdd : { select : ["Whelm"] }
-				},
-				"zap": {
-					name: "Tricksy Cantrip: Zap\n",
-					source: ["OG", 284],
-					description: tricksyCantripDesc,
-					prereqeval : function() { return isSpellUsed("zap og", true); },
-					spellChanges: {
-						"zap og": {
-							descriptionCantripDie: "rng spell atk; 1 target (+2nd in 30ft of 1st); random type of `CD`d8 damage; see B",
-							changes: tricksyCantripDesc
-						}
-					},
-					calcChanges: {
-						atkAdd: [
-							function (fields, v) {
-								if (v.WeaponName == "zap og") fields.Description = "Roll 1d8; 1:fire, 2:cold, 3:acid, 4:light, 5:thdr, 6: rad, 7: force, 8: psy; see B; 2nd target in 30ft of 1st;";
-							},
-							tricksyCantripDesc
-						]
-					},
-					weaponsAdd : { select : ["Zap"] }
 				}
 			},
-			"magical mimicry": {
-				name: "Magical Mimicry",
-				source: ["OG", 192],
-				minlevel: 14,
-				description: desc([
-						"If ally in 30ft casts spell lvl <=5 with a casting time = 1 action or bonus action & no Conc.",
-						"I can react and cast the same spell, even if unknown. I can cast at lower SL if req. for the",
-						"spell are met. Next turn I cannot cast spells, only cantrips."
-					]),
-				usages: 1,
-				recovery: "long rest",
-				action: ["reaction","Magical Mimicry"]
-			},
-		}
-});
-
-AddSubClass("faerie og", "sprig", {
-        regExpSearch: /^(?=.*(sprig)).*$/i,
-        subname: "Sprig",
-        source: [ "OG", 195],
-        features: {
-            "subclassfeature1": {
-                name: "Floral Fortitude",
-                source: ["OG", 195],
-                minlevel: 1,
-                description: desc([
-					"I gain proficiency with the Nature skill and know the Thorn Whip and Druidcraft cantrips.",
-					"I learn additional spells, which do not count towards the number of spells I can know.",
-					"I gain adv. on poison saves, ress vs. poison and can cast Speak With Plants 1/Longrest."
-				]),
-                skills: "Nature",
-				spellcastingExtra: ["thorn whip","druidcraft","entangle", "ray of sickness", "spike growth", "melf’s acid arrow", "daylight ", "plant growth", "grasping vine", "wrath of nature", "wall of thorns", "regenerate", "sunburst", "mass heal"],
-				spellcastingExtraApplyNonconform: true,
-				dmgres : "poison",
-				savetxt : { adv_vs : "poison" },
-				spellcastingBonus: [{
-					name: "Floral Fortitude",
-					spells: ["speak with plants"],
-					selection: ["speak with plants"],
-					firstCol: "oncelr"
-				}],
-            },
-			"corrosive ichor": {
-				name: "Corrosive Ichor",
-				source: ["OG", 195],
-				minlevel: 2,
-				description: desc([
-						"When I hit w/ Thorn Whip I can deal +2d8+1d8/SL acid dmg as bns spending a spell slot.",
-					]),
-				action: ["bonus action", "Corrosive Ichor (with Thorn Whip)"],
-			},
-			"grasping vines": {
-				name: "Grasping Vines",
-				source: ["OG", 195],
-				minlevel: 6,
-				description: desc([
-					   "I can cast Speak With Plants at will. My Thorn Whip can pull up to 15ft and has 45ft range.",
-					   "As bns I can move the area of my entangle, spike growth or grasping vine my cha mod ft."
-					]),
-				action: ["bonus action","Grasping Vines"],
-				calcChanges : {
-					spellAdd : [
-						function (spellKey, spellObj, spName) {
-							if(spellKey === "speak with plants") {
-								spellObj.firstCol = "atwill";
-							}
-						},
-						"I can cast Speak With Plants at will."
-					],
-					atkAdd: [
-						function (fields, v) {
-							if (v.WeaponName == "thorn whip")
-							{
-								fields.Range = "Melee, 45 ft";
-								fields.Description = "Melee spell attack, pull target up to 15 ft closer";
-							}
-						},
-						"My Thorn Whip can pull up to 15ft and has 45ft range."
-					]
+			"infestation": {
+				name: "Tricksy Cantrip: Infestation",
+				description: tricksyCantripDesc,
+				prereqeval: function() {
+					return isSpellUsed("infestation", true);
 				},
 				spellChanges: {
-					"thorn whip": {
-						description: "Melee spell atk for 1d6 Piercing dmg and pull crea up to 15 ft towards me; +1d6 at CL 5, 11, and 17",
-						descriptionCantripDie: "Melee spell attack for `CD`d6 Piercing dmg and pull crea up to 15 ft towards me",
-						range: "45 ft",
-						changes: "My Thorn Whip can pull up to 15ft and has 45ft range."
-					}
-				},
-				weaponsAdd : { select : ["Thorn Whip"] }
-			},
-			"natural raiment": {
-				name: "Natural Raiment",
-				source: ["OG", 195],
-				minlevel: 10,
-				description: desc([
-					"I can assume the form of a shambling mound for half my faerie level in hours with HP = 50 +",
-					"fearie level. In this form I can only cast Thorn Whip and other Sprig spells. I retain my Int, Wis,",
-					"Cha and my skill and save profiencies. If reduced to 0 HP I take the remainder of the dmg.",
-					"I can release the forme anytime, no action. (See wildshape page for stats, adjust HP.)",
-					]),
-				action: ["action", "Natural Raiment"],
-				usages: 1,
-				recovery : "long rest",
-				eval: function () { AddWildshape("Shambling Mound"); }
-			},
-			"we are the vine": {
-				name: "We are the Vine",
-				source: ["OG", 195],
-				minlevel: 14,
-				description: desc([
-						"Plants I created or charmed can be origin for my Thorn Whip, it gets + my cha mod acid",
-						"dmg and I can use it to pull friendly crea 15ft with no dmg or attack roll."
-					]),
-				spellChanges: {
-					"thorn whip": {
-						description: "Melee spell atk for 1d6 Piercing dmg and pull crea up to 15 ft towards me; +1d6 at CL 5, 11, and 17",
-						descriptionCantripDie: "Melee spell atk,`CD`d6 pierc + my spell mod acid dmg, pull crea max 15ft closer, can pull friend (no atk/dmg)",
-						changes: "Plants I created or charmed can be origin for my Thorn Whip, it gets + my cha mod acid dmg and I can use it to pull friendly crea 15ft with no dmg or attack roll."
+					"infestation": {
+						descriptionCantripDie: "1 crea (+2nd in 30ft of 1st) save or `CD`d6 Poison dmg and moved 5 ft in random direction",
+						changes: tricksyCantripDesc
 					}
 				},
 				calcChanges: {
 					atkAdd: [
-						function (fields, v) {
-							if (v.WeaponName == "thorn whip")
-							{
-								fields.Description = "Melee spell atk, +" + What('Cha Mod') + " acid damage, pull target max 15ft closer, can pull friend (no dmg/atk)";
-							}
+						function(fields, v) {
+							if (v.WeaponName == "infestation") fields.Description = "2nd target 30 ft of 1st; Con save, success - no damage, fail - target also moved 5 ft in rnd dir";
 						},
-						"Plants I created or charmed can be origin for my Thorn Whip, it gets + my cha mod acid dmg and I can use it to pull friendly crea 15ft with no dmg or attack roll."
+						tricksyCantripDesc
 					]
 				},
+				weaponsAdd: {
+					select: ["Infestation"]
+				}
 			},
-		}
+			"leeocks lucky coin": {
+				name: "Tricksy Cantrip: Leeock's Lucky Coin",
+				description: tricksyCantripDesc,
+				prereqeval: function() {
+					return isSpellUsed("leeocks lucky coin og", true);
+				},
+				spellChanges: {
+					"leeocks lucky coin og": {
+						descriptionCantripDie: "rng spell attack for `CD`D6+spell mod bludg dmg; 2nd target 30 ft of 1st; ignore 1/2 cover; 3/4 = 1/2 cover",
+						changes: tricksyCantripDesc
+					}
+				},
+				calcChanges: {
+					atkAdd: [
+						function(fields, v) {
+							if (v.WeaponName == "leeocks lucky coin og") fields.Description = "1 crea (+2nd in 30ft of 1st, separate roll); Ignore 1/2 cover; Treat 3/4 cover as 1/2 cover.";
+						},
+						tricksyCantripDesc
+					]
+				},
+				weaponsAdd: {
+					select: ["Leeock's Lucky Coin"]
+				}
+			},
+			"lightning lure": {
+				name: "Tricksy Cantrip: Lightning Lure",
+				description: tricksyCantripDesc,
+				prereqeval: function() {
+					return isSpellUsed("lightning lure", true);
+				},
+				spellChanges: {
+					"lightning lure": {
+						descriptionCantripDie: "1 crea (+2nd in 30ft of 1st) save or pull 10 ft to me; if it ends in 5 ft, ´CD´d8 Lightning dmg",
+						changes: tricksyCantripDesc
+					}
+				},
+				calcChanges: {
+					atkAdd: [
+						function(fields, v) {
+							if (v.WeaponName == "lightning lure") fields.Description = "1 crea (+2nd in 30ft of 1st) str save; fail: pull 10 ft closer to me & take damage if end within 5 ft of me";
+						},
+						tricksyCantripDesc
+					]
+				},
+				weaponsAdd: {
+					select: ["Lightning Lure"]
+				}
+			},
+			"message": {
+				name: "Tricksy Cantrip: Message",
+				description: tricksyCantripDesc,
+				prereqeval: function() {
+					return isSpellUsed("message", true);
+				},
+				spellChanges: {
+					"message": {
+						description: "1 crea (+2nd in 30ft of 1st) hears whispered message & can reply with a whisper; none can overhear",
+						changes: tricksyCantripDesc
+					}
+				}
+			},
+			"nature bolt": {
+				name: "Tricksy Cantrip: Nature Bolt",
+				description: tricksyCantripDesc,
+				prereqeval: function() {
+					return isSpellUsed("nature bolt og", true);
+				},
+				spellChanges: {
+					"nature bolt og": {
+						descriptionCantripDie: "rng spell atk crea (+2nd in 30ft of 1st) `CD`d8; see B for dmg type (depends on terrain)",
+						changes: tricksyCantripDesc
+					}
+				},
+				calcChanges: {
+					atkAdd: [
+						function(fields, v) {
+							if (v.WeaponName == "nature bolt og") fields.Description = "Separate roll for 2nd target in 30ft of 1st; damage type depends on terrain; see Book.";
+						},
+						tricksyCantripDesc
+					]
+				},
+				weaponsAdd: {
+					select: ["Nature Bolt"]
+				}
+			},
+			"peal of nine bells": {
+				name: "Tricksy Cantrip: Peal of Nine Bells",
+				description: tricksyCantripDesc,
+				prereqeval: function() {
+					return isSpellUsed("peal of nine bells og", true);
+				},
+				spellChanges: {
+					"peal of nine bells og": {
+						descriptionCantripDie: "1 crea (+2nd in 30ft of 1st) on save fail: `CD`D6 thunder dmg and 10ft pushed away",
+						changes: tricksyCantripDesc
+					}
+				},
+				calcChanges: {
+					atkAdd: [
+						function(fields, v) {
+							if (v.WeaponName == "peal of nine bells og") fields.Description = "One crea (+2nd in 30ft of 1st) Str Save, Fail: damage & pushed 10ft away in straight line";
+						},
+						tricksyCantripDesc
+					]
+				},
+				weaponsAdd: {
+					select: ["Peal of Nine Bells"]
+				}
+			},
+			"sanguine strike": {
+				name: "Tricksy Cantrip: Sanguine Strike",
+				description: tricksyCantripDesc,
+				prereqeval: function() {
+					return isSpellUsed("sanguine strike og", true);
+				},
+				spellChanges: {
+					"sanguine strike og": {
+						description: "touched creature (+2nd in 30ft of 1st) gains advantage for next attack roll",
+						changes: tricksyCantripDesc
+					}
+				},
+			},
+			"sapping sting": {
+				name: "Tricksy Cantrip: Sapping Sting",
+				description: tricksyCantripDesc,
+				prereqeval: function() {
+					return isSpellUsed("sapping sting", true);
+				},
+				spellChanges: {
+					"sapping sting": {
+						description: "1 crea (+2nd in 30ft) save or 1d4 Necrotic dmg and fall prone; +1d4 at CL 5, 11, and 17",
+						descriptionCantripDie: "1 crea (+2nd in 30ft) save or `CD`d4 Necrotic dmg and fall prone",
+						changes: tricksyCantripDesc
+					}
+				},
+				calcChanges: {
+					atkAdd: [
+						function(fields, v) {
+							if (v.WeaponName == "sapping sting") fields.Description = "1 crea (+2nd in 30ft) , Con save, success - no damage, fail - also fall prone";
+						},
+						tricksyCantripDesc
+					]
+				},
+				weaponsAdd: {
+					select: ["Sapping Sting"]
+				}
+			},
+			"whelm": {
+				name: "Tricksy Cantrip: Whelm",
+				description: tricksyCantripDesc,
+				prereqeval: function() {
+					return isSpellUsed("whelm og", true);
+				},
+				spellChanges: {
+					"whelm og": {
+						descriptionCantripDie: "creat. (+2nd in 30ft of 1st) save or `CD`d6 psychic damage; if taken to 0 hp unconscious + stable; see B",
+						changes: tricksyCantripDesc
+					}
+				},
+				calcChanges: {
+					atkAdd: [
+						function(fields, v) {
+							if (v.WeaponName == "whelm og") fields.Description = "1 crea (+2nd in 30ft of 1st) wis save; fail: dmg; taken to 0: unconscious for 1 min + stable.";
+						},
+						tricksyCantripDesc
+					]
+				},
+				weaponsAdd: {
+					select: ["Whelm"]
+				}
+			},
+			"vicious mockery": {
+				name: "Tricksy Cantrip: Vicious Mockery",
+				description: tricksyCantripDesc,
+				prereqeval: function() {
+					return isSpellUsed("vicious mockery", true);
+				},
+				spellChanges: {
+					"vicious mockery": {
+						descriptionCantripDie: "1 crea (+2nd in 30ft of 1st) save or `CD`d4 Psychic dmg and dis. on next attack roll",
+						changes: tricksyCantripDesc
+					}
+				},
+				calcChanges: {
+					atkAdd: [
+						function(fields, v) {
+							if (v.WeaponName == "vicious mockery") fields.Description = "Wis save, success - no damage, fail - also disadv. nxt atk in nxt turn; 1 crea (+2nd in 30ft of 1st)";
+						},
+						tricksyCantripDesc
+					]
+				},
+				weaponsAdd: {
+					select: ["Vicious Mockery"]
+				}
+			},
+			"zap": {
+				name: "Tricksy Cantrip: Zap\n",
+				description: tricksyCantripDesc,
+				prereqeval: function() {
+					return isSpellUsed("zap og", true);
+				},
+				spellChanges: {
+					"zap og": {
+						descriptionCantripDie: "rng spell atk; 1 target (+2nd in 30ft of 1st); random type of `CD`d8 damage; see B",
+						changes: tricksyCantripDesc
+					}
+				},
+				calcChanges: {
+					atkAdd: [
+						function(fields, v) {
+							if (v.WeaponName == "zap og") fields.Description = "Roll 1d8; 1:fire, 2:cold, 3:acid, 4:light, 5:thdr, 6: rad, 7: force, 8: psy; see B; 2nd target in 30ft of 1st;";
+						},
+						tricksyCantripDesc
+					]
+				},
+				weaponsAdd: {
+					select: ["Zap"]
+				}
+			}
+		},
+		"magical mimicry": {
+			name: "Magical Mimicry",
+			source: ["OG", 192],
+			minlevel: 14,
+			description: desc([
+				"If ally in 30ft casts spell lvl <=5 with a casting time = 1 action or bonus action & no Conc.",
+				"I can react and cast the same spell, even if unknown. I can cast at lower SL if req. for the",
+				"spell are met. Next turn I cannot cast spells, only cantrips."
+			]),
+			usages: 1,
+			recovery: "long rest",
+			action: ["reaction", "Magical Mimicry"]
+		},
+	}
+});
+
+AddSubClass("faerie og", "sprig", {
+	regExpSearch: /^(?=.*(sprig)).*$/i,
+	subname: "Sprig",
+	source: ["OG", 195],
+	features: {
+		"subclassfeature1": {
+			name: "Floral Fortitude",
+			source: ["OG", 195],
+			minlevel: 1,
+			description: desc([
+				"I gain proficiency with the Nature skill and know the Thorn Whip and Druidcraft cantrips.",
+				"I learn additional spells, which do not count towards the number of spells I can know.",
+				"I gain adv. on poison saves, ress vs. poison and can cast Speak With Plants 1/Longrest."
+			]),
+			skills: "Nature",
+			spellcastingExtra: ["thorn whip", "druidcraft", "entangle", "ray of sickness", "spike growth", "melf’s acid arrow", "daylight ", "plant growth", "grasping vine", "wrath of nature", "wall of thorns", "regenerate", "sunburst", "mass heal"],
+			spellcastingExtraApplyNonconform: true,
+			dmgres: "poison",
+			savetxt: {
+				adv_vs: "poison"
+			},
+			spellcastingBonus: [{
+				name: "Floral Fortitude",
+				spells: ["speak with plants"],
+				selection: ["speak with plants"],
+				firstCol: "oncelr"
+			}],
+		},
+		"corrosive ichor": {
+			name: "Corrosive Ichor",
+			source: ["OG", 195],
+			minlevel: 2,
+			description: desc([
+				"When I hit w/ Thorn Whip I can deal +2d8+1d8/SL acid dmg as bns spending a spell slot.",
+			]),
+			action: ["bonus action", "Corrosive Ichor (with Thorn Whip)"],
+		},
+		"grasping vines": {
+			name: "Grasping Vines",
+			source: ["OG", 195],
+			minlevel: 6,
+			description: desc([
+				"I can cast Speak With Plants at will. My Thorn Whip can pull up to 15ft and has 45ft range.",
+				"As bns I can move the area of my entangle, spike growth or grasping vine my cha mod ft."
+			]),
+			action: ["bonus action", "Grasping Vines"],
+			calcChanges: {
+				spellAdd: [
+					function(spellKey, spellObj, spName) {
+						if (spellKey === "speak with plants") {
+							spellObj.firstCol = "atwill";
+						}
+					},
+					"I can cast Speak With Plants at will."
+				],
+				atkAdd: [
+					function(fields, v) {
+						if (v.WeaponName == "thorn whip") {
+							fields.Range = "Melee, 45 ft";
+							fields.Description = "Melee spell attack, pull target up to 15 ft closer";
+						}
+					},
+					"My Thorn Whip can pull up to 15ft and has 45ft range."
+				]
+			},
+			spellChanges: {
+				"thorn whip": {
+					description: "Melee spell atk for 1d6 Piercing dmg and pull crea up to 15 ft towards me; +1d6 at CL 5, 11, and 17",
+					descriptionCantripDie: "Melee spell attack for `CD`d6 Piercing dmg and pull crea up to 15 ft towards me",
+					range: "45 ft",
+					changes: "My Thorn Whip can pull up to 15ft and has 45ft range."
+				}
+			},
+			weaponsAdd: {
+				select: ["Thorn Whip"]
+			}
+		},
+		"natural raiment": {
+			name: "Natural Raiment",
+			source: ["OG", 195],
+			minlevel: 10,
+			description: desc([
+				"I can assume the form of a shambling mound for half my faerie level in hours with HP = 50 +",
+				"fearie level. In this form I can only cast Thorn Whip and other Sprig spells. I retain my Int, Wis,",
+				"Cha and my skill and save profiencies. If reduced to 0 HP I take the remainder of the dmg.",
+				"I can release the forme anytime, no action. (See wildshape page for stats, adjust HP.)",
+			]),
+			action: ["action", "Natural Raiment"],
+			usages: 1,
+			recovery: "long rest",
+			eval: function() {
+				AddWildshape("Shambling Mound");
+			},
+			removeeval: function() {
+				RemoveWildshape("Shambling Mound");
+			}
+		},
+		"we are the vine": {
+			name: "We are the Vine",
+			source: ["OG", 195],
+			minlevel: 14,
+			description: desc([
+				"Plants I created or charmed can be origin for my Thorn Whip, it gets + my cha mod acid",
+				"dmg and I can use it to pull friendly crea 15ft with no dmg or attack roll."
+			]),
+			spellChanges: {
+				"thorn whip": {
+					description: "Melee spell atk for 1d6 Piercing dmg and pull crea up to 15 ft towards me; +1d6 at CL 5, 11, and 17",
+					descriptionCantripDie: "Melee spell atk,`CD`d6 pierc + my spell mod acid dmg, pull crea max 15ft closer, can pull friend (no atk/dmg)",
+					changes: "Plants I created or charmed can be origin for my Thorn Whip, it gets + my cha mod acid dmg and I can use it to pull friendly crea 15ft with no dmg or attack roll."
+				}
+			},
+			calcChanges: {
+				atkAdd: [
+					function(fields, v) {
+						if (v.WeaponName == "thorn whip") {
+							fields.Description = "Melee spell atk, +" + What('Cha Mod') + " acid damage, pull target max 15ft closer, can pull friend (no dmg/atk)";
+						}
+					},
+					"Plants I created or charmed can be origin for my Thorn Whip, it gets + my cha mod acid dmg and I can use it to pull friendly crea 15ft with no dmg or attack roll."
+				]
+			},
+		},
+	}
 });
 
 var arFaerieWeapon = ["My fists, teeth, nails, or a simple melee weapon become a magical d4 faerie weapon. I can",
-				"attack twice if I take the Attack Action with it. My speed increases by 5 feet, I have a climbing",
-				"speed of at least 20 feet. I lose any flying speed. I gain 1 hit point per level."];
+	"attack twice if I take the Attack Action with it. My speed increases by 5 feet, I have a climbing",
+	"speed of at least 20 feet. I lose any flying speed. I gain 1 hit point per level."
+];
 
 AddSubClass("faerie og", "brownie", {
 	regExpSearch: /^(?=.*(brownie)).*$/i,
 	subname: "Brownie",
-	source: [ "OG", 196],
+	source: ["OG", 196],
 	features: {
 		"subclassfeature1": {
 			name: "Grugach Magic",
@@ -3691,20 +3789,20 @@ AddSubClass("faerie og", "brownie", {
 				"I learn additional spells, which do not count towards the number of spells I can know."
 			]),
 			skills: "Survival",
-			spellcastingExtra: ["mold earth","longstrider", "zephyr strike", "earth tremor", "maximilian's earthen grasp", "erupting earth", "meld into stone", "staggering smite", "transmute rock", "move earth", "mordenkainen's sword", "earthquake", "invulnerability"],
+			spellcastingExtra: ["mold earth", "longstrider", "zephyr strike", "earth tremor", "maximilian's earthen grasp", "erupting earth", "meld into stone", "staggering smite", "transmute rock", "move earth", "mordenkainen's sword", "earthquake", "invulnerability"],
 			spellcastingExtraApplyNonconform: true,
 			armorProfs: [true, false, false, false]
 		},
 		"faerie weapon": {
 			name: "Faerie Weapon",
-			source: ["OG",195],
+			source: ["OG", 195],
 			minlevel: 1,
 			description: desc([
 				arFaerieWeapon,
 				"Use the \"Choose Feature\" button above to pick the Damage Type of your Faerie Weapon."
 			]),
- 			calcChanges : {
-				hp : function (totalHD, HDobj, prefix) {
+			calcChanges: {
+				hp: function(totalHD, HDobj, prefix) {
 					if (classes.known["faerie og"]) return [classes.known["faerie og"].level, "Faerie (Brownie)"];
 				},
 			},
@@ -3716,23 +3814,22 @@ AddSubClass("faerie og", "brownie", {
 				damage: [1, 4, "slashing"],
 				abilitytodamage: true,
 				selectNow: true,
-				description: "Finesse, magical"
+				description: "Finesse, magical",
+				isAlwaysProf: true
 			}],
 			action: ["action", "Attack twice w/ Faerie Weapon"],
 			speed: {
-				walk: {
-					bonus: "+5",
-				},
-				fly: "fixed 0",
+				walk: "+5",
+				fly: "*0",
 				climb: 20
 			},
-			choices: ["Bludgeoning","Piercing","Slashing"],
+			choices: ["Bludgeoning", "Piercing", "Slashing"],
 			"bludgeoning": {
 				name: "Faerie Weapon (Bludgeoning)",
-				calcChanges : {
-					atkAdd : [
+				calcChanges: {
+					atkAdd: [
 						function(fields, v) {
-							if(/\faerie weapon/i.test(v.WeaponText)) fields.Damage_Type = "Bludgeoning";
+							if (/\faerie.?weapon/i.test(v.WeaponText)) fields.Damage_Type = "Bludgeoning";
 						}
 					]
 				},
@@ -3740,10 +3837,10 @@ AddSubClass("faerie og", "brownie", {
 			},
 			"piercing": {
 				name: "Faerie Weapon (Piercing)",
-				calcChanges : {
-					atkAdd : [
+				calcChanges: {
+					atkAdd: [
 						function(fields, v) {
-							if(/\faerie weapon/i.test(v.WeaponText)) fields.Damage_Type = "Piercing";
+							if (/\faerie.?weapon/i.test(v.WeaponText)) fields.Damage_Type = "Piercing";
 						}
 					]
 				},
@@ -3751,10 +3848,10 @@ AddSubClass("faerie og", "brownie", {
 			},
 			"slashing": {
 				name: "Faerie Weapon (Slashing)",
-				calcChanges : {
-					atkAdd : [
+				calcChanges: {
+					atkAdd: [
 						function(fields, v) {
-							if(/\faerie weapon/i.test(v.WeaponText)) fields.Damage_Type = "Slashing";
+							if (/\faerie.?weapon/i.test(v.WeaponText)) fields.Damage_Type = "Slashing";
 						}
 					]
 				},
@@ -3766,27 +3863,27 @@ AddSubClass("faerie og", "brownie", {
 			source: ["OG", 196],
 			minlevel: 2,
 			description: desc([
-					"I can whimsy at turnstart, until end of next turn. During I have resist. to pierc, slash, bludg.",
-					"I can conc. on spells, but only cast cantrips, and I have disadv. on conc. checks. Atk and dmg",
-					"with my faerie weapon use Cha instead of Str/Dex. The whimsy ends on unconscious.",
-				]),
+				"I can whimsy at turnstart, until end of next turn. During I have resist. to pierc, slash, bludg.",
+				"I can conc. on spells, but only cast cantrips, and I have disadv. on conc. checks. Atk and dmg",
+				"with my faerie weapon use Cha instead of Str/Dex. The whimsy ends on unconscious.",
+			]),
 			usages: "Con mod per ",
 			usagescalc: "event.value = Math.max(1, What('Con Mod'));",
 			recovery: "short rest",
-			calcChanges : {
-				atkAdd : [
+			calcChanges: {
+				atkAdd: [
 					function(fields, v) {
-						if(classes.known["faerie og"] && What('Cha Mod') > What(AbilityScores.abbreviations[fields.Mod - 1] + ' Mod') && (fields.Mod == 1 || fields.Mod == 2) && /\bwhimsy/i.test(v.WeaponText)) {
+						if (classes.known["faerie og"] && What('Cha Mod') > What(AbilityScores.abbreviations[fields.Mod - 1] + ' Mod') && (fields.Mod == 1 || fields.Mod == 2) && /\bwhimsy/i.test(v.WeaponText)) {
 							fields.Mod = 6;
 						}
 					},
 					"If I include the word 'Whimsy' in a melee weapon's name, the weapon will use my Charisma mod for Attack and Damage."
 				]
 			},
-			weaponsAdd : {
-				select : ["Faerie Weapon, Whimsy"]
+			weaponsAdd: {
+				select: ["Faerie Weapon, Whimsy"]
 			},
-			dmgres : [
+			dmgres: [
 				["Bludgeoning", "Bludge. (in whimsy)"],
 				["Slashing", "Slash. (in whimsy)"],
 				["Piercing", "Pierc. (in whimsy)"]
@@ -3797,8 +3894,8 @@ AddSubClass("faerie og", "brownie", {
 			source: ["OG", 196],
 			minlevel: 6,
 			description: desc([
-					"When I atk with my Faerie Weapon I can atk an additional time as bonus action.",
-				]),
+				"When I atk with my Faerie Weapon I can atk an additional time as bonus action.",
+			]),
 			action: ["bonus action", "Quickling Attack w/ Faerie Weapon"],
 		},
 		"wanton assault": {
@@ -3806,49 +3903,49 @@ AddSubClass("faerie og", "brownie", {
 			source: ["OG", 196],
 			minlevel: 10,
 			description: desc([
-					"Use action + bns during whimsy: +15 feet speed, immune atks of opport., make Cha mod",
-					"(min 3) atks w/ faerie weapon & deal +1d6 extra dmg. Whimsy ends at end of turn.",
-					"Use the \"Choose Feature\" button above to pick beetween Necrotic and Radiant damage."
+				"Use action + bns during whimsy: +15 feet speed, immune atks of opport., make Cha mod",
+				"(min 3) atks w/ faerie weapon & deal +1d6 extra dmg. Whimsy ends at end of turn.",
+				"Use the \"Choose Feature\" button above to pick beetween Necrotic and Radiant damage."
 			]),
 			usages: 1,
 			recovery: "long rest",
-			choices : ['Radiant', 'Necrotic'],
-			"radiant" : {
+			choices: ['Radiant', 'Necrotic'],
+			"radiant": {
 				name: "Wanton Assault",
 				description: desc([
-						"While in a whimsy, use action and bns to: +15 feet speed, immune to atks of opport.,",
-						"make a number of atks with my faerie weapon equal to my Cha mod (min 3) which deal",
-						"+1d6 Radiant dmg. When my turn ends, so does my whimsy."
-					]),
-				calcChanges : {
-					atkAdd : [
+					"While in a whimsy, use action and bns to: +15 feet speed, immune to atks of opport.,",
+					"make a number of atks with my faerie weapon equal to my Cha mod (min 3) which deal",
+					"+1d6 Radiant dmg. When my turn ends, so does my whimsy."
+				]),
+				calcChanges: {
+					atkAdd: [
 						function(fields, v) {
-							if(/\bwhimsy/i.test(v.WeaponText)) {
-								if(classes.known["faerie og"].level < 14)
+							if (/\bwhimsy/i.test(v.WeaponText)) {
+								if (classes.known["faerie og"].level < 14)
 									fields.Description = "Magical, +1D6 Radiant Damage during Wanton Assault.";
 								else
-									fields.Description = "Finesse, magical, +" + Math.floor(classes.known["faerie og"].level/2) + " Radiant dmg on first hit/rnd, +1D6 Radiant dmg during Wanton Assault.";
+									fields.Description = "Finesse, magical, +" + Math.floor(classes.known["faerie og"].level / 2) + " Radiant dmg on first hit/rnd, +1D6 Radiant dmg during Wanton Assault.";
 							}
 						},
 						"Attacks with my Faerie Weapon deal an additional 1D6 Radiant Damage during Wanton Assault. From level 14 on the first hit each round during whimsy deals half my faerie level extra Radiant damage."
 					]
 				},
 			},
-			"necrotic" : {
+			"necrotic": {
 				name: "Wanton Assault",
 				description: desc([
-						"While in a whimsy, use action and bns to: +15 feet speed, immune to atks of opport.,",
-						"make a number of atks with my faerie weapon equal to my Cha mod (min 3) which deal",
-						"+1d6 Necrotic dmg. When my turn ends, so does my whimsy."
-					]),
-				calcChanges : {
-					atkAdd : [
+					"While in a whimsy, use action and bns to: +15 feet speed, immune to atks of opport.,",
+					"make a number of atks with my faerie weapon equal to my Cha mod (min 3) which deal",
+					"+1d6 Necrotic dmg. When my turn ends, so does my whimsy."
+				]),
+				calcChanges: {
+					atkAdd: [
 						function(fields, v) {
-							if(/\bwhimsy/i.test(v.WeaponText)) {
-								if(classes.known["faerie og"].level < 14)
-									fields.Description = "Magical, +1D6 Necrotic Damage during Wanton Assault.";
+							if (/\bwhimsy/i.test(v.WeaponText)) {
+								if (classes.known["faerie og"].level < 14)
+									fields.Description = "Finesse, Magical, +1D6 Necrotic Damage during Wanton Assault.";
 								else
-									fields.Description = "Finesse, magical, +" + Math.floor(classes.known["faerie og"].level/2) + " Necrotic dmg on first hit/rnd, +1D6 Necrotic dmg during Wanton Assault.";
+									fields.Description = "Finesse, magical, +" + Math.floor(classes.known["faerie og"].level / 2) + " Necrotic dmg on first hit/rnd, +1D6 Necrotic dmg during Wanton Assault.";
 							}
 						},
 						"Attacks with my Faerie Weapon deal an additional 1D6 Necrotic Damage during Wanton Assault. From level 14 on the first hit each round during whimsy deals half my faerie level extra Necrotic damage."
@@ -3862,56 +3959,55 @@ AddSubClass("faerie og", "brownie", {
 			minlevel: 14,
 			description: desc([
 				"During whimsy the first hit ea turn deals +half faerie level dmg (same type as above)."
-				]),
+			]),
 		},
 	}
 });
 
 CreatureList["shambling mound"] = {
-        name: "Shambling Mound",
-        source: ["MM", 270],
-        size: 2,
-        type: "Plant",
-        companion: "familiar_not_al",
-        alignment: "Unaligned",
-        ac: 15,
-        hp: 50,
-        hd: [16, 10],
-		speed: "20 ft, swim 20 ft",
-        scores: [18, 8, 16, 5, 10, 3],
-        skills: {
-            stealth: 2
-        },
-        senses: "Blindsight 60 ft, blind beyond that",
-        damage_resistances : "cold, fire",
-		damage_immunities : "poison",
-		condition_immunities : "blind, deaf, exhaustion",
-		passivePerception: 10,
-        challengeRating: "5",
-        proficiencyBonus: 3,
-        attacksAction: 1,
-        attacks: [{
-            name: "Slam",
-            ability: 1,
-            damage: [2, 8, "bludgeoning"],
-            range: "Melee (5 ft)",
-            description: ""
-        },{
-		    name: "Engulf",
-            ability: 1,
-            damage: [2, 8, "bludgeoning"],
-            range: "Special",
-            description: "Target is blind, restr., unable to breath. DC 14 Con/rnd or DMG. See B"
-        }
-		],
-        traits: [
-			{
-				name: "Lightning Absorption",
-				description: "When taking lightn. dmg, take no dmg and gain hp equal to the lightn. dmg."
-			},
-			{
-				name: "Multiattack",
-				description: "Make 2 slam atks. If both hit a <=Medium  crea it is grappled (escape DC 14), and I use Engulf on it."
-			}
-		]
+	name: "Shambling Mound",
+	source: ["MM", 270],
+	size: 2,
+	type: "Plant",
+	alignment: "Unaligned",
+	ac: 15,
+	hp: 50,
+	hd: [16, 10],
+	speed: "20 ft, swim 20 ft",
+	scores: [18, 8, 16, 5, 10, 3],
+	skills: {
+		stealth: 2
+	},
+	senses: "Blindsight 60 ft, blind beyond that",
+	damage_resistances: "cold, fire",
+	damage_immunities: "poison",
+	condition_immunities: "blind, deaf, exhaustion",
+	passivePerception: 10,
+	challengeRating: "5",
+	proficiencyBonus: 3,
+	attacksAction: 1,
+	attacks: [{
+		name: "Slam",
+		ability: 1,
+		damage: [2, 8, "bludgeoning"],
+		range: "Melee (5 ft)",
+		description: ""
+	}, {
+		name: "Engulf",
+		ability: 1,
+		damage: [2, 8, "bludgeoning"],
+		range: "Special",
+		description: "Target is blind, restr., unable to breath. DC 14 Con/rnd or DMG. See B"
+	}],
+	traits: [{
+			name: "Lightning Absorption",
+			description: "When taking lightn. dmg, take no dmg and gain hp equal to the lightn. dmg."
+		},
+		{
+			name: "Multiattack",
+			description: "Make 2 slam atks. If both hit a <=Medium  crea it is grappled (escape DC 14), and I use Engulf on it."
+		}
+	]
 };
+
+// ### END FAERIE ### Old_Gus_Errata-Faerie.js
