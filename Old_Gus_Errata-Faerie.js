@@ -4,45 +4,38 @@
 	-KEEP IN MIND-
 	It is recommended to enter the code in a fresh sheet before adding any other information (i.e. before making your character with it).
 */
-
 /*	-INFORMATION-
 	Subject:	Class
-	Effect:		This script aims to add the Faerie Class & it's four Subclasses from Old Gus Errata
+	Effect:		This script adds the Faerie Class & it's four Subclasses from Old Gus Errata
 	Source 1:	https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link
 	Source 2:	https://www.reddit.com/r/UnearthedArcana/comments/z5872u/old_gus_errata_wanderers_of_the_infinite_skies/
 	Author:		https://reddit/u/callmepartario
 	Code by:	xika
-	
-	Date:		2024-11-09 (sheet v13)
-
-	Included:
+	Date:		2024-11-20 (sheet v13)
+*/
+/*	
+	Changelog:
+	2024-11-20	- Code Cleanup
 	2024-11-02	- added Shambling mount to Wildshapes automatically
 				- improved some of the text output formatting
 				- added Vicious Mockery and Infestation to Tricksy Cantrip
 				- fixed Brownie Walk & Fly Speed
-				
 	2024-11-01	- added tools and multiclassing tools
 				- added Shambling Mound as manual Wildshape
 				- improved Readability of Spelllist
 				- some minor formatting improvements
-				
 	2024-10-31	Initial Release
-
 */
-
 var iFileName = "Old_Gus_Errata-Faerie.js";
-
 RequiredSheetVersion("13.2.0");
-
 SourceList.OG = {
-	name : "Old Gus' Errata - Wanderer of Infinite Skies",
-	abbreviation : "OG",
-	abbreviationSpellsheet : "OG",
-	group : "Old Gus Errata",
+	name: "Old Gus' Errata - Wanderer of Infinite Skies",
+	abbreviation: "OG",
+	abbreviationSpellsheet: "OG",
+	group: "Old Gus Errata",
 	url: "https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link",
-	date : "2022/01/08"
+	date: "2022/01/08"
 };
-
 ClassList["faerie og"] = {
 	name: "Faerie",
 	regExpSearch: /^(?=.*faerie).*$/i,
@@ -107,7 +100,7 @@ ClassList["faerie og"] = {
 			source: ["OG", 190],
 			minlevel: 1,
 			description: desc([
-				'My creature type is Fey in addition to the creature type determined by my race.',
+				'My creature type is Fey in addition to the creature type determined by my race.'
 			])
 		},
 		"spellcasting": {
@@ -281,7 +274,6 @@ ClassList["faerie og"] = {
 		},
 	}
 };
-
 AddSubClass("faerie og", "sidhe", {
 	regExpSearch: /^(?=.*(sidhe)).*$/i,
 	subname: "Sidhe",
@@ -365,9 +357,7 @@ AddSubClass("faerie og", "sidhe", {
 		},
 	}
 });
-
 var tricksyCantripDesc = "\n   I empower 1 faerie cantrip that targets 1 crea. The cantrip can target 1 extra crea within\n   range & also within 30ft of 1st target. If it needs an atk roll I need a separate roll for 2nd.";
-
 AddSubClass("faerie og", "nixie", {
 	regExpSearch: /^(?=.*(nixie)).*$/i,
 	subname: "Nixie",
@@ -709,7 +699,6 @@ AddSubClass("faerie og", "nixie", {
 		},
 	}
 });
-
 AddSubClass("faerie og", "sprig", {
 	regExpSearch: /^(?=.*(sprig)).*$/i,
 	subname: "Sprig",
@@ -805,7 +794,22 @@ AddSubClass("faerie og", "sprig", {
 			},
 			removeeval: function() {
 				RemoveWildshape("Shambling Mound");
-			}
+			},
+			/*			changeeval: function(lvl, chc) {
+							var prefix = getTemplPre(event.target.name, "WSfront", true);
+							var Fld = event.target.name.slice(-1);
+							var WSfrontA = What("Template.extras.WSfront").split(",");
+							// Loop through all wildshape pages
+							for (var i = 0; i < WSfrontA.length; i++) {
+								// Loop through all the wildshapes on a page
+								for (var j = 1; j <= 4; j++) {
+									// If the current wildshape is the shambling mound, add our faerie lvl
+									if (What(prefix + "Wildshape.Race" + j) === 'Shambling Mound') {
+										Value(prefix + "Wildshape." + Fld + ".HP Max", 69 + lvl[1]);
+									}
+								}
+							}
+						}*/
 		},
 		"we are the vine": {
 			name: "We are the Vine",
@@ -835,12 +839,10 @@ AddSubClass("faerie og", "sprig", {
 		},
 	}
 });
-
 var arFaerieWeapon = ["My fists, teeth, nails, or a simple melee weapon become a magical d4 faerie weapon. I can",
 	"attack twice if I take the Attack Action with it. My speed increases by 5 feet, I have a climbing",
 	"speed of at least 20 feet. I lose any flying speed. I gain 1 hit point per level."
 ];
-
 AddSubClass("faerie og", "brownie", {
 	regExpSearch: /^(?=.*(brownie)).*$/i,
 	subname: "Brownie",
@@ -939,7 +941,7 @@ AddSubClass("faerie og", "brownie", {
 			calcChanges: {
 				atkAdd: [
 					function(fields, v) {
-						if (classes.known["faerie og"] && What('Cha Mod') > What(AbilityScores.abbreviations[fields.Mod - 1] + ' Mod') && (fields.Mod == 1 || fields.Mod == 2) && /\bwhimsy/i.test(v.WeaponText)) {
+						if (classes.known["faerie og"] && What('Cha Mod') > What(AbilityScores.abbreviations[fields.Mod - 1] + ' Mod') && (fields.Mod == 1 || fields.Mod == 2) && /\bwhimsy\b/i.test(v.WeaponText)) {
 							fields.Mod = 6;
 						}
 					},
@@ -1029,7 +1031,6 @@ AddSubClass("faerie og", "brownie", {
 		},
 	}
 });
-
 CreatureList["shambling mound"] = {
 	name: "Shambling Mound",
 	source: ["MM", 270],
@@ -1073,5 +1074,5 @@ CreatureList["shambling mound"] = {
 			name: "Multiattack",
 			description: "Make 2 slam atks. If both hit a <=Medium  crea it is grappled (escape DC 14), and I use Engulf on it."
 		}
-	]
+	],
 };

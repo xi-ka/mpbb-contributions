@@ -4,7 +4,6 @@
 	-KEEP IN MIND-
 	It is recommended to enter the code in a fresh sheet before adding any other information (i.e. before making your character with it).
 */
-
 /*	-INFORMATION-
 	Subject:	Spells
 	Effect:		This script adds 187 spells from Old Gus's Errata
@@ -13,10 +12,15 @@
 	Author:		https://reddit/u/callmepartario
 	LLM Import:	Rocky
 	Code by:	xika
-
-	Date:		2024-11-09 (sheet v13)
-	
+	Date:		2024-11-20 (sheet v13)
+*/
+/*
 	Changelog:
+	2024-11-20
+		- Wild Flight: description fixed
+		- Misty Slash fix: changed from action to bonus action
+		- Hirsutism: changed save from Str to Cha since this is the initial save
+	2024-11-09
 		- The following spells were updated after corrections in the source book:
 		  Arcane Razor, Avalanche, Blade of Resonance, Conduit, Drunkard's Breath, Ghost Trap, Immaculate Conception, Othertime, Papercut, Polandara’s Petticoat Pocket, Quentin’s Quickling Senses, Unconscious Command
 	2024-10-30
@@ -26,18 +30,13 @@
 		- moved Spell-Weapons and Cantrip-Weapons right under their respective Spells instead of top of the list
 	2024-10-23
 		- added dulling chains and soul whip to weapons
-				
 */
-
 /*
 	-TODO-
 	- "puff of smoke og" adjust after sheet update
 */
-
 var iFileName = "Old_Gus_Errata-Spells.js";
-
 RequiredSheetVersion("13.2.0");
-
 SourceList.OG = {
 	name : "Old Gus' Errata - Wanderer of Infinite Skies",
 	abbreviation : "OG",
@@ -46,7 +45,6 @@ SourceList.OG = {
 	url: "https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link",
 	date : "2022/01/08"
 };
-
 SpellsList["acidic exudation og"] = {
 	name: "Acidic Exudation",
 	classes: ["artificer", "sorcerer", "wizard"],
@@ -821,7 +819,6 @@ SpellsList["dust dash og"] = {
 	description: "dash faerie dust on creature; spell attack if unwilling; cause unpredictable effects; see Table in Book",
 	descriptionFull: "You dash faerie dust wantonly upon a living creature within 5 feet of you, causing unpredictable effects. Make a melee spell attack against the target if it is unwilling. On a hit, roll a d20 to determine the dust’s unpredictable effects from the table in the Book.",
 	atHigherLevels: "When you cast this spell using a spell slot of 2nd-level or higher, you can add or subtract a number to your d20 roll on the table equal to the level of the spell slot you expended minus one. For example, if you cast the spell at 2nd-level, and rolled a 10, you can choose from anywhere between 9 and 11 on the table for the applied dust effect."
-
 };
 SpellsList["entropic field og"] = {
 	name: "Entropic Field",
@@ -868,7 +865,6 @@ SpellsList["exstasis og"] = {
 	description: "I project and control duplicate self; higher SL = more range, duration and duplicates; see B",
 	descriptionFull: "You project a duplicate self, which materializes in an unoccupied point within range. The destination must be known to you, and on the same plane of existence as you. Your familiarity determines whether your second self arrives there successfully. The DM rolls a d20 and consults the table. (See Book for Teleportation Safety Book and results.)\nFor the duration, the following rules apply:\n- Your selves share the same statistics, spell slots, hit points, conditions, and equipment. \n- On your turn, you can act using any of your selves’ locations and senses. If you or your second self drops an object or gives it away, it disappears from the other location. \n- Your selves count as a single creature for spells or other abilities that target a specific number of creatures, and they can’t be targeted more than once by them. \n- If both of your selves are standing in an area created by spell or ability, for example, a Dragon’s breath weapon, both selves must make a saving throw to avoid its effects. \n- If one of your selves take damage and you aren’t incapacitated, you can use your reaction to sacrifice that self, avoiding the damage entirely.\nWhen the spell ends, you choose which of your selves you become, unless you are incapacitated. If you are incapacitated, you become the self closest to the source of your incapacitation (for example, an attacking creature or natural hazard).",
 	atHigherLevels: "When you cast this spell using a spell slot of 6th, the duration is increased to 10 minutes, and the range is increased to 10 miles. When you cast this spell using a spell slot of 7th-level, you can create a third self, the duration is increased to 1 hour, and the range is increased to 100 miles. When you cast this spell using a spell slot of 8th level, the duration is increased to 8 hours, and the range is increased to 1000 miles. Using a spell slot of 9th level or higher grants a duration that doesn’t require concentration, and the range extends to any location on the plane you are upon."
-
 };
 SpellsList["fallow og"] = {
 	name: "Fallow",
@@ -1184,7 +1180,7 @@ SpellsList["hirsutism og"] = {
 	components: "V,S,M",
 	compMaterial: "a drop of castor oil",
 	duration: "Conc, 1 min",
-	save: "Str",
+	save: "Cha",
 	description: "willing crea chooses hair,beard,... or unwilling crea cursed with massive hair growth; see B",
 	descriptionFull: "You cause hair to sprout from a target you can see within range. Constructs, Celestials, Plants, and Undead are immune to the spell. Choose from the following two versions of the spell:\nHirsute Blessing. You choose a willing target within range. The target then determines any amount hair growth they desire, including where it sprouts from, it’s density and texture. The spell results in a new hairstyle, beard, moustache, or pouf of chest hair of their own design. The hair created by the spell lasts until shorn.\nHirsute Curse. You choose a target you can see, which makes a Charisma saving throw. On a failure, the target sprouts a copious amount of thick, unruly hair all over their body. On a success, the target is unaffected.\nFor the duration, an affected target is blinded by the hair, and their movement speed is reduced by half as the tangled masses of hair catch on their equipment and anything else near to them. At the start each of an affected creature’s turns, they must succeed on a Strength saving throw or be restrained by the hair until the start of their turn. \nA creature with an Intelligence score of at least 6 that is holding an appropriate implement (for example, shears or a dagger) can use its action to shear enough hair from an affected creature’s eyes, to alleviate their blindness or restraints, but the grows so quickly that the spell’s effects resume at the end of the affected creature’s next turn.\nThe target makes a new Charisma saving throw at the end of each of its turns, ending the effect on a success. A dispel magic or remove curse spell ends the effects early. If you maintain your concentration on this spell for the entire possible duration, the hair growth becomes permanent until it is dispelled, or the creature spends an hour with shears or other bladed weapon to remove the unwanted tangles of hair from their body (or half as much time if they have assistance from another creature)."
 };
@@ -1681,7 +1677,7 @@ SpellsList["misty slash og"] = {
 	source: ["OG", 261],
 	level: 3,
 	school: "Conj",
-	time: "1 a",
+	time: "1 bns",
 	range: "S",
 	components: "V,S,M\u0192",
 	compMaterial: "a melee weapon worth at least 10 gp that deals slashing damage",
@@ -1727,7 +1723,6 @@ SpellsList["nature bolt og"] = {
 	source: ["OG", 263],
 	level: 0,
 	school: "Trans",
-
 	time: "1 a",
 	range: "60 ft",
 	components: "V,S",
@@ -2784,7 +2779,6 @@ SpellsList["whelm og"] = {
 	source: ["OG", 280],
 	level: 0,
 	school: "Ench",
-
 	time: "1 a",
 	range: "30 ft",
 	components: "S",
@@ -2820,7 +2814,7 @@ SpellsList["wild flight og"] = {
 	duration: "Instantaneous",
 	save: "Dex",
 	description: "double remain. move; move in 10ft increm. through crea & deal 4d6+1d6/SL dmg; 1/2 on save; see B",
-	descriptionFull: "You become a swirling orb of magical energy. You double your remaining movement speed. Until the end of your turn, you can use your movement speed to move freely through creatures. Your velocity so high that you can only change direction every 10 feet you move.\nEach creature you move through must make a Dexterity saving throw, taking 4d6 radiant damage on a failure, or half as much on a success. A creature takes an additional 1d6 damage for every size category larger than Medium they exceed (for example, a Huge creature takes an additional 2d6 damage). A creature can only be damaged by your travel path once.\nIf you end your turn in a space occupied by another creature, you take 2d6 force damage and are shunted to the nearest available space.",
+	descriptionFull: "You become a swirling orb of magical energy. You double your remaining movement speed. Until the end of your turn, you can use your movement speed to move freely through creatures. Your velocity is so high that you can only change direction every 10 feet you move.\nEach creature you move through must make a Dexterity saving throw, taking 4d6 radiant damage on a failure, or half as much on a success. A creature takes an additional 1d6 damage for every size category larger than Medium they exceed (for example, a Huge creature takes an additional 2d6 damage). A creature can only be damaged by your travel path once.\nIf you end your turn in a space occupied by another creature, you take 2d6 force damage and are shunted to the nearest available space.",
 	atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd."
 };
 SpellsList["wild runner og"] = {
