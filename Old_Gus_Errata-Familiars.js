@@ -6,13 +6,14 @@
 */
 /*	-INFORMATION-
 	Subject:	Creatures
-	Effect:		This script adds 42 Familiars from Old Gus's Errata
-	Source 1:	https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link
-	Source 2:	https://www.reddit.com/r/UnearthedArcana/comments/z5872u/old_gus_errata_wanderers_of_the_infinite_skies/
-	Author:		https://reddit/u/callmepartario
+	Effect:		This script aims to add 42 Familiars from Old Gus's Errata's Wanderer of Infinite Skies
+				This is just a part of the source book. The master file with all finished scripts can be found here:
+				https://github.com/xi-ka/mpmb-contributions/blob/main/Old_Gus_Errata-Master.js
+	Source:		https://callmepartario.github.io/old-gus-errata/
+	Author:		Old Gus (Partario Flynn)
 	LLM Import:	Rocky
 	Code by:	xika
-	Date:		2024-11-20 (sheet v13)
+	Date:		2024-12-26 (sheet v13)
 */
 /*
 	Changelog:
@@ -20,7 +21,7 @@
 
 */
 var iFileName = "Old_Gus_Errata-Familiars.js";
-RequiredSheetVersion("13.2.0");
+RequiredSheetVersion("13.2.3");
 SourceList.OG = {
 	name: "Old Gus' Errata - Wanderer of Infinite Skies",
 	abbreviation: "OG",

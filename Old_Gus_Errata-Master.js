@@ -4,34 +4,27 @@
 	-KEEP IN MIND-
 	It is recommended to enter the code in a fresh sheet before adding any other information (i.e. before making your character with it).
 */
-
 /*	-INFORMATION-
 	Subject:	Source Book
-	Effect:		This script aims to add Races, Classes, Subclasses, Spells and more from Old Gus's Errata
-	Source 1:	https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link
-	Source 2:	https://www.reddit.com/r/UnearthedArcana/comments/z5872u/old_gus_errata_wanderers_of_the_infinite_skies/
-	Author:		https://reddit/u/callmepartario
-	Code by:	xika; fish(fey, plants); 123499(dwarves, elves); rocky (LLM imports)
-
-	Date:		2024-11-20 (sheet v13)
-
-	Questions, Problems or Requests: contact xika on the MPMB discord
-
+	Effect:		This script aims to add Races, Classes, Spells, Familiars and more from Old Gus's Errata's Wanderer of Infinite Skies
+	Source:		https://callmepartario.github.io/old-gus-errata/
+	Author:		Old Gus (Partario Flynn)
+	Code by:	xika
+	Date:		2024-12-26 (sheet v13)
+	Content:	This is the master file containing all finished scripts
 	Content included thus far:
-		- 69/98 Races 
-		- Spells (187)
-		- Faerie Class with four Subclasses
-		- 42 Familiars
-	
-	Check individual files for changelog and progress.
-	
+		- Races:		80/100
+		- Spells: 		187/187
+		- Familiars: 	42/42
+		- Classes:		1/2
+		- Subclasses:	9/43
+		- Feats:		0/62
+		- Weapons:		9/9
+	See individual files for detailed changelog and progress.
 	Repository for individual scripts:	https://github.com/xi-ka/mpmb-contributions/tree/main
 */
-
 var iFileName = "Old_Gus_Errata-Master.js";
-
-RequiredSheetVersion("13.2.0");
-
+RequiredSheetVersion("13.2.3");
 SourceList.OG = {
 	name : "Old Gus' Errata - Wanderer of Infinite Skies",
 	abbreviation : "OG",
@@ -40,24 +33,57 @@ SourceList.OG = {
 	url: "https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link",
 	date : "2024/10/22"
 };
-
 // ### BEGIN FOLK ### Old_Gus_Errata-Races.js
-function removeSpellCosts(spellKey, spellObj, spName, bookKey, removeRitual) {
+removeSpellElements = function(spellKey, spellObj, spName, bookKey, ElementsToRemove) {
+	if (ElementsToRemove.length === 0) return;
 	reg = new RegExp(bookKey, "i");
 	if (reg.test(spName)) {
-		spellObj.description = spellObj.description.replace(/ \(\d+k? ?gp( cons\.?)?\)/i, "");
-		spellObj.components = spellObj.components.replace(/,M.?/g, '');
-		spellObj.compMaterial = "";
-		if (removeRitual) {
-			spellObj.ritual = false;
+		oldSpellObj = {
+			components: spellObj.components,
+			description: spellObj.description,
+			ritual: spellObj.ritual
+		};
+		if (ElementsToRemove.material) {
+			spellObj.description = spellObj.description.replace(/ \(\d+k? ?gp( cons\.?)?\)/i, '');
+			spellObj.components = spellObj.components.replace(/,M.?/gi, '');
+			spellObj.compMaterial = "";
 		}
-		return true;
+		if (ElementsToRemove.somatic) spellObj.components = spellObj.components.replace(/(S,)|(,?S)/gi, '');
+		if (ElementsToRemove.verbal) spellObj.components = spellObj.components.replace(/V,?/gi, '');
+		if (ElementsToRemove.ritual) spellObj.ritual = false;
+		if (oldSpellObj.components != spellObj.components || oldSpellObj.description != spellObj.description || oldSpellObj.ritual != spellObj.ritual) return true;
 	}
-}
+};
+SpellsList["animal friendship level 2"] = {
+	name: "Animal Friendship",
+	source: ["P", 212],
+	level: 2,
+	school: "Ench",
+	time: "1 a",
+	range: "30 ft",
+	components: "V,S",
+	compMaterial: "",
+	duration: "24 h",
+	save: "Wis",
+	description: "2 beasts (Int>=4) save or charmed for the duration",
+	descriptionFull: "This spell lets you convince two beasts that you mean them no harm. Choose one or two beasts that you can see within range. They must see and hear you. If the beasts Intelligence is 4 or higher, the spell fails. Otherwise, the beasts must succeed on a Wisdom saving throw or be charmed by you for the spell's duration. If you or one of your companions harms the targets, the spell ends."
+};
+SpellsList["charm person level 2"] = {
+	name: "Charm Person",
+	source: ["P", 221],
+	level: 2,
+	school: "Ench",
+	time: "1 a",
+	range: "30 ft",
+	components: "V,S",
+	duration: "1 h",
+	save: "Wis",
+	description: "2 humanoids, each max 30 ft apart, save or charmed; adv. on save if me/ally is fighting it",
+	descriptionFull: "You attempt to charm up to two humanoids you can see within range. They must make a Wisdom saving throw, and do so with advantage if you or your companions are fighting them. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you."
+};
 SpellsList["colorspray level 2"] = {
 	name: "Color Spray",
-	regExpSearch: /\(color spray\)/i,
-	source: ["OG", 74],
+	source: ["P", 222],
 	defaultExcluded: false,
 	classes: [],
 	level: 2,
@@ -73,36 +99,9 @@ SpellsList["colorspray level 2"] = {
 	descriptionFull: "A dazzling array of flashing, colored light springs from your hand. Roll 8d10, the total is how many hit points of creatures this spell can effect. Creatures in a 15-foot cone originating from you are affected in ascending order of their current hit points (ignoring unconscious creatures and creatures that can't see)." +
 		"\n   " + "Starting with the creature that has the lowest current hit points, each creature affected by this spell is blinded until the end of your next turn. Subtract each creature's hit points from the total before moving on to the creature with the next lowest hit points. A creature's hit points must be equal to or less than the remaining total for the creature to be affected.",
 };
-SpellsList["animal friendship level 2"] = {
-	name: "Animal Friendship",
-	source: ["OG", 74],
-	level: 2,
-	school: "Ench",
-	time: "1 a",
-	range: "30 ft",
-	components: "V,S",
-	compMaterial: "",
-	duration: "24 h",
-	save: "Wis",
-	description: "2 beasts (Int>=4) save or charmed for the duration",
-	descriptionFull: "This spell lets you convince two beasts that you mean it no harm. Choose one or two beasts that you can see within range. It must see and hear you. If the beast's Intelligence is 4 or higher, the spell fails. Otherwise, the beast must succeed on a Wisdom saving throw or be charmed by you for the spell's duration. If you or one of your companions harms the target, the spell ends."
-};
-SpellsList["charm person level 2"] = {
-	name: "Charm Person",
-	source: ["OG", 76],
-	level: 2,
-	school: "Ench",
-	time: "1 a",
-	range: "30 ft",
-	components: "V,S",
-	duration: "1 h",
-	save: "Wis",
-	description: "2 humanoids, each max 30 ft apart, save or charmed; adv. on save if me/ally is fighting it",
-	descriptionFull: "You attempt to charm up to two humanoids you can see within range. They must make a Wisdom saving throw, and do so with advantage if you or your companions are fighting them. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you."
-};
 SpellsList["fog cloud level 2"] = {
 	name: "Fog Cloud",
-	source: ["OG", 79],
+	source: ["P", 243],
 	level: 2,
 	school: "Conj",
 	time: "1 a",
@@ -112,9 +111,20 @@ SpellsList["fog cloud level 2"] = {
 	description: "40-ft rad fog that spreads around corners; heavily obscures; 10 mph wind disperses it",
 	descriptionFull: "You create a 40-foot-radius sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured. It lasts for the duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it."
 };
+SpellsList["inflict wounds level 2"] = {
+	name: "Inflict Wounds",
+	source: ["P", 253],
+	level: 2,
+	school: "Necro",
+	time: "1 a",
+	range: "Touch",
+	components: "V,S",
+	duration: "Instantaneous",
+	description: "Melee Spell attack for 4d10 Necrotic dmg",
+	descriptionFull: "Make a melee spell attack against a creature you can reach. On a hit, the target takes 4d10 necrotic damage."
+};
 SpellsList["thundering stomp og"] = {
 	name: "Thundering Stomp",
-	classes: [],
 	source: ["OG", 81],
 	level: 0,
 	school: "Evoc",
@@ -122,7 +132,7 @@ SpellsList["thundering stomp og"] = {
 	range: "5ft",
 	components: "S",
 	duration: "Instantaneous",
-	descriptionCantripDie: "all in 5ft Con Save or `CD`d8 thunder dmg and deafened for 1 trn; audible in 100ft.",
+	descriptionCantripDie: "all in 5ft ConSave (DC: 8+ProfBns+StrMod) or 4d8 thunder dmg and deafened for 1trn; audible in 100ft.",
 	description: "all in 5ft Con Save or 1d8 (+1 at CL 5, 11, 17) thunder dmg and deafened for 1 trn; audible in 100ft",
 	descriptionFull: "As an action, you stomp your foot down, creating a thundering sound audible out to 100 feet. All creatures within 5 feet of you must make a Constitution saving throw DC 8 + your proficiency bonus + your Strength modifier. On a failure, a creature takes 1d8 thunder damage and is deafened until the start of your next turn. This damage increases at 5th level (2d8), 11th level (3d8), and 17th level (4d8)."
 };
@@ -135,20 +145,69 @@ WeaponsList["thundering stomp og"] = {
 	dc: true,
 	damage: ["C", 8, "Thunder"],
 	range: "5ft",
-	description: "Con Save or thunder dmg in 5ft; audible in 100ft.",
+	description: "Con Save (DC: 8+ProfBonus+StrMod) or thunder dmg in 5ft; audible in 100ft.",
 	list: "spell",
 	tooltip: "As an action, you stomp your foot down, creating a thundering sound audible out to 100 feet. All creatures within 5 feet of you must make a Constitution saving throw DC 8 + your proficiency bonus + your Strength modifier. On a failure, a creature takes 1d8 thunder damage and is deafened until the start of your next turn. This damage increases at 5th level (2d8), 11th level (3d8), and 17th level (4d8)."
 };
 // RACE: DRAGONBORN
+var pinkDragonSpellTable = [ // Cantrips
+	"acid splash", "booming blade", "encode thoughts", "guidance", "mage hand", "message", "mind sliver", "minor illusion", "primal savagery", "puff of smoke og", "thaumaturgy", "thunderclap", "vicious mockery", "whelm og",
+	// 1st-level
+	"absorb elements", "allergen cloud og", "bane", "bless", "charm person", "command", "compelled duel", "comprehend languages", "drunkards breath og", "disguise self", "dissonant whispers", "dust dash og", "faerie fire", "feather fall", "fog cloud", "grease", "mass distortion og", "metamorphose liquid og", "reorient og", "silvery barbs", "wood rot og",
+	// 2nd-level
+	"acidic exudation og", "borrowed knowledge", "calm emotions", "corrosive touch og", "crown of madness", "detect thoughts", "discordant thrum og", "doublespeak og", "enlarge/reduce", "enthrall", "glamoured majesty og", "heat metal", "jinx og", "kinetic jaunt", "londyns duet og", "mind spike", "mirror image", "misty step", "nathair's mischief", "nystul's magic aura", "phantasmal force", "pyrotechnics", "ray of enfeeblement", "shatter", "silence", "solid fog og", "suggestion", "tasha's mind whip", "zone of truth"
+];
+AddRacialVariant("dragonborn", "pink og", {
+	regExpSearch: /pink/i,
+	name: "Pink Dragonborn",
+	trait: "Pink Dragonborn (+2 Str, +1 Cha)" +
+		"\n\u25C6 Bubble Breath: I can replace one of my atk actions on my turn with an exhalation in a 15ft cone. The save DC for it is 8 + my Con mod + my prof. bonus. On fail a crea. is blinded until end of my nxt turn." +
+		"\n\u25C6 Cantrip: I know a cantrip from the Pink Dragon spells table. Int, Wis or Cha is my Ability for it." +
+		"\n\u25C6 Draconic Inscrutability: I have adv. on saves vs. charmed. As an action I can ward my mind for 10 mins per level once per long rest. During I'm immune to magic that allows others to read my thoughts, see if I'm lying or know my alignment.",
+	savetxt: {
+		adv_vs: ["charmed"]
+	},
+	spellcastingAbility: [4, 5, 6],
+	features: {
+		"cantrip": {
+			name: "Cantrip",
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Pink Dragonborn",
+				spells: pinkDragonSpellTable,
+				level: [0, 2],
+				firstCol: "atwill"
+			}],
+			calcChanges: {
+				spellAdd: [
+					function(k, o, n) {
+						return removeSpellElements(k, o, n, "draconblood dragonborn", {
+							material: true,
+							ritual: true
+						});
+					},
+					"I require no material components to cast my Pink Dragonborn racial spells."
+				]
+			}
+		},
+		"draconic inscrutability": {
+			name: "Draconic Inscrutability",
+			minlevel: 1,
+			usages: 1,
+			recovery: "long rest",
+			action: ["action", ""],
+		},
+	}
+});
 // RACE: DWARVES
 RaceList["arctic dwarf og"] = {
-	regExpSearch: /^(?=.*arctic)(?=.*dwarf).*$/i,
+	regExpSearch: /^(?=.*\barctic\b)(?=.*\bdwarf\b).*$/i,
 	name: "Arctic Dwarf",
 	sortname: "Dwarf, Arctic",
 	source: [
 		["OG", 19]
 	],
-	plural: "Arctic dwarves",
+	plural: "Arctic Dwarves",
 	size: [4],
 	speed: {
 		walk: {
@@ -169,11 +228,11 @@ RaceList["arctic dwarf og"] = {
 	heightMetric: " stand between " + ConvertToMetric("3 ft", 0.1) + " and " + ConvertToMetric("4 ft", 0.1) + " tall.",
 	weightMetric: " weigh between " + ConvertToMetric("90 lbs", 0.1) + " and " + ConvertToMetric("120 lbs", 0.1) + ".",
 	scores: [1, 0, 2, 0, 1, 0],
-	trait: "Arctic Dwarf (+1 Strength, +2 Constitution, +1 Wisdom)\n\n\u25C6 Ice in the Veins:  Difficult terrain due to non-magical snow or ice doesn’t cost me extra movement. I'm also naturally adapted to cold climates.\n\n\u25C6 Hunter-Gatherer: If I'm proficient with the pike or halberd, I can wield them without the penalty usually applied to Small creatures.\n\n\u25C6 Speed: My speed is not reduced by wearing Heavy Armor.",
+	trait: "Arctic Dwarf (+1 Strength, +2 Constitution, +1 Wisdom)\n\n\u25C6 Ice in the Veins:  Difficult terrain due to non-magical snow or ice doesn’t cost me extra movement. Naturally adapted to cold climates (DMG 110).\n\n\u25C6 Hunter-Gatherer: If I'm proficient with the pike or halberd, I can wield them without the penalty usually applied to Small creatures.\n\n\u25C6 Speed: My speed is not reduced by wearing Heavy Armor.",
 	features: {}
 };
 RaceList["dworc og"] = {
-	regExpSearch: /^(?=.*\bdwarf\b)(?=.*\borc\b).*|\bdworc\b$/i,
+	regExpSearch: /^((?=.*\bdwarf\b)(?=.*\borc\b).*)|\bdworc\b$/i,
 	name: "Dworc",
 	source: [
 		["OG", 20]
@@ -190,7 +249,7 @@ RaceList["dworc og"] = {
 	vision: [
 		["Darkvision", 60]
 	],
-	weaponProfs: [false, false, ["two martial weapon"]],
+	weaponProfs: [false, false, ["Martial weapon 1", "Martial weapon 2"]],
 	toolProfs: [
 		["Artisan's Tools", 1],
 	],
@@ -227,7 +286,7 @@ RaceList["dworc og"] = {
 	}
 };
 RaceList["ev'arak og"] = {
-	regExpSearch: /^(?=.*\bgnome\b)(?=.*\bdwarf\b).*|\b(?=.*\bev.?arak\b)\b|\b(?=.*\bevarak\b)\b$/i,
+	regExpSearch: /^((?=.*\bgnome\b)(?=.*\bdwarf\b).*)|(\bev\W?arak\b)$/i,
 	name: "Ev'arak",
 	source: [
 		["OG", 21]
@@ -278,7 +337,7 @@ RaceList["ev'arak og"] = {
 	}
 };
 RaceList["moss dwarf og"] = {
-	regExpSearch: /^(?=.*moss)(?=.*dwarf).*$/i,
+	regExpSearch: /^(?=.*\bmoss\b)(?=.*\bdwarf\b).*$/i,
 	name: "Moss Dwarf",
 	sortname: "Dwarf, Moss",
 	source: [
@@ -476,7 +535,10 @@ RaceList["elowarin og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "elowarin og");
+						return removeSpellElements(k, o, n, "elowarin og", {
+							material: true,
+							ritual: true
+						});
 					},
 					"I require no material components to cast my Elowarin racial spells."
 				]
@@ -546,7 +608,9 @@ RaceList["neled'sieh og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "neled'sieh og");
+						return removeSpellElements(k, o, n, "neled'sieh og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Neled'sieh racial spells."
 				]
@@ -628,7 +692,9 @@ RaceList["ulsanya og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "ulsanya og");
+						return removeSpellElements(k, o, n, "ulsanya og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Ulsanya racial cantrip."
 				]
@@ -637,11 +703,474 @@ RaceList["ulsanya og"] = {
 	}
 };
 // RACE: GOBLINS
+RaceList["dekanter goblin og"] = {
+	name: "Dekanter Goblin",
+	sortname: "Goblin, Dekanter",
+	plural: "Dekanter Goblins",
+	regExpSearch: /\bdekanter\b/i,
+	source: ["OG", 27],
+	age: " reach adulthood at 8 years, and live up to 60 years.",
+	height: " are between 4 and 5 feet tall.",
+	weight: " average about 150 pounds.",
+	heightMetric: " stand between " + ConvertToMetric("4 ft", 0.1) + " and " + ConvertToMetric("5 ft", 0.1) + " tall.",
+	weightMetric: " average about " + ConvertToMetric("150 lbs", 0.1) + ".",
+	size: [3],
+	scores: [1, 0, 2, 0, 0, 0],
+	scorestxt: "+2 Con, +1 Str",
+	trait: "Dekanter Goblin (+2 Con, +1 Str)" +
+		"\n\n\u25C6 Horn: my horn is a natural weapon dealing 1d4 + Str mod piercing damage. If I move at least 20 ft in a straight line and hit a creature with my horn I deal an additional 1d4 damage." +
+		"\n\n\u25C6 Iceborn: I'm acclimated to high altitudes and cold climates (DMG 110). I have resistance to cold damage.",
+	speed: {
+		walk: {
+			spd: 30,
+			enc: 20
+		}
+	},
+	dmgres: ["cold"],
+	vision: [
+		["Darkvision", 60]
+	],
+	languageProfs: [
+		"Common",
+		"Goblin",
+		"Undercommon"
+	],
+	weaponOptions: [{
+		baseWeapon: "unarmed strike",
+		regExpSearch: /^(?=.*\bgoblin\b)(?=.*\bhorn?\b).*$/i,
+		name: "Goblin Horn",
+		damage: [1, 4, "piercing"],
+		abilitytodamage: true,
+		selectNow: true,
+		description: "1d4 extra damage if I've moved 20ft in a straight line before the attack"
+	}, ],
+	features: {
+		"healing factor": {
+			name: "Healing Factor",
+			minlevel: 1,
+			usages: "Prof bonus per long rest",
+			usagescalc: "event.value = Number(How('Proficiency Bonus'));",
+			recovery: "long rest",
+			action: ["bonus action", ""],
+			additional: "1d4+Con Mod",
+			toNotesPage: [{
+				note: desc([
+					"I have a number of special healing dice equal to my proficiency bonus, which are d4s. I can",
+					"use a bonus action to roll any number of these dice, adding my Constitution modifier to",
+					"each dice rolled. I recover any expended healing dice when you finish a long rest."
+				]),
+				page3notes: true,
+				name: "Healing Factor",
+				additional: "Prof bonus x per long rest",
+			}],
+		},
+	}
+};
+RaceList["gaki og"] = {
+	name: "Gaki Goblin",
+	sortname: "Goblin, Gaki",
+	plural: "Gaki Goblins",
+	regExpSearch: /\bgaki\b/i,
+	source: ["OG", 28],
+	age: " reach adulthood at 8 years, and live up to 60 years.",
+	height: " are between 3 and 4 feet tall.",
+	weight: " weigh between 40 and 80 pounds.",
+	heightMetric: " stand between " + ConvertToMetric("3 ft", 0.1) + " and " + ConvertToMetric("4 ft", 0.1) + " tall.",
+	weightMetric: " weigh between " + ConvertToMetric("40 lbs", 0.1) + " and " + ConvertToMetric("80 lbs", 0.1) + ".",
+	size: [4],
+	scores: [0, 0, 0, 1, 0, 2],
+	scorestxt: "+2 Cha, +1 Int",
+	trait: "Gaki (+2 Cha, +1 Int)" +
+		"\n\u25C6 Fury of the Small: When I damage a creature which is larger than me, with an attack or spell I can deal extra damage equal to my level. I can use this trait once per short or long rest." +
+		"\n\u25C6 Hellish Resistance. I have resistance to fire damage." +
+		"\n\u25C6 Impish Legacy: I learn the fire bolt cantrip. From 3rd level I can cast hellish rebuke and from 5th level invisibility. I can cast both spells once per long rest using this trait. Int, Wis, or Cha is my spellcasting ability for these spells and I don't require material components.",
+	spellcastingAbility: [4, 5, 6],
+	dmgres: ["fire"],
+	speed: {
+		walk: {
+			spd: 25,
+			enc: 15
+		}
+	},
+	vision: [
+		["Darkvision", 60]
+	],
+	languageProfs: [
+		"Common",
+		"Goblin",
+		"Infernal"
+	],
+	features: {
+		"impish legacy": {
+			name: "Impish Legacy",
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Impish Legacy",
+				spells: ["fire bolt"],
+				selection: ["fire bolt"],
+				firstCol: "atwill"
+			}],
+			calcChanges: {
+				spellAdd: [
+					function(k, o, n) {
+						return removeSpellElements(k, o, n, "gaki og", {
+							material: true
+						});
+					},
+					"I require no material components to cast my Gaki racial spells."
+				]
+			}
+		},
+		"impish legacy 3": {
+			name: "Impish Legacy",
+			minlevel: 3,
+			spellcastingBonus: [{
+				name: "Impish Legacy",
+				spells: ["hellish rebuke"],
+				selection: ["hellish rebuke"],
+				firstCol: "oncelr"
+			}]
+		},
+		"impish legacy 5": {
+			name: "Impish Legacy",
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Impish Legacy",
+				spells: ["invisibility"],
+				selection: ["invisibility"],
+				firstCol: "oncelr"
+			}]
+		},
+		"fury of the small": {
+			name: "Fury of the Small",
+			minlevel: 1,
+			usages: 1,
+			recovery: "short rest"
+		}
+	}
+};
+RaceList["grodd goblin og"] = {
+	name: "Grodd Goblin",
+	sortname: "Goblin, Grodd",
+	plural: "Grodd Goblins",
+	regExpSearch: /\bgrodd\b/i,
+	source: ["OG", 29],
+	age: " reach adulthood at 8 years, and live up to 60 years",
+	height: " are between 3 and 4 feet tall.",
+	weight: " weigh between 40 and 80 pounds.",
+	heightMetric: " stand between " + ConvertToMetric("3 ft", 0.1) + " and " + ConvertToMetric("4 ft", 0.1) + " tall.",
+	weightMetric: " weigh between " + ConvertToMetric("40 lbs", 0.1) + " and " + ConvertToMetric("80 lbs", 0.1) + ".",
+	size: [4],
+	carryingCapacity: 1,
+	scores: [0, 1, 1, 1, 0, 0],
+	scorestxt: "+1 Dex, +1 Con, +1 Int",
+	trait: "Grodd Goblin (+1 Dex, +1 Con, +1 Int)" +
+		"\n\u25C6 Compass Sense: w/o magical interference, I always know north." +
+		"\n\u25C6 Crafty Escape: I can hide as a bonus action." +
+		"\n\u25C6 Fury of the Small: When I damage a creature which is larger than me, with an attack or spell I can deal extra damage equal to my level. I can use this trait once per short or long rest." +
+		"\n\u25C6 Necrotic Resistance: I have resistance to necrotic damage." +
+		"\n\u25C6 Sunlight Sensitivity: I have disadvantage on attack rolls and Wisdom (Perception) checks that rely on sight when I, the target of my attack, or whatever I'm trying to perceive is in direct sunlight",
+	spellcastingAbility: [4, 5, 6],
+	skills: ["Stealth"],
+	skillstxt: "Stealth",
+	dmgres: ["necrotic"],
+	speed: {
+		walk: {
+			spd: 30,
+			enc: 20
+		}
+	},
+	vision: [
+		["Darkvision", 120]
+	],
+	languageProfs: [
+		"Common",
+		"Elvish"
+	],
+	features: {
+		"nalavarauthatorys legacy": {
+			name: "Nalavarauthatory’s Legacy",
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Nalavarauthatory’s Legacy",
+				spells: ["dancing lights"],
+				selection: ["dancing lights"],
+				firstCol: "atwill"
+			}],
+			toNotesPage: [{
+				note: desc([
+					"I know the dancing lights cantrip. From 3rd level I can cast darkness once per long rest",
+					"From 5th level I can cast it a second time. Int, Wis, or Cha is my spellcasting ability for",
+					"these spells and they don't require material components."
+				]),
+				page3notes: true,
+				name: "Nalavarauthatory’s Legacy",
+			}],
+			calcChanges: {
+				spellAdd: [
+					function(k, o, n) {
+						return removeSpellElements(k, o, n, "grodd goblin og", {
+							material: true
+						});
+					},
+					"I require no material components to cast my Grodd Goblin racial spells."
+				]
+			}
+		},
+		"nalavarauthatorys legacy 3": {
+			name: "Nalavarauthatory’s Legacy",
+			minlevel: 3,
+			spellcastingBonus: [{
+				name: "Nalavarauthatory’s Legacy",
+				spells: ["darkness"],
+				selection: ["darkness"],
+				firstCol: "oncelr"
+			}]
+		},
+		"nalavarauthatorys legacy 5": {
+			name: "Nalavarauthatory’s Legacy II.",
+			minlevel: 5,
+			calcChanges: {
+				spellAdd: [
+					function(spellKey, spellObj, spName, isDuplicate) {
+						if (spName === "grodd goblin og" && spellKey === "darkness") {
+							spellObj.firstCol = "2x";
+							return true;
+						}
+					},
+					"From level 5 on I can cast darkness twice per long rest."
+				]
+			}
+		},
+		"crafty escape": {
+			name: "Crafty Escape",
+			minlevel: 1,
+			action: ["bonus action", "Hide"],
+		},
+		"fury of the small": {
+			name: "Fury of the Small",
+			minlevel: 1,
+			usages: 1,
+			recovery: "short rest"
+		}
+	}
+};
+RaceList["grue og"] = {
+	name: "Grue Goblin",
+	sortname: "Goblin, Grue",
+	plural: "Grue Goblins",
+	regExpSearch: /\bgrue\b/i,
+	source: ["OG", 30],
+	age: " reach adulthood at 4 years, and live up to 40 years.",
+	height: " are between 3 and 4 feet tall.",
+	weight: " weigh between 40 and 65 pounds.",
+	heightMetric: " stand between " + ConvertToMetric("3 ft", 0.1) + " and " + ConvertToMetric("4 ft", 0.1) + " tall.",
+	weightMetric: " weigh between " + ConvertToMetric("40 lbs", 0.1) + " and " + ConvertToMetric("80 lbs", 0.1) + ".",
+	size: [4],
+	scores: [0, 2, 0, 1, 0, 0],
+	scorestxt: "+2 Dex, +1 Int",
+	trait: "Grue (+2 Dex, +1 Int)" +
+		"\n\u25C6 Disease Resistance: I have adv. on saves vs. disease." +
+		"\n\u25C6 Fury of the Small: When I damage a creature which is larger than me, with an attack or spell I can deal extra damage equal to my level. I can use this trait once per short or long rest." +
+		"\n\u25C6 Keen Hearing: I have adv. on Perception or Investigation checks that rely on hearing." +
+		"\n\u25C6 Sunlight Sensitivity: I have disadvantage on attack rolls and Wisdom (Perception) checks that rely on sight when I, the target of my attack, or whatever I'm trying to perceive is in direct sunlight",
+	savetxt: {
+		adv_vs: ["disease"]
+	},
+	speed: {
+		walk: {
+			spd: 30,
+			enc: 20
+		}
+	},
+	vision: [
+		["Darkvision", 120],
+		"Keen Hearing (see traits)"
+	],
+	languageProfs: [
+		"Common",
+		"Goblin"
+	],
+	features: {
+		"lateral thinker": {
+			name: "Lateral Thinker",
+			minlevel: 1,
+			usages: "Prof bonus per long rest",
+			usagescalc: "event.value = Number(How('Proficiency Bonus'));",
+			recovery: "long rest",
+			action: ["bonus action", " (Help)"],
+			toNotesPage: [{
+				note: desc([
+					"I can use the Help action as a bonus action. I can use this trait a number of times equal to",
+					"my proficiency bonus, and regain expended uses of it when I finish a long rest.",
+					"When I use this trait to aid an ally in attacking a creature, the target of that attack can be",
+					"within 30 feet of me, rather than within 5 feet of me, if the target can see or hear me."
+				]),
+				page3notes: true,
+				name: "Lateral Thinker",
+				additional: "Prof Bonus x per long rest",
+			}],
+		},
+		"fury of the small": {
+			name: "Fury of the Small",
+			minlevel: 1,
+			usages: 1,
+			recovery: "short rest"
+		}
+	}
+};
+RaceList["kol'ksu goblin og"] = {
+	name: "Kol'Ksu Goblin",
+	sortname: "Goblin, Kol'Ksu",
+	plural: "Kol'Ksu Goblins",
+	regExpSearch: /^(?=.*kol\W?ksu)(?=.*goblin)?.*$/i,
+	source: ["OG", 31],
+	age: " reach adulthood at 8 years, and live up to 60 years.",
+	height: " are slightly taller than most goblins, standing between 3 and a half and 4 feet tall.",
+	weight: " weigh between 50 and 85 pounds.",
+	heightMetric: " stand between " + ConvertToMetric("3.5 ft", 0.1) + " and " + ConvertToMetric("4.5 ft", 0.1) + " tall.",
+	weightMetric: " weigh between " + ConvertToMetric("50 lbs", 0.1) + " and " + ConvertToMetric("85 lbs", 0.1) + ".",
+	size: [4],
+	scores: [0, 1, 2, 0, 0, 0],
+	scorestxt: "+2 Con, +1 Dex",
+	trait: "Kol’Ksu Goblin (+2 Con, +1 Dex)" +
+		"\n\u25C6 Amphibious: I have a swim speed of 30 ft and can breath air and water." +
+		"\n\u25C6 Ambusher: I can hide as a bonus action." +
+		"\n\u25C6 Fury of the Small: When I damage a creature which is larger than me, with an attack or spell I can deal extra damage equal to my level. I can use this trait once per short or long rest." +
+		"\n\u25C6 Kol’ksu Training: I'm proficient with spear and net.",
+	speed: {
+		walk: {
+			spd: 25,
+			enc: 15
+		},
+		swim: {
+			spd: 30
+		},
+	},
+	vision: [
+		["Darkvision", 60]
+	],
+	weaponProfs: [false, false, ["spear", "net"]],
+	languageProfs: [
+		"Common",
+		"Goblin"
+	],
+	features: {
+		"fury of the small": {
+			name: "Fury of the Small",
+			minlevel: 1,
+			usages: 1,
+			recovery: "short rest"
+		},
+		"ambusher": {
+			name: "Ambusher",
+			minlevel: 1,
+			action: ["bonus action", "Hide"],
+		}
+	}
+};
 // RACE: ORC
+RaceList["ondontis og"] = {
+	name: "Ondontis",
+	sortname: "Orc, Ondontis",
+	plural: "Ondontis Orcs",
+	regExpSearch: /\bondontis\b/i,
+	source: ["OG", 32],
+	age: " reach adulthood at age 12 and live up to 50 years.",
+	height: " are usually between 5 and 7 feet tall.",
+	weight: " weigh between 170 and 280 pounds.",
+	heightMetric: " stand between " + ConvertToMetric("5 ft", 0.1) + " and " + ConvertToMetric("7 ft", 0.1) + " tall.",
+	weightMetric: " weigh between " + ConvertToMetric("170 lbs", 0.1) + " and " + ConvertToMetric("280 lbs", 0.1) + ".",
+	size: [3],
+	carryingCapacity: 2,
+	scores: [1, 0, 1, 0, 1, 0],
+	scorestxt: "+1 Str, +1 Con, +1 Wis",
+	trait: "Ondontis Orc (+1 Str, +1 Con, +1 Wis)\n\n\u25C6 Eldath’s Legacy: I know the shape water cantrip. Once I reach 3rd level, I  can cast the calm emotions spell; I must finish a long rest in order to cast the spell again using this trait. Intelligence, Wisdom, or Charisma is my  spellcasting ability for these spells.",
+	spellcastingAbility: [4, 5, 6],
+	skills: ["Insight"],
+	skillstxt: "Insight",
+	speed: {
+		walk: {
+			spd: 30,
+			enc: 20
+		}
+	},
+	vision: [
+		["Darkvision", 60]
+	],
+	languageProfs: [
+		"Common",
+		"Orc"
+	],
+	features: {
+		"eldaths legacy": {
+			name: "Eldath's Legacy",
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Eldath’s Legacy",
+				spells: ["shape water"],
+				selection: ["shape water"],
+				firstCol: "atwill"
+			}]
+		},
+		"eldaths legacy 3": {
+			name: "Eldath's Legacy",
+			minlevel: 3,
+			spellcastingBonus: [{
+				name: "Eldath’s Legacy",
+				spells: ["calm emotions"],
+				selection: ["calm emotions"],
+				firstCol: "oncelr"
+			}]
+		}
+	}
+};
+RaceList["scro og"] = {
+	name: "Scro",
+	sortname: "Orc, Scro",
+	plural: "Scro Orcs",
+	regExpSearch: /\bscro\b/i,
+	source: ["OG", 35],
+	age: " ",
+	height: " are usually over 6 feet tall.",
+	weight: " weigh between 230 and 280 pounds.",
+	heightMetric: " are usually " + ConvertToMetric("6 ft", 0.1) + " tall.",
+	weightMetric: " weigh between " + ConvertToMetric("230 lbs", 0.1) + " and " + ConvertToMetric("280 lbs", 0.1) + ".",
+	size: [3],
+	carryingCapacity: 2,
+	scores: [1, 1, 0, 1, 0, 0],
+	scorestxt: "+1 Str, +1 Dex, +1 Int",
+	trait: "Scro (+1 Str, +1 Dex, +1 Int)\n\n\u25C6 Aggressive. As a bonus action, I can move up to my movement speed toward a hostile creature I can see or hear. I must end this move closer to the enemy than I started.",
+	speed: {
+		walk: {
+			spd: 35,
+			enc: 25
+		}
+	},
+	vision: [
+		["Darkvision", 60]
+	],
+	weaponProfs: [false, false, ["Martial Weapon 1", "Martial Weapon 2"]],
+	languageProfs: [
+		"Common",
+		"Elvish",
+		"Orc",
+		"Scro"
+	],
+	toolProfs: [
+		"poisoner’s kit"
+	],
+	features: {
+		"aggressive": {
+			name: "Aggressive",
+			minlevel: 1,
+			action: ["bonus action"]
+		}
+	}
+};
 // RACE: BEASTS
 RaceList["aaratica haan-hi og"] = {
 	name: "Aaratica Haan-Hi",
-	plural: "Aaratica Haan-Hi",
 	regExpSearch: /^(?=.*aaratica)(?=.*haan-hi).*$/i,
 	languageProfs: [
 		"Common",
@@ -670,7 +1199,6 @@ RaceList["aaratica haan-hi og"] = {
 };
 RaceList["aaratica paar-dal og"] = {
 	name: "Aaratica Paar-dal",
-	plural: "Aaratica Paar-dal",
 	regExpSearch: /^(?=.*aaratica)(?=.*paar-dal).*$/i,
 	source: ["OG", 35],
 	languageProfs: ["Common", "Aarakocra"],
@@ -701,7 +1229,6 @@ RaceList["aaratica paar-dal og"] = {
 };
 RaceList["aaratica pii-vin og"] = {
 	name: "Aaratica Pii-Vin",
-	plural: "Aaratica Pii-Vin",
 	regExpSearch: /^(?=.*aaratica)(?=.*pii-vin).*$/i,
 	source: ["OG", 36],
 	height: " average 4 feet tall.",
@@ -738,7 +1265,10 @@ RaceList["aaratica pii-vin og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "aaratica pii-vin og");
+						return removeSpellElements(k, o, n, "aaratica pii-vin og og", {
+							material: true,
+							ritual: true
+						});
 					},
 					"I require no material components to cast my Aaratica Pii-Vin racial spells."
 				]
@@ -767,9 +1297,9 @@ RaceList["aaratica pii-vin og"] = {
 	}
 };
 RaceList["apelong ozo og"] = {
-	name: "Apelong Ozo",
-	plural: "Apelong Ozo",
-	regExpSearch: /^(?=.*apelong)(?=.*ozo).*$/i,
+	name: "Ozo",
+	sortname: "Apelong, Ozo",
+	regExpSearch: /\bozo\b/i,
 	source: ["OG", 37],
 	age: " mature at 10 years and live up to 60 years.",
 	height: " stand between 5½ and 6½ feet tall.",
@@ -825,9 +1355,9 @@ RaceList["apelong ozo og"] = {
 	}
 };
 RaceList["apelong panzu og"] = {
-	name: "Apelong Panzu",
-	plural: "Apelong Panzu",
-	regExpSearch: /^(?=.*apelong)(?=.*panzu).*$/i,
+	name: "Panzu",
+	sortname: "Apelong, Panzu",
+	regExpSearch: /\bpanzu\b/i,
 	source: ["OG", 37],
 	age: " mature at 10 years and live up to 70 years.",
 	height: " stand between 3½ and 4½ feet tall.",
@@ -870,9 +1400,9 @@ RaceList["apelong panzu og"] = {
 	features: {}
 };
 RaceList["apelong suxiu og"] = {
-	name: "Apelong Suxiu",
-	plural: "Apelong Suxiu",
-	regExpSearch: /^(?=.*apelong)(?=.*suxiu).*$/i,
+	name: "Suxiu",
+	sortname: "Apelong, Suxiu",
+	regExpSearch: /\bsuxiu\b/i,
 	source: ["OG", 37],
 	age: " mature at 5 years and live up to 30 years.",
 	height: " stand between 3 ft and 4 ft tall.",
@@ -912,7 +1442,6 @@ RaceList["apelong suxiu og"] = {
 };
 RaceList["bullywug og"] = {
 	name: "Bullywug",
-	plural: "Bullywug",
 	regExpSearch: /^bullywug$/i,
 	source: ["OG", 39],
 	age: " mature at 10 years, and live up to 50 years.",
@@ -969,8 +1498,7 @@ RaceList["bullywug og"] = {
 };
 RaceList["chapa og"] = {
 	name: "Cha'pa",
-	plural: "Cha'pa",
-	regExpSearch: /^(cha\'pa|chapa)$/i,
+	regExpSearch: /^cha\W?pa$/i,
 	source: ["OG", 40],
 	age: " mature at 8 years, and live up to 50 years.",
 	height: " stand between 4 and 5 feet tall.",
@@ -1004,7 +1532,7 @@ RaceList["chapa og"] = {
 	],
 	weaponOptions: [{
 		baseWeapon: "unarmed strike",
-		regExpSearch: /^(?=.*Cha'pa)(?=.*\bTail?\b).*$/i,
+		regExpSearch: /^(?=.*cha\W?pa)(?=.*\btail?\b).*$/i,
 		name: "Cha'pa Tail",
 		damage: [1, 6, "bludgeoning"],
 		abilitytodamage: true,
@@ -1055,8 +1583,7 @@ RaceList["chapa og"] = {
 };
 RaceList["elkin og"] = {
 	name: "Elkin",
-	plural: "Elkin",
-	regExpSearch: /^(?=.*elkin).*$/i,
+	regExpSearch: /^elkin$/i,
 	source: ["OG", 41],
 	age: " mature at 5 years, and live up to 40 years.",
 	height: " stand between 6 and 8 feet tall.",
@@ -1123,7 +1650,10 @@ RaceList["elkin og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "elkin og");
+						return removeSpellElements(k, o, n, "elkin og", {
+							material: true,
+							ritual: true
+						});
 					},
 					"I require no material components to cast my Elkin racial spells."
 				]
@@ -1159,8 +1689,7 @@ RaceList["elkin og"] = {
 };
 RaceList["giff og"] = {
 	name: "Giff",
-	plural: "Giff",
-	regExpSearch: /^(?=.*giff).*$/i,
+	regExpSearch: /^giff$/i,
 	source: ["OG", 42],
 	age: " mature at 20 years, and live up to a century.",
 	height: " stand between 7½ and 8½ feet tall.",
@@ -1229,7 +1758,7 @@ RaceList["giff og"] = {
 RaceList["grimalkin wild og"] = {
 	name: "Wild Grimalkin",
 	sortname: "Grimalkin, wild",
-	plural: "Wild Grimalkin",
+	plural: "Wild Grimalkins",
 	regExpSearch: /^(?=.*grimalkin)(?=.*wild).*$/i,
 	source: ["OG", 44],
 	age: " mature at 5 years, and live up to three decades",
@@ -1279,7 +1808,7 @@ RaceList["grimalkin wild og"] = {
 RaceList["grimalkin urban og"] = {
 	name: "Urban Grimalkin",
 	sortname: "Grimalkin, urban",
-	plural: "Urban Grimalkin",
+	plural: "Urban Grimalkins",
 	regExpSearch: /^(?=.*grimalkin)(?=.*urban).*$/i,
 	source: ["OG", 44],
 	age: " mature at 5 years, and live up to three decades",
@@ -1313,7 +1842,6 @@ RaceList["grimalkin urban og"] = {
 };
 RaceList["grung og"] = {
 	name: "Grung",
-	plural: "Grung",
 	regExpSearch: /^grung$/i,
 	source: ["OG", 45],
 	age: " mature at 5 years, and live up to 30 years.",
@@ -1363,9 +1891,8 @@ RaceList["grung og"] = {
 };
 RaceList["haashir og"] = {
 	name: "Haashir",
-	plural: "Haashir",
-	regExpSearch: /^(?=.*haashir).*$/i,
-	source: ["OG", 35],
+	regExpSearch: /^haashir$/i,
+	source: ["OG", 46],
 	age: " mature at 30 years, and live up to two centuries.",
 	height: " are between 6½ and 7½ feet tall.",
 	weight: " weigh between 270 and 400 pounds.",
@@ -1434,7 +1961,10 @@ RaceList["haashir og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "haashir og");
+						return removeSpellElements(k, o, n, "haashir og", {
+							material: true,
+							ritual: true
+						});
 					},
 					"I require no material components to cast my Haashir racial spells."
 				]
@@ -1468,9 +1998,8 @@ RaceList["haashir og"] = {
 };
 RaceList["kamelon og"] = {
 	name: "Kamelon",
-	plural: "Kamelon",
-	regExpSearch: /^(?=.*kamelon).*$/i,
-	source: ["OG", 35],
+	regExpSearch: /^kamelon$/i,
+	source: ["OG", 47],
 	age: " mature at 12 years, and live up to 60 years.",
 	height: " stand between 3 and 4 feet tall.",
 	weight: " weigh an average of 50 pounds.",
@@ -1548,8 +2077,7 @@ RaceList["kamelon og"] = {
 };
 RaceList["kangaren og"] = {
 	name: "Kangaren",
-	plural: "Kangaren",
-	regExpSearch: /^(?=.*kangaren).*$/i,
+	regExpSearch: /^kangaren$/i,
 	source: ["OG", 48],
 	age: " mature at 15 years, and live up to 80 years.",
 	height: " have lean, muscular bodies, standing between 6 and 7 feet tall.",
@@ -1559,7 +2087,7 @@ RaceList["kangaren og"] = {
 	size: [3],
 	scores: [2, 0, 1, 0, 0, 0],
 	scorestxt: "+2 Str, +1 Con",
-	trait: "Kangaren (+2 Str, +1 Con)\n\u25C6 Natural Athlete. I'm proficient in the Athletics skill.\n\u25C6 Arid Adaptation. I'm acclimated to dry climates and require only half the normal amount of water to survive. I'm also naturally adapted to hot climates, as described in Chapt. 5 of the DMG.\n\u25C6 Extended Long Jump. I can add twice my proficiency bonus in ft when making a long jump.\n\u25C6 Mighty Hop. If I move at least 20 ft in a straight line on the ground without diff.ter., I gain +10ft of movement, which can only used along the same line.",
+	trait: "Kangaren (+2 Str, +1 Con)\n\u25C6 Natural Athlete. I'm proficient in the Athletics skill.\n\u25C6 Arid Adaptation. I'm acclimated to dry climates and require only half the normal amount of water to survive. Naturally adapted to hot climates (DMG 110).\n\u25C6 Extended Long Jump. I can add twice my proficiency bonus in ft when making a long jump.\n\u25C6 Mighty Hop. If I move at least 20 ft in a straight line on the ground without diff.ter., I gain +10ft of movement, which can only used along the same line.",
 	speed: {
 		walk: {
 			spd: 30,
@@ -1598,7 +2126,6 @@ RaceList["kangaren og"] = {
 };
 RaceList["kunek og"] = {
 	name: "Kunek",
-	plural: "Kunek",
 	regExpSearch: /^kunek$/i,
 	source: ["OG", 49],
 	age: " mature at 5 years, and live up to 30 years.",
@@ -1652,8 +2179,7 @@ RaceList["kunek og"] = {
 RaceList["hundr madra og"] = {
 	name: "Hundr Madra",
 	sortname: "Madra, Hundr",
-	plural: "Hundr Madra",
-	regExpSearch: /^(?=.*Hundr)(?=.*Madra).*$/i,
+	regExpSearch: /^(?=.*hundr)(?=.*madra).*$/i,
 	source: ["OG", 50],
 	age: " mature at 8 years and live up to 50 years.",
 	height: " stand between 4 and 5 feet tall.",
@@ -1701,7 +2227,9 @@ RaceList["hundr madra og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "hundr madra og");
+						return removeSpellElements(k, o, n, "hundr og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Hundr Madre racial spells."
 				]
@@ -1722,7 +2250,6 @@ RaceList["hundr madra og"] = {
 RaceList["koer madra og"] = {
 	name: "Koer Madra",
 	sortname: "Madra, Koer",
-	plural: "Koer Madra",
 	regExpSearch: /^(?=.*Koer)(?=.*Madra).*$/i,
 	source: ["OG", 50],
 	age: " mature at 8 years and live up to 50 years.",
@@ -1764,7 +2291,9 @@ RaceList["koer madra og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "koer madra og");
+						return removeSpellElements(k, o, n, "koer og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Koer Madre racial spells."
 				]
@@ -1784,8 +2313,7 @@ RaceList["koer madra og"] = {
 };
 RaceList["nychterid og"] = {
 	name: "Nychterid",
-	plural: "Nychterid",
-	regExpSearch: /nychterid/i,
+	regExpSearch: /^nychterid$/i,
 	source: ["OG", 51],
 	age: " reach physical maturity at the age of 15, and can live up to 80 years.",
 	height: " are between 3 and 4 feet tall.",
@@ -1825,7 +2353,7 @@ RaceList["nychterid og"] = {
 		"echolocation": {
 			name: "Echolocation",
 			minlevel: 1,
-			action: ["action", "Echolocation)"],
+			action: ["action", ""],
 			toNotesPage: [{
 				note: desc([
 					"As an action I can emit a short burst of high-pitched noise, audible up to 60 feet away, but",
@@ -1854,7 +2382,6 @@ RaceList["nychterid og"] = {
 };
 RaceList["opsu og"] = {
 	name: "Opsu",
-	plural: "Opsu",
 	regExpSearch: /^opsu$/i,
 	source: ["OG", 52],
 	age: " mature at 5 years, and live up to 30 years.",
@@ -1913,7 +2440,6 @@ RaceList["opsu og"] = {
 };
 RaceList["pangolo og"] = {
 	name: "Pangolo",
-	plural: "Pangolo",
 	regExpSearch: /^pangolo$/i,
 	source: ["OG", 53],
 	age: " reach physical maturity at the age of 15, and can live up to 80 years.",
@@ -1983,7 +2509,10 @@ RaceList["pangolo og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "pangolo og");
+						return removeSpellElements(k, o, n, "pangolo og", {
+							material: true,
+							ritual: true
+						});
 					},
 					"I require no material components to cast my Pangolo racial spells."
 				]
@@ -2003,7 +2532,6 @@ RaceList["pangolo og"] = {
 };
 RaceList["quillen og"] = {
 	name: "Quillen",
-	plural: "Quillen",
 	regExpSearch: /^quillen$/i,
 	source: ["OG", 54],
 	age: " reach physical maturity at the age of 8, and can live up to 50 years.",
@@ -2059,7 +2587,9 @@ RaceList["quillen og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "quillen og");
+						return removeSpellElements(k, o, n, "quillen og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Quillen racial spells."
 				]
@@ -2093,8 +2623,7 @@ RaceList["quillen og"] = {
 };
 RaceList["rhinox og"] = {
 	name: "Rhinox",
-	plural: "Rhinox",
-	regExpSearch: /^Rhinox$/i,
+	regExpSearch: /^rhinox$/i,
 	source: ["OG", 55],
 	age: " mature at 8 years, and live up to 60 years.",
 	height: " stand between 6 and 8 feet tall.",
@@ -2152,7 +2681,9 @@ RaceList["rhinox og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "rhinox og");
+						return removeSpellElements(k, o, n, "rhinox og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Rhinox cantrip."
 				]
@@ -2174,7 +2705,6 @@ RaceList["rhinox og"] = {
 };
 RaceList["skiouros og"] = {
 	name: "Skiouros",
-	plural: "Skiouros",
 	regExpSearch: /^skiouros$/i,
 	source: ["OG", 56],
 	age: " mature at 5 years, and live up to 25 years.",
@@ -2225,7 +2755,10 @@ RaceList["skiouros og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "skiouros og");
+						return removeSpellElements(k, o, n, "skiouros og", {
+							material: true,
+							ritual: true
+						});
 					},
 					"I require no material components to cast my Skiouros racial spells."
 				]
@@ -2245,7 +2778,6 @@ RaceList["skiouros og"] = {
 };
 RaceList["thanoi og"] = {
 	name: "Thanoi",
-	plural: "Thanoi",
 	regExpSearch: /^thanoi$/i,
 	source: ["OG", 57],
 	age: " mature at 15 years, and live up to 80 years.",
@@ -2268,7 +2800,7 @@ RaceList["thanoi og"] = {
 			spd: 30
 		},
 	},
-	weaponProfs: [false, false, ["spears", "nets"]],
+	weaponProfs: [false, false, ["spear", "net"]],
 	languageProfs: [
 		"Common",
 		"Thanoi"
@@ -2333,8 +2865,7 @@ var baseUrsine = {
 RaceList["ursine shash og"] = {
 	name: "Ursine Shash",
 	sortname: "Ursine, Shash",
-	plural: "Ursine Shash",
-	regExpSearch: /^(?=.*ursine)(?=.*shash).*$/i,
+	regExpSearch: /\bshash\b$/i,
 	source: ["OG", 58],
 	age: baseUrsine.age,
 	height: baseUrsine.height,
@@ -2370,8 +2901,7 @@ RaceList["ursine shash og"] = {
 RaceList["ursine makwa og"] = {
 	name: "Ursine Makwa",
 	sortname: "Ursine, Makwa",
-	plural: "Ursine Makwa",
-	regExpSearch: /^(?=.*ursine)(?=.*makwa).*$/i,
+	regExpSearch: /\bmakwa\b/i,
 	source: ["OG", 58],
 	age: baseUrsine.age,
 	height: baseUrsine.height,
@@ -2411,8 +2941,7 @@ RaceList["ursine makwa og"] = {
 RaceList["ursine helarc og"] = {
 	name: "Ursine Helarc",
 	sortname: "Ursine, Helarc",
-	plural: "Ursine Helarc",
-	regExpSearch: /^(?=.*ursine)(?=.*helarc).*$/i,
+	regExpSearch: /\bhelarc\b/i,
 	source: ["OG", 58],
 	age: baseUrsine.age,
 	height: baseUrsine.height,
@@ -2461,8 +2990,7 @@ RaceList["boggle og"] = {
 	scorestxt: "+2 Dex, +1 Int",
 	trait: "Boggle, Fey (+2 Dex, +1 Int)." +
 		"\n\u25C6 Uncanny Smell: Prof in Perception." +
-		"\n\u25C6 Fire Resistance: Skin is coated in non-flammable oil." +
-		"\n\u25C6 Optional Racial Feats: Boggle-Twisting-Space, Boggle-Mischievous-Familiar.",
+		"\n\u25C6 Fire Resistance: Skin is coated in non-flammable oil.",
 	skills: ["Perception"],
 	skillstxt: "Perception.",
 	speed: {
@@ -2517,7 +3045,7 @@ RaceList["boggle og"] = {
 				]),
 				page3notes: true,
 				name: "Oil Puddle",
-				additional: "action, SaveDC = 8 + ProfBns + ConMod"
+				additional: "action, SaveDC = 8 + ProfBonus + ConMod"
 			}]
 		},
 		"change oil viscosity": {
@@ -2533,7 +3061,7 @@ RaceList["varkind og"] = {
 	name: "Varkind",
 	sortname: "Varkind",
 	plural: "Varkinds",
-	regExpSearch: /^(?=.*varkind).*$/i,
+	regExpSearch: /^varkind$/i,
 	source: ["OG", 60],
 	age: " mature at 15 years, and live up to 70 years.",
 	height: " are as stout as dwarves, standing between 4 and 5½ feet tall",
@@ -2579,7 +3107,9 @@ RaceList["varkind og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "varkind og");
+						return removeSpellElements(k, o, n, "varkind og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Varkind racial spells."
 				]
@@ -2638,10 +3168,9 @@ var baseVulpine = {
 		"\n\u25C6 Compass Sense: Barring magical interference, I always know north."
 };
 RaceList["vulpini raposi og"] = {
-	name: "Vulpini Raposi",
+	name: "Raposi",
 	sortname: "Vulpini, Raposi",
-	plural: "Vulpini Raposi",
-	regExpSearch: /^(?=.*vulpini)(?=.*raposi).*$/i,
+	regExpSearch: /\braposi\b/i,
 	source: ["OG", 61],
 	age: baseVulpine.age,
 	height: baseVulpine.height,
@@ -2675,7 +3204,9 @@ RaceList["vulpini raposi og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "vulpini raposi og");
+						return removeSpellElements(k, o, n, "vulpini raposi og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Vulpini Raposi racial spells."
 				]
@@ -2699,10 +3230,9 @@ RaceList["vulpini raposi og"] = {
 	}
 };
 RaceList["vulpini tenko og"] = {
-	name: "Vulpini Tenko",
+	name: "Tenko",
 	sortname: "Vulpini, Tenko",
-	plural: "Vulpini Tenko",
-	regExpSearch: /^(?=.*vulpini)(?=.*tenko).*$/i,
+	regExpSearch: /\btenko\b/i,
 	source: ["OG", 62],
 	age: baseVulpine.age,
 	height: baseVulpine.height,
@@ -2739,7 +3269,10 @@ RaceList["vulpini tenko og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "vulpini tenko og");
+						return removeSpellElements(k, o, n, "vulpini tenko og", {
+							material: true,
+							ritual: true
+						});
 					},
 					"I require no material components to cast my Vulpini Tenko racial spells."
 				]
@@ -2785,10 +3318,9 @@ RaceList["vulpini tenko og"] = {
 	}
 };
 RaceList["vulpini guaxin og"] = {
-	name: "Vulpini Guaxin",
+	name: "Guaxin",
 	sortname: "Vulpini, Guaxin",
-	plural: "Vulpini Guaxin",
-	regExpSearch: /^(?=.*vulpini)(?=.*guaxin).*$/i,
+	regExpSearch: /\bguaxin\b/i,
 	source: ["OG", 62],
 	age: baseVulpine.age,
 	height: baseVulpine.height,
@@ -2822,7 +3354,9 @@ RaceList["vulpini guaxin og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "vulpini guaxin og");
+						return removeSpellElements(k, o, n, "vulpini guaxin og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Vulpini Guaxin racial spells."
 				]
@@ -2860,7 +3394,7 @@ RaceList["darkling og"] = {
 	weaponProfs: [false, false, ["dagger", "scimitar", "shortsword", "rapier"]],
 	vision: [
 		["Darkling Vision", 120],
-		"Light Sensitivity"
+		"Light Sensitivity (see traits)"
 	],
 	spellcastingAbility: [4, 5, 6],
 	height: " stand between 3 and 4 ft tall.",
@@ -2873,7 +3407,7 @@ RaceList["darkling og"] = {
 	trait: "Darkling, Fey (+2 Dex, +1 Wis)." +
 		"\n\u25C6 Fey Ancestry: Adv on saves vs. charmed." +
 		"\n\u25C6 Darkling Movement: Prof in Stealth, Adv. on Stealth in darkness." +
-		"\n\u25C6 Light Sensitivity: Disadv on ATK-rolls and Perception checks relying on sight, when I, my target or what I wanna perceive is in bright light." +
+		"\n\u25C6 Light Sensitivity: Disadv on ATK-rolls and Perception checks relying on sight, when I or what I wanna perceive/attack is in bright light." +
 		"\n\u25C6 Darkling Weapon Training: I'm proficient with daggers, scimitars, shortswords, and rapiers",
 	speed: {
 		walk: {
@@ -2905,7 +3439,9 @@ RaceList["darkling og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "darkling og");
+						return removeSpellElements(k, o, n, "darkling og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Darkling racial spells."
 				]
@@ -2916,7 +3452,7 @@ RaceList["darkling og"] = {
 					"Int, Wis, or Cha is my spellc. ability for it and it requires no material components."
 				]),
 				page3notes: true,
-				name: "Woad-ways",
+				name: "Darkling Magic",
 			}]
 		},
 		"death flash": {
@@ -2949,7 +3485,7 @@ RaceList["dryad og"] = {
 	scorestxt: "+2 Wis, +1 Cha",
 	trait: "Dryad, Fey (+2 Wis, +1 Cha)." +
 		"\n\u25C6 Fey Ancestry: Adv on saves vs charmed." +
-		"\n\u25C6 Natural Adept: Prof in Nature." +
+		"\n\u25C6 Natural Adept: I'm proficient in Nature." +
 		"\n\u25C6 Fallow: No need to sleep, instead lie fallow (semiconscious) 4h/lr" +
 		"\n\u25C6 Photosynthetic: I don't eat, but must maintain physical contact with fertile soil at least 72h/w or ingest a handful fertile soil each day. I need direct sunlight 6h/d (partial light contributes 1/2, bright magical light 1/4). Standard rules for no food/water (DMG 185).",
 	savetxt: {
@@ -2991,7 +3527,9 @@ RaceList["dryad og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "dryad og");
+						return removeSpellElements(k, o, n, "dryad og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Dryad spells."
 				]
@@ -3045,17 +3583,17 @@ var baseGelfling = {
 		}
 	},
 	braveOrWinged: "Please pick the Brave Male or Winged Female racial variant!",
-	bravetrait: "Male Gelfling: Adv on saves vs frightened.",
-	wingedtrait: "Female Gelfling: Retractable Wings (can be tucked away). Taking dmg while flying causes sudden falling. Fluttering with wings only halves the fall dmg.",
+	bravetrait: "Brave Gelfling: Adv on saves vs frightened.",
+	wingedtrait: "Winged Gelfling: Retractable Gossamer-Wings (can be tucked away safely in the clothing). Taking dmg while flying causes sudden falling. Fluttering with wings only halves the fall dmg.",
 	dousanTrait: "Dousan Gelfling, Fey (+2 Wis, +1 Cha)." +
 		"\n\u25C6 Thoughtful: Prof in Insight or Perception." +
 		"\n\u25C6 Song of Thra: Prof in 1 Instrument and 1 Gaming Set." +
-		"\n\u25C6 Desert Born: Acclimated to high altitudes above 20.000ft. Naturally adapted to hot climates." +
+		"\n\u25C6 Desert Born: Acclimated to high altitudes above 20.000ft. Naturally adapted to hot climates (DMG 110)." +
 		"\n\u25C6 ",
 	drenchenTrait: "Drenchen Gelfling, Fey (+1 Dex, +1 Con, +1 Cha)." +
 		"\n\u25C6 Drenchen Weapon Training: Scimitars, Blowguns, Shortbows." +
-		"\n\u25C6 Amphibious: Breathe Air and Water." +
-		"\n\u25C6 Poison Resistance: Adv. on saves vs poison, poison res." +
+		"\n\u25C6 Amphibious: I can breathe Air and Water." +
+		"\n\u25C6 Poison Resistance: Adv. on saves vs poison, poison resistance." +
 		"\n\u25C6 Survivalist: Prof in Animal Handling or Survival." +
 		"\n\u25C6 ",
 	grottanTrait: "Grottan Gelfling, Fey (+1 Int, +1 Wis, +1 Cha)." +
@@ -3065,13 +3603,13 @@ var baseGelfling = {
 		"\n\u25C6 ",
 	sifaTrait: "Sifa Gelfling, Fey (+1 Dex, +1 Wis, +1 Cha)." +
 		"\n\u25C6 Silver Tongue: Prof in Persuasion or Deception." +
-		"\n\u25C6 Sifa Crafts: Prof with Water Vehivles or Navigator's Tools." +
+		"\n\u25C6 Sifa Crafts: Prof with Water Vehicles or Navigator's Tools." +
 		"\n\u25C6 Sifa Weapon Training: Scimitars, Shortbows, Longbows." +
 		"\n\u25C6 ",
 	spritonTrait: "Spriton Gelfling, Fey (+1 Str, +1 Dex, +1 Cha)." +
 		"\n\u25C6 Capable: Prof in Athletics or Acrobatics." +
 		"\n\u25C6 Spriton Crafts: Prof with either Calligrapher's Supplies, Leatherworker's Tools or Weaver's Tools." +
-		"\n\u25C6 Spriton Weapon Training: Light Armour,  Choose 2 martial weapons." +
+		"\n\u25C6 Spriton Weapon Training: Light Armor, Choose 2 martial weapons." +
 		"\n\u25C6 ",
 	stonewoodTrait: "Stonewood Gelfling, Fey (+1 Dex, +1 Int, +1 Cha)." +
 		"\n\u25C6 Naturalist: Prof in Nature." +
@@ -3080,7 +3618,7 @@ var baseGelfling = {
 		"\n\u25C6 Fixer: I learn the Mending Cantrip." +
 		"\n\u25C6 ",
 	vapraTrait: "Vapra Gelfling, Fey (+1 Int, +2 Cha)." +
-		"\n\u25C6 Mountain Born: Acclimated to high altitudes above 20.000ft. Naturally adapted to cold climates." +
+		"\n\u25C6 Mountain Born: Acclimated to high altitudes above 20.000ft. Naturally adapted to cold climates (DMG 110)." +
 		"\n\u25C6 Vapra Education: Prof in History or Arcana." +
 		"\n\u25C6 ",
 	dreamfasting: {
@@ -3093,7 +3631,7 @@ var baseGelfling = {
 		toNotesPage: [{
 			note: desc([
 				"I can share my memories with another Gelfing or crea that is able to dreamfast.",
-				"I can teach a crea (with min 6INT) how to dreamfast, success on CHA-check (DC18).",
+				"I can teach a crea (with min 6INT) how to dreamfast, if it succeeds on CHA-check (DC18).",
 				"A dreametching may occur spontanously during dreamfasting (DM's discretion).",
 			]),
 			page3notes: true,
@@ -3119,7 +3657,10 @@ var baseGelfling = {
 	calcChangesSpellCost: {
 		spellAdd: [
 			function(k, o, n) {
-				removeSpellCosts(k, o, n, "gelfling.*((dousan)|(drenchen)|(grottan)|(sifa)|(spriton)|(stonewood)|(vapra)).*og", true);
+				return removeSpellElements(k, o, n, "gelfling.*((dousan)|(drenchen)|(grottan)|(sifa)|(spriton)|(stonewood)|(vapra)).*og", {
+					material: true,
+					ritual: true
+				});
 			},
 			"I require no material components to cast my Gelfling racial spells."
 		]
@@ -3361,11 +3902,11 @@ RaceList["gelfling sifa og"] = {
 	spellcastingAbility: [4, 5, 6],
 	trait: baseGelfling.sifaTrait + baseGelfling.braveOrWinged,
 	skills: [],
-	skillstxt: "Choose: Insight or Perception.",
+	skillstxt: "Choose: Persuasion or Deception.",
 	toolProfs: [
 		["Water Vehicles or Navigator's Tools", 1]
 	],
-	weaponProfs: [false, false, "scimitar", "shortbow", "longbow"],
+	weaponProfs: [false, false, ["scimitar", "shortbow", "longbow"]],
 	features: {
 		dreamfasting: baseGelfling.dreamfasting,
 		dreametching: baseGelfling.dreametching,
@@ -3606,7 +4147,7 @@ AddRacialVariant("gelfling vapra og", "winged", {
 	trait: baseGelfling.vapraTrait + baseGelfling.wingedtrait
 });
 RaceList["korred og"] = {
-	regExpSearch: /^.*(?=.*korred).*$/i,
+	regExpSearch: /^korred$/i,
 	name: "Korred",
 	plural: "Korreds",
 	source: ["OG", 70],
@@ -3621,7 +4162,7 @@ RaceList["korred og"] = {
 	trait: "Korred, Fey (+1 Str, +1 Con, +1 Cha)." +
 		"\n\u25C6 Stone Adept: Adv. on stealth-checks in rocky terrain. Difficult terrain (rock, stone) does not impede my movement." +
 		"\n\u25C6 Stone Mover: I count as large for capacity (carry, push, drag, lift)." +
-		"\n\u25C6 Stone Speech: I can spend 10min to speak with stones. Most rocks do not have ears/eyes and poor grasp of time but give info about mineral composition and integrity." +
+		"\n\u25C6 Stone Speech: I can spend 10min to speak with stones. Most rocks do not have ears/eyes and a poor grasp of time but give info about mineral composition and integrity." +
 		"\n\u25C6 Stone Magic: I learn the Mold Earth Cantrip. I can also cast Meld into Stone from lvl 3 once per long rest w/o material components.",
 	speed: {
 		walk: {
@@ -3673,7 +4214,10 @@ RaceList["korred og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "korred og", true);
+						return removeSpellElements(k, o, n, "korred og", {
+							material: true,
+							ritual: true
+						});
 					},
 					"I require no material components to cast my Korred racial spells."
 				]
@@ -3682,7 +4226,7 @@ RaceList["korred og"] = {
 	}
 };
 RaceList["nocker og"] = {
-	regExpSearch: /^(?=.*nocker).*$/i,
+	regExpSearch: /^nocker/i,
 	name: "Nocker",
 	plural: "Nockers",
 	source: ["OG", 71],
@@ -3731,7 +4275,10 @@ RaceList["nocker og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "nocker og", true);
+						return removeSpellElements(k, o, n, "nocker og", {
+							material: true,
+							ritual: true
+						});
 					},
 					"I require no material components to cast my Nocker spells."
 				]
@@ -3785,7 +4332,7 @@ var basePixie = {
 		text: ["Vulner. to thdr"]
 	},
 	trait: "\n\u25C6 Fey Cunning: I've adv. on WIS/CHA-saves vs magic; magic can't put me to sleep and I'm vulnerable to thunder damage." +
-		"\n\u25C6 Fly: I can't fly with medium/heavy armour or while exhausted." +
+		"\n\u25C6 Fly: I can't fly with medium/heavy armor or while exhausted." +
 		"\n\u25C6 Naive: I gain no benefits of a background. Instead I choose one Skill and one Artisan's Tool or Musical Instrument." +
 		"\n\u25C6 Feywild Access: I know the exact location of any portals to the Feywild in 100ft at all times, and can access them at will. When I reach 5th level, I can cast divination to discover the nearest Feywild portal within 7 miles of my current location once per long rest.",
 	toolProfs: [
@@ -3810,7 +4357,10 @@ var basePixie = {
 	calcChangesRemoveCosts: {
 		spellAdd: [
 			function(k, o, n) {
-				removeSpellCosts(k, o, n, "pixie.*((seelie)|(unseelie)|(wild)).*og", true);
+				return removeSpellElements(k, o, n, "pixie.*((seelie)|(unseelie)|(wild)).*og", {
+					material: true,
+					ritual: true
+				});
 			},
 			"I require no material components to cast my Pixie racial spells."
 		]
@@ -4035,7 +4585,7 @@ RaceList["pixie wild og"] = {
 	}
 };
 RaceList["podling og"] = {
-	regExpSearch: /^(?=.*podling).*$/i,
+	regExpSearch: /^podling$/i,
 	name: "Podling",
 	plural: "Podlings",
 	source: ["OG", 75],
@@ -4085,7 +4635,10 @@ RaceList["podling og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "podling og", true);
+						return removeSpellElements(k, o, n, "podling og", {
+							material: true,
+							ritual: true
+						});
 					},
 					"I require no material components to cast my Podling racial spells."
 				]
@@ -4140,12 +4693,12 @@ CreatureList["fizzgig og"] = {
 };
 var basePooka = {
 	trait: "Pooka (+2 Dex, +1 Cha)." +
-		"\n\n\u25C6 Natural Liar: I'm proficient in Deception." +
-		"\n\n\u25C6 Confidant Magic: I learn the Friends cantrip. I can cast Charm Person at SL 2 from level 3 and Calm Emotions from level 5. I can cast both spells once per long rest and w/o material components." +
-		"\n\n\u25C6 "
+		"\n\u25C6 Natural Liar: I'm proficient in Deception." +
+		"\n\u25C6 Confidant Magic: I learn the Friends cantrip. I can cast Charm Person at SL 2 from level 3 and Calm Emotions from level 5. I can cast both spells once per long rest and w/o material components." +
+		"\n\u25C6 "
 };
 RaceList["pooka og"] = {
-	regExpSearch: /^(?=.*pooka).*$/i,
+	regExpSearch: /^pooka$/i,
 	name: "Pooka",
 	plural: "Pookas",
 	source: ["OG", 76],
@@ -4164,9 +4717,6 @@ RaceList["pooka og"] = {
 	},
 	skills: ["Deception"],
 	skillstxt: "Deception.",
-	toolProfs: [
-		["One set of Artisan's Tools", 1]
-	],
 	scores: [0, 2, 0, 0, 0, 1],
 	scorestxt: "+2 Dex, +1 Cha",
 	trait: basePooka.trait + "Please choose between Darkvision, Keen Hearing or Keen smell using the \"Racial Options\"-button below",
@@ -4194,7 +4744,9 @@ RaceList["pooka og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "pooka og");
+						return removeSpellElements(k, o, n, "pooka og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Pooka racial spells."
 				]
@@ -4252,7 +4804,7 @@ AddRacialVariant("pooka og", "keen hearing", {
 	name: "Pooka",
 	trait: basePooka.trait + "Keen Hearing: Advantage on Perception checks relying on hearing.",
 	vision: [
-		"Keen Hearing"
+		"Keen Hearing (see notes)"
 	],
 });
 AddRacialVariant("pooka og", "keen smell", {
@@ -4261,11 +4813,11 @@ AddRacialVariant("pooka og", "keen smell", {
 	name: "Pooka",
 	trait: basePooka.trait + "Keen Smell: Advantage on Perception checks relying on smell.",
 	vision: [
-		"Keen Smell"
+		"Keen Smell (see notes)"
 	],
 });
 RaceList["redcap og"] = {
-	regExpSearch: /^(?=.*redcap).*$/i,
+	regExpSearch: /^redcap$/i,
 	name: "Redcap",
 	plural: "Redcaps",
 	source: ["OG", 77],
@@ -4279,7 +4831,7 @@ RaceList["redcap og"] = {
 	scorestxt: "+1 Str, +2 Con",
 	trait: "Redcap (+1 Str, +1 Con)" +
 		"\n\u25C6 Bad Attitude: I'm proficient in Intimidation. If I have Prof from elsewhere, I gain Expertise instead." +
-		"\n\u25C6 Redundant Organs: I've adv. on saves vs disease and poison and Poison Resistance." +
+		"\n\u25C6 Redundant Organs: Adv. on saves vs disease and poison and Poison Resistance." +
 		"\n\u25C6 Omnivore: I can eat almost everything! As long as I can put my mouth around it, I can subsist on it." +
 		"\n\u25C6 Redcap Savagery: I learn the Primal Savagery Cantrip and can pick between Slashing, Piercing, and Bludgeoning for it's damage type. If it hits an object, it always crits. Str is my spellcasting ability for it.",
 	spellcastingAbility: 1,
@@ -4354,8 +4906,9 @@ RaceList["redcap og"] = {
 	}
 };
 RaceList["satyr og"] = {
-	regExpSearch: /^(?=.*satyr).*$/i,
-	name: "Satyr",
+	regExpSearch: /\bsatyr\b/i,
+	name: "Satyr (OG)",
+	sortname: "Satyr",
 	plural: "Satyrs",
 	source: ["OG", 78],
 	age: " enter adulthood in their early teens and live up to 300 years.",
@@ -4447,7 +5000,9 @@ RaceList["satyr og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "satyr og");
+						return removeSpellElements(k, o, n, "satyr og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Satyr spells."
 				]
@@ -4466,7 +5021,7 @@ RaceList["satyr og"] = {
 	}
 };
 RaceList["siren og"] = {
-	regExpSearch: /^(?=.*siren).*$/i,
+	regExpSearch: /^siren$/i,
 	name: "Siren",
 	plural: "Sirens",
 	source: ["OG", 79],
@@ -4482,7 +5037,7 @@ RaceList["siren og"] = {
 		"\n\u25C6 Darkvision: I can see in dim light within 60 feet as if it were bright light, and in darkness as if it were dim light, but can't discern color." +
 		"\n\u25C6 Friend of the Sea: Using gestures and sounds I can communicate simple ideas to beasts with a swim speed." +
 		"\n\u25C6 Siren Training: I am proficient with Spears, Tridents, and one Musical Instrument." +
-		"\n\u25C6 Siren Magic: I learn the Friends cantrip. I can cast Fog Cloud at SL 2 from level 3 once per long rest and w/o material components.",
+		"\n\u25C6 Siren Magic: I learn the Friends cantrip. From level 3, I can cast  Fog Cloud (SL2) once per long rest without material components.",
 	vision: [
 		["Darkvision", 60]
 	],
@@ -4546,7 +5101,9 @@ RaceList["siren og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "siren og");
+						return removeSpellElements(k, o, n, "siren og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Siren racial spells."
 				]
@@ -4566,7 +5123,7 @@ RaceList["siren og"] = {
 					"up to 10 min. For the duration I gain adv on Performance-checks. As a bns a I force a crea",
 					"which is not in combat to make WIS-save (DC = 8 + ProfBonus + ChaMod). On a failure,",
 					"the crea is charmed by me for up to an hour, as long as it can hear the music.",
-					"I can charm a number of creatures equal to my Cha Mod."
+					"I can charm a number of creatures equal to my ChaMod."
 				]),
 				page3notes: true,
 				name: "Siren Song",
@@ -4576,7 +5133,7 @@ RaceList["siren og"] = {
 	}
 };
 RaceList["sluagh og"] = {
-	regExpSearch: /^(?=.*sluagh).*$/i,
+	regExpSearch: /^sluagh$/i,
 	name: "Sluagh",
 	plural: "Sluaghs",
 	source: ["OG", 80],
@@ -4646,8 +5203,7 @@ RaceList["sluagh og"] = {
 			],
 			toNotesPage: [{
 				note: desc([
-					"Using a ritual tea-set I serve the favorite tea of someone I know, who also owns a ritual tea-set. I contact them by tapping with a tea-spoon (like \"Sending\"-Spell).",
-					"The tapping is the only information transferred. If the owner of the other tea-set hears it, they respond by tapping. The connection lasts until the tea has gone cold or is consumed.",
+					"I see into the ethereal plane 30ft until the end of my next turn. I can apply my ProfBonus twice to CHA(Persuasion)-checks when conversing with undead who are not hostile to me.",
 				]),
 				page3notes: true,
 				name: "Friends to the Dead"
@@ -4665,7 +5221,9 @@ RaceList["sluagh og"] = {
 			calcChanges: {
 				spellAdd: [
 					function(k, o, n) {
-						removeSpellCosts(k, o, n, "sluagh og");
+						return removeSpellElements(k, o, n, "sluagh og", {
+							material: true
+						});
 					},
 					"I require no material components to cast my Sluagh racial spells."
 				]
@@ -4740,9 +5298,9 @@ RaceList["stone troll og"] = {
 			}],
 			toNotesPage: [{
 				note: desc([
-					"I stomp, creating thundering sound audible 100ft. All crea within 5ft must make CON-save.",
-					"Failed save: 1d8 thunder dmg and deafened until start of its next turn.",
-					"Damage increase: CL5 2d8, CL11 3d8, CL17 4d8.",
+					"I stomp, creating thundering sound audible 100ft. All crea within 5ft must make CON-save",
+					"(DC = 8 + ProfBonus + StrMod). Failed save: 1d8 thunder dmg and deafened until start of",
+					"its next turn. Damage increase: CL5 2d8, CL11 3d8, CL17 4d8.",
 				]),
 				page3notes: true,
 				name: "Thundering Stomp",
@@ -4753,10 +5311,773 @@ RaceList["stone troll og"] = {
 };
 // RACE: MONSTROUS
 // RACE: PLANTS
+RaceList["drosera og"] = {
+	name: "Drosera",
+	sortname: "Drosera",
+	plural: "Droseras",
+	regExpSearch: /^drosera$/i,
+	source: ["OG", 97],
+	age: " reach adulthood at around 15 years and live up to 150 years.",
+	height: " average about 6 feet tall.",
+	weight: " weigh about 100 pounds.",
+	heightMetric: " are about " + ConvertToMetric("6 ft", 0.1) + " tall.",
+	weightMetric: " weigh about " + ConvertToMetric("100 lbs", 0.1) + ".",
+	size: [3],
+	carryingCapacity: 1,
+	scores: [1, 1, 1, 0, 0, 0],
+	scorestxt: "+1 Str, +1 Dex, +1 Con",
+	trait: "Drosera, Plant (+1 Str, +1 Dex, +1 Con)" +
+		"\n\u25C6 Headplate Vision: I protect my sensitive eyes and my fearsome jaw with a headplate (see notes)." +
+		"\n\u25C6 Ambush Hunter: I'm proficient with Longbows, Spears and the Stealth skill." +
+		"\n\u25C6 Mutable: From level 3, I can cast Snare. From level 5, I can cast Alter Self. I can cast the spells once per day and without providing material components.",
+	spellcastingAbility: [4, 5, 6],
+	skills: ["Stealth"],
+	skillstxt: "Stealth",
+	speed: {
+		walk: {
+			spd: 30,
+			enc: 20
+		},
+	},
+	vision: [
+		["Unhinged headplate: Darkvision 120 ft;"],
+		["\nHinged headplate: Obscured vision (see notes);"]
+	],
+	weaponProfs: [false, false, ["longbow", "spear"]],
+	languageProfs: [
+		"Common",
+		"Primordial"
+	],
+	features: {
+		"jaw": {
+			name: "Jaw",
+			minLevel: 1,
+			weaponOptions: [{
+				baseWeapon: "unarmed strike",
+				regExpSearch: /^(?=.*carnivorous)(?=.*\bbite?\b).*$/i,
+				name: "Carnivorous Bite",
+				damage: [1, 6, "piercing"],
+				range: "Melee (5ft)",
+				description: "Requires unhinged headplate. I deal additional acid dmg, eq 2*ProfBonus.",
+				selectNow: true
+			}, ],
+		},
+		"headplate": {
+			name: "Headplate",
+			minlevel: 1,
+			action: ["bonus action", "Hinge/Unhinge Headplate"],
+			toNotesPage: [{
+				note: desc([
+					"I can hinge or unhinge my headplate as a bns a.",
+					"- \"Hinged\": My vision is obscured. I can only see 15ft; or up to 60ft with help of bright light.",
+					"- \"Unhinged\": My sensitive eyes and fearsome jaw are exposed. I gain Darkvision 120ft and",
+					"  I can use my \"Carnivorous Bite\". I am more vulnerable: Crits against me deal +1d10 dmg."
+				]),
+				page3notes: true,
+				name: "Headplate",
+				additional: "bonus action",
+			}],
+		},
+		"mutable": {
+			name: "Mutable",
+			minlevel: 3,
+			spellcastingBonus: [{
+				name: "Mutable",
+				spells: ["snare"],
+				selection: ["snare"],
+				firstCol: "oncelr"
+			}],
+			calcChanges: {
+				spellAdd: [
+					function(k, o, n) {
+						return removeSpellElements(k, o, n, "drosera og", {
+							material: true
+						});
+					},
+					"I require no material components to cast my Drosera racial spells."
+				]
+			}
+		},
+		"mutable 5": {
+			name: "Mutable",
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Mutable",
+				spells: ["alter self"],
+				selection: ["alter self"],
+				firstCol: "oncelr"
+			}],
+		},
+	}
+};
+RaceList["gwaloth og"] = {
+	name: "Gwaloth",
+	sortname: "Gwaloth",
+	plural: "Gwaloths",
+	regExpSearch: /^gwaloth$/i,
+	source: ["OG", 98],
+	age: " reach adulthood at around 30 years and live up to 200 years.",
+	height: " average about 4 feet tall.",
+	weight: " weigh about 45 pounds.",
+	heightMetric: " are about " + ConvertToMetric("4 ft", 0.1) + " tall.",
+	weightMetric: " weigh about " + ConvertToMetric("45 lbs", 0.1) + ".",
+	size: [4],
+	carryingCapacity: 1,
+	scores: [0, 0, 1, 0, 2, 0],
+	scorestxt: "+1 Con, +2 Wis",
+	trait: "Gwaloth, Plant (+1 Con, +2 Wis)" +
+		"\n\u25C6 Photosynthetic: I don't eat, but must maintain physical contact with fertile soil at least 24h/w or ingest a handful fertile soil each day. I need direct sunlight 4h/d (partial light contributes 1/2, bright magical light 1/4). Standard rules for no food/water (DMG 185)." +
+		"\n\u25C6 Herbal Affinity: I'm proficient in Nature and Medicine." +
+		"\n\u25C6 Gwaloth Magic: I know the Resistance Cantrip. I can cast Goodberry from level 3 and Speak with Plants from level 5. I can cast both once per long rest and without providing material components.",
+	spellcastingAbility: [4, 5, 6],
+	skills: ["Nature", "Medicine"],
+	skillstxt: "Nature and Medicine",
+	dmgres: [
+		["All -Fire", "All -Fire (rooted)"]
+	],
+	speed: {
+		walk: {
+			spd: 25,
+			enc: 15
+		},
+	},
+	languageProfs: [
+		"Common",
+		"Druidic"
+	],
+	features: {
+		"deep roots": {
+			name: "Deep Roots",
+			minlevel: 1,
+			usages: 1,
+			recovery: "long rest",
+			action: ["action", "Deep Roots"],
+			toNotesPage: [{
+				note: desc([
+					"I plunge my roots into the ground. Until start of my next turn, I can't move or take reactions.",
+					"I have resistance to all dmg, except fire. I regain HP if I take lightning dmg.",
+					"At start of my next turn, roots retract: I can spend 1 HitDie (regain the # + ConMod as HP)."
+				]),
+				page3notes: true,
+				name: "Deep Roots",
+				additional: "1x per long rest"
+			}],
+		},
+		"gwaloth magic": {
+			name: "Gwaloth Magic",
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Gwaloth Magic",
+				spells: ["resistance"],
+				selection: ["resistance"],
+				firstCol: "oncelr"
+			}],
+			calcChanges: {
+				spellAdd: [
+					function(k, o, n) {
+						return removeSpellElements(k, o, n, "gwaloth og", {
+							material: true
+						});
+					},
+					"I require no material components to cast my Gwaloth racial spells."
+				]
+			}
+		},
+		"gwaloth magic 3": {
+			name: "Gwaloth Magic",
+			minlevel: 3,
+			spellcastingBonus: [{
+				name: "Gwaloth Magic",
+				spells: ["goodberry"],
+				selection: ["goodberry"],
+				firstCol: "oncelr"
+			}],
+		},
+		"gwaloth magic 5": {
+			name: "Gwaloth Magic",
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Gwaloth Magic",
+				spells: ["speak with plants"],
+				selection: ["speak with plants"],
+				firstCol: "oncelr"
+			}],
+		},
+	}
+};
+RaceList["myconid og"] = {
+	name: "Myconid",
+	sortname: "Myconid",
+	plural: "Myconids",
+	regExpSearch: /^myconid$/i,
+	source: ["OG", 99],
+	age: " reach adulthood at around 5 years and live up to 40 years.",
+	height: " stand between 4½ and 7 feet tall.",
+	weight: " weigh between 100 and 200 pounds.",
+	heightMetric: " are about " + ConvertToMetric("4½ ft", 0.1) + " to " + ConvertToMetric("7 ft", 0.1) + " tall.",
+	weightMetric: " weigh between " + ConvertToMetric("100 lbs", 0.1) + " and " + ConvertToMetric("200 lbs", 0.1) + ".",
+	size: [3],
+	carryingCapacity: 1,
+	scores: [0, 0, 1, 0, 2, 0],
+	scorestxt: "+1 Con, +2 Wis",
+	trait: "Myconid, Plant (+1 Con, +2 Wis)" +
+		"\n\u25C6 Mute Telepath. I'm unable to speak and have to rely on spores and telepathy to communicate (see notes)." +
+		"\n\u25C6 Sun Sickness: In direct sunlight, I have disadv on atk-rolls and Wis-(Perception)-checks relying on sight. After 1h in sunlight, DC15 Con-save or 1 lvl exhaustion. No benefits from rests in sunlight." +
+		"\n\u25C6 Sporeling Magic: I know the Infestation cantrip. I can cast Inflict Wounds (SL2) from level 3, and Enthrall from level 5. I can cast the spells once per day, without material or verbal components.",
+	speed: {
+		walk: {
+			spd: 30,
+			enc: 20
+		},
+	},
+	vision: [
+		["Superior Darkvision", 120],
+		"Sun Sickness (see notes)"
+	],
+	languageProfs: [
+		"Common",
+		"Undercommon"
+	],
+	features: {
+		"rapport spores": {
+			name: "Rapport Spores",
+			minlevel: 1,
+			action: ["action", "Rapport Spores"],
+			toNotesPage: [{
+				note: desc([
+					"I can telepathically communicate with crea I choose (req Int>=2) within 30ft of me.",
+					"Crea must share a language with me and cannot be Constructs, Elementals, or Undead.",
+					"Duration: # hours eq my ProfBonus. Dmg I take can be sensed by affected crea within 240ft.",
+					"Blocked by magical silence, 1ft stone, 1in common metal, a thin sheet of lead, or 3ft wood."
+				]),
+				page3notes: true,
+				name: "Rapport Spores"
+			}],
+		},
+		"sporeling magic": {
+			name: "Sporeling Magic",
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Sporeling Magic",
+				spells: ["infestation"],
+				selection: ["infestation"],
+				atwill: true
+			}],
+			calcChanges: {
+				spellAdd: [
+					function(k, o, n) {
+						return removeSpellElements(k, o, n, "myconid og", {
+							material: true,
+							verbal: true
+						});
+					},
+					"My Myconid racial spells require no material or verbal components."
+				]
+			}
+		},
+		"sporeling magic 3": {
+			name: "Sporeling Magic",
+			minlevel: 3,
+			spellcastingBonus: [{
+				name: "Sporeling Magic",
+				spells: ["inflict wounds level 2"],
+				selection: ["inflict wounds level 2"],
+				firstCol: "oncelr",
+			}],
+		},
+		"sporeling magic 5": {
+			name: "Sporeling Magic",
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Sporeling Magic",
+				spells: ["enthrall"],
+				selection: ["enthrall"],
+				firstCol: "oncelr",
+			}],
+		},
+	}
+};
+var baseOlassi = {
+	source: ["OG", 101],
+	age: " reach physical maturity at about 18 years, and with proper nourishment can live over 300 years.",
+	height: " range in height from 4 to 8 feet tall.",
+	weight: "  weigh 80-220 pounds",
+	heightMetric: " stand between " + ConvertToMetric("4 ft", 0.1) + " and " + ConvertToMetric("8 ft", 0.1) + " tall.",
+	weightMetric: " weigh between " + ConvertToMetric("80 lbs", 0.1) + " and " + ConvertToMetric("200 lbs", 0.1) + ". ",
+	size: [3],
+	speed: {
+		walk: {
+			spd: 30,
+			enc: 20
+		}
+	},
+	savetxt: {
+		adv_vs: ["charmed"]
+	},
+	skills: ["Nature"],
+	skillstxt: "Nature",
+	vision: [
+		["Darkvision", 60],
+	],
+	languageProfs: [
+		"Common",
+		"Sylvan",
+		"Leaf Speech",
+	],
+	naturalaffinity: {
+		name: "Natural Affinity",
+		minlevel: 1,
+		toNotesPage: [{
+			note: desc([
+				"I can discern the purity of water and fertility of soil by touch, potentially being affected as",
+				"other Plants in the area at DM discretion."
+			]),
+			page3notes: true,
+			name: "Natural Affinity"
+		}],
+	},
+	calcChangesRemoveCosts: {
+		spellAdd: [
+			function(k, o, n) {
+				return removeSpellElements(k, o, n, "olassi.*((almandil)|(fanalos)|(sundo.?talma)|(taan.?tiin)).*og", {
+					material: true
+				});
+			},
+			"I require no material components to cast my Olassi racial spells."
+		]
+	},
+};
+RaceList["olassi almandil og"] = {
+	name: "Almandil Olassi",
+	sortname: "Olassi, Almandil",
+	regExpSearch: /\balmandil\b/i,
+	source: ["OG", 101],
+	age: baseOlassi.age,
+	height: baseOlassi.height,
+	weight: baseOlassi.weight,
+	heightMetric: baseOlassi.heightMetric,
+	weightMetric: baseOlassi.weightMetric,
+	size: baseOlassi.size,
+	speed: baseOlassi.speed,
+	savetxt: baseOlassi.savetxt,
+	skills: baseOlassi.skills,
+	skillstxt: baseOlassi.skillstxt,
+	vision: baseOlassi.vision,
+	languageProfs: baseOlassi.languageProfs,
+	scores: [0, 0, 0, 0, 2, 1],
+	scorestxt: "+2 Wis, +1 Cha",
+	trait: "Almandil, Olassi, Plant (+2 Wis, +1 Cha)" +
+		"\n\u25C6 Fey Ancestry: I have adv on saves vs charmed." +
+		"\n\u25C6 Fallow: No need to sleep, instead lie fallow (semiconscious) 4h/lr." +
+		"\n\u25C6 Leaf speech: I can communicate with plants." +
+		"\n\u25C6 Photosynthetic: I don't eat, but must maintain physical contact with fertile soil at least 72h/w or ingest a handful fertile soil each day. I need direct sunlight 6h/d (partial light contributes 1/2, bright magical light 1/4). Standard rules for no food/water (DMG 185).",
+	features: {
+		"natural affinity": baseOlassi.naturalaffinity,
+		"efflorescence": {
+			name: "Efflorescence",
+			minlevel: 1,
+			usages: 1,
+			recovery: "long rest",
+			action: ["action", "Efflorescence"],
+			toNotesPage: [{
+				note: desc([
+					"I create 1min grand display (my petals). I add my WisMod (min 1) to Cha-checks and -saves."
+				]),
+				page3notes: true,
+				name: "Efflorescence",
+				additional: "1x per long rest"
+			}],
+		},
+		"almandil magic": {
+			name: "Almandil Magic",
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Almandil Magic",
+				spells: ["druidcraft"],
+				selection: ["druidcraft"],
+				atwill: true
+			}],
+			toNotesPage: [{
+				note: desc([
+					"I know the Druidcraft cantrip. I can cast Goodberry from level 3 and Spike Growth from level",
+					"5. I can cast these spells once per long rest without providing material components."
+				]),
+				page3notes: true,
+				name: "Almandil Magic"
+			}],
+			calcChanges: baseOlassi.calcChangesRemoveCosts
+		},
+		"almandil magic 3": {
+			name: "Almandil Magic",
+			minlevel: 3,
+			spellcastingBonus: [{
+				name: "Almandil Magic",
+				spells: ["goodberry"],
+				selection: ["goodberry"],
+				firstCol: "oncelr",
+			}],
+		},
+		"almandil magic 5": {
+			name: "Almandil Magic",
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Almandil Magic",
+				spells: ["spike growth"],
+				selection: ["spike growth"],
+				firstCol: "oncelr",
+			}],
+		},
+	}
+};
+RaceList["olassi fanalos og"] = {
+	regExpSearch: /\bfanalos\b/i,
+	name: "Fanalos",
+	sortname: "Olassi, Fanalos",
+	source: ["OG", 101],
+	age: baseOlassi.age,
+	height: baseOlassi.height,
+	weight: baseOlassi.weight,
+	heightMetric: baseOlassi.heightMetric,
+	weightMetric: baseOlassi.weightMetric,
+	size: baseOlassi.size,
+	speed: baseOlassi.speed,
+	savetxt: baseOlassi.savetxt,
+	skills: baseOlassi.skills,
+	skillstxt: baseOlassi.skillstxt,
+	scores: [0, 0, 0, 1, 2, 0],
+	scorestxt: "+1 Int, +2 Wis",
+	trait: "Fanalos, Olassi, Plant (+1 Int, +2 Wis)" +
+		"\n\u25C6 Fey Ancestry: I have adv on saves vs charmed." +
+		"\n\u25C6 Fallow: No need to sleep, instead lie fallow (semiconscious) 4h/LR." +
+		"\n\u25C6 Leaf speech: I can communicate with plants." +
+		"\n\u25C6 Nutritional Requirements: I require a diet of decayed matter and two gallons of water per day. If I become dehydrated, my size becomes small and my speed decreases to 20ft. Standard rules for no food/water (DMG 185).",
+	vision: [
+		["Fey Darkvision", "120ft"],
+		"Sunlight Sensitivity (see notes)"
+	],
+	languageProfs: [
+		"Common",
+		"Sylvan",
+		"Leaf Speach",
+		"Sporelinguistics"
+	],
+	features: {
+		"natural affinity": baseOlassi.naturalaffinity,
+		"fanalos magic": {
+			name: "Fanalos Magic",
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Fanalos Magic",
+				spells: ["message"],
+				selection: ["message"],
+				firstCol: "atwill"
+			}],
+			toNotesPage: [{
+				note: desc([
+					"I know the Message cantrip (I can target an add # of crea eq my WisMod (min 1)).",
+					"I can cast Dissonant Whispers from level 3 and Ray of Enfeeblement from level 5.",
+					"I can cast these spells once per long rest without providing material components."
+				]),
+				page3notes: true,
+				name: "Fanalos Magic"
+			}],
+			calcChanges: {
+				spellAdd: [
+					function(k, o, n) {
+						if (k == "message" && n == "olassi fanalos og") {
+							o.description = "1+Wis Mod (min 1) crea I point to hear whispered msg and reply with whisper; nobody can overhear";
+							removeSpellElements(k, o, n, "olassi fanalos og", {
+								material: true
+							});
+							return true;
+						}
+					},
+					"I can target a number of additional creatures with message equal to my Wisdom modifier (minimum: 1) and I need no material components."
+				]
+			}
+		},
+		"fanalos magic 3": {
+			name: "Fanalos Magic",
+			minlevel: 3,
+			spellcastingBonus: [{
+				name: "Fanalos Magic",
+				spells: ["dissonant whispers"],
+				selection: ["dissonant whispers"],
+				firstCol: "oncelr",
+			}],
+		},
+		"fanalos magic 5": {
+			name: "Fanalos Magic",
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Fanalos Magic",
+				spells: ["ray of enfeeblement"],
+				selection: ["ray of enfeeblement"],
+				firstCol: "oncelr",
+			}],
+		},
+		"fey darkvision": {
+			name: "Fey Darkvision",
+			minlevel: 1,
+			toNotesPage: [{
+				note: desc([
+					"I can see in darkness within 120 ft of me as if it were bright light and in color."
+				]),
+				page3notes: true,
+				name: "Fey Darkvision",
+			}],
+		},
+		"sunlight sensitivity": {
+			name: "Sunlight Sensitivity",
+			minlevel: 1,
+			toNotesPage: [{
+				note: desc([
+					"I have disadvantage on attack rolls and Wisdom (Perception) checks that rely on sight",
+					"when I, the target of my attack, or whatever I'm trying to perceive is in direct sunlight."
+				]),
+				page3notes: true,
+				name: "Sunlight Sensitivity",
+			}],
+		},
+		"spore linguistics": {
+			name: "Spore Linguistics",
+			minlevel: 1,
+			toNotesPage: [{
+				note: desc([
+					"I can communicate with crea that use spores to communicate (i.e. mushrooms, myconids)."
+				]),
+				page3notes: true,
+				name: "Spore Linguistics",
+				additional: "range: 120ft"
+			}],
+		},
+	}
+};
+RaceList["olassi sundo talma og"] = {
+	regExpSearch: /^(?=.*sundo)(?=.*talma).*$/i,
+	name: "Sundo Talma",
+	sortname: "Olassi, Sundo Talma",
+	source: ["OG", 101],
+	age: baseOlassi.age,
+	height: baseOlassi.height,
+	weight: baseOlassi.weight,
+	heightMetric: baseOlassi.heightMetric,
+	weightMetric: baseOlassi.weightMetric,
+	size: baseOlassi.size,
+	speed: baseOlassi.speed,
+	savetxt: baseOlassi.savetxt,
+	skills: baseOlassi.skills,
+	skillstxt: baseOlassi.skillstxt,
+	vision: baseOlassi.vision,
+	languageProfs: baseOlassi.languageProfs,
+	carryingCapacity: 2,
+	scores: [1, 0, 0, 0, 2, 0],
+	scorestxt: "+1 Str, +2 Wis",
+	trait: "Sundo Talma, Olassi, Plant (+1 Str, +2 Wis)" +
+		"\n\u25C6 Fey Ancestry: I have adv on saves vs charmed." +
+		"\n\u25C6 Fallow: No need to sleep, instead lie fallow (semiconscious) 4h/lr." +
+		"\n\u25C6 Leaf speech: I can communicate with plants." +
+		"\n\u25C6 Hydrophyte: I can sustain myself on decayed matter, or remain in contact with fertile soil or water 48h/w. I require 2 gallons of water per day. I need direct sunlight 4h/d (partial light contributes 1/2, bright magical light 1/4). Standard rules for no food/water (DMG 185). I can breathe underwater." +
+		"\n\u25C6 Powerful Build: I count as large for capacity (carry, push, drag, lift).",
+	features: {
+		"natural affinity": baseOlassi.naturalaffinity,
+		"talma magic": {
+			name: "Talma Magic",
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Talma Magic",
+				spells: ["thorn whip"],
+				selection: ["thorn whip"],
+				atwill: true
+			}],
+			toNotesPage: [{
+				note: desc([
+					"I know the Thorn Whip cantrip. I can cast Ensnaring Strike from level 3 and Barkskin from",
+					"level 5. I can cast these spells once per long rest without providing material components."
+				]),
+				page3notes: true,
+				name: "Talma Magic"
+			}],
+			calcChanges: baseOlassi.calcChangesRemoveCosts
+		},
+		"talma magic 3": {
+			name: "Talma Magic",
+			minlevel: 3,
+			spellcastingBonus: [{
+				name: "Talma Magic",
+				spells: ["ensnaring strike"],
+				selection: ["ensnaring strike"],
+				firstCol: "oncelr",
+			}],
+		},
+		"talma magic 5": {
+			name: "Talma Magic",
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Talma Magic",
+				spells: ["barkskin"],
+				selection: ["barkskin"],
+				firstCol: "oncelr",
+			}],
+		},
+	}
+};
+RaceList["olassi taan tiin og"] = {
+	regExpSearch: /^(?=.*taan)(?=.*tiin).*$/i,
+	name: "Taan Tiin",
+	sortname: "Olassi, Taan Tiin",
+	source: ["OG", 101],
+	age: baseOlassi.age,
+	height: baseOlassi.height,
+	weight: baseOlassi.weight,
+	heightMetric: baseOlassi.heightMetric,
+	weightMetric: baseOlassi.weightMetric,
+	size: baseOlassi.size,
+	carryingCapacity: baseOlassi.carryingCapacity,
+	speed: baseOlassi.speed,
+	savetxt: baseOlassi.savetxt,
+	skills: baseOlassi.skills,
+	skillstxt: baseOlassi.skillstxt,
+	vision: baseOlassi.vision,
+	languageProfs: baseOlassi.languageProfs,
+	scores: [0, 0, 0, 1, 2, 0],
+	scorestxt: "+1 Con, +2 Wis",
+	trait: "Taan Tiin, Olassi, Plant (+1 Con, +2 Wis)" +
+		"\n\u25C6 Fey Ancestry: I have adv on saves vs charmed." +
+		"\n\u25C6 Fallow: No need to sleep, instead lie fallow (semiconscious) 4h/lr." +
+		"\n\u25C6 Leaf speech: I can communicate with plants." +
+		"\n\u25C6 Xerophyte: I need one drink of water per week and must remain in physical contact with fertile soil 1h/w. Alternatively I can meet all nutritional requirements with fresh fruit. I need direct sunlight 8h/d (partial light contributes 1/2, bright magical light 1/4). Standard rules for no food/water (DMG 185).",
+	features: {
+		"natural affinity": baseOlassi.naturalaffinity,
+		"spines og": {
+			name: "Spines",
+			minlevel: 1,
+			usages: 1,
+			recovery: "long rest",
+			action: ["bonus action", "Spines"],
+			toNotesPage: [{
+				note: desc([
+					"I have flexible spines that I can harden for 1min. If a crea makes a meele-atk vs me (without",
+					"the reach property) it takes a # eq my ProfBonus piercing dmg from my spines."
+				]),
+				page3notes: true,
+				name: "Spines",
+				additional: "1x per long rest"
+			}],
+		},
+		"taan tiin magic": {
+			name: "Taan Tiin Magic",
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Taan Tiin Magic",
+				spells: ["dancing lights"],
+				selection: ["dancing lights"],
+				atwill: true
+			}],
+			toNotesPage: [{
+				note: desc([
+					"I know the Dancing Lights cantrip. I can cast Blur from level 3 and Cordon of Arrows from",
+					"level 5. I can cast these spells once per long rest without providing material components."
+				]),
+				page3notes: true,
+				name: "Taan Tiin Magic"
+			}],
+			calcChanges: baseOlassi.calcChangesRemoveCosts
+		},
+		"taan tiin magic 3": {
+			name: "Taan Tiin Magic",
+			minlevel: 3,
+			spellcastingBonus: [{
+				name: "Taan Tiin Magic",
+				spells: ["blur"],
+				selection: ["blur"],
+				firstCol: "oncelr",
+			}],
+		},
+		"taan tiin magic 5": {
+			name: "Taan Tiin Magic",
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Taan Tiin Magic",
+				spells: ["cordon of arrows"],
+				selection: ["cordon of arrows"],
+				firstCol: "oncelr",
+			}],
+		},
+	}
+};
+RaceList["tan dalu og"] = {
+	regExpSearch: /^(?=.*Tan\WDalu).*$/i,
+	name: "Tan'Dalu",
+	sortname: "Tan'Dalu",
+	source: ["OG", 102],
+	age: " reach adulthood at around 50 years and live up to 10.000 years.",
+	height: " are between 7 and 9 feet tall.",
+	weight: " weigh between 240 and 300 pounds.",
+	heightMetric: " are about " + ConvertToMetric("7 ft", 0.1) + " to " + ConvertToMetric("9 ft", 0.1) + " tall.",
+	weightMetric: " weigh about " + ConvertToMetric("270 lbs", 0.1) + ".",
+	size: [3],
+	carryingCapacity: 1,
+	scores: [1, 0, 2, 0, 0, 0],
+	scorestxt: "+2 Con, +1 Str",
+	trait: "Tan’Dalu, Plant (+2 Con, +1 Str)" +
+		"\n\u25C6 Photosynthetic: I don't eat, but must maintain physical contact with fertile soil at least 24h/w or ingest a handful fertile soil each day. I need direct sunlight 4h/d (partial light contributes 1/2, bright magical light 1/4). Standard rules for no food/water (DMG 185)." +
+		"\n\u25C6 Powerful Build: I count as large for capacity (carry, push, drag, lift)." +
+		"\n\u25C6 Bark Skin: My skin provides an AC 16. I cannot use Dex to adjust this AC but benefit from a shield.",
+	spellcastingAbility: 1,
+	armorOptions: [{
+		regExpSearch: /^Tan'?Dalu Bark Skin$/i,
+		name: "Tan'Dalu Bark Skin",
+		source: ["OG", 102],
+		ac: "16",
+		dex: 0,
+		affectsWildShape: false,
+		selectNow: true
+	}],
+	speed: {
+		walk: {
+			spd: 25,
+			enc: 15
+		},
+	},
+	languageProfs: [
+		"Common",
+		"Sylvan",
+		"Speech of Beast and Leaf",
+	],
+	features: {
+		"speach of beast and leaf": {
+			name: "Speech of Beast and Leaf",
+			minlevel: 1,
+			toNotesPage: [{
+				note: desc([
+					"I can speak to plants and beasts and have adv. on CHA-checks to influence them.",
+					"They understand my words, but I cannot understand them."
+				]),
+				page3notes: true,
+				name: "Speech of Beast and Leaf"
+			}]
+		},
+		"vine tendril": {
+			name: "Vine Tendril",
+			minlevel: 1,
+			weaponsAdd: {
+				select: ["Thorn Whip"],
+			},
+			spellcastingBonus: [{
+				name: "Vine Tendril",
+				spells: ["thorn whip"],
+				selection: ["thorn whip"],
+				firstCol: "atwill",
+			}],
+		}
+	}
+};
 // RACE: UNDEAD
 RaceList["bound spirit og"] = {
 	regExpSearch: /^(?=.*spirit)(?=.*bound).*$/i,
 	name: "Bound Spirit",
+	plural: "Bound Spirits",
 	source: ["OG", 104],
 	scores: [0, 0, 0, 0, 2, 0],
 	scorestxt: "+2 Wis, +1 in any other",
@@ -4767,7 +6088,6 @@ RaceList["bound spirit og"] = {
 	age: " do not age, and can persist indefinitely until they are dispersed.",
 	height: " are small or medium, depending on their former race.",
 	weight: " weight depends on their former race.",
-	plural: "Bound Spirits",
 	size: [3, 4],
 	speed: {
 		walk: {
@@ -4832,8 +6152,9 @@ RaceList["bound spirit og"] = {
 	}
 };
 RaceList["ghoul og"] = {
-	regExpSearch: /^(?=.*ghoul).*$/i,
+	regExpSearch: /^ghoul$/i,
 	name: "Ghoul",
+	plural: "Ghouls",
 	source: ["OG", 105],
 	scores: [0, 2, 0, 0, 1, 0],
 	savetxt: {
@@ -4844,7 +6165,6 @@ RaceList["ghoul og"] = {
 	age: " do not age, but they do break. They can endure unlife indefinitely.",
 	height: " are small or medium, depending on their former race.",
 	weight: " weight depends on their former race.",
-	plural: "Ghouls",
 	size: [3, 4],
 	speed: {
 		walk: {
@@ -4897,8 +6217,9 @@ RaceList["ghoul og"] = {
 	}
 };
 RaceList["mummy og"] = {
-	regExpSearch: /^(?=.*mummy).*$/i,
+	regExpSearch: /^mummy$/i,
 	name: "Mummy",
+	plural: "Mummies",
 	source: ["OG", 106],
 	scores: [2, 0, 1, 0, 0, 0],
 	scorestxt: "+2 Str, +1 Con",
@@ -4914,7 +6235,6 @@ RaceList["mummy og"] = {
 	age: " do not age, nor do they decay. They can endure unlife for a number of centuries equal to their original race’s lifespan in years.",
 	height: " can be of most any race before they died. Your size is Medium or Small.",
 	weight: " weight depends on their former race.",
-	plural: "Mummies",
 	size: [3, 4],
 	speed: {
 		walk: {
@@ -4954,8 +6274,9 @@ RaceList["mummy og"] = {
 	}
 };
 RaceList["skeleton og"] = {
-	regExpSearch: /^(?=.*skeleton).*$/i,
+	regExpSearch: /^skeleton$/i,
 	name: "Skeleton",
+	plural: "Skeletons",
 	source: ["OG", 107],
 	scores: [0, 0, 0, 1, 2, 0],
 	scorestxt: "+2 Wis and +1 Int",
@@ -4966,7 +6287,6 @@ RaceList["skeleton og"] = {
 	age: " do not age, but they do break. They can endure unlife for several centuries after they are raised, up to three times as long as the lifespan of their original species.",
 	height: " can be of most any race before they died. My size is Medium or Small.",
 	weight: " weight depends on their former race.",
-	plural: "Skeletons",
 	size: [3, 4],
 	speed: {
 		walk: {
@@ -5017,8 +6337,9 @@ RaceList["skeleton og"] = {
 	}
 };
 RaceList["wight og"] = {
-	regExpSearch: /^(?=.*wight).*$/i,
+	regExpSearch: /^wight$/i,
 	name: "Wight",
+	plural: "Wights",
 	source: ["OG", 108],
 	scores: [0, 0, 1, 1, 1, 0],
 	scorestxt: "+1 Con, Int and Wis",
@@ -5029,7 +6350,6 @@ RaceList["wight og"] = {
 	age: " do not age, and their flesh does not decay. They can endure unlife indefinitely after they are raised.",
 	height: " can be of most any race before they died. My size is Medium or Small.",
 	weight: " weight depends on my former race.",
-	plural: "Wights",
 	size: [3, 4],
 	speed: {
 		walk: {
@@ -5087,8 +6407,9 @@ RaceList["wight og"] = {
 	}
 };
 RaceList["zombie og"] = {
-	regExpSearch: /^(?=.*zombie).*$/i,
+	regExpSearch: /^zombie$/i,
 	name: "Zombie",
+	plural: "Zombies",
 	source: ["OG", 109],
 	scores: [0, 0, 2, 0, 0, 0],
 	scorestxt: "+2 Con and +1 to any other",
@@ -5101,7 +6422,6 @@ RaceList["zombie og"] = {
 	age: " do not age, but they do decay. If they maintain a diet of living flesh, they can endure unlife for many years after their conversion, up to as long as the lifespan of their original species.",
 	height: " can be of most any race before they died. My size is Medium or Small.",
 	weight: " weight depends on their former race.",
-	plural: "Zombies",
 	size: [3, 4],
 	speed: {
 		walk: {
@@ -5478,7 +6798,7 @@ AddSubClass("faerie og", "nixie", {
 	source: ["OG", 193],
 	features: {
 		"subclassfeature1": {
-			name: "Cunnnig Magics",
+			name: "Cunning Magics",
 			source: ["OG", 193],
 			minlevel: 1,
 			description: desc([
@@ -5489,7 +6809,8 @@ AddSubClass("faerie og", "nixie", {
 			spellcastingExtra: ["vicious mockery", "infestation", "command", "dissonant whispers", "crown of madness", "phantasmal force", "fear", "hypnotic pattern", "phantasmal killer", "dominate person", "eyebite", "reverse gravity", "dominate monster", "psychic scream"],
 			spellcastingExtraApplyNonconform: true,
 		},
-		"nightmarish delirium": {
+		"subclassfeature2": {
+			//generic feature name so that the entry on the notes page has the correct header
 			name: "Nightmarish Delirium",
 			source: ["OG", 194],
 			minlevel: 2,
@@ -5502,20 +6823,24 @@ AddSubClass("faerie og", "nixie", {
 			action: ["bonus action", "Nightmarish Delirium"],
 			toNotesPage: [{
 				name: "Nightmarish Delirium",
+				popupName: "Nightmarish Delirium",
+				source: ["OG", 194],
 				note: [
 					"I can plunge a creature charmed or frightened of me, or that I have put to sleep into a delirious nightmare.",
 					"As a bonus action, I concentrate (as if concentrating on the spell, if you are not already) and double the remaining duration of the effect upon the creature, which becomes lost in a nightmare of my design. The creature sees and hears only itself and the nightmare, experiencing up to one hour’s passing on each of their turns. At the end each of my turns, I can alter the nightmare, causing the creature to be charmed by me, frightened of me, unconscious or confused.",
 					"If the target takes damage, they immediately make a Wisdom saving throw against my faerie spell save DC, ending the effect on a success. Once the effect ends, the creature becomes immune to my Nightmarish Delirium for 24 hours.\n",
 					"Confusion",
 					"A confused creature can’t take reactions and must roll a d10 at the start of each of its turns to determine its behavior for that turn.",
-					"d10    Behavior",
-					"1-2    The creature uses all its movement to move in a random direction. To determine the direction, roll a d8 and assign a direction to each die face. The creature doesn’t take an action this turn.",
-					"2-6    The creature doesn’t move or take Actions this turn.",
-					"7-8    The creature uses its action to make a melee Attack against a randomly determined creature within its reach. If there is no creature within its reach, the creature does nothing this turn.",
-					"9-10  The creature can act and move normally."
-				],
-				popupName: "Nightmarish Delirium",
-				source: ["OG", 194]
+					"\nd10    Behavior",
+					"\n1-2    The creature uses all its movement to move in a random direction.",
+					"             To determine the direction, roll a d8 and assign a direction to each",
+					"             die face. The creature doesn’t take an action this turn.",
+					"\n2-6    The creature doesn’t move or take Actions this turn.",
+					"\n7-8    The creature uses its action to make a melee Attack against a",
+					"             randomly determined creature within its reach. If there is no",
+					"             creature within its reach, the creature does nothing this turn.",
+					"\n9-10  The creature can act and move normally."
+				]
 			}],
 		},
 		"supple wards": {
@@ -5810,7 +7135,7 @@ AddSubClass("faerie og", "nixie", {
 			usages: 1,
 			recovery: "long rest",
 			action: ["reaction", "Magical Mimicry"]
-		},
+		}
 	}
 });
 AddSubClass("faerie og", "sprig", {
@@ -5846,7 +7171,7 @@ AddSubClass("faerie og", "sprig", {
 			source: ["OG", 195],
 			minlevel: 2,
 			description: desc([
-				"When I hit w/ Thorn Whip I can deal +2d8+1d8/SL acid dmg as bns spending a spell slot.",
+				"On hit w/ Thorn Whip I can deal +2d8 +1d8/SL>1 acid dmg as bns a for a spell slot.",
 			]),
 			action: ["bonus action", "Corrosive Ichor (with Thorn Whip)"],
 		},
@@ -5856,9 +7181,9 @@ AddSubClass("faerie og", "sprig", {
 			minlevel: 6,
 			description: desc([
 				"I can cast Speak With Plants at will. My Thorn Whip can pull up to 15ft and has 45ft range.",
-				"As bns I can move the area of my entangle, spike growth or grasping vine my cha mod ft."
+				"As bns I can move the area of my entangle, spike growth or grasping vine my cha mod x 5 ft."
 			]),
-			action: ["bonus action", "Grasping Vines"],
+			action: ["bonus action", " (Cha mod * 5 ft)"],
 			calcChanges: {
 				spellAdd: [
 					function(spellKey, spellObj, spName) {
@@ -5908,22 +7233,7 @@ AddSubClass("faerie og", "sprig", {
 			},
 			removeeval: function() {
 				RemoveWildshape("Shambling Mound");
-			},
-			/*			changeeval: function(lvl, chc) {
-							var prefix = getTemplPre(event.target.name, "WSfront", true);
-							var Fld = event.target.name.slice(-1);
-							var WSfrontA = What("Template.extras.WSfront").split(",");
-							// Loop through all wildshape pages
-							for (var i = 0; i < WSfrontA.length; i++) {
-								// Loop through all the wildshapes on a page
-								for (var j = 1; j <= 4; j++) {
-									// If the current wildshape is the shambling mound, add our faerie lvl
-									if (What(prefix + "Wildshape.Race" + j) === 'Shambling Mound') {
-										Value(prefix + "Wildshape." + Fld + ".HP Max", 69 + lvl[1]);
-									}
-								}
-							}
-						}*/
+			}
 		},
 		"we are the vine": {
 			name: "We are the Vine",
@@ -5980,7 +7290,7 @@ AddSubClass("faerie og", "brownie", {
 			source: ["OG", 195],
 			minlevel: 1,
 			description: desc([
-				arFaerieWeapon,
+				...arFaerieWeapon,
 				"Use the \"Choose Feature\" button above to pick the Damage Type of your Faerie Weapon."
 			]),
 			calcChanges: {
@@ -6191,6 +7501,799 @@ CreatureList["shambling mound"] = {
 	],
 };
 // ### END FAERIE CLASS ### Old_Gus_Errata-Faerie.js
+// ### BEGIN SUBCLASSES CLASS ### Old_Gus_Errata-Subclasses.js
+AddSubClass("artificer", "tattoosionist og", {
+	regExpSearch: /tattoosionist/i,
+	subname: "Tattoosionist",
+	fullname: "Tattoosionist",
+	source: ["OG", 135],
+	features: {
+		"subclassfeature3": {
+			name: "Irons & Skin Show",
+			minlevel: 3,
+			source: ["OG", 135],
+			description: desc([
+				"I gain profiency with Calligrapher's Supplies or another artisan tool if I already have it.",
+				"I can animate tattoos on my skin and create new ones. I can also permanently tattoo others."
+			]),
+			spellcastingBonus : [{
+				name: "Skin Show",
+				spells: ["tattoosion og"],
+				selection: ["tattoosion og"]
+			},{
+				name: "Skin Show",
+				spells: ["puncture og"],
+				selection: ["puncture og"]
+			}],
+			toolProfs: [
+				["Calligrapher's Supplies"]
+			],
+		},
+		"tattoosionist spells": {
+			name: "Tattoosionist Spells",
+			minlevel: 3,
+			source: ["OG", 135],
+			spellcastingExtra: [
+				//SL 1
+				"illusory script", "inflict wounds",
+				//SL 2
+				"cloud of daggers", "crown of madness",
+				//SL 3
+				"spirit guardians", "major image",
+				//SL 4
+				"giant insect", "summon greater demon",
+				//SL 5
+				"circle of power", "hold monster"
+			],
+			description: desc([
+				"I have a number of extra spells always prepared after I reach 3rd, 5th, 9th, 13th and 17 level.",
+				"They are artificer spells for me, but they don’t count against the number of spells I prepare."
+			]),
+		},
+		"custom work": {
+			name: "Custom Work",
+			minlevel: 3,
+			source: ["OG", 136],
+			description: desc([
+				"I can create constructs from my tattoos (See \"Animated Tattoos List\" in Book; add creatures",
+				"on companion page and switch type to \"Animated Tattoo\"). When I finish a long rest and",
+				"my alchemist’s supplies are with me, I can choose new forms for my animated tattoos."
+			]),
+			additional: "Max animated tattoos: Int Mod",
+			action: ["action","Animate Tattoo"],
+			extraLimitedFeatures : [{
+				name : "Animate Tattoo",
+				usages : 1,
+				recovery : "long rest",
+				altResource : "SS 1+"
+			}]
+		},
+		"loyal to the coil": {
+			name: "Loyal to the Coil",
+			minlevel: 9,
+			source: ["OG", 136],
+			description: desc([
+				"I can exert complete control over one of my animated tattoos as an action. It gains 60ft",
+				"darkvision and 10ft tremorsense. I can speak through it with my own voice, but I'm deaf",
+				"and blind with regard to my own senses. As an action I can cause it to explode dealing 4d8",
+				"psychic damage; half on Wis save. I need to restore that tattoo as part of a short/long rest."
+			])
+		},
+		"my art suffers for me": {
+			Name: "My Art Suffers For Me",
+			minlevel: 15,
+			source: ["OG", 135],
+			description: desc([
+				"My animated tattoo can swap with a crea. that has just been attacked (see companion page)."
+			]),
+			action: ["reaction", "My Art Suffers For Me"]
+		}
+	}
+});
+CompanionList.animated_tattoo = {
+	/*
+	Animated Tattoo for the Tattoosionist, Artificer Subclass
+	+ type: construct
+	+ immune: immune to poison and psychic damage, and the charmed, exhausted, frightened, paralyzed, petrified, and poisoned conditions
+	+ hp: 2 + your Intelligence modifier + five times your artificer level
+	+ weapon attacks are magical
+	+ to hit bonus replaced by PC spell attack bonus
+	+ spell DC replaced by PC spell dc
+	+ bonus to damage of PC profiency - 2
+	+ disappears after 1h or 100 * int ft distance
+	+ command as bns
+	*/
+	name: "Animated Tattoo",
+	nameTooltip: "Animated Tattoo (Warlock Subclass Tattoosionist)",
+	nameOrigin: "Stat adjustment for Animated Tattoos from the Warlock Subclass Tattoosionist",
+	nameMenu: "Animated Tattoo (Tattoosionist)",
+	source: [
+		["OG", 243]
+	],
+	attributesAdd : {
+		header: "Animated Tattoo",
+		type: "Construct",
+		minlevelLinked: ["artificer"],
+		subtype: "",
+		features: [{
+			name: "Immunities",
+			description: "The animated tattoo is immune to poison and psychic damage, and the charmed, exhausted, frightened, paralyzed, petrified, and poisoned conditions."
+		},{
+			name: "Summon",
+			description: "The animated tattoo disappears when it reaches 0 HP, after 1h or if it moves more than 100 ft * my int mod away from me."
+		}],
+		actions: [{
+			name: "Pounding Skin",
+			minlevel: 5,
+			description: "Once per turn when one of my animated tattoos deals damage I can add a d12."
+		},{
+			name: "My Art Suffers For Me",
+			minlevel: 14,
+			description: "As a reaction I can command one of my animated tattoos to swap places with a willing creature within 5ft that has just been attacked. The attack hits my animated tattoo and it gains resistance to it. Additionally I can now use Pounding Skin twice per turn."
+		}],
+		notes: [{
+			name: "Animated Tattoo",
+			description: "Once per long rest I can animate a tattoo I created earlier for free as an action, after that it costs a spell slot. When animated, the tattoo appears in an unoccupied space within 5ft of the person bearing it. It has the creature type construct, no senses of its own and is under my control. "
+		},{
+			name: "Combat",
+			description: "The animated tattoo shares my initiative count, but it takes its turn immediately after mine. It can move and use its reaction on its own, but the only action it takes on its turn is the Dodge action, unless I take a bonus action to command it to take one of the actions in its stat block or the Dash, Disengage, Help, Hide, or Search action. The animated tattoo uses my artificer spell mod as attack modifier, gets a bonus of my Prof Bonus -2 to damage and its attacks count as magical.  If it causes a creature to make a saving throw, I can use my spell save DC for it instead.\nThe first row of the attacks above already has these bonuses added. The Description and text in traits and features does not."
+		}],
+		senses: "No senses of it's own."
+	},
+	calcChanges : {
+		hp : function (totalHD, HDobj, prefix) {
+			if (!classes.known.artificer && /tattoosionist/.test(classes.known.artificer.subclass)) return;
+			HDobj.alt.push( 2 + What("Int Mod") + 5 * classes.known.artificer.level );
+			HDobj.altStr.push(" =  2 + your Intelligence modifier + five times your Artificer level.");
+		},
+		setAltHp : true
+	},
+	attributesChange : function(sCrea, objCrea) {
+		for (var i = 0; i < objCrea.attacks.length; i++) {
+			var oAtk = objCrea.attacks[i];
+			strExtraDmg = "oProf-2";
+			if (!oAtk.dc)
+			{
+				if(oAtk.abilitytodamage !== false)
+				{
+					//If the previous Attack had abilityToDamage we now need to add
+					//     it manually since switching to the spellMod removes that
+					var strAttribute = ["Str","Dex","Con","Wis","Int","Cha"][oAtk.ability - 1];
+					strExtraDmg = strAttribute + "+" + strExtraDmg;
+				}
+				oAtk.useSpellMod = "artificer";
+				if (!oAtk.modifiers)
+				{
+					oAtk.modifiers = [0, strExtraDmg];
+				}
+				else
+				{
+					oAtk.modifiers[1] += "+" + strExtraDmg;
+				}
+			} else {
+				//Change Spell DC to Artificer Spell DC
+				oAtk.useSpellMod = "artificer";
+				oAtk.modifiers[0] = "dc";
+			}
+		}
+	}
+};
+AddSubClass("ranger", "sensate og", {
+	regExpSearch: /sensate/i,
+	subname: "Sensate",
+	fullname: "Sensate",
+	source: ["OG", 162],
+	features: {
+		"subclassfeature3": {
+			name: "Sensate Weaponry",
+			minlevel: 3,
+			source: ["OG", 162],
+			additional: levels.map(function(n, idx) {
+				var sensateWeapons = [0, 0, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5][idx];
+				return sensateWeapons + " Weapon Types (see page 3)";
+			}),
+			description: "",
+			toNotesPage: [{
+				name: "Sensate Weaponry",
+				popupName: "Sensate Weaponry",
+				source: ["OG", 148],
+				page3notes: true,
+				note: [
+					"I pick 2 types of weapons I'm proficient with to be my sensate weapons. I can use my Wis",
+					"mod, instead of Str or Dex, for the attack and damage rolls. Once on each of my turns, after",
+					"I hit with a sensate weapon or unarmed strike, I can choose one of the following:",
+					"\u25C6 I cause the attack to deal an additional 1d6 damage.",
+					"\u25C6 Target has disadv. on 1st atk it makes before the end of it's next turn if it fails a Str Save.",
+					"\u25C6 I push the target 10 feet away from me",
+					"When I reach 6th, 11th, and 17th level in this class, I can choose another type of weapon.",
+					"Include the word \"Sensate\" in the name of a weapon on page 1 to activate."
+				]
+			}],
+			calcChanges: {
+				atkAdd: [
+					function(fields, v) {
+						if (classes.known.ranger && What('Wis Mod') > What(AbilityScores.abbreviations[fields.Mod - 1] + ' Mod') && (fields.Mod == 1 || fields.Mod == 2) && /\bsensate\b/i.test(v.WeaponText)) {
+							fields.Mod = 5;
+							return true;
+						}
+					},
+					"If I include the word 'Sensate' in a melee weapon's name, the weapon will use my Wisdom mod for Attack and Damage."
+				]
+			},
+		},
+		"sensate spells": {
+			name: "Sensate Spells",
+			minlevel: 3,
+			source: ["OG", 162],
+			spellcastingBonus : [{
+				//Class Level 3
+				name : "Sensate Spells SL1",
+				spells: ["bane", "bless"],
+				times : [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+				level : [1, 1]
+			},{
+				//Class Level 5
+				name : "Sensate Spells SL2",
+				spells: ["augury", "detect thoughts"],
+				times : [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+				level : [2, 2]
+			},{
+				//Class Level 9
+				name : "Sensate Spells SL3",
+				spells: ["clairvoyance", "mass healing word"],
+				times : [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+				level : [3, 3]
+			},{
+				//Class Level 13
+				name : "Sensate Spells SL4",
+				spells: ["divination", "otiluke's resilient sphere"],
+				times : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+				level : [4, 4]
+			},{
+				//Class Level 17
+				name : "Sensate Spells",
+				spells: ["destructive wave", "mass cure wounds"],
+				times : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
+				level : [5, 5]
+			}],
+			description: desc([
+				"Starting at level 3 I can can pick one of two additional spells when I reach certain levels.",
+				"They count as ranger spells for me, but they don’t count against the number of spells I know."
+			]),
+		},
+		"subclassfeature7": {
+			name: "Truesense",
+			minlevel: 7,
+			source: ["OG", 162],
+			description: desc([
+				"I can focus my senses and gain one of three bonuses (see page 3)."
+			]),
+			action: ["bonus action", ""],
+			usages: 1,
+			recovery: "short rest",
+			toNotesPage: [{
+				name: "Truesense",
+				popupName: "Truesense",
+				source: ["OG", 148],
+				additional: "1 x short rest, 10 Minutes",
+				page3notes: true,
+				note: [
+					"I gain one of the following benefits when using \"Truesense\":",
+					"\u25C6 Know Truth: Adv. on Wisdom (Insight & Perception) checks, checks to discern or",
+					"   disbelieve illusions, and saves vs charmed or frightened.",
+					"\u25C6 See Beyond: I can see invisible crea and objects as if they were visible and can see",
+					"   into the Ethereal Plane. Ethereal things appear ghostly and translucent.",
+					"\u25C6 Steel Resolve: I've adv. on initiative rolls and can’t be surprised.",
+					"   I've resistance to psychic dmg, and adv. on Int and Cha saving throws."
+				]
+			}],
+		},
+		"mystic enlightenment": {
+			name: "Mystic Enlightenment",
+			minlevel: 11,
+			source: ["OG", 162],
+			description: desc([
+				"I learn one spell from any class and can cast it once per long rest for free as a 3rd level spell."
+			]),
+			spellcastingBonus : [{
+				name : "Mystic Enlightenment",
+				times : [1],
+				level : [1, 3],
+				firstCol: "ME"
+			}],
+			calcChanges: {
+				spellAdd: [
+					function(spellKey, spellObj, spName) {
+						if (spellObj.firstCol == "ME" && spellObj.level != 3)
+						{
+							spellObj.description = spellObj.description + " (cast at SL 3)";
+							spellObj.firstCol = "oncelr";
+							return true;
+						}
+						else if (spellObj.firstCol == "ME" )
+						{
+							spellObj.firstCol = "oncelr";
+						}
+					},
+					"I can cast the spell gained through \"Mystic Enlightenment\" at Spell Level 3."
+				]
+			}
+		},
+		"impenetrable defense": {
+			name: "Impenetrable Defense",
+			minlevel: 15,
+			source: ["OG", 162],
+			description: desc([
+				"When attacked I can react and add my Wis mod to AC until the start of my next turn."
+			]),
+			action: ["reaction", " (+ Wis Mod AC)"],
+			usages: "Prof Bonus x per long rest",
+			usagescalc: "event.value = Number(How('Proficiency Bonus'));",
+			recovery: "long rest",
+		}
+	}
+});
+var arMayhemPowerBallad = [
+	"As a bonus action I can transform a musical instrument I am holding into a musical weapon.",
+	"It is a simple weapon dealing 1d6 damage and a spell focus for me. It remains transformed",
+	"for 10 Minutes or until I'm incapacitated."
+];
+AddSubClass("bard", "college of mayhem og", {
+	regExpSearch: /college of mayhem/i,
+	subname: "College of Mayhem",
+	source: ["OG", 143],
+	features: {
+		"subclassfeature3": {
+			name: "Power Ballad",
+			minlevel: 3,
+			source: ["OG", 143],
+			description: desc([
+				...arMayhemPowerBallad,
+				"Please select the damage type of the Musical Weapon using \"Choose Feature\"."
+			]),
+			toNotesPage: [{
+				name: "Power Ballad",
+				popupName: "Power Ballad",
+				source: ["OG", 143],
+				page3notes: true,
+				note: [
+					"I can add the following Transformations to my Instrument:",
+					"\u25C6 Encore: Once per turn I can attack twice with an attack action",
+					"\u25C6 Heavy Metal: It gains the Reach & 2-Handed properties and deals 1d10 dmg",
+					"\u25C6 Masterpiece: It gains the Finesse & Thrown(20/60ft) properties,",
+					"   +2 to attack rolls and returns to my hand when thrown.",
+					"\u25C6 Unison: I gain +1 AC when wielding the weapon and when a crea I see",
+					"   attacks a target within 5ft of me I can react to give it disadvantage."
+				]
+			}],
+			weaponOptions: [{
+				baseWeapon: "club",
+				regExpSearch: /^(?=.*instrument).*$/i,
+				name: "Instrument",
+				source: ["OG", 143],
+				damage: [1, 6, "Special"],
+				abilitytodamage: true,
+				selectNow: true,
+				description: "",
+				isAlwaysProf: true
+			}],
+			action: [
+				["action", "Attack twice with Encore"],
+				["bonus action", "Transform Instrument"]
+			],
+			additional: levels.map(function(n, idx) {
+				var properties = [0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3][idx];
+				return properties + " Properties, 10 Minutes";
+			}),
+			calcChanges: {
+				atkAdd: [
+					function(fields, v) {
+						if (/instrument/i.test(v.WeaponText)) {
+							if (classes.known.bard.level < 5)
+								fields.Description = "I can add a Transformation (see page 3 notes) to my Instrument";
+							else if (classes.known.bard.level < 11)
+								fields.Description = "I can add two Transformations (see page 3 notes) to my Instrument";
+							else
+								fields.Description = "I can add three Transformations (see page 3 notes) to my Instrument";
+							var transformations = [];
+							if (/\heavy metal/i.test(v.WeaponText)) transformations.push("Reach, Two-Handed");
+							if (/\masterpiece/i.test(v.WeaponText)) {
+								transformations.push ("Finesse, returns after throw");
+								fields.Range = "Melee, 20/60 ft";
+							}
+							if (/\encore/i.test(v.WeaponText)) transformations.push("attack twice");
+							if (/\unison/i.test(v.WeaponText)) transformations.push("+1 AC, react to disadv. on atk vs oth. crea in 5ft");
+							if(transformations.length > 0	)
+								fields.Description = transformations.join(", ");
+						}
+					},
+					"I can add Properties to my Instrument (1 before lvl 5, 2 from lvl 5, 3 from lvl 11). Add 'Encore', 'Heavy Metal', 'Masterpiece' and/or 'Unison' to an 'Instrument' to automatically add the properties."
+				],
+				atkCalc: [
+					function(fields, v, output) {
+						if (/instrument/i.test(v.WeaponText)) {
+							if (/\heavy metal/i.test(v.WeaponText))
+								output.die = "1d10";
+							if (/\masterpiece/i.test(v.WeaponText))
+								output.extraHit = output.extraHit + 2;
+						}
+					},
+					""
+				]
+			},
+			choices: ["Bludgeoning", "Piercing", "Slashing"],
+			"bludgeoning": {
+				name: "Musical Weapon (Bludgeoning)",
+				calcChanges: {
+					atkAdd: [
+						function(fields, v) {
+							if (/\instrument/i.test(v.WeaponText))
+							{
+								if (classes.known.bard.level > 5)
+									fields.Damage_Type = "Bludg/Thdr";
+								else
+									fields.Damage_Type = "Bludgeoning";
+							}
+						}
+					]
+				},
+				description: desc(arMayhemPowerBallad),
+			},
+			"piercing": {
+				name: "Musical Weapon (Piercing)",
+				calcChanges: {
+					atkAdd: [
+						function(fields, v) {
+							if (/\instrument/i.test(v.WeaponText))
+							{
+								if (classes.known.bard.level > 5)
+									fields.Damage_Type = "Pierc/Thdr";
+								else
+									fields.Damage_Type = "Piercing";
+							}
+						}
+					]
+				},
+				description: desc(arMayhemPowerBallad),
+			},
+			"slashing": {
+				name: "Musical Weapon (Slashing)",
+				calcChanges: {
+					atkAdd: [
+						function(fields, v) {
+							if (/\instrument/i.test(v.WeaponText))
+							{
+								if (classes.known.bard.level > 5)
+									fields.Damage_Type = "Slash/Thdr";
+								else
+									fields.Damage_Type = "Slashing";
+							}
+						}
+					]
+				},
+				description: desc(arMayhemPowerBallad),
+			}
+		},
+		"exorcists education": {
+			name: "Exorcist's Education",
+			minlevel: 3,
+			source: ["OG", 143],
+			spellcastingExtra: [
+				"thaumaturgy",
+				//SL 1
+				"detect evil and good", "wrathful smite",
+				//SL 2
+				"tasha's mind whip", "spirit shroud",
+				//SL 3
+				"phantom steed", "spirit shroud",
+				//SL 4
+				"otiluke's resilient sphere", "shadow of moil",
+				//SL 5
+				"banishing smite", "dispel evil and good"
+			],
+			description: desc([
+				"I learn the Thaumaturgy cantrip and a couple of spells are added to bard spell list for me."
+			]),
+			spellcastingBonus : [{
+				name: "Exorcist's Education",
+				spells: ["thaumaturgy"],
+				selection: ["thaumaturgy"],
+				firstCol: "atWill"
+			}]
+		},
+		"cathartic cacophony": {
+			name: "Cathartic Cacophony",
+			minlevel: 6,
+			source: ["OG", 143],
+			description: desc([
+				"When I attack with a transformed instrument I can cast Vicious Mockery as bns a.",
+				"Even if I don't know the cantrip. Additionally my instrument can deal thunder dmg."
+			]),
+			spellcastingBonus : [{
+				name: "Cathartic Cacophony",
+				spells: ["vicious mockery"],
+				selection: ["vicious mockery"],
+				firstCol: "-"
+			}],
+			weaponsAdd: {
+				select: ["Vicious Mockery"]
+			},
+			action: [
+				["bonus action", "Vicous Mockery (after Instrument attack)"]
+			],
+		},
+		"bring the whole band": {
+			name: "Bring the Whole Band",
+			minlevel: 14,
+			source: ["OG", 143],
+			description: desc([
+				"When I give a willing creature a bardic inspiration I can choose one weapon or musical",
+				"instrument it is holding to gain one property of my choice from my Power Ballad feature.",
+				"If it is an instrument it also becomes a melee weapon the creature is proficient with, and",
+				"it deals 1d6 thunder dmg on hit. The effect last until the Bardic Inspiration is lost, the",
+				"instrument leaves the creatures hand or I become incapacitated."
+			]),
+		}
+	}
+});
+AddSubClass("cleric", "pestilence og", {
+	regExpSearch: /^(?=.*cleric)(?=.*pestilence).*$/i,
+	subname: "Pestilence Domain",
+	source: ["OG", 147],
+	features: {
+		"subclassfeature1": {
+			name: "An Itch to Scratch",
+			minlevel: 1,
+			source: ["OG", 147],
+			description: desc([
+				"I learn the infestation cantrip. It is a cleric spell for me, and doesn’t count against my",
+				"number of cleric cantrips known. When I cast the spell, it can target two creatures within",
+				"range and within 5 feet of each other."
+			]),
+			spellcastingExtra: [
+				//Cantrip
+				"infestation",
+				//SL 1
+				"false life", "ray of sickness",
+				//SL 2
+				"blur", "ray of enfeeblement",
+				//SL 3
+				"gaseous form", "stinking cloud",
+				//SL 4
+				"blight", "hallucinatory terrain",
+				//SL 5
+				"contagion", "cloudkill"
+			],
+			calcChanges: {
+				spellAdd: [
+					function(spellKey, spellObj, spName) {
+						if (spellKey === "infestation" && spName === "cleric") {
+							spellObj.descriptionCantripDie = "1-2 crea (within 5ft of each other) save or `CD`d6 Poison dmg and moved 5 ft in random direction";
+							return true;
+						}
+					},
+					"I can target two creatures within 5ft with Infestation."
+				],
+				atkAdd: [
+					function(fields, v) {
+						if (v.WeaponName == "infestation") {
+							fields.Description = "1-2 crea (within 5ft of each other), Con save, success - no damage, fail - targets also moved 5 ft in random direction";
+							return true;
+						}
+					},
+					"I can target two creatures within 5ft with Infestation"
+				]
+			},
+		},
+		"faithfuls inoculation": {
+			name: "Faithful's Inoculation",
+			minlevel: 1,
+			source: ["OG", 147],
+			description: desc([
+				"I can touch a willing crea as a bns a and remove one disease or neutralize one poison."
+			]),
+			action: ["bonus action", ""],
+			usages: "Wis Mod x per long rest",
+			usagescalc: "event.value = What('Wis Mod');",
+			recovery: "long rest",
+		},
+		"channel divinity tide of affliction": {
+			name: "Channel Divinity: Tide of Affliction",
+			minlevel: 2,
+			source: ["OG", 147],
+			description: desc([
+				"I can use my Channel Divinity to emit a wave of affliction. I pick a number of creatures not",
+				"immune to disease up to my Wis Mod (min 1). If my targets fail a con save they take poison",
+				"damage equal to my cleric level and are poisoned for 1 minute. They can repeat their save at",
+				"the end of their turn and end the effect on success."
+			]),
+			action: ["action", ""]
+		},
+		"withering affliction": {
+			name: "Withering Affliction",
+			minlevel: 6,
+			source: ["OG", 147],
+			description: desc([
+				"Poison damage dealt by my cleric spells and Tide of Affliction ignores resistance."
+			])
+		},
+		"potent spellcasting": {
+			name: "Potent Spellcasting",
+			minlevel: 8,
+			source: ["OG", 147],
+			description: desc("I add my Wisdom modifier to the damage I deal with my cleric cantrips"),
+			calcChanges: GenericClassFeatures["potent spellcasting"].calcChanges
+		},
+		"subclassfeature17": {
+			//generic feature name so that the entry on the notes page has the correct header
+			name: "Befoulment",
+			minlevel: 17,
+			source: ["OG", 147],
+			description: desc([
+				"As an action I touch a creature and befoul it, or befoul up to 24 cu ft of food or drink.",
+				"The target creature (or any creature who consumed the befouled drink or food within a",
+				"number of hours equal to my cleric level) must succeed a Con save or be infected.",
+				"My befoulment can infect a number of creatures equal to five times my cleric level",
+				"When I use this feature I choose one befoulments (see book or the notes page).",
+				"My befoulment is only curable by greater restoration spell or a paladin’s Lay on Hands ability.",
+				"When an infected creature saves against or is otherwise cured of one of my diseases, they",
+				"become immune to it for one year. Additionally, when a creature fails a Constitution saving",
+				"throw against one of my domain spells or my Tide of Affliction, I can apply a Befoulment",
+				"upon them as a bonus action. The disease’s symptoms manifest immediately."
+			]),
+			usages: "Wis Mod x ",
+			toNotesPage: [{
+				name: "Befoulments",
+				popupName: "Befoulments Table",
+				source: ["OG", 148],
+				additional: "max infected: cleric level x 5",
+				note: [
+					"\u25C6 Tell-Tale Cough. After 1d12 hours, infected creatures begin to cough and become exhausted. Resting with the nagging cough is impossible. The next day and each day after, infected creatures repeat their saving throw or take an additional level of exhaustion. If they succeed, they lose one level of exhaustion, and end their infection if their exhaustion level reaches zero. If they succeed in this manner, they are immune to my Tell-Tale cough for one year. Coughing creatures can infect other breathing creatures within 10 feet, who must succeed a Constitution saving throw or become infected.",
+					"\u25C6 Fleshrot. After 3d12 hours, the extremities of an infected creature’s body such as their toes, fingers or ears begin to harden and turn a waxy-looking green, yellow, purple, or black. Creatures repeat their saving throw at the start of each day, and on a failure, their movement speed is reduced by 5 feet. If they fail, they take necrotic damage equal to my cleric level one random extremity, and the disease spreads closer to their heart and organs. The disease can be cured by amputation. If the creature’s speed becomes 0, they die. Creatures that come into direct contact with the infected flesh must succeed a Constitution saving throw or contract the disease.",
+					"\u25C6 Maddening Fever. After 2d12 hours, an infected creature descends into a feverish delirium, making all Wisdom (Insight, Perception) checks with disadvantage. They repeat their saving throw the following day. If they fail, they are also under the effects of the confusion spell, and their maximum hit point total is reduced by half my cleric level for each day they have had the disease. If their maximum hit point total reaches 0, they die. If they succeed, the fever begins to subside, and they regain their faculties after 24 hours.",
+					"\u25C6 Weeping Sores. After 4d12 hours, boils and pustules rise to the surface of the infected creature’s skin, eventually exploding in a shower of blood and pus, dealing poison damage equal to my cleric level to the infected creature. Creatures can repeat their saving throw each day, but do so at disadvantage unless bound in clean bandages. Otherwise, the creature’s sores rise again and burst again, dealing an additional 1d6 slashing damage for each day since they contracted the disease. A creature whose skin comes into contact with an infected creature’s bodily fluids must succeed a Constitution saving throw or become infected."
+				]
+			}],
+			action: [
+				["action", ""],
+				["bonus action", "(after target Con Save fail)"]
+			],
+			usagescalc: "event.value = Math.max(1, What('Wis Mod'));",
+			recovery: "long rest"
+		}
+	}
+});
+AddSubClass("rogue", "gatecrasher og", {
+	regExpSearch: /gatecrasher/i,
+	subname: "Gatecrasher",
+	fullname: "Gatecrasher",
+	source: ["OG", 163],
+	abilitySave: 4,
+	spellcastingFactor: 3,
+	spellcastingList: {
+		class: "sorcerer",
+		school: ["Conj", "Div", "Trans"],
+		level: [0, 4]
+	},
+	spellcastingKnown: {
+		cantrips: [0, 0, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+		spells: [0, 0, 3, 4, 4, 4, 5, 5, 5, 6, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10]
+	},
+	features: {
+		"subclassfeature3": {
+			name: "Spellcasting",
+			minlevel: 3,
+			source: ["OG", 163],
+			description: desc([
+				"I can cast known sorcerer cantrips/spells picked from the conjuration, divination, or",
+				"transmutation schools, using Intelligence as my spellcasting ability. I start with 3 known",
+				"spells at level 3 and learn more as I level up. Each time I gain a level I can also replace",
+				"one spell. The spells learned at level 8, 14 and 20 can be from any school of magic.",
+				"At 3rd level I learn the Mage Hand cantrip and two more from the sorcerer spell list.",
+				"At level 10 I learn another sorcerer cantrip of my choice."
+			]),
+			additional: levels.map(function(n, idx) {
+				var cantr = [0, 0, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3][idx];
+				var splls = [0, 0, 3, 4, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10, 10, 11, 11, 11, 12, 13][idx];
+				return cantr + " cantrips \u0026 " + splls + " spells known";
+			}),
+			spellcastingBonus : [{
+				name: "Magehand",
+				spells: ["mage hand"],
+				selection: ["mage hand"]
+			}, {
+				name : "Any school",
+				class : "sorcerer",
+				times : [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3],
+				level : [1, 4]
+			}]
+		},
+		"quicktunnel": {
+			name: "Quicktunnel",
+			minlevel: 3,
+			source: ["OG", 164],
+			description: desc([
+				"I can quicktunnel after Disengaging or as a reaction when falling or taking damage. I",
+				"teleport to an unoccupied space in 30ft I can see. Once I learn Uncanny Dodge I can",
+				"quicktunnel as part of that reaction. Once I learn Evasion I can quicktunnel if I succeed a",
+				"Dex save. I also learn the Detect Good and Evil spell and sense Extraplanar Portals with it."
+			]),
+			usages: "",
+			usagescalc: "event.value = classes.known.rogue.level < 5 ? 2 : classes.known.rogue.level < 11 ? 3 : classes.known.rogue.level < 17 ? 4 : 5",
+			action: ["bonus action", "Disengage & Quicktunnel"],
+			recovery: "short rest",
+			additional: [
+				"", "",
+				"2 times, 30ft", "2 times, 30ft",
+				"3 times, 35ft", "3 times, 35ft", "3 times, 35ft", "3 times, 35ft", "3 times, 35ft", "3 times, 35ft",
+				"4 times, 40ft", "4 times, 40ft", "4 times, 40ft", "4 times, 40ft", "4 times, 40ft", "4 times, 40ft",
+				"5 times, 45ft", "5 times, 45ft", "5 times, 45ft", "5 times, 45ft",
+			],
+			spellcastingBonus: [{
+				name: "Quicktunnel",
+				spells: ["detect evil and good"],
+				selection: ["detect evil and good"]
+			}],
+			calcChanges: {
+				spellAdd: [
+					function(spellKey, spellObj, spName) {
+						if (spellKey === "detect evil and good" && spName === "rogue") {
+							spellObj.description = "Know if aberr., celest., elem., fey, fiend, und., des-/consecrated area, and extrapl. portal within 30 ft";
+							return true;
+						}
+					},
+					"I also know the presence of extraplanar portals when I cast detect evil and good."
+				]
+			},
+		},
+		"uncanny dodge" : {
+			name : "Uncanny Dodge",
+			source : [["SRD", 40], ["P", 96]],
+			minlevel : 5,
+			description : desc("As a reaction, I can halve the damage of an attack from an attacker that I can see"),
+			action : [
+				["reaction", ""],
+				["reaction", "Uncanny Dodge & Quicktunnel"]
+			]
+		},
+		"evasion" : {
+			name : "Evasion",
+			source : [["SRD", 40], ["P", 96]],
+			minlevel : 7,
+			description : desc("My Dexterity saves vs. areas of effect negate damage on success and halve it on failure"),
+			savetxt : { text : ["Dex save vs. area effects: fail \u2015 half dmg, success \u2015 no dmg"] },
+			action: ["reaction", "Quicktunnel after Evasion success"]
+		},
+		"interplanar knack": {
+			name: "Interplanar Knack",
+			minlevel: 9,
+			source: ["OG", 164],
+			description: desc([
+				"I can see through opaque portals. The time it takes me to learn a new language is halved",
+				"and I can communicate simple ideas with any creature that speaks at least one language."
+			])
+		},
+		"oblique ambush": {
+			name: "Oblique Ambush",
+			minlevel: 13,
+			source: ["OG", 164],
+			description: desc([
+				"After I quicktunnel I create sensory distractions and have advantage on the first weapon",
+				"attack on any crea. in 30ft of my arrival point until the start of my next turn."
+			]),
+		},
+		"quicktunnel stabilization": {
+			name: "Quicktunnel Stabilization",
+			minlevel: 17,
+			source: ["OG", 164],
+			description: desc([
+				"I can bring one medium or smaller creat. along when I quicktunnel. Cha save if unwilling."
+			]),
+			additional: "Save DC: 8 + Int mod + Prof bonus"
+		}
+	}
+});
+// ### END SUBCLASSES CLASS ### Old_Gus_Errata-Subclasses.js
 // ### BEGIN SPELLS ### Old_Gus_Errata-Spells.js
 SpellsList["acidic exudation og"] = {
 	name: "Acidic Exudation",
@@ -6347,6 +8450,7 @@ SpellsList["avalanche og"] = {
 };
 SpellsList["avyies temporal trickery og"] = {
 	name: "Avyie's Temporal Trickery",
+	regExpSearch: /avyie\W?s temporal trickery/i,
 	classes: ["artificer", "bard", "wizard"],
 	source: ["OG", 228],
 	level: 3,
@@ -6568,6 +8672,7 @@ SpellsList["conjure shield og"] = {
 };
 SpellsList["corak's metal form og"] = {
 	name: "Corak's Metal Form",
+	regExpSearch: /corak\W?s metal form/i,
 	classes: ["sorcerer", "wizard"],
 	source: ["OG", 232],
 	level: 7,
@@ -6619,8 +8724,8 @@ SpellsList["cuppy snacks og"] = {
 	school: "Conj",
 	time: "1 min",
 	range: "Self",
-	components: "V,S,M",
-	materials: "100gp + 50gp/SL, which the spell consumes",
+	components: "V,S,M\u2020",
+	compMaterial: "100gp + 50gp/SL, which the spell consumes",
 	duration: "24 h",
 	description: "time-travel-buy 2+1/SL snacks; heal 2d4+2; nourishment for 1 day; lose potency after 24h",
 	descriptionFull: "You travel through time and space to an eatery you are familiar with, purchase food, and send it back to yourself in a sealed magical cup with a paraffin paper lid, which preserves, shrinks, and infuses the food with healing potential, becoming cuppy snacks.\nImmediately, two snacks appear in your hand and last for the duration. A creature can use its action to peel back the lid and eat a snack. Eating a snack restores 2d4 + 2 hit points, and the snack provides enough nourishment to sustain a creature for one day.\nThe snacks lose their potency if they have not been consumed within 24 hours.",
@@ -6702,12 +8807,12 @@ SpellsList["delay agony og"] = {
 };
 SpellsList["dimensional anchor og"] = {
 	name: "Dimensional Anchor",
-	classes: ["cleric", "wizard"],
+	classes: ["cleric", "paladin", "wizard"],
 	source: ["OG", 235],
 	level: 4,
 	school: "Abjur",
 	time: "1 rea",
-	timeFull: "",
+	timeFull: "You react to grasp at a teleporting creature’s essence, and attempt to anchor it.",
 	range: "60 ft",
 	components: "V,S",
 	duration: "Conc, 1 min",
@@ -6779,6 +8884,7 @@ SpellsList["disguise undead og"] = {
 };
 SpellsList["diterlizzis dymaxion og"] = {
 	name: "DiTerlizzi's Dymaxion",
+	regExpSearch: /diterlizzi\W?s dymaxion/i,
 	classes: ["artificer"],
 	source: ["OG", 236],
 	level: 2,
@@ -6865,6 +8971,7 @@ SpellsList["drumble dead og"] = {
 };
 SpellsList["drunkards breath og"] = {
 	name: "Drunkard's Breath",
+	regExpSearch: /drunkard\W?s breath/i,
 	classes: ["artificer", "bard"],
 	source: ["OG", 238],
 	level: 1,
@@ -6895,6 +9002,7 @@ SpellsList["drunken revelry og"] = {
 };
 SpellsList["duelist's ward og"] = {
 	name: "Duelist's Ward",
+	regExpSearch: /duelist\W?s ward/i,
 	classes: ["sorcerer", "warlock", "wizard"],
 	source: ["OG", 239],
 	level: 3,
@@ -7030,6 +9138,7 @@ SpellsList["fallow og"] = {
 };
 SpellsList["fenton's flickering fists og"] = {
 	name: "Fenton's Flickering Fists",
+	regExpSearch: /fenton\W?s flickering fists/i,
 	classes: ["artificer", "bard", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 242],
 	level: 0,
@@ -7044,8 +9153,8 @@ SpellsList["fenton's flickering fists og"] = {
 };
 WeaponsList["fenton's flickering fists og"] = {
 	name: "Fenton's Flickering Fists",
+	regExpSearch: /fenton\W?s flickering fists/i,
 	source: ["OG", 242],
-	regExpSearch: /^(?=.*fenton)(?=.*fist).*$/i,
 	type: "Cantrip",
 	ability: 4,
 	abilitytodamage: false,
@@ -7073,6 +9182,7 @@ SpellsList["flourishing beanstalk og"] = {
 };
 SpellsList["fools speech og"] = {
 	name: "Fool's Speech",
+	regexpsearch: /fool\W?s speech/i,
 	classes: ["bard", "sorcerer", "wizard"],
 	source: ["OG", 243],
 	level: 4,
@@ -7262,6 +9372,7 @@ SpellsList["glassteel og"] = {
 };
 SpellsList["glogalas paradox og"] = {
 	name: "Glogala's Paradox",
+	regexpsearch: /glogala\W?s paradox/i,
 	classes: ["sorcerer", "warlock", "wizard"],
 	source: ["OG", 248],
 	level: 8,
@@ -7364,6 +9475,7 @@ SpellsList["humanoid possession og"] = {
 };
 SpellsList["hunter's mercy og"] = {
 	name: "Hunter’s Mercy",
+	regExpSearch: /hunter\W?s mercy/i,
 	classes: ["ranger"],
 	source: ["OG", 251],
 	level: 1,
@@ -7539,6 +9651,7 @@ SpellsList["jinx og"] = {
 };
 SpellsList["leeocks lucky coin og"] = {
 	name: "Leeock's Lucky Coin",
+	regExpSearch: /leeock\W?s lucky coin/i,
 	classes: ["artificer", "bard", "sorcerer", "warlock"],
 	source: ["OG", 254],
 	level: 0,
@@ -7554,8 +9667,8 @@ SpellsList["leeocks lucky coin og"] = {
 };
 WeaponsList["leeocks lucky coin og"] = {
 	name: "Leeock's Lucky Coin",
+	regExpSearch: /leeock\W?s lucky coin/i,
 	source: ["OG", 242],
-	regExpSearch: /^(?=.*leeock)(?=.*lucky)(?=.*coin).*$/i,
 	type: "Cantrip",
 	ability: 4,
 	abilitytodamage: true,
@@ -7597,6 +9710,7 @@ SpellsList["lipstitch og"] = {
 };
 SpellsList["lloyds beacon og"] = {
 	name: "Lloyd's Beacon",
+	regExpSearch: /lloyd\W?s beacon/i,
 	classes: ["artificer", "bard", "cleric", "wizard"],
 	source: ["OG", 256],
 	level: 4,
@@ -7611,6 +9725,7 @@ SpellsList["lloyds beacon og"] = {
 };
 SpellsList["londyns duet og"] = {
 	name: "Londyn's Duet",
+	regExpSearch: /londyn\W?s duet/i,
 	classes: ["bard"],
 	source: ["OG", 256],
 	level: 2,
@@ -7702,7 +9817,7 @@ SpellsList["magnetokinesis og"] = {
 	name: "Magnetokinesis",
 	classes: ["artificer", "wizard"],
 	source: ["OG", 258],
-	level: 6,
+	level: 3,
 	school: "Trans",
 	time: "1 a",
 	range: "60 ft",
@@ -7744,6 +9859,7 @@ SpellsList["mass distortion og"] = {
 };
 SpellsList["melfs unicorn arrow og"] = {
 	name: "Melf's Unicorn Arrow",
+	regexpsearch: /melf\W?s unicorn arrow/i,
 	classes: ["sorcerer", "wizard"],
 	source: ["OG", 259],
 	level: 3,
@@ -8010,6 +10126,7 @@ SpellsList["plaguemask og"] = {
 };
 SpellsList["polandaras petticoat pocket og"] = {
 	name: "Polandara's Petticoat Pocket",
+	regexpsearch: /polandara\W?s petticoat pocket/i,
 	nameShort: "Polandara's Pettic. Pocket",
 	classes: ["artificer", "bard", "wizard"],
 	source: ["OG", 265],
@@ -8057,11 +10174,11 @@ SpellsList["puff of smoke og"] = {
 	source: ["OG", 266],
 	level: 0,
 	school: "Conj",
-	/* descriptionCantripDie: "`CD*0.5` 5ft rad, 15ft high; heavy obsc.; choose color and if 5ft dim light; audible for 100ft", TODO after rounding update*/
 	time: "1 a",
 	range: "60 ft",
 	components: "V,S",
 	duration: "1 rnd",
+	descriptionCantripDie: "`CD*0.5` 5ft rad, 15ft high; heavy obsc.; choose color and if 5ft dim light; audible for 100ft",
 	description: "1 (+1 at CL11) 5ft rad, 15ft high; heavy obsc.; choose color and if 5ft dim light; audible for 100ft",
 	descriptionFull: "You create a 5-foot-radius, 15-foot-high cylinder of fog centered on a point within range. The smoke spreads around corners, and its area is heavily obscured. When created, the puff produces a dull thud which is audible out to 100 feet.\nThe smoke can be any color you desire, and you can cause it to shed dim light in a 5-foot-radius in the same color. It lasts until the start of your next turn, or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.\nWhen you reach 11th level, you can create two puffs of smoke with the spell."
 };
@@ -8110,6 +10227,7 @@ SpellsList["pyroclasm og"] = {
 };
 SpellsList["quentins quickling senses og"] = {
 	name: "Quentin's Quickling Senses",
+	regexpsearch: /quentin\W?s quickling senses/i,
 	nameShort: "Quentin's Quickl. Senses",
 	classes: ["artificer", "bard", "sorcerer", "wizard"],
 	source: ["OG", 267],
@@ -8479,7 +10597,7 @@ WeaponsList["soul whip og"] = {
 };
 SpellsList["speak with object og"] = {
 	name: "Speak with Object",
-	classes: ["bard", "sorcerer", "warlock"],
+	classes: ["bard", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 272],
 	level: 3,
 	school: "Conj",
@@ -8756,11 +10874,11 @@ SpellsList["tree steed og"] = {
 	components: "V,S",
 	duration: "24 h",
 	description: "turn log into steed; AC 16, vuln. fire; chose br.bear, crocodile, elk, giant goat, ox or riding horse; see B",
-	descriptionFull: "You touch a wooden log at least one foot in diameter, and five to ten feet long, causing it to spring to life, sprouting four wooden legs. The steed takes on a form that you choose: a brown bear, crocodile, elk, giant goat, ox or riding horse. The steed has the statistics of your chosen form, though it a plant instead of a Beast. Additionally, your steed’s wooden exterior grants it an AC of 16, and it is vulnerable to fire damage. It cannot speak, but understands sylvan and druidic, and when you cast the spell, you can give it the ability to understand one additional language you know. It is friendly to you and your companions, and obeys your commands.\nThe steed serves you as a mount, both in combat and out, and you have an instinctive bond with it that allows you to fight as a seamless unit. While mounted on your steed, you can make any spell you cast that targets only you also target your steed.\When the steed drops to 0 hit points, its legs retract and it falls to the ground, becoming a normal log again. If it is slain by fire damage, the log is burned and cannot be used as a steed again.\nYou can’t create more than one steed with this spell at a time. As bonus action, you can release the steed from your service, causing it to become a mundane log."
+	descriptionFull: "You touch a wooden log at least one foot in diameter, and five to ten feet long, causing it to spring to life, sprouting four wooden legs. The steed takes on a form that you choose: a brown bear, crocodile, elk, giant goat, ox or riding horse. The steed has the statistics of your chosen form, though it a plant instead of a Beast. Additionally, your steed’s wooden exterior grants it an AC of 16, and it is vulnerable to fire damage. It cannot speak, but understands sylvan and druidic, and when you cast the spell, you can give it the ability to understand one additional language you know. It is friendly to you and your companions, and obeys your commands.\nThe steed serves you as a mount, both in combat and out, and you have an instinctive bond with it that allows you to fight as a seamless unit. While mounted on your steed, you can make any spell you cast that targets only you also target your steed.\W?hen the steed drops to 0 hit points, its legs retract and it falls to the ground, becoming a normal log again. If it is slain by fire damage, the log is burned and cannot be used as a steed again.\nYou can’t create more than one steed with this spell at a time. As bonus action, you can release the steed from your service, causing it to become a mundane log."
 };
 SpellsList["twisting innards og"] = {
 	name: "Twisting Innards",
-	classes: ["artificer", "sorcerer", "wizard"],
+	classes: ["artificer", "faerie", "sorcerer", "warlock", "wizard"],
 	source: ["OG", ],
 	level: 5,
 	school: "Trans",
@@ -9102,7 +11220,7 @@ WeaponsList["zap og"] = {
 	ability: 4,
 	damage: ["C", 8, "Special"],
 	range: "60ft",
-	description: "Roll 1d8; 1:fire, 2:cold, 3:acid, 4:light, 5:thdr, 6: rad, 7: force, 8: psy; see B",
+	description: "Roll 1d8, modify result ± x (x = # of DmgDice - 1) = 1:fire, 2:cold, 3:acid, 4:light, 5:thdr, 6: rad, 7: force, 8: psy;",
 	list: "spell",
 	tooltip: "A thrum of chaotic magic streaks out of you toward one creature of your choice that you can see within range. Make a ranged spell attack. If it hits, roll a d8 to determine the type of damage, then deal 1d8 of that type to the creature. The spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8). Each time the damage dice increase, you can modify the results of your damage type’s roll by an additional ±1.\n\nZap Damage Type:\n1 fire\n2 cold\n3 acid\n4 lightning\n5 thunder\n6 radiant\n7 force\n8 psychic\n"
 };
@@ -9251,7 +11369,6 @@ CreatureList["awakened tome og"] = {
 		range: "Melee (5 ft)",
 		description: "Wisdom Save or + 2 psychic damage and disadv. on the next attack roll before the end of its next turn"
 	}]
-
 };
 CreatureList["basilisk youngling og"] = {
 	name: "Basilisk Youngling",
@@ -9363,7 +11480,6 @@ CreatureList["bloombat og"] = {
 			"   1/day: entangle, snare\n"
 		])
 	}],
-
 	attacksAction: 1,
 	attacks: [{
 		name: "Bite",
@@ -9737,7 +11853,6 @@ CreatureList["fluttering oculus og"] = {
 	senses: "Darkvision 60 ft",
 	challengeRating: "1/8",
 	proficiencyBonus: 2,
-
 	features: [{
 		name: "Vigilant",
 		description: "The fluttering oculus can't be surprised.",
@@ -10875,3 +12990,133 @@ CreatureList["wordworm og"] = {
 	}]
 };
 // ### END FAMILIARS ### Old_Gus_Errata-Familiars.js
+// ### BEGIN FAMILIARS ### Old_Gus_Errata-Misc.js
+WeaponsList["chain whip og"] = {
+	regExpSearch : /chain whip/i,
+	name : "Chain Whip",
+	source : ["OG", 311],
+	list : "melee",
+	ability : 1,
+	type : "Martial",
+	damage : [2, 4, "bludgeoning"],
+	range : "melee",
+	weight : 4,
+	description : "Reach",
+	abilitytodamage : true
+};
+WeaponsList["composite longbow og"] = {
+	regExpSearch : /composite longbow/i,
+	name : "Composite longbow",
+	source : ["OG", 311],
+	list : "ranged",
+	ability : 2,
+	type : "Martial",
+	damage : [2, 6, "piercing"],
+	range : "100/400 ft",
+	weight : 6,
+	modifiers: [2, 1],
+	description : "Ammunition, heavy, two-handed, penalty if Str<16, can add Str instead of Dex to dmg",
+	abilitytodamage : true,
+	ammo : "arrow"
+};
+WeaponsList["greatshield og"] = {
+	regExpSearch : /greatshield/i,
+	name : "Greatshield",
+	source : ["OG", 311],
+	list : "melee",
+	ability : 1,
+	type : "Martial",
+	damage : [1, 8, "bludgeoning"],
+	range : "melee",
+	weight : 10,
+	description : "Heavy, two-handed, special",
+	abilitytodamage : true
+};
+WeaponsList["katana og"] = {
+	regExpSearch : /katana/i,
+	name : "Katana",
+	source : ["OG", 311],
+	list : "melee",
+	ability : 1,
+	type : "Martial",
+	damage : [1, 6, "slashing"],
+	range : "melee",
+	weight : 3,
+	description : "Finesse, versatile (1d10)",
+	abilitytodamage : true,
+	monkweapon : true
+};
+WeaponsList["kusarigama og"] = {
+	regExpSearch : /kusarigama/i,
+	name : "Kusarigama",
+	source : ["OG", 311],
+	list : "melee",
+	ability : 1,
+	type : "Martial",
+	damage : [1, 4, "slashing"],
+	range : "melee",
+	weight : 4,
+	description : "Two-handed, reach, special",
+	abilitytodamage : true,
+	monkweapon : true
+};
+WeaponsList["giff pistol og"] = {
+	regExpSearch : /giff pistol/i,
+	name : "Giff Pistol",
+	source : ["OG", 42],
+	list : "Giff Weapons",
+	ability : 2,
+	type : "Martial",
+	damage : [1, 10, "slashing"],
+	range : "30/90 ft",
+	weight : 4,
+	description : "loading",
+	abilitytodamage : true,
+	ammo : "giff bullet og"
+};
+WeaponsList["giff musket og"] = {
+	regExpSearch : /giff musket/i,
+	name : "Giff Musket",
+	source : ["OG", 42],
+	list : "Giff Weapons",
+	ability : 2,
+	type : "Martial",
+	damage : [1, 12, "slashing"],
+	range : "30/90 ft",
+	weight : 4,
+	description : "loading",
+	abilitytodamage : true,
+	ammo : "giff bullet og"
+};
+AmmoList["giff bullet og"] = {
+	name: "Giff Bullet",
+	source : ["OG", 42],
+	weight: 0.1,
+	icon : "Bullets",
+	invName: "Giff Bullet",
+	alternatives : [/^giff bullet$/i],
+};
+WeaponsList["frag grenade og"] = {
+	regExpSearch : /frag grenade/i,
+	name : "Frag Grenade",
+	source : ["OG", 42],
+	list : "Giff Weapons",
+	ability : 2,
+	dc: true,
+	type : "Martial",
+	damage : [5, 6, "piercing"],
+	range : "30/90 ft",
+	weight : 2,
+	isNotWeapon: true,
+	description : "DC Dexterity saving throw for half damage",
+	abilitytodamage : false,
+	ammo : "frag grenade og"
+};
+AmmoList["frag grenade og"] = {
+        name: "Frag Grenade",
+		source : ["OG", 42],
+        weight: 2,
+        icon : "Flasks",
+        invName: "Frag Grenades"
+};
+// ### END FAMILIARS ### Old_Gus_Errata-Misc.js

@@ -6,28 +6,37 @@
 */
 /*	-INFORMATION-
 	Subject:	Class
-	Effect:		This script adds the Faerie Class & it's four Subclasses from Old Gus Errata
-	Source 1:	https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link
-	Source 2:	https://www.reddit.com/r/UnearthedArcana/comments/z5872u/old_gus_errata_wanderers_of_the_infinite_skies/
-	Author:		https://reddit/u/callmepartario
+	This script adds the Faerie Class & it's four Subclasses from Old Gus Errata Wanderer of Infinite Skies
+				This is just a part of the source book. The master file with all finished scripts can be found here:
+				https://github.com/xi-ka/mpmb-contributions/blob/main/Old_Gus_Errata-Master.js
+	Source:		https://callmepartario.github.io/old-gus-errata/
+	Author:		Old Gus (Partario Flynn)
 	Code by:	xika
 	Date:		2024-11-20 (sheet v13)
 */
 /*	
 	Changelog:
-	2024-11-20	- Code Cleanup
-	2024-11-02	- added Shambling mount to Wildshapes automatically
+	2024-12-26
+				- Brownie Description Fix
+				- fixed "Grasping Vines" distance
+				- changed text for "Corrosive Ichor" to be clearer
+	2024-11-20	
+				- Code Cleanup
+	2024-11-02	
+				- added Shambling Mount to Wildshapes automatically
 				- improved some of the text output formatting
 				- added Vicious Mockery and Infestation to Tricksy Cantrip
 				- fixed Brownie Walk & Fly Speed
-	2024-11-01	- added tools and multiclassing tools
+	2024-11-01	
+				- added tools and multiclassing tools
 				- added Shambling Mound as manual Wildshape
 				- improved Readability of Spelllist
 				- some minor formatting improvements
-	2024-10-31	Initial Release
+	2024-10-31	
+				Initial Release
 */
 var iFileName = "Old_Gus_Errata-Faerie.js";
-RequiredSheetVersion("13.2.0");
+RequiredSheetVersion("13.2.3");
 SourceList.OG = {
 	name: "Old Gus' Errata - Wanderer of Infinite Skies",
 	abbreviation: "OG",
@@ -364,7 +373,7 @@ AddSubClass("faerie og", "nixie", {
 	source: ["OG", 193],
 	features: {
 		"subclassfeature1": {
-			name: "Cunnnig Magics",
+			name: "Cunning Magics",
 			source: ["OG", 193],
 			minlevel: 1,
 			description: desc([
@@ -375,7 +384,8 @@ AddSubClass("faerie og", "nixie", {
 			spellcastingExtra: ["vicious mockery", "infestation", "command", "dissonant whispers", "crown of madness", "phantasmal force", "fear", "hypnotic pattern", "phantasmal killer", "dominate person", "eyebite", "reverse gravity", "dominate monster", "psychic scream"],
 			spellcastingExtraApplyNonconform: true,
 		},
-		"nightmarish delirium": {
+		"subclassfeature2": {
+			//generic feature name so that the entry on the notes page has the correct header
 			name: "Nightmarish Delirium",
 			source: ["OG", 194],
 			minlevel: 2,
@@ -388,20 +398,24 @@ AddSubClass("faerie og", "nixie", {
 			action: ["bonus action", "Nightmarish Delirium"],
 			toNotesPage: [{
 				name: "Nightmarish Delirium",
+				popupName: "Nightmarish Delirium",
+				source: ["OG", 194],
 				note: [
 					"I can plunge a creature charmed or frightened of me, or that I have put to sleep into a delirious nightmare.",
 					"As a bonus action, I concentrate (as if concentrating on the spell, if you are not already) and double the remaining duration of the effect upon the creature, which becomes lost in a nightmare of my design. The creature sees and hears only itself and the nightmare, experiencing up to one hour’s passing on each of their turns. At the end each of my turns, I can alter the nightmare, causing the creature to be charmed by me, frightened of me, unconscious or confused.",
 					"If the target takes damage, they immediately make a Wisdom saving throw against my faerie spell save DC, ending the effect on a success. Once the effect ends, the creature becomes immune to my Nightmarish Delirium for 24 hours.\n",
 					"Confusion",
 					"A confused creature can’t take reactions and must roll a d10 at the start of each of its turns to determine its behavior for that turn.",
-					"d10    Behavior",
-					"1-2    The creature uses all its movement to move in a random direction. To determine the direction, roll a d8 and assign a direction to each die face. The creature doesn’t take an action this turn.",
-					"2-6    The creature doesn’t move or take Actions this turn.",
-					"7-8    The creature uses its action to make a melee Attack against a randomly determined creature within its reach. If there is no creature within its reach, the creature does nothing this turn.",
-					"9-10  The creature can act and move normally."
-				],
-				popupName: "Nightmarish Delirium",
-				source: ["OG", 194]
+					"\nd10    Behavior",
+					"\n1-2    The creature uses all its movement to move in a random direction.",
+					"             To determine the direction, roll a d8 and assign a direction to each",
+					"             die face. The creature doesn’t take an action this turn.",
+					"\n2-6    The creature doesn’t move or take Actions this turn.",
+					"\n7-8    The creature uses its action to make a melee Attack against a",
+					"             randomly determined creature within its reach. If there is no",
+					"             creature within its reach, the creature does nothing this turn.",
+					"\n9-10  The creature can act and move normally."
+				]
 			}],
 		},
 		"supple wards": {
@@ -696,7 +710,7 @@ AddSubClass("faerie og", "nixie", {
 			usages: 1,
 			recovery: "long rest",
 			action: ["reaction", "Magical Mimicry"]
-		},
+		}
 	}
 });
 AddSubClass("faerie og", "sprig", {
@@ -732,7 +746,7 @@ AddSubClass("faerie og", "sprig", {
 			source: ["OG", 195],
 			minlevel: 2,
 			description: desc([
-				"When I hit w/ Thorn Whip I can deal +2d8+1d8/SL acid dmg as bns spending a spell slot.",
+				"On hit w/ Thorn Whip I can deal +2d8 +1d8/SL>1 acid dmg as bns a for a spell slot.",
 			]),
 			action: ["bonus action", "Corrosive Ichor (with Thorn Whip)"],
 		},
@@ -742,9 +756,9 @@ AddSubClass("faerie og", "sprig", {
 			minlevel: 6,
 			description: desc([
 				"I can cast Speak With Plants at will. My Thorn Whip can pull up to 15ft and has 45ft range.",
-				"As bns I can move the area of my entangle, spike growth or grasping vine my cha mod ft."
+				"As bns I can move the area of my entangle, spike growth or grasping vine my cha mod x 5 ft."
 			]),
-			action: ["bonus action", "Grasping Vines"],
+			action: ["bonus action", " (Cha mod * 5 ft)"],
 			calcChanges: {
 				spellAdd: [
 					function(spellKey, spellObj, spName) {
@@ -794,22 +808,7 @@ AddSubClass("faerie og", "sprig", {
 			},
 			removeeval: function() {
 				RemoveWildshape("Shambling Mound");
-			},
-			/*			changeeval: function(lvl, chc) {
-							var prefix = getTemplPre(event.target.name, "WSfront", true);
-							var Fld = event.target.name.slice(-1);
-							var WSfrontA = What("Template.extras.WSfront").split(",");
-							// Loop through all wildshape pages
-							for (var i = 0; i < WSfrontA.length; i++) {
-								// Loop through all the wildshapes on a page
-								for (var j = 1; j <= 4; j++) {
-									// If the current wildshape is the shambling mound, add our faerie lvl
-									if (What(prefix + "Wildshape.Race" + j) === 'Shambling Mound') {
-										Value(prefix + "Wildshape." + Fld + ".HP Max", 69 + lvl[1]);
-									}
-								}
-							}
-						}*/
+			}
 		},
 		"we are the vine": {
 			name: "We are the Vine",
@@ -866,7 +865,7 @@ AddSubClass("faerie og", "brownie", {
 			source: ["OG", 195],
 			minlevel: 1,
 			description: desc([
-				arFaerieWeapon,
+				...arFaerieWeapon,
 				"Use the \"Choose Feature\" button above to pick the Damage Type of your Faerie Weapon."
 			]),
 			calcChanges: {

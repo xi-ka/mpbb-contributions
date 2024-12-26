@@ -6,18 +6,26 @@
 */
 /*	-INFORMATION-
 	Subject:	Spells
-	Effect:		This script adds 187 spells from Old Gus's Errata
-	Source 1:	https://drive.google.com/drive/folders/1Qv-U43kH066mbaeu9dLNeqmDpsdQW6CW?usp=drive_link
-	Source 2:	https://www.reddit.com/r/UnearthedArcana/comments/z5872u/old_gus_errata_wanderers_of_the_infinite_skies/
-	Author:		https://reddit/u/callmepartario
+	Effect:		This script adds 187 spells from Old Gus's Errata's Wanderer of Infinite Skies
+				This is just a part of the source book. The master file with all finished scripts can be found here:
+				https://github.com/xi-ka/mpmb-contributions/blob/main/Old_Gus_Errata-Master.js
+	Source:		https://callmepartario.github.io/old-gus-errata/
+	Author:		Old Gus (Partario Flynn)
 	LLM Import:	Rocky
 	Code by:	xika
-	Date:		2024-11-20 (sheet v13)
+	Date:		2024-12-26 (sheet v13)
 */
-/*
+/*
 	Changelog:
+	2024-12-26
+		- updated "Puff of Smoke" descriptionCantripDie after MPMB update
+		- added +/- mod to Zap weapon description 
+		- updated Twisting Innards, Speak with Object and Dimensional Anchor to reflect changes in Source 
+		- added regex to spells with apostrophe in the name to catch all types of apostrophe and none at all
+		- Cuppy Snacks fix: material cost corrected
+		- Magnetokinesis fix: level corrected
 	2024-11-20
-		- Wild Flight: description fixed
+		- Wild Flight fix: description
 		- Misty Slash fix: changed from action to bonus action
 		- Hirsutism: changed save from Str to Cha since this is the initial save
 	2024-11-09
@@ -30,13 +38,11 @@
 		- moved Spell-Weapons and Cantrip-Weapons right under their respective Spells instead of top of the list
 	2024-10-23
 		- added dulling chains and soul whip to weapons
-*/
-/*
-	-TODO-
-	- "puff of smoke og" adjust after sheet update
+	2024-10-23
+		- Initial Release: 287 Spells done
 */
 var iFileName = "Old_Gus_Errata-Spells.js";
-RequiredSheetVersion("13.2.0");
+RequiredSheetVersion("13.2.3");
 SourceList.OG = {
 	name : "Old Gus' Errata - Wanderer of Infinite Skies",
 	abbreviation : "OG",
@@ -200,6 +206,7 @@ SpellsList["avalanche og"] = {
 };
 SpellsList["avyies temporal trickery og"] = {
 	name: "Avyie's Temporal Trickery",
+	regExpSearch: /avyie\W?s temporal trickery/i,
 	classes: ["artificer", "bard", "wizard"],
 	source: ["OG", 228],
 	level: 3,
@@ -421,6 +428,7 @@ SpellsList["conjure shield og"] = {
 };
 SpellsList["corak's metal form og"] = {
 	name: "Corak's Metal Form",
+	regExpSearch: /corak\W?s metal form/i,
 	classes: ["sorcerer", "wizard"],
 	source: ["OG", 232],
 	level: 7,
@@ -472,8 +480,8 @@ SpellsList["cuppy snacks og"] = {
 	school: "Conj",
 	time: "1 min",
 	range: "Self",
-	components: "V,S,M",
-	materials: "100gp + 50gp/SL, which the spell consumes",
+	components: "V,S,M\u2020",
+	compMaterial: "100gp + 50gp/SL, which the spell consumes",
 	duration: "24 h",
 	description: "time-travel-buy 2+1/SL snacks; heal 2d4+2; nourishment for 1 day; lose potency after 24h",
 	descriptionFull: "You travel through time and space to an eatery you are familiar with, purchase food, and send it back to yourself in a sealed magical cup with a paraffin paper lid, which preserves, shrinks, and infuses the food with healing potential, becoming cuppy snacks.\nImmediately, two snacks appear in your hand and last for the duration. A creature can use its action to peel back the lid and eat a snack. Eating a snack restores 2d4 + 2 hit points, and the snack provides enough nourishment to sustain a creature for one day.\nThe snacks lose their potency if they have not been consumed within 24 hours.",
@@ -555,12 +563,12 @@ SpellsList["delay agony og"] = {
 };
 SpellsList["dimensional anchor og"] = {
 	name: "Dimensional Anchor",
-	classes: ["cleric", "wizard"],
+	classes: ["cleric", "paladin", "wizard"],
 	source: ["OG", 235],
 	level: 4,
 	school: "Abjur",
 	time: "1 rea",
-	timeFull: "",
+	timeFull: "You react to grasp at a teleporting creature’s essence, and attempt to anchor it.",
 	range: "60 ft",
 	components: "V,S",
 	duration: "Conc, 1 min",
@@ -632,6 +640,7 @@ SpellsList["disguise undead og"] = {
 };
 SpellsList["diterlizzis dymaxion og"] = {
 	name: "DiTerlizzi's Dymaxion",
+	regExpSearch: /diterlizzi\W?s dymaxion/i,
 	classes: ["artificer"],
 	source: ["OG", 236],
 	level: 2,
@@ -718,6 +727,7 @@ SpellsList["drumble dead og"] = {
 };
 SpellsList["drunkards breath og"] = {
 	name: "Drunkard's Breath",
+	regExpSearch: /drunkard\W?s breath/i,
 	classes: ["artificer", "bard"],
 	source: ["OG", 238],
 	level: 1,
@@ -748,6 +758,7 @@ SpellsList["drunken revelry og"] = {
 };
 SpellsList["duelist's ward og"] = {
 	name: "Duelist's Ward",
+	regExpSearch: /duelist\W?s ward/i,
 	classes: ["sorcerer", "warlock", "wizard"],
 	source: ["OG", 239],
 	level: 3,
@@ -883,6 +894,7 @@ SpellsList["fallow og"] = {
 };
 SpellsList["fenton's flickering fists og"] = {
 	name: "Fenton's Flickering Fists",
+	regExpSearch: /fenton\W?s flickering fists/i,
 	classes: ["artificer", "bard", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 242],
 	level: 0,
@@ -897,8 +909,8 @@ SpellsList["fenton's flickering fists og"] = {
 };
 WeaponsList["fenton's flickering fists og"] = {
 	name: "Fenton's Flickering Fists",
+	regExpSearch: /fenton\W?s flickering fists/i,
 	source: ["OG", 242],
-	regExpSearch: /^(?=.*fenton)(?=.*fist).*$/i,
 	type: "Cantrip",
 	ability: 4,
 	abilitytodamage: false,
@@ -926,6 +938,7 @@ SpellsList["flourishing beanstalk og"] = {
 };
 SpellsList["fools speech og"] = {
 	name: "Fool's Speech",
+	regexpsearch: /fool\W?s speech/i,
 	classes: ["bard", "sorcerer", "wizard"],
 	source: ["OG", 243],
 	level: 4,
@@ -1115,6 +1128,7 @@ SpellsList["glassteel og"] = {
 };
 SpellsList["glogalas paradox og"] = {
 	name: "Glogala's Paradox",
+	regexpsearch: /glogala\W?s paradox/i,
 	classes: ["sorcerer", "warlock", "wizard"],
 	source: ["OG", 248],
 	level: 8,
@@ -1217,6 +1231,7 @@ SpellsList["humanoid possession og"] = {
 };
 SpellsList["hunter's mercy og"] = {
 	name: "Hunter’s Mercy",
+	regExpSearch: /hunter\W?s mercy/i,
 	classes: ["ranger"],
 	source: ["OG", 251],
 	level: 1,
@@ -1392,6 +1407,7 @@ SpellsList["jinx og"] = {
 };
 SpellsList["leeocks lucky coin og"] = {
 	name: "Leeock's Lucky Coin",
+	regExpSearch: /leeock\W?s lucky coin/i,
 	classes: ["artificer", "bard", "sorcerer", "warlock"],
 	source: ["OG", 254],
 	level: 0,
@@ -1407,8 +1423,8 @@ SpellsList["leeocks lucky coin og"] = {
 };
 WeaponsList["leeocks lucky coin og"] = {
 	name: "Leeock's Lucky Coin",
+	regExpSearch: /leeock\W?s lucky coin/i,
 	source: ["OG", 242],
-	regExpSearch: /^(?=.*leeock)(?=.*lucky)(?=.*coin).*$/i,
 	type: "Cantrip",
 	ability: 4,
 	abilitytodamage: true,
@@ -1450,6 +1466,7 @@ SpellsList["lipstitch og"] = {
 };
 SpellsList["lloyds beacon og"] = {
 	name: "Lloyd's Beacon",
+	regExpSearch: /lloyd\W?s beacon/i,
 	classes: ["artificer", "bard", "cleric", "wizard"],
 	source: ["OG", 256],
 	level: 4,
@@ -1464,6 +1481,7 @@ SpellsList["lloyds beacon og"] = {
 };
 SpellsList["londyns duet og"] = {
 	name: "Londyn's Duet",
+	regExpSearch: /londyn\W?s duet/i,
 	classes: ["bard"],
 	source: ["OG", 256],
 	level: 2,
@@ -1555,7 +1573,7 @@ SpellsList["magnetokinesis og"] = {
 	name: "Magnetokinesis",
 	classes: ["artificer", "wizard"],
 	source: ["OG", 258],
-	level: 6,
+	level: 3,
 	school: "Trans",
 	time: "1 a",
 	range: "60 ft",
@@ -1597,6 +1615,7 @@ SpellsList["mass distortion og"] = {
 };
 SpellsList["melfs unicorn arrow og"] = {
 	name: "Melf's Unicorn Arrow",
+	regexpsearch: /melf\W?s unicorn arrow/i,
 	classes: ["sorcerer", "wizard"],
 	source: ["OG", 259],
 	level: 3,
@@ -1863,6 +1882,7 @@ SpellsList["plaguemask og"] = {
 };
 SpellsList["polandaras petticoat pocket og"] = {
 	name: "Polandara's Petticoat Pocket",
+	regexpsearch: /polandara\W?s petticoat pocket/i,
 	nameShort: "Polandara's Pettic. Pocket",
 	classes: ["artificer", "bard", "wizard"],
 	source: ["OG", 265],
@@ -1910,11 +1930,11 @@ SpellsList["puff of smoke og"] = {
 	source: ["OG", 266],
 	level: 0,
 	school: "Conj",
-	/* descriptionCantripDie: "`CD*0.5` 5ft rad, 15ft high; heavy obsc.; choose color and if 5ft dim light; audible for 100ft", TODO after rounding update*/
 	time: "1 a",
 	range: "60 ft",
 	components: "V,S",
 	duration: "1 rnd",
+	descriptionCantripDie: "`CD*0.5` 5ft rad, 15ft high; heavy obsc.; choose color and if 5ft dim light; audible for 100ft",
 	description: "1 (+1 at CL11) 5ft rad, 15ft high; heavy obsc.; choose color and if 5ft dim light; audible for 100ft",
 	descriptionFull: "You create a 5-foot-radius, 15-foot-high cylinder of fog centered on a point within range. The smoke spreads around corners, and its area is heavily obscured. When created, the puff produces a dull thud which is audible out to 100 feet.\nThe smoke can be any color you desire, and you can cause it to shed dim light in a 5-foot-radius in the same color. It lasts until the start of your next turn, or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.\nWhen you reach 11th level, you can create two puffs of smoke with the spell."
 };
@@ -1963,6 +1983,7 @@ SpellsList["pyroclasm og"] = {
 };
 SpellsList["quentins quickling senses og"] = {
 	name: "Quentin's Quickling Senses",
+	regexpsearch: /quentin\W?s quickling senses/i,
 	nameShort: "Quentin's Quickl. Senses",
 	classes: ["artificer", "bard", "sorcerer", "wizard"],
 	source: ["OG", 267],
@@ -2332,7 +2353,7 @@ WeaponsList["soul whip og"] = {
 };
 SpellsList["speak with object og"] = {
 	name: "Speak with Object",
-	classes: ["bard", "sorcerer", "warlock"],
+	classes: ["bard", "sorcerer", "warlock", "wizard"],
 	source: ["OG", 272],
 	level: 3,
 	school: "Conj",
@@ -2609,11 +2630,11 @@ SpellsList["tree steed og"] = {
 	components: "V,S",
 	duration: "24 h",
 	description: "turn log into steed; AC 16, vuln. fire; chose br.bear, crocodile, elk, giant goat, ox or riding horse; see B",
-	descriptionFull: "You touch a wooden log at least one foot in diameter, and five to ten feet long, causing it to spring to life, sprouting four wooden legs. The steed takes on a form that you choose: a brown bear, crocodile, elk, giant goat, ox or riding horse. The steed has the statistics of your chosen form, though it a plant instead of a Beast. Additionally, your steed’s wooden exterior grants it an AC of 16, and it is vulnerable to fire damage. It cannot speak, but understands sylvan and druidic, and when you cast the spell, you can give it the ability to understand one additional language you know. It is friendly to you and your companions, and obeys your commands.\nThe steed serves you as a mount, both in combat and out, and you have an instinctive bond with it that allows you to fight as a seamless unit. While mounted on your steed, you can make any spell you cast that targets only you also target your steed.\When the steed drops to 0 hit points, its legs retract and it falls to the ground, becoming a normal log again. If it is slain by fire damage, the log is burned and cannot be used as a steed again.\nYou can’t create more than one steed with this spell at a time. As bonus action, you can release the steed from your service, causing it to become a mundane log."
+	descriptionFull: "You touch a wooden log at least one foot in diameter, and five to ten feet long, causing it to spring to life, sprouting four wooden legs. The steed takes on a form that you choose: a brown bear, crocodile, elk, giant goat, ox or riding horse. The steed has the statistics of your chosen form, though it a plant instead of a Beast. Additionally, your steed’s wooden exterior grants it an AC of 16, and it is vulnerable to fire damage. It cannot speak, but understands sylvan and druidic, and when you cast the spell, you can give it the ability to understand one additional language you know. It is friendly to you and your companions, and obeys your commands.\nThe steed serves you as a mount, both in combat and out, and you have an instinctive bond with it that allows you to fight as a seamless unit. While mounted on your steed, you can make any spell you cast that targets only you also target your steed.\W?hen the steed drops to 0 hit points, its legs retract and it falls to the ground, becoming a normal log again. If it is slain by fire damage, the log is burned and cannot be used as a steed again.\nYou can’t create more than one steed with this spell at a time. As bonus action, you can release the steed from your service, causing it to become a mundane log."
 };
 SpellsList["twisting innards og"] = {
 	name: "Twisting Innards",
-	classes: ["artificer", "sorcerer", "wizard"],
+	classes: ["artificer", "faerie", "sorcerer", "warlock", "wizard"],
 	source: ["OG", ],
 	level: 5,
 	school: "Trans",
@@ -2955,7 +2976,7 @@ WeaponsList["zap og"] = {
 	ability: 4,
 	damage: ["C", 8, "Special"],
 	range: "60ft",
-	description: "Roll 1d8; 1:fire, 2:cold, 3:acid, 4:light, 5:thdr, 6: rad, 7: force, 8: psy; see B",
+	description: "Roll 1d8, modify result ± x (x = # of DmgDice - 1) = 1:fire, 2:cold, 3:acid, 4:light, 5:thdr, 6: rad, 7: force, 8: psy;",
 	list: "spell",
 	tooltip: "A thrum of chaotic magic streaks out of you toward one creature of your choice that you can see within range. Make a ranged spell attack. If it hits, roll a d8 to determine the type of damage, then deal 1d8 of that type to the creature. The spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8). Each time the damage dice increase, you can modify the results of your damage type’s roll by an additional ±1.\n\nZap Damage Type:\n1 fire\n2 cold\n3 acid\n4 lightning\n5 thunder\n6 radiant\n7 force\n8 psychic\n"
 };
